@@ -1,95 +1,232 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
+  
+  
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="None">
-    <link rel="shortcut icon" href="img/favicon.ico">
-    <title>Welcome to MkDocs &mdash; My Docs</title>
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700">
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/fira_code.css">
-    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/all.css">
-    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/v4-shims.css">
-    <link rel="stylesheet" href="css/theme.css">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
-    <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <meta name="description" content="P: Modular and Safe Programming of Distributed Systems">
+    <meta name="author" content="Ankush Desai">
+    
+    <link rel="shortcut icon" href="./img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>P</title>
+    <link href="./css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="./css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="./css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="./js/jquery-3.2.1.min.js"></script>
+    <script src="./js/bootstrap-3.3.7.min.js"></script>
+    <script src="./js/highlight.pack.js"></script>
+    
+      <script src="./js/elasticlunr.min.js"></script>
+    
+    <base target="_top">
     <script>
-        hljs.initHighlightingOnLoad();
-    </script> 
+      var base_url = '.';
+      var is_top_frame = (window === window.parent);
+        
+        var pageToc = [
+          {title: "P", url: "#_top", children: [
+              {title: "Selected Publications", url: "#selected-publications" },
+              {title: "Manual", url: "#manual" },
+              {title: "Programming Safe Robotics Systems using P", url: "#programming-safe-robotics-systems-using-p" },
+              {title: "Programming Secure Distributed Systems using P", url: "#programming-secure-distributed-systems-using-p" },
+              {title: "Blogs", url: "#blogs" },
+              {title: "News", url: "#news" },
+          ]},
+        ];
+
+    </script>
+    <script src="./js/base.js"></script>
+      <script src="search/main.js"></script> 
 </head>
 
-<body ontouchstart="">
-    <div id="container">
-        <aside>
-            <div class="home">
-                <div class="title">
-                    <button class="hamburger"></button>
-                    <a href="." class="site-name"> My Docs</a>
-                </div>
-                <div class="search">
-                    <div role="search">
-    <form id="rtd-search-form" class="wy-form" action="./search.html" method="get">
-        <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
-    </form>
-</div>
-                </div>
-            </div>
-            <nav class="nav">
-                <ul class="root">
-                    <li class="toctree-l1 current"><a class="nav-item current" href=".">Welcome to MkDocs</a>
-<ul class="subnav">
-<li class="toctree-l2"><a class="nav-item toc" href="#commands">Commands</a></li>
-<li class="toctree-l2"><a class="nav-item toc" href="#project-layout">Project layout</a></li>
-</ul></li>
-                </ul>
-            </nav>
-            <div class="repo">
-</div>
-        </aside>
-        <div id="spacer"><button class="arrow"></button></div>
-        <main>
-            <div class="home-top">
-                <button class="hamburger"></button>
-                <a href="." class="site-name"> My Docs</a>
-            </div>
-            <div id="main">
-                <nav class="breadcrumbs">
-<ul>
-    
-</ul>
-</nav>
-                <div id="content"><h1 id="welcome-to-mkdocs">Welcome to MkDocs</h1>
-<p>For full documentation visit <a href="https://www.mkdocs.org">mkdocs.org</a>.</p>
-<h2 id="commands">Commands</h2>
-<ul>
-<li><code>mkdocs new [dir-name]</code> - Create a new project.</li>
-<li><code>mkdocs serve</code> - Start the live-reloading docs server.</li>
-<li><code>mkdocs build</code> - Build the documentation site.</li>
-<li><code>mkdocs -h</code> - Print help message and exit.</li>
-</ul>
-<h2 id="project-layout">Project layout</h2>
-<pre><code>mkdocs.yml    # The configuration file.
-docs/
-    index.md  # The documentation homepage.
-    ...       # Other markdown pages, images and other files.
-</code></pre></div>
-                <footer>
-    <div class="footer-note">
-        <p>
-            Built with <a href="http://www.mkdocs.org">MkDocs</a> using
-            <a href="https://github.com/daizutabi/mkdocs-ivory">Ivory theme</a>.
-        </p>
-    </div>
-</footer>
-            </div>
-        </main>
-    </div>
-    <script>var base_url = '.';</script>
-    <script src="js/theme.js"></script>
-    <script src="search/main.js"></script>
-</body>
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
 
+<nav class="navbar wm-page-top-frame">
+  <div class="container-fluid wm-top-container">
+    
+    <div class="wm-top-tool pull-right wm-vcenter">
+      <form class="dropdown wm-vcentered" id="wm-search-form" action="./search.html">
+        
+        <button id="wm-search-show" class="btn btn-sm btn-default" type="submit"
+          ><i class="fa fa-search" aria-hidden="true"></i></button>
+
+        <div class="input-group input-group-sm wm-top-search">
+          <input type="text" name="q" class="form-control" id="mkdocs-search-query" placeholder="Search" autocomplete="off">
+          <span class="input-group-btn" role="search">
+            
+            <button class="btn btn-default dropdown-toggle collapse" data-toggle="dropdown" type="button"><span class="caret"></span></button>
+            <ul id="mkdocs-search-results" class="dropdown-menu dropdown-menu-right"></ul>
+            <button id="wm-search-go" class="btn btn-default" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+          </span>
+        </div>
+      </form>
+    </div>
+
+    
+    <div class="wm-top-tool wm-vcenter pull-right wm-small-left">
+      <button id="wm-toc-button" type="button" class="btn btn-sm btn-default wm-vcentered"><i class="fa fa-th-list" aria-hidden="true"></i></button>
+    </div>
+
+    
+    
+
+    
+    <a href="" class="wm-top-brand wm-top-link wm-vcenter">
+      
+      <div class="wm-top-title">
+        P<br>
+        
+          <span class="wm-top-version">v1.0.0</span>
+        
+      </div>
+    </a>
+  </div>
+</nav>
+
+  <div id="main-content" class="wm-page-top-frame">
+    
+<nav class="wm-toc-pane">
+  
+    <ul class="wm-toctree wm-toc-repo">
+      <li class="wm-toc-li wm-toc-lev1">
+      <a class="wm-article-link wm-toc-text" href="https://p-org.github.io/P/">
+        
+        P-Org
+      </a>
+      </li>
+    </ul>
+  <ul class="wm-toctree">
+        <li class="wm-toc-li wm-toc-lev1 "><a href="" class="wm-article-link wm-toc-text">Overview</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Getting Started</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev2 "><a href="sample-a.md" class="wm-article-link wm-toc-text">Installation</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 wm-toc-opener"><span class="wm-toc-text">Build from Source</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev3 "><a href="a/sample-a1.md" class="wm-article-link wm-toc-text">Sample Subpage A1</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="a/sample-a2.md" class="wm-article-link wm-toc-text">Sample Subpage A2</a>
+</li>
+  </ul>
+</li>
+
+  </ul>
+</li>
+
+        <li class="wm-toc-li wm-toc-lev1 "><a href="sample-b.md" class="wm-article-link wm-toc-text">Tutorials</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="sample-b.md" class="wm-article-link wm-toc-text">Language Manual</a>
+</li>
+  </ul>
+</nav>
+
+    <div class="wm-content-pane">
+      <iframe class="wm-article" name="article"></iframe>
+    </div>
+  </div>
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+
+    <h1 id="p">P<a class="headerlink" href="#p" title="Permanent link">#</a></h1>
+<p>P is a state machine based programming language for modeling and specifying complex distributed systems. P allows the programmer to specify the system as a collection of interacting state machines, which communicate with each other using events. P unifies modeling, programming, and testing into one activity for the programmer. Not only can a P program be compiled into executable code, but it can also be systematically tested using Model Checking. 
+P is currently being used extensively inside Amazon (AWS) for model checking complex distributed systems.
+P has been used to implement and validate the USB device driver stack that ships with Microsoft Windows 8 and Windows Phone.
+We have also used P for programming safe robotics systems.</p>
+<h2 id="selected-publications">Selected Publications<a class="headerlink" href="#selected-publications" title="Permanent link">#</a></h2>
+<ul>
+<li>
+<p><strong><a href="https://ankushdesai.github.io/assets/papers/modp.pdf">Compositional Programming and Testing of Dynamic Distributed Systems</a></strong>.
+Ankush Desai, Amar Phanishayee, Shaz Qadeer, and Sanjit Seshia.
+International Conference on Object-Oriented Programming, Systems, Languages, and Applications (OOPSLA), 2018.</p>
+</li>
+<li>
+<p><strong><a href="https://ankushdesai.github.io/assets/papers/drona.pdf">DRONA: A Framework for Safe Distributed Mobile Robotics</a></strong>.
+Ankush Desai, Indranil Saha, Jianqiao Yang, Shaz Qadeer, and Sanjit A. Seshia.
+In Proceedings of the 8th ACM/IEEE International Conference on Cyber-Physical Systems (ICCPS), 2017.</p>
+</li>
+<li>
+<p><strong><a href="https://ankushdesai.github.io/assets/papers/fse-desai.pdf">Systematic Testing of Asynchronous Reactive Systems</a></strong>.
+Ankush Desai, Shaz Qadeer, and Sanjit A. Seshia.
+In Proceedings of the 2015 10th Joint Meeting on Foundations of Software Engineering (ESEC/FSE 2015). </p>
+</li>
+<li>
+<p><strong><a href="https://ankushdesai.github.io/assets/papers/p.pdf">P: Safe asynchronous event-driven programming</a></strong>.
+Ankush Desai, Vivek Gupta, Ethan Jackson, Shaz Qadeer, Sriram Rajamani, and Damien Zufferey.
+In Proceedings of ACM SIGPLAN Conference on Programming Language Design and Implementation (PLDI), 2013.</p>
+</li>
+</ul>
+<h2 id="manual">Manual<a class="headerlink" href="#manual" title="Permanent link">#</a></h2>
+<p>Check the <a href="https://github.com/p-org/P/wiki/Introduction-to-P-language">P Wiki</a>.</p>
+<p>Information for building P framework is available <a href="https://github.com/p-org/P/wiki">here</a>.</p>
+<h2 id="programming-safe-robotics-systems-using-p">Programming Safe Robotics Systems using P<a class="headerlink" href="#programming-safe-robotics-systems-using-p" title="Permanent link">#</a></h2>
+<p>We built DRONA, a software framework for distributed mobile robotics systems. DRONA uses P language for implementing and model-checking the distributed robotics software stack (<strong><a href="https://github.com/Drona-Org/Drona/wiki/Drona-Software-Stack">wiki</a></strong>). The C code generated from P compiler can be easily deployed on  Robot Operating System (ROS).
+More details about the DRONA framework and simulation videos are available here:
+<strong><a href="https://drona-org.github.io/Drona/">https://drona-org.github.io/Drona/</a></strong></p>
+<p>See <a href="https://www.youtube.com/watch?v=R8ztpfMPs5c">fun demo video</a> using P to control a quadrocopter and make sense of the MavLink stream, all visualized in a live DGML diagram.</p>
+<h2 id="programming-secure-distributed-systems-using-p">Programming Secure Distributed Systems using P<a class="headerlink" href="#programming-secure-distributed-systems-using-p" title="Permanent link">#</a></h2>
+<p>Programming secure distributed systems that have a formal guarantee of no information leakage is challenging.
+We extended P to the PSec language to enable programming secure distributed systems.
+We leverage Intel SGX enclaves to ensure that the security guarantees provided by the P language are enforced
+at runtime. By combining information flow control with hardware enclaves, we prevent P programmers
+from inadvertently leaking sensitive information while sending data securely across machines. We
+formally proved the security properties of the extended P language and used it to program several real-world
+examples, including a One Time Passcode application and a Secure Electronic Voting System.
+Details about the PSec framework can be found <a href="https://github.com/ShivKushwah/PSec">here</a>.</p>
+<h2 id="blogs">Blogs<a class="headerlink" href="#blogs" title="Permanent link">#</a></h2>
+<ul>
+<li><strong><a href="https://www.microsoft.com/en-us/research/blog/p-programming-language-asynchrony/">P: A programming language designed for asynchrony, fault-tolerance and uncertainty</a></strong></li>
+<li>
+<p><strong><a href="https://blogs.msdn.microsoft.com/b8/2011/08/22/building-robust-usb-3-0-support/">Building robust USB 3.0 support</a></strong></p>
+</li>
+<li>
+<p><strong><a href="https://freertos.org/2020/12/using-formal-methods-to-validate-ota-protocol.html">Using Formal Methods to Validate OTA Protocol</a></strong></p>
+</li>
+</ul>
+<h2 id="news">News<a class="headerlink" href="#news" title="Permanent link">#</a></h2>
+<ul>
+<li><strong>TechWorld[2016]</strong>: <strong><a href="http://www.techworld.com.au/article/608591/microsoft-open-sources-p-language-iot/">Microsoft open-sources P language for IoT</a></strong></li>
+<li><strong>InfoQ</strong>[2016]: <strong><a href="https://www.infoq.com/news/2016/10/microsoft-p-language-opensourced">Microsoft Open-Sources P Language for Safe Async Event-Driven Programming</a></strong></li>
+<li><strong>Reddit[2016]</strong>: <strong><a href="https://www.reddit.com/r/programming/comments/56nbbx/microsoft_opensources_p_language/">Microsoft opensources P language</a></strong></li>
+</ul>
+
+  <br>
+    
+
+    <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://p-org.github.io/P/">P-Org</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://p-org.github.io/P/">Windmill Dark</a> theme by Ankush Desai (noraj).</p>
+</footer>
+
+</body>
 </html>
+<!--
+MkDocs version : 1.1.2
+Build Date UTC : 2021-06-16 05:49:11.128436+00:00
+-->
