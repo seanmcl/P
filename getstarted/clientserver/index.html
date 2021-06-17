@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="Ankush Desai">
+    
+    <link rel="shortcut icon" href="../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Simple client server application using P - P</title>
+    <link href="../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+        ];
+
+    </script>
+    <script src="../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../../publications/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../../publications/" class="btn btn-xs btn-link">
+        Publications
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../syntaxhighlight/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../syntaxhighlight/" class="btn btn-xs btn-link">
+        Syntax Highlighting for P
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <p>A P program is a collection of event and machine declarations.
+Here is a basic P program containing a Client machine and a Server machine
+communicating with each other via Ping and Pong events.</p>
+<pre><code>// PingPong.p
+event PING assert 1: machine;
+event PONG assert 1;
+event SUCCESS;
+
+main machine Client {
+    var server: machine;
+
+    start state Init {
+        entry {
+            server = new Server();
+            raise SUCCESS;         
+        }
+        on SUCCESS goto SendPing;
+    }
+
+    state SendPing {
+        entry {
+              send server, PING, this;
+              raise SUCCESS;
+    }
+        on SUCCESS goto WaitPong;
+    }
+
+    state WaitPong {
+        on PONG goto SendPing;
+    }
+}
+
+machine Server {
+    start state WaitPing {
+        on PING goto SendPong;
+    }
+
+    state SendPong {
+          entry (payload: machine) {
+              send payload, PONG;
+              raise SUCCESS;              
+          }
+        on SUCCESS goto WaitPing;
+    }
+}
+</code></pre>
+<p>We now take a closer look at the event and machine declarations in this program.
+The declaration of event <code>PING</code> indicates that it is accompanied with
+a data value of <code>machine</code> type.
+The <code>machine</code> type contains the addresses of all dynamically-created
+P machines.
+This declaration also indicates that at most one instance of the <code>PING</code>
+event may be present in the input queue of any machine.</p>
+<p>A machine declaration contains a collection of variable and state
+declarations.
+For example, the machine <code>Client</code> has a variable <code>server</code> and three
+states, <code>Init</code>, <code>SendPing</code>, and <code>WaitPong</code>, declared inside it.
+The storage for the <code>server</code> variable is local to a particular instance
+of the <code>Client</code> machine.
+State <code>Init</code> is declared to be the start state to indicate that
+an instance of <code>Client</code> begins executing by entering the <code>Init</code> state.</p>
+<p>There can be many different declarations inside a state.
+A code block indicated by entry { ... } is executed when
+the state is entered.
+Similarly, a code block indicated by exit { ... }
+(not used in our example) is executed when the state is exited.
+Other than these two declarations, all other declarations inside a
+state are related to event handling.
+The declaration <code>on SUCCESS goto SendPing</code> in state <code>Init</code> is an
+example of such a declaration indicating that the <code>SUCCESS</code> event
+must be handled by moving to state <code>SendPing</code>.
+Different states can choose to handle a particular event
+differently.
+For example, state <code>Init</code> handles <code>SUCCESS</code> by moving to state <code>SendPing</code>
+but state <code>SendPing</code> handled <code>SUCCESS</code> by moving to state <code>WaitPong</code>.</p>
+<p>Next, we look at the contents of the entry code block in state <code>Init</code>
+of machine <code>Client</code>.
+This code block has two statements.
+The first statement creates an
+instance of the Server machine and stores the address of this
+instance in variable <code>server</code>.
+The second statement raises an event <code>SUCCESS</code>
+which causes control to exit <code>Init</code> and enter <code>SendPing</code>.
+In P, when a machine sends an event to another machine (or itself),
+the event is enqueued in the target machine's input queue.
+However, a raised event does not go through the queue;
+rather it terminates execution of the enclosing code block and is
+handled immediately.</p>
+<p>The entry code block in state <code>SendPing</code> shows an example of the "send"
+statement for sending a <code>PING</code> event to the machine whose address
+is stored in the variable server.
+The keyword <code>this</code> evaluates to the address of the machine
+executing the current statement.</p>
+<p>Finally, the entry code block in state <code>SendPong</code> of machine <code>Server</code>
+shows that the data value associated with a received event can be
+retrieved through a parameter of the apppriate type to the event handler.
+In this code block, the <code>payload</code> parameter evaluates to the data attached to the
+<code>PING</code> event whose handling caused control to enter <code>SendPong</code>.
+This data value is the address of the instance of the <code>Client</code> machine
+that sent the <code>PING</code> event.
+Similarly, a parameter can be used to retrieve the argument
+to the constructor of a freshly-created machine when it starts execution
+in the entry block of its <code>start</code> state.</p>
+<p>The attentive reader might be wondering how the PingPong program
+begins execution.
+The machine <code>Client</code> is annotated with <code>main</code> to indicate that program
+execution begins with a single instance of <code>Client</code> entering state <code>Init</code>.
+Let us call this <code>Client</code> instance X.
+X creates an instance of <code>Server</code> and raises <code>SUCCESS</code> to enter state
+<code>SendPing</code>.
+Let us call this <code>Server</code> instance Y; it begins execution in state <code>WaitPing</code>
+of <code>Server</code>.
+From this point on, X and Y exchange <code>PING</code> and <code>PONG</code> messages, where X
+cycles between <code>SendPing</code> and <code>WaitPong</code> and Y cycles between <code>WaitPing</code> and
+<code>SendPong</code>.</p>
+<p>The most important safety specification of a P program is that every event
+dequeued by a machine is handled; otherwise, the P runtime throws an "UnhandledEvent" exception.
+The PingPong program satisfies this specification, since the <code>Server</code>
+machine handles the <code>PING</code> event, and the <code>Client</code> machine handles
+the <code>PONG</code> event in every state where an event dequeue is possible.</p>
+<p>In order to terminate a state machine cleanly, there is a special <code>halt</code> event.
+Termination of a machine due to an unhandled <code>halt</code> event is a valid behavior
+and does not throw the UnhandledEvent exception.
+Therefore, a machine can be halted by queuing a <code>halt</code> event to it.
+From the point of view of formal operational semantics,
+a halted machine is fully receptive and consumes any event that is sent to it.
+The P runtime implements this semantics efficiently by cleaning up resources
+allocated with the halting machine and recording that the machine has halted.
+An event sent to a halted machine is simply dropped.
+A halted machine cannot be restarted; it remains halted forever. </p>
+
+  <br>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../../publications/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../../publications/" class="btn btn-xs btn-link">
+        Publications
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../syntaxhighlight/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../syntaxhighlight/" class="btn btn-xs btn-link">
+        Syntax Highlighting for P
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="container-fluid wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

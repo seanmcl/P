@@ -35,18 +35,11 @@
         
         var pageToc = [
           {title: "P", url: "#_top", children: [
-              {title: "Selected Publications", url: "#selected-publications" },
-              {title: "Manual", url: "#manual" },
-              {title: "Programming Safe Robotics Systems using P", url: "#programming-safe-robotics-systems-using-p" },
-              {title: "Programming Secure Distributed Systems using P", url: "#programming-secure-distributed-systems-using-p" },
-              {title: "Blogs", url: "#blogs" },
-              {title: "News", url: "#news" },
           ]},
         ];
 
     </script>
-    <script src="./js/base.js"></script>
-      <script src="search/main.js"></script> 
+    <script src="./js/base.js"></script> 
 </head>
 
 <body>
@@ -89,8 +82,6 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
       <div class="wm-top-title">
         P<br>
         
-          <span class="wm-top-version">v1.0.0</span>
-        
       </div>
     </a>
   </div>
@@ -100,41 +91,91 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
     
 <nav class="wm-toc-pane">
   
-    <ul class="wm-toctree wm-toc-repo">
-      <li class="wm-toc-li wm-toc-lev1">
-      <a class="wm-article-link wm-toc-text" href="https://p-org.github.io/P/">
-        
-        P-Org
-      </a>
-      </li>
-    </ul>
   <ul class="wm-toctree">
-        <li class="wm-toc-li wm-toc-lev1 "><a href="" class="wm-article-link wm-toc-text">Overview</a>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="" class="wm-article-link wm-toc-text">P</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="howdoesitwork/" class="wm-article-link wm-toc-text">How does P work</a>
 </li>
         <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Getting Started</span>
 </li>
 <li class="wm-toc-li-nested collapse">
   <ul class="wm-toctree">
-      <li class="wm-toc-li wm-toc-lev2 "><a href="sample-a.md" class="wm-article-link wm-toc-text">Installation</a>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="getstarted/install/" class="wm-article-link wm-toc-text">Installing P</a>
 </li>
-      <li class="wm-toc-li wm-toc-lev2 wm-toc-opener"><span class="wm-toc-text">Build from Source</span>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="getstarted/build/" class="wm-article-link wm-toc-text">Building from Source</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="getstarted/syntaxhighlight/" class="wm-article-link wm-toc-text">Syntax Highlighting for P</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="getstarted/clientserver/" class="wm-article-link wm-toc-text">Simple client server application using P</a>
+</li>
+  </ul>
+</li>
+
+        <li class="wm-toc-li wm-toc-lev1 "><a href="publications/" class="wm-article-link wm-toc-text">Publications</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="casestudies/" class="wm-article-link wm-toc-text">Case Studies</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="articles/" class="wm-article-link wm-toc-text">Blogs and Articles</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="videos/" class="wm-article-link wm-toc-text">Videos</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Tutorials</span>
 </li>
 <li class="wm-toc-li-nested collapse">
   <ul class="wm-toctree">
-      <li class="wm-toc-li wm-toc-lev3 "><a href="a/sample-a1.md" class="wm-article-link wm-toc-text">Sample Subpage A1</a>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="tutsoutline/" class="wm-article-link wm-toc-text">Outline</a>
 </li>
-      <li class="wm-toc-li wm-toc-lev3 "><a href="a/sample-a2.md" class="wm-article-link wm-toc-text">Sample Subpage A2</a>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="tutorial/clientserver/" class="wm-article-link wm-toc-text">Client Server</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="tutorial/twophasecommit/" class="wm-article-link wm-toc-text">Two Phase Commit</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="tutorial/paxos/" class="wm-article-link wm-toc-text">Failure Detector</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="tutorial/paxos/" class="wm-article-link wm-toc-text">Paxos Made Simple</a>
 </li>
   </ul>
 </li>
 
+        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">How-to guides</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev2 "><a href="howtoguides/sharedmemory/" class="wm-article-link wm-toc-text">Modeling Shared Memory Concurrency</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="howtoguides/modelbasedtesting/" class="wm-article-link wm-toc-text">Model based testing of implementation</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="howtoguides/importanceliveness/" class="wm-article-link wm-toc-text">Importance of Liveness Specifications</a>
+</li>
   </ul>
 </li>
 
-        <li class="wm-toc-li wm-toc-lev1 "><a href="sample-b.md" class="wm-article-link wm-toc-text">Tutorials</a>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="faq/" class="wm-article-link wm-toc-text">FAQ</a>
 </li>
-        <li class="wm-toc-li wm-toc-lev1 "><a href="sample-b.md" class="wm-article-link wm-toc-text">Language Manual</a>
+        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Language Manual</span>
 </li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev2 "><a href="manual/events/" class="wm-article-link wm-toc-text">P Events</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="manual/statemachines/" class="wm-article-link wm-toc-text">P State Machines</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="manual/monitors/" class="wm-article-link wm-toc-text">P Monitors</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="manual/functions/" class="wm-article-link wm-toc-text">P Functions</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="manual/functions/" class="wm-article-link wm-toc-text">P Statements</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="manual/functions/" class="wm-article-link wm-toc-text">P DataTypes and Operations</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="manual/functions/" class="wm-article-link wm-toc-text">P Module System</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="manual/functions/" class="wm-article-link wm-toc-text">P Test cases</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="manual/functions/" class="wm-article-link wm-toc-text">P Foreign Interface</a>
+</li>
+  </ul>
+</li>
+
   </ul>
 </nav>
 
@@ -148,85 +189,64 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
     
 
     
+    
+      
+    
 
-    <h1 id="p">P<a class="headerlink" href="#p" title="Permanent link">#</a></h1>
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="howdoesitwork/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="howdoesitwork/" class="btn btn-xs btn-link">
+        How does P work
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h1 id="p">P</h1>
 <p>P is a state machine based programming language for modeling and specifying complex distributed systems. P allows the programmer to specify the system as a collection of interacting state machines, which communicate with each other using events. P unifies modeling, programming, and testing into one activity for the programmer. Not only can a P program be compiled into executable code, but it can also be systematically tested using Model Checking. 
 P is currently being used extensively inside Amazon (AWS) for model checking complex distributed systems.
 P has been used to implement and validate the USB device driver stack that ships with Microsoft Windows 8 and Windows Phone.
 We have also used P for programming safe robotics systems.</p>
-<h2 id="selected-publications">Selected Publications<a class="headerlink" href="#selected-publications" title="Permanent link">#</a></h2>
-<ul>
-<li>
-<p><strong><a href="https://ankushdesai.github.io/assets/papers/modp.pdf">Compositional Programming and Testing of Dynamic Distributed Systems</a></strong>.
-Ankush Desai, Amar Phanishayee, Shaz Qadeer, and Sanjit Seshia.
-International Conference on Object-Oriented Programming, Systems, Languages, and Applications (OOPSLA), 2018.</p>
-</li>
-<li>
-<p><strong><a href="https://ankushdesai.github.io/assets/papers/drona.pdf">DRONA: A Framework for Safe Distributed Mobile Robotics</a></strong>.
-Ankush Desai, Indranil Saha, Jianqiao Yang, Shaz Qadeer, and Sanjit A. Seshia.
-In Proceedings of the 8th ACM/IEEE International Conference on Cyber-Physical Systems (ICCPS), 2017.</p>
-</li>
-<li>
-<p><strong><a href="https://ankushdesai.github.io/assets/papers/fse-desai.pdf">Systematic Testing of Asynchronous Reactive Systems</a></strong>.
-Ankush Desai, Shaz Qadeer, and Sanjit A. Seshia.
-In Proceedings of the 2015 10th Joint Meeting on Foundations of Software Engineering (ESEC/FSE 2015). </p>
-</li>
-<li>
-<p><strong><a href="https://ankushdesai.github.io/assets/papers/p.pdf">P: Safe asynchronous event-driven programming</a></strong>.
-Ankush Desai, Vivek Gupta, Ethan Jackson, Shaz Qadeer, Sriram Rajamani, and Damien Zufferey.
-In Proceedings of ACM SIGPLAN Conference on Programming Language Design and Implementation (PLDI), 2013.</p>
-</li>
-</ul>
-<h2 id="manual">Manual<a class="headerlink" href="#manual" title="Permanent link">#</a></h2>
-<p>Check the <a href="https://github.com/p-org/P/wiki/Introduction-to-P-language">P Wiki</a>.</p>
-<p>Information for building P framework is available <a href="https://github.com/p-org/P/wiki">here</a>.</p>
-<h2 id="programming-safe-robotics-systems-using-p">Programming Safe Robotics Systems using P<a class="headerlink" href="#programming-safe-robotics-systems-using-p" title="Permanent link">#</a></h2>
-<p>We built DRONA, a software framework for distributed mobile robotics systems. DRONA uses P language for implementing and model-checking the distributed robotics software stack (<strong><a href="https://github.com/Drona-Org/Drona/wiki/Drona-Software-Stack">wiki</a></strong>). The C code generated from P compiler can be easily deployed on  Robot Operating System (ROS).
-More details about the DRONA framework and simulation videos are available here:
-<strong><a href="https://drona-org.github.io/Drona/">https://drona-org.github.io/Drona/</a></strong></p>
-<p>See <a href="https://www.youtube.com/watch?v=R8ztpfMPs5c">fun demo video</a> using P to control a quadrocopter and make sense of the MavLink stream, all visualized in a live DGML diagram.</p>
-<h2 id="programming-secure-distributed-systems-using-p">Programming Secure Distributed Systems using P<a class="headerlink" href="#programming-secure-distributed-systems-using-p" title="Permanent link">#</a></h2>
-<p>Programming secure distributed systems that have a formal guarantee of no information leakage is challenging.
-We extended P to the PSec language to enable programming secure distributed systems.
-We leverage Intel SGX enclaves to ensure that the security guarantees provided by the P language are enforced
-at runtime. By combining information flow control with hardware enclaves, we prevent P programmers
-from inadvertently leaking sensitive information while sending data securely across machines. We
-formally proved the security properties of the extended P language and used it to program several real-world
-examples, including a One Time Passcode application and a Secure Electronic Voting System.
-Details about the PSec framework can be found <a href="https://github.com/ShivKushwah/PSec">here</a>.</p>
-<h2 id="blogs">Blogs<a class="headerlink" href="#blogs" title="Permanent link">#</a></h2>
-<ul>
-<li><strong><a href="https://www.microsoft.com/en-us/research/blog/p-programming-language-asynchrony/">P: A programming language designed for asynchrony, fault-tolerance and uncertainty</a></strong></li>
-<li>
-<p><strong><a href="https://blogs.msdn.microsoft.com/b8/2011/08/22/building-robust-usb-3-0-support/">Building robust USB 3.0 support</a></strong></p>
-</li>
-<li>
-<p><strong><a href="https://freertos.org/2020/12/using-formal-methods-to-validate-ota-protocol.html">Using Formal Methods to Validate OTA Protocol</a></strong></p>
-</li>
-</ul>
-<h2 id="news">News<a class="headerlink" href="#news" title="Permanent link">#</a></h2>
-<ul>
-<li><strong>TechWorld[2016]</strong>: <strong><a href="http://www.techworld.com.au/article/608591/microsoft-open-sources-p-language-iot/">Microsoft open-sources P language for IoT</a></strong></li>
-<li><strong>InfoQ</strong>[2016]: <strong><a href="https://www.infoq.com/news/2016/10/microsoft-p-language-opensourced">Microsoft Open-Sources P Language for Safe Async Event-Driven Programming</a></strong></li>
-<li><strong>Reddit[2016]</strong>: <strong><a href="https://www.reddit.com/r/programming/comments/56nbbx/microsoft_opensources_p_language/">Microsoft opensources P language</a></strong></li>
-</ul>
 
   <br>
     
 
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="howdoesitwork/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="howdoesitwork/" class="btn btn-xs btn-link">
+        How does P work
+      </a>
+    </div>
+    
+  </div>
+
     <br>
 </div>
 
-<footer class="col-md-12 wm-page-content">
-      <p>
-        <a href="https://p-org.github.io/P/">P-Org</a>
-      </p>
-  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://p-org.github.io/P/">Windmill Dark</a> theme by Ankush Desai (noraj).</p>
+<footer class="container-fluid wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
 </footer>
 
 </body>
 </html>
 <!--
 MkDocs version : 1.1.2
-Build Date UTC : 2021-06-16 05:49:11.128436+00:00
+Build Date UTC : 2021-06-17 03:39:04.539845+00:00
 -->

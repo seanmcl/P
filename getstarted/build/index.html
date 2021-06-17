@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="Ankush Desai">
+    
+    <link rel="shortcut icon" href="../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Building from Source - P</title>
+    <link href="../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Build from source", url: "#_top", children: [
+              {title: "Prerequisites", url: "#prerequisites" },
+              {title: "Building the P project", url: "#building-the-p-project" },
+              {title: "Running the tests", url: "#running-the-tests" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../syntaxhighlight/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../syntaxhighlight/" class="btn btn-xs btn-link">
+        Syntax Highlighting for P
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../install/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../install/" class="btn btn-xs btn-link">
+        Installing P
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h2 id="build-from-source">Build from source</h2>
+<p>If you plan to contribute a Pull Request to P then you need to be able to build the source code
+and run the tests.</p>
+<h3 id="prerequisites">Prerequisites</h3>
+<ul>
+<li>
+<p><a href="https://dotnet.microsoft.com/download/dotnet/3.1">.NET 3.1 SDK</a></p>
+</li>
+<li>
+<p><a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">Java JRE</a> <sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup></p>
+</li>
+</ul>
+<p><strong>Optional:</strong></p>
+<ul>
+<li>
+<p>For developing P programs: <a href="https://www.jetbrains.com/idea/">IntelliJ IDEA</a> as we support basic <a href="../syntaxhighlight/">P syntax highlighting</a> for IntelliJ.</p>
+</li>
+<li>
+<p>For editing C# code (P compiler): <a href="https://www.jetbrains.com/rider/">Rider</a> or <a href="https://visualstudio.microsoft.com/vs/mac/">Visual Studio for Mac</a> or <a href="https://docs.microsoft.com/en-us/visualstudio/install/install-visual-studio">Visual Studio 2019</a>.</p>
+</li>
+<li>
+<p>For editing Java code (P Java runtime): <a href="https://www.jetbrains.com/idea/">IntelliJ IDEA</a></p>
+</li>
+</ul>
+<h3 id="building-the-p-project">Building the P project</h3>
+<p>Clone the <a href="https://github.com/p-org/P">P repo</a>.</p>
+<p><strong>On Windows</strong></p>
+<pre><code class="language-shell">cd Bld
+./build.ps1
+</code></pre>
+<p><strong>on MacOS or Linux</strong></p>
+<pre><code class="language-shell">cd Bld
+./build.sh
+</code></pre>
+<h3 id="running-the-tests">Running the tests</h3>
+<p>You can run the following command to build and run the test regressions for P Compiler. Make sure you are in the root directory of the clone repo that has the <code>P.sln</code>.</p>
+<pre><code class="language-plain">dotnet build --configuration Release
+dotnet test --configuration Release
+</code></pre>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>P compiler uses <a href="https://www.antlr.org/">ANTLR</a> parser generator that using Java.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+  <br>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../syntaxhighlight/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../syntaxhighlight/" class="btn btn-xs btn-link">
+        Syntax Highlighting for P
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../install/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../install/" class="btn btn-xs btn-link">
+        Installing P
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="container-fluid wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

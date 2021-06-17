@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="Ankush Desai">
+    
+    <link rel="shortcut icon" href="../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Installing P - P</title>
+    <link href="../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Installing P Tool Chain", url: "#_top", children: [
+              {title: "Prerequisites", url: "#prerequisites" },
+              {title: "Nuget Packages", url: "#nuget-packages" },
+              {title: "Installing the P compiler", url: "#installing-the-p-compiler" },
+              {title: "Installing the P Checker", url: "#installing-the-p-checker" },
+              {title: "Troubleshooting", url: "#troubleshooting" },
+              {title: "Using the P tool", url: "#using-the-p-tool" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../build/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../build/" class="btn btn-xs btn-link">
+        Building from Source
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../../howdoesitwork/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../../howdoesitwork/" class="btn btn-xs btn-link">
+        How does P work
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h2 id="installing-p-tool-chain">Installing P Tool Chain</h2>
+<p>The P compiler is a NuGet library and works on .NET Core which means it can be used on Windows, Linux and
+macOS.</p>
+<h3 id="prerequisites">Prerequisites</h3>
+<ul>
+<li>
+<p><a href="https://dotnet.microsoft.com/download/dotnet/3.1">.NET 3.1 SDK</a></p>
+</li>
+<li>
+<p><a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">Java JRE</a> <sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup></p>
+</li>
+</ul>
+<p><strong>Optional:</strong></p>
+<ul>
+<li>
+<p>For developing P programs: <a href="https://www.jetbrains.com/idea/">IntelliJ IDEA</a> as we support basic <a href="../syntaxhighlight/">P syntax highlighting</a> for IntelliJ.</p>
+</li>
+<li>
+<p>For debugging generated C# code: <a href="https://www.jetbrains.com/rider/">Rider</a> or <a href="https://visualstudio.microsoft.com/vs/mac/">Visual Studio for Mac</a> or <a href="https://docs.microsoft.com/en-us/visualstudio/install/install-visual-studio">Visual Studio 2019</a>.</p>
+</li>
+<li>
+<p>For debugging generated Java code: <a href="https://www.jetbrains.com/idea/">IntelliJ IDEA</a></p>
+</li>
+</ul>
+<h3 id="nuget-packages">Nuget Packages</h3>
+<div>
+<a href="https://www.nuget.org/packages/P/" class="btn btn-primary mt-20 mr-30" target="_blank">Install P Compiler</a>
+<a href="https://www.nuget.org/packages/Microsoft.Coyote/1.0.5" class="btn btn-primary mt-20 mr-30" target="_blank">Install Coyote Version 1.0.5</a>
+<br/>
+</div>
+
+<h3 id="installing-the-p-compiler">Installing the P compiler</h3>
+<p>Install the <code>dotnet tool</code> named <code>P</code> using the following command:</p>
+<pre><code class="language-shell">dotnet tool install --global P
+</code></pre>
+<p>Now you can run the <code>P</code> compiler without having to build P from source. Type <code>pc
+-h</code> to see if it is working.</p>
+<p>You can update the version of <code>P</code> tool by running the following command:</p>
+<pre><code class="language-shell">dotnet tool update --global P
+</code></pre>
+<p>You can remove the global <code>P</code> tool by running the following command:</p>
+<pre><code class="language-shell">dotnet tool uninstall --global P
+</code></pre>
+<h3 id="installing-the-p-checker">Installing the P Checker</h3>
+<p>The current P concurrency checker depends on <a href="https://microsoft.github.io/coyote/">Coyote</a> (previously <a href="https://github.com/p-org/PSharp">P#</a>)</p>
+<p>Install the <code>Coyote</code> version <code>1.0.5</code> using the following command:</p>
+<pre><code class="language-shell">dotnet tool install --global Microsoft.Coyote.CLI --version 1.0.5
+</code></pre>
+<p>Now you can run <code>coyote</code> to check the correctness of P programs. Type <code>coyote --help</code> to see if it is working.</p>
+<p><strong>On MacOS or Linux</strong></p>
+<p>We recommend that you add the following alias to the bash profile (<code>~/.bash_profile</code>) so that you can invoke the P checker (pmc) from the commandline.</p>
+<p>Add the following line to the <code>~/.bash_profile</code>.</p>
+<pre><code class="language-shell">alias pmc='coyote test'
+</code></pre>
+<p><strong>On Windows</strong></p>
+<p>We recommend that you add the following to the <code>Microsoft.PowerShell_profile</code> normally found in <code>D:\Users\&lt;username&gt;\Documents\WindowsPowerShell</code></p>
+<pre><code class="language-shell">function pmc { coyote test $args}
+</code></pre>
+<h3 id="troubleshooting">Troubleshooting</h3>
+<h4 id="error-pc-or-coyote-command-not-found-after-installation">[Error] <code>pc</code> or <code>coyote</code> command not found after installation</h4>
+<p>After installation, run <code>which pc</code> (or <code>which coyote</code>) and it should show:</p>
+<pre><code class="language-shell">which pc
+/Users/&lt;user&gt;/.dotnet/tools/pc
+</code></pre>
+<p>If not, add <code>$HOME/.dotnet/tools</code> to <code>$PATH</code> in your <code>.bash_profile</code> (or equivalent) and try again after restarting the shell.</p>
+<h3 id="using-the-p-tool">Using the P tool</h3>
+<p>Great! You are all set to compile and test your first P program. To learn how to use the P tool chain read <a href="../clientserver/">here</a>.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>P compiler uses <a href="https://www.antlr.org/">ANTLR</a> parser generator that using Java.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+  <br>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../build/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../build/" class="btn btn-xs btn-link">
+        Building from Source
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../../howdoesitwork/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../../howdoesitwork/" class="btn btn-xs btn-link">
+        How does P work
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="container-fluid wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>
