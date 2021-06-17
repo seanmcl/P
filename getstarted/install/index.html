@@ -119,37 +119,45 @@ macOS.</p>
 
 <h3 id="installing-the-p-compiler">Installing the P compiler</h3>
 <p>Install the <code>dotnet tool</code> named <code>P</code> using the following command:</p>
-<pre><code class="language-shell">dotnet tool install --global P
-</code></pre>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>dotnet tool install --global P
+</code></pre></div>
+</td></tr></table>
 <p>Now you can run the <code>P</code> compiler without having to build P from source. Type <code>pc
 -h</code> to see if it is working.</p>
 <p>You can update the version of <code>P</code> tool by running the following command:</p>
-<pre><code class="language-shell">dotnet tool update --global P
-</code></pre>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>dotnet tool update --global P
+</code></pre></div>
+</td></tr></table>
 <p>You can remove the global <code>P</code> tool by running the following command:</p>
-<pre><code class="language-shell">dotnet tool uninstall --global P
-</code></pre>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>dotnet tool uninstall --global P
+</code></pre></div>
+</td></tr></table>
 <h3 id="installing-the-p-checker">Installing the P Checker</h3>
 <p>The current P concurrency checker depends on <a href="https://microsoft.github.io/coyote/">Coyote</a> (previously <a href="https://github.com/p-org/PSharp">P#</a>)</p>
 <p>Install the <code>Coyote</code> version <code>1.0.5</code> using the following command:</p>
-<pre><code class="language-shell">dotnet tool install --global Microsoft.Coyote.CLI --version 1.0.5
-</code></pre>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>dotnet tool install --global Microsoft.Coyote.CLI --version <span class="m">1</span>.0.5
+</code></pre></div>
+</td></tr></table>
 <p>Now you can run <code>coyote</code> to check the correctness of P programs. Type <code>coyote --help</code> to see if it is working.</p>
 <p><strong>On MacOS or Linux</strong></p>
 <p>We recommend that you add the following alias to the bash profile (<code>~/.bash_profile</code>) so that you can invoke the P checker (pmc) from the commandline.</p>
 <p>Add the following line to the <code>~/.bash_profile</code>.</p>
-<pre><code class="language-shell">alias pmc='coyote test'
-</code></pre>
-<p><strong>On Windows</strong></p>
+<p><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nb">alias</span> <span class="nv">pmc</span><span class="o">=</span><span class="s1">&#39;coyote test&#39;</span>
+</code></pre></div>
+</td></tr></table>
+<strong>On Windows</strong></p>
 <p>We recommend that you add the following to the <code>Microsoft.PowerShell_profile</code> normally found in <code>D:\Users\&lt;username&gt;\Documents\WindowsPowerShell</code></p>
-<pre><code class="language-shell">function pmc { coyote test $args}
-</code></pre>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">function</span> pmc <span class="o">{</span> coyote <span class="nb">test</span> <span class="nv">$args</span><span class="o">}</span>
+</code></pre></div>
+</td></tr></table>
 <h3 id="troubleshooting">Troubleshooting</h3>
 <h4 id="error-pc-or-coyote-command-not-found-after-installation">[Error] <code>pc</code> or <code>coyote</code> command not found after installation</h4>
 <p>After installation, run <code>which pc</code> (or <code>which coyote</code>) and it should show:</p>
-<pre><code class="language-shell">which pc
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>which pc
 /Users/&lt;user&gt;/.dotnet/tools/pc
-</code></pre>
+</code></pre></div>
+</td></tr></table>
 <p>If not, add <code>$HOME/.dotnet/tools</code> to <code>$PATH</code> in your <code>.bash_profile</code> (or equivalent) and try again after restarting the shell.</p>
 <h3 id="using-the-p-tool">Using the P tool</h3>
 <p>Great! You are all set to compile and test your first P program. To learn how to use the P tool chain read <a href="../clientserver/">here</a>.</p>

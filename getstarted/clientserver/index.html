@@ -57,12 +57,12 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../../publications/" class="btn btn-xs btn-default pull-right">
+      <a href="../../tutsoutline/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../../publications/" class="btn btn-xs btn-link">
-        Publications
+      <a href="../../tutsoutline/" class="btn btn-xs btn-link">
+        Outline
       </a>
     </div>
     
@@ -81,7 +81,48 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
     <p>A P program is a collection of event and machine declarations.
 Here is a basic P program containing a Client machine and a Server machine
 communicating with each other via Ping and Pong events.</p>
-<pre><code>// PingPong.p
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>// PingPong.p
 event PING assert 1: machine;
 event PONG assert 1;
 event SUCCESS;
@@ -123,7 +164,8 @@ machine Server {
         on SUCCESS goto WaitPing;
     }
 }
-</code></pre>
+</code></pre></div>
+</td></tr></table>
 <p>We now take a closer look at the event and machine declarations in this program.
 The declaration of event <code>PING</code> indicates that it is accompanied with
 a data value of <code>machine</code> type.
@@ -220,12 +262,12 @@ A halted machine cannot be restarted; it remains halted forever. </p>
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../../publications/" class="btn btn-xs btn-default pull-right">
+      <a href="../../tutsoutline/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../../publications/" class="btn btn-xs btn-link">
-        Publications
+      <a href="../../tutsoutline/" class="btn btn-xs btn-link">
+        Outline
       </a>
     </div>
     
