@@ -735,8 +735,7 @@
                 
                   <h1>Installing P</h1>
                 
-                <h2>Installing P Tool Chain</h2>
-<p>The P compiler is a NuGet library and works on .NET Core which means it can be used on Windows, Linux and
+                <p>The P compiler is a NuGet library and works on .NET Core which means it can be used on Windows, Linux and
 macOS.</p>
 <h3>Prerequisites</h3>
 <ul>
@@ -750,7 +749,7 @@ macOS.</p>
 <p><strong>Optional:</strong></p>
 <ul>
 <li>
-<p>For developing P programs: <a href="https://www.jetbrains.com/idea/">IntelliJ IDEA</a> as we support basic <a href="../syntaxhighlight/">P syntax highlighting</a> for IntelliJ.</p>
+<p>For developing P programs: <a href="https://www.jetbrains.com/idea/">IntelliJ IDEA</a>, we support basic <a href="../syntaxhighlight/">P syntax highlighting</a> for IntelliJ.</p>
 </li>
 <li>
 <p>For debugging generated C# code: <a href="https://www.jetbrains.com/rider/">Rider</a> or <a href="https://visualstudio.microsoft.com/vs/mac/">Visual Studio for Mac</a> or <a href="https://docs.microsoft.com/en-us/visualstudio/install/install-visual-studio">Visual Studio 2019</a>.</p>
@@ -760,12 +759,8 @@ macOS.</p>
 </li>
 </ul>
 <h3>Nuget Packages</h3>
-<div>
-<a href="https://www.nuget.org/packages/P/" class="btn btn-primary mt-20 mr-30" target="_blank">Install P Compiler</a>
-<a href="https://www.nuget.org/packages/Microsoft.Coyote/1.0.5" class="btn btn-primary mt-20 mr-30" target="_blank">Install Coyote Version 1.0.5</a>
-<br/>
-</div>
-
+<p><a class="md-button" href="https://www.nuget.org/packages/P/">Install P Compiler</a>
+<a class="md-button" href="https://www.nuget.org/packages/Microsoft.Coyote/1.0.5">Install Coyote Version 1.0.5</a></p>
 <h3>Installing the P compiler</h3>
 <p>Install the <code>dotnet tool</code> named <code>P</code> using the following command:</p>
 <div class="highlight"><pre><span></span><code>dotnet tool install --global P
@@ -784,22 +779,31 @@ macOS.</p>
 <div class="highlight"><pre><span></span><code>dotnet tool install --global Microsoft.Coyote.CLI --version <span class="m">1</span>.0.5
 </code></pre></div>
 <p>Now you can run <code>coyote</code> to check the correctness of P programs. Type <code>coyote --help</code> to see if it is working.</p>
-<p><strong>On MacOS or Linux</strong></p>
-<p>We recommend that you add the following alias to the bash profile (<code>~/.bash_profile</code>) so that you can invoke the P checker (pmc) from the commandline.</p>
-<p>Add the following line to the <code>~/.bash_profile</code>.</p>
-<p><div class="highlight"><pre><span></span><code><span class="nb">alias</span> <span class="nv">pmc</span><span class="o">=</span><span class="s1">&#39;coyote test&#39;</span>
-</code></pre></div>
-<strong>On Windows</strong></p>
-<p>We recommend that you add the following to the <code>Microsoft.PowerShell_profile</code> normally found in <code>D:\Users\&lt;username&gt;\Documents\WindowsPowerShell</code></p>
+<div class="tabbed-set" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">On MacOS or Linux</label><div class="tabbed-content">
+<p>We recommend that you add the following alias to the bash profile (<code>~/.bash_profile</code>) 
+so that you can invoke the P checker (pmc) from the commandline.
+<div class="highlight"><pre><span></span><code><span class="nb">alias</span> <span class="nv">pmc</span><span class="o">=</span><span class="s1">&#39;coyote test&#39;</span>
+</code></pre></div></p>
+</div>
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">On Windows</label><div class="tabbed-content">
+<p>We recommend that you add the following to the <code>Microsoft.PowerShell_profile</code> 
+normally found in <code>D:\Users\&lt;username&gt;\Documents\WindowsPowerShell</code></p>
 <div class="highlight"><pre><span></span><code><span class="k">function</span> pmc <span class="o">{</span> coyote <span class="nb">test</span> <span class="nv">$args</span><span class="o">}</span>
 </code></pre></div>
+</div>
+</div>
 <h3>Troubleshooting</h3>
-<h4>[Error] <code>pc</code> or <code>coyote</code> command not found after installation</h4>
-<p>After installation, run <code>which pc</code> (or <code>which coyote</code>) and it should show:</p>
+<div class="admonition hint">
+<p class="admonition-title">Tool not found after installation</p>
+<p>After installation, run <code>which pc</code> (or <code>which coyote</code>) and it should show:
 <div class="highlight"><pre><span></span><code>which pc
 /Users/&lt;user&gt;/.dotnet/tools/pc
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>which coyote
+coyote is /Users/&lt;user&gt;/.dotnet/tools/coyote
+</code></pre></div></p>
 <p>If not, add <code>$HOME/.dotnet/tools</code> to <code>$PATH</code> in your <code>.bash_profile</code> (or equivalent) and try again after restarting the shell.</p>
+</div>
 <h3>Using the P tool</h3>
 <p>Great! You are all set to compile and test your first P program. To learn how to use the P tool chain read <a href="../clientserver/">here</a>.</p>
 <div class="footnote">
