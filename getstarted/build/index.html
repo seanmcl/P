@@ -65,6 +65,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#prerequisites" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -222,7 +227,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="../../manual/events/" class="md-tabs__link">
+        <a href="../../manualoutline/" class="md-tabs__link">
           Language Manual
         </a>
       
@@ -340,9 +345,50 @@
     <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
     
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Building from Source
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
     <a href="./" class="md-nav__link md-nav__link--active">
       Building from Source
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#building-the-p-project" class="md-nav__link">
+    Building the P project
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-the-tests" class="md-nav__link">
+    Running the tests
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -366,7 +412,7 @@
 
   <li class="md-nav__item">
     <a href="../clientserver/" class="md-nav__link">
-      Simple client server application using P
+      Using P Compiler and Checker
     </a>
   </li>
 
@@ -611,6 +657,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../../manualoutline/" class="md-nav__link">
+      Outline
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../manual/events/" class="md-nav__link">
       P Events
     </a>
@@ -725,6 +783,48 @@
               </div>
             
             
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#building-the-p-project" class="md-nav__link">
+    Building the P project
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-the-tests" class="md-nav__link">
+    Running the tests
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content">
             <article class="md-content__inner md-typeset">
@@ -735,7 +835,7 @@
                 
                 <p>If you plan to contribute a Pull Request to P then you need to be able to build the source code
 and run the tests.</p>
-<h3>Prerequisites</h3>
+<h3 id="prerequisites">Prerequisites</h3>
 <ul>
 <li>
 <p><a href="https://dotnet.microsoft.com/download/dotnet/3.1">.NET 3.1 SDK</a></p>
@@ -747,7 +847,7 @@ and run the tests.</p>
 <p><strong>Optional:</strong></p>
 <ul>
 <li>
-<p>For developing P programs: <a href="https://www.jetbrains.com/idea/">IntelliJ IDEA</a> as we support basic <a href="../syntaxhighlight/">P syntax highlighting</a> for IntelliJ.</p>
+<p>For developing P programs: <a href="https://www.jetbrains.com/idea/">IntelliJ IDEA</a>, we support basic <a href="../syntaxhighlight/">P syntax highlighting</a> for IntelliJ.</p>
 </li>
 <li>
 <p>For editing C# code (P compiler): <a href="https://www.jetbrains.com/rider/">Rider</a> or <a href="https://visualstudio.microsoft.com/vs/mac/">Visual Studio for Mac</a> or <a href="https://docs.microsoft.com/en-us/visualstudio/install/install-visual-studio">Visual Studio 2019</a>.</p>
@@ -756,17 +856,20 @@ and run the tests.</p>
 <p>For editing Java code (P Java runtime): <a href="https://www.jetbrains.com/idea/">IntelliJ IDEA</a></p>
 </li>
 </ul>
-<h3>Building the P project</h3>
-<p>Clone the <a href="https://github.com/p-org/P">P repo</a>.</p>
-<p><strong>On Windows</strong></p>
+<h3 id="building-the-p-project">Building the P project</h3>
+<p>Clone the <a href="https://github.com/p-org/P">P repo</a> and run the following <code>build</code> script.</p>
+<div class="tabbed-set" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">on MacOS or Linux</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span> Bld
+./build.sh
+</code></pre></div>
+</div>
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">On Windows</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span> Bld
 ./build.ps1
 </code></pre></div>
-<p><strong>on MacOS or Linux</strong>
-<div class="highlight"><pre><span></span><code><span class="nb">cd</span> Bld
-./build.sh
-</code></pre></div></p>
-<h3>Running the tests</h3>
+</div>
+</div>
+<h3 id="running-the-tests">Running the tests</h3>
 <p>You can run the following command to build and run the test regressions for P Compiler. Make sure you are in the root directory of the clone repo that has the <code>P.sln</code>.</p>
 <div class="highlight"><pre><span></span><code>dotnet build --configuration Release
 dotnet test --configuration Release
@@ -847,7 +950,7 @@ dotnet test --configuration Release
     
       
       
-      <a href="https://twitter.com/squidfunk" target="_blank" rel="noopener" title="P on Twitter" class="md-footer-social__link">
+      <a href="https://twitter.com/_planguage" target="_blank" rel="noopener" title="P on Twitter" class="md-footer-social__link">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
       </a>
     
