@@ -216,8 +216,6 @@
         
       
         
-      
-        
   
   
     <li class="md-tabs__item">
@@ -530,18 +528,6 @@
 
 
   <li class="md-nav__item">
-    <a href="../faq/" class="md-nav__link">
-      FAQ
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
     <a href="../publications/" class="md-nav__link">
       Publications
     </a>
@@ -591,14 +577,14 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
     
-    <label class="md-nav__link" for="nav-11">
+    <label class="md-nav__link" for="nav-10">
       Language Manual
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Language Manual" data-md-level="1">
-      <label class="md-nav__title" for="nav-11">
+      <label class="md-nav__title" for="nav-10">
         <span class="md-nav__icon md-icon"></span>
         Language Manual
       </label>
@@ -745,7 +731,20 @@
                 
                   <h1>Outline</h1>
                 
-                
+                <p>We use three examples of increasing complexity to illustrate various features of the P programming language and framework.</p>
+<ul>
+<li>
+<p>Client Server: A simple client-server example where a client state machine sends requests to a server state machine that performs some local computation and sends a response back to the client.
+We will use this example to understand P syntax, semantics, how to write specifications, run the model checker to find a bug, and then fix the bug.</p>
+</li>
+<li>
+<p>Two Phase Commit: Two phase commit protocol where a coordinator state machine communicates with participant state machines to ensure atomicity guarantees for transactions.
+We will use this example to dive deeper into how to model non-determinism in systems, how to write more complex properties in P, run the model checker, find and fix the existing bug.</p>
+</li>
+<li>
+<p>Failure Detector: We will use this protocol as an exercise to understand how to model node failures in P.</p>
+</li>
+</ul>
                 
               
               

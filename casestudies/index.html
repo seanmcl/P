@@ -66,7 +66,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#programming-safe-robotics-systems-using-p" class="md-skip">
+        <a href="#amazon-s3-strong-consistency" class="md-skip">
           Skip to content
         </a>
       
@@ -209,8 +209,6 @@
     </li>
   
 
-      
-        
       
         
       
@@ -524,18 +522,6 @@
 
 
   <li class="md-nav__item">
-    <a href="../faq/" class="md-nav__link">
-      FAQ
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
     <a href="../publications/" class="md-nav__link">
       Publications
     </a>
@@ -575,15 +561,29 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#programming-safe-robotics-systems-using-p" class="md-nav__link">
-    Programming Safe Robotics Systems using P
+  <a href="#amazon-s3-strong-consistency" class="md-nav__link">
+    Amazon S3 Strong Consistency
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#programming-secure-distributed-systems-using-p" class="md-nav__link">
-    Programming Secure Distributed Systems using P
+  <a href="#windows-usb-30-device-drivers" class="md-nav__link">
+    Windows USB 3.0 Device Drivers
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#programming-safe-robotics-systems" class="md-nav__link">
+    Programming Safe Robotics Systems
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#programming-secure-distributed-systems" class="md-nav__link">
+    Programming Secure Distributed Systems
   </a>
   
 </li>
@@ -626,14 +626,14 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
     
-    <label class="md-nav__link" for="nav-11">
+    <label class="md-nav__link" for="nav-10">
       Language Manual
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Language Manual" data-md-level="1">
-      <label class="md-nav__title" for="nav-11">
+      <label class="md-nav__title" for="nav-10">
         <span class="md-nav__icon md-icon"></span>
         Language Manual
       </label>
@@ -787,15 +787,29 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#programming-safe-robotics-systems-using-p" class="md-nav__link">
-    Programming Safe Robotics Systems using P
+  <a href="#amazon-s3-strong-consistency" class="md-nav__link">
+    Amazon S3 Strong Consistency
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#programming-secure-distributed-systems-using-p" class="md-nav__link">
-    Programming Secure Distributed Systems using P
+  <a href="#windows-usb-30-device-drivers" class="md-nav__link">
+    Windows USB 3.0 Device Drivers
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#programming-safe-robotics-systems" class="md-nav__link">
+    Programming Safe Robotics Systems
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#programming-secure-distributed-systems" class="md-nav__link">
+    Programming Secure Distributed Systems
   </a>
   
 </li>
@@ -815,12 +829,18 @@
                 
                   <h1>Case Studies</h1>
                 
-                <h2 id="programming-safe-robotics-systems-using-p">Programming Safe Robotics Systems using P</h2>
-<p>We built DRONA, a software framework for distributed mobile robotics systems. DRONA uses P language for implementing and model-checking the distributed robotics software stack (<strong><a href="https://github.com/Drona-Org/Drona/wiki/Drona-Software-Stack">wiki</a></strong>). The C code generated from P compiler can be easily deployed on  Robot Operating System (ROS).
+                <h3 id="amazon-s3-strong-consistency">Amazon S3 Strong Consistency</h3>
+<h3 id="windows-usb-30-device-drivers">Windows USB 3.0 Device Drivers</h3>
+<p>Event-driven asynchronous programs typically have layers of design, where the higher layers reason with how the various components (or machines) interact, and the protocol they follow, and where as lower layers manage more data-intensive computations, controlling local devices, etc. However, the programs often get written in traditional languages that offer no mechanisms to capture these abstractions, and hence over time leads to code where the individual layers are no longer discernible. High-level protocols, though often first designed on paper using clean graphical state-machine abstractions, eventually get lost in code, and hence verification tools for such programs face the daunting task of extracting these models from the programs.
+The natural solution to the above problem is to build a programming language for asynchronous event-driven programs that preserves the protocol abstractions in code. Apart from the difficulty in designing such a language, this task is plagued by the reluctance of programmers to adopt a new language of programming and the discipline that it brings. However, this precise solution was pioneered by the P programming framework, where, during the development of Windows 8, the team building the USB driver stack used P for modeling, implementing, and model-checking of the USB 3.0 device drivers (<a href="https://ankushdesai.github.io/assets/papers/p.pdf">paper</a>)</p>
+<h3 id="programming-safe-robotics-systems">Programming Safe Robotics Systems</h3>
+<p>We built DRONA, a software framework for distributed mobile robotics systems. 
+DRONA uses P language for implementing and model-checking the distributed robotics software stack. 
+The C code generated from P compiler can be easily deployed on  Robot Operating System (ROS).
 More details about the DRONA framework and simulation videos are available here:
-<strong><a href="https://drona-org.github.io/Drona/">https://drona-org.github.io/Drona/</a></strong></p>
-<p>See <a href="https://www.youtube.com/watch?v=R8ztpfMPs5c">fun demo video</a> using P to control a quadrocopter and make sense of the MavLink stream, all visualized in a live DGML diagram.</p>
-<h2 id="programming-secure-distributed-systems-using-p">Programming Secure Distributed Systems using P</h2>
+<strong><a href="https://drona-org.github.io/Drona/">https://drona-org.github.io/Drona/</a></strong>
+See <a href="https://www.youtube.com/watch?v=R8ztpfMPs5c">fun demo video</a> using P to control a quadrocopter and make sense of the MavLink stream, all visualized in a live DGML diagram.</p>
+<h3 id="programming-secure-distributed-systems">Programming Secure Distributed Systems</h3>
 <p>Programming secure distributed systems that have a formal guarantee of no information leakage is challenging.
 We extended P to the PSec language to enable programming secure distributed systems.
 We leverage Intel SGX enclaves to ensure that the security guarantees provided by the P language are enforced
@@ -829,19 +849,6 @@ from inadvertently leaking sensitive information while sending data securely acr
 formally proved the security properties of the extended P language and used it to program several real-world
 examples, including a One Time Passcode application and a Secure Electronic Voting System.
 Details about the PSec framework can be found <a href="https://github.com/ShivKushwah/PSec">here</a>.</p>
-<div class="tabbed-set" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Tab1</label><div class="tabbed-content">
-<p>xx
-asd</p>
-</div>
-<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Tab2</label><div class="tabbed-content">
-<p>asds
-asda</p>
-</div>
-</div>
-<div class="admonition bug">
-<p class="admonition-title">Bug</p>
-<p>There is an error here</p>
-</div>
                 
               
               

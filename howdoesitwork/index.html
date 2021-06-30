@@ -214,8 +214,6 @@
         
       
         
-      
-        
   
   
     <li class="md-tabs__item">
@@ -526,18 +524,6 @@
 
 
   <li class="md-nav__item">
-    <a href="../faq/" class="md-nav__link">
-      FAQ
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
     <a href="../publications/" class="md-nav__link">
       Publications
     </a>
@@ -587,14 +573,14 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
     
-    <label class="md-nav__link" for="nav-11">
+    <label class="md-nav__link" for="nav-10">
       Language Manual
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Language Manual" data-md-level="1">
-      <label class="md-nav__title" for="nav-11">
+      <label class="md-nav__title" for="nav-10">
         <span class="md-nav__icon md-icon"></span>
         Language Manual
       </label>
@@ -741,7 +727,24 @@
                 
                   <h1>How does P work</h1>
                 
-                
+                <p>Asynchronous event-driven systems<sup id="fnref:eds"><a class="footnote-ref" href="#fn:eds">1</a></sup> are ubiquitous across domains such as device drivers,
+distributed systems, and robotics. These systems are notoriously hard to get right as the
+programmer needs to reason about numerous control paths resulting from the myriad interleaving of events (or messages) and failures. 
+Unsurprisingly, it is easy to introduce subtle errors while attempting to fill in gaps between high-level system specifications and their
+concrete implementations. In practice, it is extremely difficult to test asynchronous systems, most control paths remain untested, and serious bugs lie dormant for months or even years after deployment.</p>
+<div class="admonition quote">
+<p><em>The P programming framework takes several steps towards addressing these challenges</em>. </p>
+</div>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:eds">
+<p>Event-driven asynchronous systems are systems that are built on top of the actor or communicating
+state-machines model of computation where processes execute concurrently and communicate
+with each other by sending message asynchronously.&#160;<a class="footnote-backref" href="#fnref:eds" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
                 
               
               
