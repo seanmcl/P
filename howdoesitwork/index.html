@@ -65,6 +65,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#p-framework" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -289,9 +294,63 @@
     <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
     
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        How does P work
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
     <a href="./" class="md-nav__link md-nav__link--active">
       How does P work
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#p-framework" class="md-nav__link">
+    P Framework
+  </a>
+  
+    <nav class="md-nav" aria-label="P Framework">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#p-language" class="md-nav__link">
+    P Language
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backend-analysis-engines" class="md-nav__link">
+    Backend Analysis Engines
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#code-generation" class="md-nav__link">
+    Code Generation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -719,6 +778,61 @@
               </div>
             
             
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#p-framework" class="md-nav__link">
+    P Framework
+  </a>
+  
+    <nav class="md-nav" aria-label="P Framework">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#p-language" class="md-nav__link">
+    P Language
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backend-analysis-engines" class="md-nav__link">
+    Backend Analysis Engines
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#code-generation" class="md-nav__link">
+    Code Generation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content">
             <article class="md-content__inner md-typeset">
@@ -727,24 +841,27 @@
                 
                   <h1>How does P work</h1>
                 
-                <p>Asynchronous event-driven systems<sup id="fnref:eds"><a class="footnote-ref" href="#fn:eds">1</a></sup> are ubiquitous across domains such as device drivers,
-distributed systems, and robotics. These systems are notoriously hard to get right as the
-programmer needs to reason about numerous control paths resulting from the myriad interleaving of events (or messages) and failures. 
+                <style>
+  .md-typeset h1,
+  .md-content__button {
+    display: none;
+  }
+</style>
+
+<p><img align="center" alt="Placeholder" src="../distsystem.png" /></p>
+<p>Distributed systems are notoriously hard to get right as the programmer needs to reason about numerous control paths resulting from the myriad interleaving of events (or messages) and failures.
 Unsurprisingly, it is easy to introduce subtle errors while attempting to fill in gaps between high-level system specifications and their
 concrete implementations. In practice, it is extremely difficult to test asynchronous systems, most control paths remain untested, and serious bugs lie dormant for months or even years after deployment.</p>
 <div class="admonition quote">
 <p><em>The P programming framework takes several steps towards addressing these challenges</em>. </p>
 </div>
-<div class="footnote">
-<hr />
-<ol>
-<li id="fn:eds">
-<p>Event-driven asynchronous systems are systems that are built on top of the actor or communicating
-state-machines model of computation where processes execute concurrently and communicate
-with each other by sending message asynchronously.&#160;<a class="footnote-backref" href="#fnref:eds" title="Jump back to footnote 1 in the text">&#8617;</a></p>
-</li>
-</ol>
-</div>
+<h2 id="p-framework">P Framework</h2>
+<p>P is a unified framework for modeling, specifying, implementing, testing and verifying complex distributed systems. 
+The P framework can be divided into three important parts:</p>
+<p><img align="center" alt="Placeholder" src="../toolchain.png" /></p>
+<h3 id="p-language">P Language</h3>
+<h3 id="backend-analysis-engines">Backend Analysis Engines</h3>
+<h3 id="code-generation">Code Generation</h3>
                 
               
               
