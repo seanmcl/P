@@ -213,14 +213,6 @@
 
       
         
-      
-        
-      
-        
-      
-        
-      
-        
   
   
     <li class="md-tabs__item">
@@ -232,6 +224,14 @@
     </li>
   
 
+      
+        
+      
+        
+      
+        
+      
+        
       
     </ul>
   </div>
@@ -566,64 +566,16 @@
       
 
 
-  <li class="md-nav__item">
-    <a href="../../publications/" class="md-nav__link">
-      Publications
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../../casestudies/" class="md-nav__link">
-      Case Studies
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../../articles/" class="md-nav__link">
-      Blogs and Articles
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../../videos/" class="md-nav__link">
-      Videos
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
     
-    <label class="md-nav__link" for="nav-10">
+    <label class="md-nav__link" for="nav-6">
       Language Manual
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Language Manual" data-md-level="1">
-      <label class="md-nav__title" for="nav-10">
+      <label class="md-nav__title" for="nav-6">
         <span class="md-nav__icon md-icon"></span>
         Language Manual
       </label>
@@ -767,6 +719,54 @@
   </li>
 
     
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../casestudies/" class="md-nav__link">
+      Case Studies
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../articles/" class="md-nav__link">
+      Blogs and Articles
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../videos/" class="md-nav__link">
+      Videos
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../publications/" class="md-nav__link">
+      Publications
+    </a>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -819,52 +819,52 @@
                 
                 <p>We introduce the P language syntax and semantics in details in the <a href="../../tutsoutline/">Tutorials</a> and <a href="../../manualoutline/">Language Manual</a>.
 In this section, We provide an overview of the steps involved in compiling and testing a P program using the <a href="../../tutorial/clientserver/">client server</a> example.</p>
-<details class="tip"><summary>Clone the P repo and navigate to the tutorials folder</summary><p>We will use the ClientServer example from Tutorials to describe the process of compiling and testing P program. 
-Please clone the P repo and navigate to the ClientServer example in Tutorials.</p>
+<details class="tip"><summary>Clone the P repo and navigate to the Tutorial folder</summary><p>We will use the ClientServer example from Tutorial to describe the process of compiling and testing a P program. 
+Please clone the P repo and navigate to the ClientServer example in Tutorial.</p>
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span> &lt;P cloned folder&gt;/Tutorial/ClientServer
 </code></pre></div>
 </details>
 <h3 id="structure-of-a-p-program">Structure of a P Program</h3>
 <p>A P program is typically divided into following four folders (or parts):</p>
 <ul>
-<li><code>PSrc</code>: The <code>PSrc</code> folder contains all the state machines that together represent the implementation (model) of the system or protocol to be verified or tested.</li>
-<li><code>PSpec</code>: The <code>PSpec</code> folder contains all the specifications that together represent the <em>correctness</em> properties that the implementation must satisfy.</li>
+<li><code>PSrc</code>: contains all the state machines representing the implementation (model) of the system or protocol to be verified or tested.</li>
+<li><code>PSpec</code>: contains all the specifications representing the <em>correctness</em> properties that the system must satisfy.</li>
 <li>
-<p><code>PTst</code>: The <code>PTst</code> folder contains all the <em>environment</em> state machines or <em>test harness</em> state machines that model the non-deterministic 
-  scenarios under which we want to check that the implementation in <code>PSrc</code> satisfies the specifications in <code>PSpec</code>. 
+<p><code>PTst</code>: contains all the <em>environment</em> or <em>test harness</em> state machines that model the non-deterministic 
+  scenarios under which we want to check that the system model in <code>PSrc</code> satisfies the specifications in <code>PSpec</code>. 
   P allows writing different model checking scenarios as test-cases.</p>
 </li>
 <li>
 <p><code>PForeign</code>: P also supports interfacing with foreign languages like <code>Java</code>, <code>C#</code>, and <code>C/C++</code>. 
-  P allows programmers to implement a part of its protocol logic in these foreign languages and use them in a P program using the Foreign types and functions interface (<a href="../manual/foriegntypesfunctions.md">Foreign</a>)
+  P allows programmers to implement a part of their protocol logic in these foreign languages and use them in a P program using the Foreign types and functions interface (<a href="../manual/foriegntypesfunctions.md">Foreign</a>)
   The <code>PForeign</code> folder contains all the foreign code used in the P program.</p>
 </li>
 </ul>
-<details class="tip"><summary>Primer: Models, Specifications, Model Checking Scenario</summary><p>Here's a quick primer on what a model is, versus a specification, and model checking scenarios:
+<details class="tip"><summary>Models, Specifications, Model Checking Scenario</summary><p>A quick primer on what a model is, versus a specification, and model checking scenarios:
 (1) A specification says what the system should do (correctness properties).
 (2) A model captures the details of how the system does it.
-(3) A model checking scenario provides the non-deterministc test-harness or environment under which the model checker should check
+(3) A model checking scenario provides the finite non-deterministc test-harness or environment under which the model checker should check
 that the system model satisfies its specifications.</p>
 </details>
 <div class="admonition note">
 <p class="admonition-title">Recommendation</p>
-<p>The folder structure described above is a recommendation. The P compiler does not require any particular folder structure for a P project.
+<p>The folder structure described above is just a recommendation. The P compiler does not require any particular folder structure for a P project.
 The examples in the <a href="../../tutsoutline/">Tutorials</a> use the same folder structure.</p>
 </div>
 <h3 id="compiling-a-p-program">Compiling a P program</h3>
-<p>We assume that you have successfully installed the <a href="../install/#installing-the-p-compiler">P Compiler and checker</a>.
+<p>We assume that you have successfully installed the <a href="../install/#installing-the-p-compiler">P Compiler and Checker</a>.
 The P compiler provides the following commandline options:</p>
 <details class="help"><summary>P Compiler commandline options:</summary><div class="highlight"><pre><span></span><code>------------------------------------------
 Recommended usage:
 &gt;&gt; pc -proj:&lt;.pproj file&gt;
 ------------------------------------------
 Optional usage:
-&gt;&gt; pc file1.p <span class="o">[</span>file2.p ...<span class="o">]</span> <span class="o">[</span>-t:tfile<span class="o">]</span> <span class="o">[</span>options<span class="o">]</span>
--t:<span class="o">[</span>target project name<span class="o">]</span>   -- project name <span class="o">(</span>as well as the generated file<span class="o">)</span>
-<span class="k">if</span> not supplied, use file1
+&gt;&gt; pc file1.p <span class="o">[</span>file2.p ...<span class="o">]</span> <span class="o">[</span>options<span class="o">]</span>
+
+options:
+-t:<span class="o">[</span>target project name<span class="o">]</span>   -- project name <span class="o">(</span>as well as the generated file<span class="o">)</span> <span class="k">if</span> not supplied, use file1
 -outputDir:<span class="o">[</span>path<span class="o">]</span>          -- where to write the generated files
--aspectOutputDir:<span class="o">[</span>path<span class="o">]</span>    -- where to write the generated aspectj files
-<span class="k">if</span> not supplied, use outputDir
+-aspectOutputDir:<span class="o">[</span>path<span class="o">]</span>    -- where to write the generated aspectj files <span class="k">if</span> not supplied, use outputDir
 -generate:<span class="o">[</span>C,CSharp,RVM<span class="o">]</span>   -- <span class="k">select</span> a target language to generate
 C       : generate C code
 CSharp  : generate C# code
@@ -873,12 +873,76 @@ RVM     : generate Monitor code
 ------------------------------------------
 </code></pre></div>
 </details>
-<p>There are two ways of compiling a P program: 
-(1) passing all the P files (<code>*.p</code>) to be compiled as commandline arguments along with the other parameters like <code>-generate</code> to provide the code to be generated or 
-(2) using the P project file (<code>*.pproj</code>) that provides all the inputs to the compiler.</p>
+<p>There are two ways of compiling a P program:
+(1) using the P project file (<code>*.pproj</code>) that provides all the inputs to the compiler.
+(2) passing all the P files (<code>*.p</code>) to be compiled as commandline arguments along with other options like <code>-generate</code> to provide the code to be generated. </p>
 <div class="admonition note">
 <p class="admonition-title">Recommendation</p>
 <p>We recommend using the P project files to compile a P program.</p>
+</div>
+<div class="tabbed-set" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Compile using the P Project</label><div class="tabbed-content">
+<p>The P compiler does not support fancy project management features like separate compilation and dependency analysis (coming soon).
+The current project file interface is a simple mechanism to provide all the required inputs to the compiler in XML format.
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;Project&gt;</span>
+<span class="nt">&lt;IncludeProject&gt;</span>../CommonUtils/Common.pproj<span class="nt">&lt;/IncludeProject&gt;</span>
+<span class="nt">&lt;InputFiles&gt;</span>
+    <span class="nt">&lt;PFile&gt;</span>./PSrc/<span class="nt">&lt;/PFile&gt;</span>
+    <span class="nt">&lt;PFile&gt;</span>./PSpec/<span class="nt">&lt;/PFile&gt;</span>
+    <span class="nt">&lt;PFile&gt;</span>./PTst/<span class="nt">&lt;/PFile&gt;</span>
+<span class="nt">&lt;/InputFiles&gt;</span>
+<span class="nt">&lt;Target&gt;</span>CSharp<span class="nt">&lt;/Target&gt;</span>
+<span class="nt">&lt;ProjectName&gt;</span>ClientServer<span class="nt">&lt;/ProjectName&gt;</span>
+<span class="nt">&lt;OutputDir&gt;</span>./PGenerated/<span class="nt">&lt;/OutputDir&gt;</span>
+<span class="nt">&lt;/Project&gt;</span>
+</code></pre></div>
+The <code>&lt;InputFiles&gt;</code> block provides all the P files that must be compiled together for this project. 
+In <code>&lt;PFile&gt;</code> can either specify the path to the P file or to a folder and the P compiler includes all the files in the folder during compilation.
+The <code>&lt;Target&gt;</code> block specifies the target language for code generation (options are: CSharp, C, RVM and we are adding support for Java).
+The <code>&lt;ProjectName&gt;</code> block provides the name for the project which is used as the output file name.
+The <code>&lt;OutputDir&gt;</code> block provides the output directory for the generated code.
+Finally, <code>&lt;IncludeProject&gt;</code> block provides path to other P projects that must be included as dependencies during compilation. 
+The P compiler simply recursively copies all the P files in the dependency projects and compiles them together. 
+This feature provides a way to split the P models for a large system into sub projects that can share models.</p>
+<p>Compiling the ClientServer project:</p>
+<div class="highlight"><pre><span></span><code>pc -proj:ClientServer.pproj
+</code></pre></div>
+<details class="info"><summary>Expected output</summary><div class="highlight"><pre><span></span><code>$ pc -proj:ClientServer.pproj
+----------------------------------------
+==== Loading project file: ClientServer.pproj
+....... includes p file: P/Tutorial/ClientServer/PSrc/ClientServer.p
+....... includes p file: P/Tutorial/ClientServer/PSrc/AbstractServer.p
+....... includes p file: P/Tutorial/ClientServer/PSpec/Monotonic.p
+....... includes p file: /P/Tutorial/ClientServer/PTst/Modules.p
+....... includes p file: P/Tutorial/ClientServer/PTst/TestDriver.p
+....... includes p file: P/Tutorial/ClientServer/PTst/Testscript.p
+----------------------------------------
+----------------------------------------
+Parsing ..
+Type checking ...
+Code generation ....
+Generated ClientServer.cs
+----------------------------------------
+Compiling ClientServer.csproj ..
+
+Microsoft (R) Build Engine version 16.8.3+39993bd9d for .NET
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Determining projects to restore...
+Restored P/Tutorial/ClientServer/ClientServer.csproj (in 122 ms).
+ClientServer -&gt; P/Tutorial/ClientServer/netcoreapp3.1/ClientServer.dll
+
+Build succeeded.
+0 Warning(s)
+0 Error(s)
+
+Time Elapsed 00:00:02.25
+----------------------------------------
+</code></pre></div>
+</details>
+</div>
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Compile P files directly</label><div class="tabbed-content">
+<p>aa</p>
+</div>
 </div>
                 
               
@@ -972,7 +1036,7 @@ RVM     : generate Monitor code
       <script>
         app = initialize({
           base: "../..",
-          features: ['navigation.instant', 'navigation.tabs', 'navigation.expand', 'navigation.top', 'toc.integrate'],
+          features: ['navigation.instant', 'navigation.indexes', 'navigation.tabs', 'navigation.expand', 'navigation.top', 'toc.integrate'],
           search: Object.assign({
             worker: "../../assets/javascripts/worker/search.4ac00218.min.js"
           }, typeof search !== "undefined" && search)
