@@ -269,7 +269,7 @@
       
         <li class="md-nav__item">
   <a href="#step-1-install-net-core-sdk" class="md-nav__link">
-    [Step 1]: Install .Net Core SDK
+    [Step 1] Install .Net Core SDK
   </a>
   
 </li>
@@ -282,15 +282,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-3-installing-the-p-compiler" class="md-nav__link">
-    [Step 3] Installing the P compiler
+  <a href="#step-3-install-p-compiler" class="md-nav__link">
+    [Step 3] Install P compiler
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-4-installing-the-p-checker" class="md-nav__link">
-    [Step 4] Installing the P Checker
+  <a href="#step-4-install-p-checker" class="md-nav__link">
+    [Step 4] Install P Checker
   </a>
   
 </li>
@@ -760,7 +760,7 @@
       
         <li class="md-nav__item">
   <a href="#step-1-install-net-core-sdk" class="md-nav__link">
-    [Step 1]: Install .Net Core SDK
+    [Step 1] Install .Net Core SDK
   </a>
   
 </li>
@@ -773,15 +773,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-3-installing-the-p-compiler" class="md-nav__link">
-    [Step 3] Installing the P compiler
+  <a href="#step-3-install-p-compiler" class="md-nav__link">
+    [Step 3] Install P compiler
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-4-installing-the-p-checker" class="md-nav__link">
-    [Step 4] Installing the P Checker
+  <a href="#step-4-install-p-checker" class="md-nav__link">
+    [Step 4] Install P Checker
   </a>
   
 </li>
@@ -816,7 +816,7 @@
                   <h1>Installing P</h1>
                 
                 <p>P is cross platform and can be used on Windows, Linux, and MacOS. We provide a step-by-step guide for installing P along with the required dependencies.</p>
-<h3 id="step-1-install-net-core-sdk">[Step 1]: Install .Net Core SDK</h3>
+<h3 id="step-1-install-net-core-sdk">[Step 1] Install .Net Core SDK</h3>
 <p>The P Compiler and Checker are implemented in C# and hence requires <code>dotnet</code>. 
 P currently supports the latest version of <a href="https://docs.microsoft.com/en-us/dotnet/core/install/">.Net SDK 5.0</a> </p>
 <div class="tabbed-set" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">MacOS</label><div class="tabbed-content">
@@ -848,8 +848,7 @@ sudo apt-get install -y dotnet-sdk-5.0
 <p>Installing .Net SDK on Windows: <a href="https://docs.microsoft.com/en-us/dotnet/core/install/windows?tabs=net50">details</a></p>
 </div>
 </div>
-<details class="hint"><summary>Troubleshoot</summary><p>Confirm that dotnet is correctly installed on your machine.
-<div class="highlight"><pre><span></span><code>dotnet --version
+<details class="hint"><summary>Troubleshoot: Confirm that dotnet is correctly installed on your machine.</summary><p><div class="highlight"><pre><span></span><code>dotnet --version
 </code></pre></div>
 You must have <code>5.0.*</code> dotnet version installed. 
 If you get <code>dotnet</code> command not found error, mostly likely, you need to add the path to dotnet in your <code>PATH</code>.</p>
@@ -864,29 +863,24 @@ If you have Java SDK installed please ignore this step.</p>
 Dont have Homebrew? Directly use <a href="https://www.java.com/en/download/help/mac_install.html">installer</a>. </p>
 </div>
 <input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">Ubuntu</label><div class="tabbed-content">
-<p>Installing .Net SDK on Ubuntu: <a href="https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu">details</a></p>
-<div class="highlight"><pre><span></span><code>wget https://packages.microsoft.com/config/ubuntu/21.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
-sudo dpkg -i packages-microsoft-prod.deb
-rm packages-microsoft-prod.deb
-</code></pre></div>
-<div class="highlight"><pre><span></span><code>sudo apt-get update; \
-sudo apt-get install -y apt-transport-https &amp;&amp; \
-sudo apt-get update &amp;&amp; \
-sudo apt-get install -y dotnet-sdk-5.0
+<p>Installing Java on Ubuntu: <a href="https://ubuntu.com/tutorials/install-jre#2-installing-openjdk-jre">details</a></p>
+<div class="highlight"><pre><span></span><code>sudo apt install default-jre
 </code></pre></div>
 </div>
 <input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><label for="__tabbed_2_3">Amazon Linux</label><div class="tabbed-content">
-<p>Installing .Net SDK on Amazon Linux: <a href="https://docs.servicestack.net/deploy-netcore-to-amazon-linux-2-ami">details</a></p>
-<div class="highlight"><pre><span></span><code>sudo rpm -Uvh https://packages.microsoft.com/config/centos/7/packages-microsoft-prod.rpm
-</code></pre></div>
-<div class="highlight"><pre><span></span><code>sudo yum install aspnetcore-runtime-5.0
+<p>Run below commands to install Java 8 on Amazon Linux</p>
+<div class="highlight"><pre><span></span><code>sudo yum install java-1.8.0-openjdk
 </code></pre></div>
 </div>
 <input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><label for="__tabbed_2_4">Windows</label><div class="tabbed-content">
-<p>Installing .Net SDK on Windows: <a href="https://docs.microsoft.com/en-us/dotnet/core/install/windows?tabs=net50">details</a></p>
+<p>Installing Java on Windows: <a href="https://www.java.com/en/download/help/windows_manual_download.html">details</a></p>
 </div>
 </div>
-<h3 id="step-3-installing-the-p-compiler">[Step 3] Installing the P compiler</h3>
+<details class="hint"><summary>Troubleshoot: Confirm that java is correctly installed on your machine.</summary><p><div class="highlight"><pre><span></span><code>java --version
+</code></pre></div>
+If you get <code>java</code> command not found error, mostly likely, you need to add the path to dotnet in your <code>PATH</code>.</p>
+</details>
+<h3 id="step-3-install-p-compiler">[Step 3] Install P compiler</h3>
 <p>We can install the P compiler tool as a <code>dotnet tool</code> using the following command:</p>
 <div class="highlight"><pre><span></span><code>dotnet tool install --global P
 </code></pre></div>
@@ -900,7 +894,7 @@ sudo apt-get install -y dotnet-sdk-5.0
 </code></pre></div>
 If not, add <code>$HOME/.dotnet/tools</code> to <code>$PATH</code> in your <code>.bash_profile</code> (or equivalent) and try again after restarting the shell.</p>
 </details>
-<h3 id="step-4-installing-the-p-checker">[Step 4] Installing the P Checker</h3>
+<h3 id="step-4-install-p-checker">[Step 4] Install P Checker</h3>
 <p>The current P concurrency checker depends on <a href="https://microsoft.github.io/coyote/">Coyote</a> (previously <a href="https://github.com/p-org/PSharp">P#</a>)</p>
 <p>Install the <code>Coyote</code> version <code>1.0.5</code> using the following command:</p>
 <div class="highlight"><pre><span></span><code>dotnet tool install --global Microsoft.Coyote.CLI --version <span class="m">1</span>.0.5
