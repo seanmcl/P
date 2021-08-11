@@ -9,7 +9,7 @@
         <meta name="description" content="P: Modular and Safe Programming of Distributed Systems">
       
       
-        <link rel="canonical" href="http://p-org.github.io/P/manual/functions/">
+        <link rel="canonical" href="http://p-org.github.io/P/advanced/structureOfPProgram/">
       
       
         <meta name="author" content="Ankush Desai">
@@ -19,7 +19,7 @@
     
     
       
-        <title>P Test cases - P</title>
+        <title>Structure of a P Program - P</title>
       
     
     
@@ -90,7 +90,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              P Test cases
+              Structure of a P Program
             
           </span>
         </div>
@@ -421,10 +421,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" checked>
     
     <label class="md-nav__link" for="nav-6">
       Power Users
@@ -442,11 +444,18 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../../advanced/structureOfPProgram/" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
       Structure of a P Program
     </a>
+    
   </li>
 
         
@@ -456,7 +465,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../advanced/PProject/" class="md-nav__link">
+    <a href="../PProject/" class="md-nav__link">
       P Project File
     </a>
   </li>
@@ -471,12 +480,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7" checked>
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
     
     <label class="md-nav__link" for="nav-7">
       Language Manual
@@ -508,7 +515,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../events/" class="md-nav__link">
+    <a href="../../manual/events/" class="md-nav__link">
       P Events
     </a>
   </li>
@@ -520,7 +527,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../statemachines/" class="md-nav__link">
+    <a href="../../manual/statemachines/" class="md-nav__link">
       P State Machines
     </a>
   </li>
@@ -532,7 +539,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../monitors/" class="md-nav__link">
+    <a href="../../manual/monitors/" class="md-nav__link">
       P Monitors
     </a>
   </li>
@@ -544,7 +551,7 @@
 
 
   <li class="md-nav__item">
-    <a href="./" class="md-nav__link">
+    <a href="../../manual/functions/" class="md-nav__link">
       P Functions
     </a>
   </li>
@@ -556,7 +563,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../expressions/" class="md-nav__link">
+    <a href="../../manual/expressions/" class="md-nav__link">
       P Expressions
     </a>
   </li>
@@ -568,7 +575,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../statements/" class="md-nav__link">
+    <a href="../../manual/statements/" class="md-nav__link">
       P Statements
     </a>
   </li>
@@ -580,7 +587,7 @@
 
 
   <li class="md-nav__item">
-    <a href="./" class="md-nav__link">
+    <a href="../../manual/functions/" class="md-nav__link">
       P DataTypes and Operations
     </a>
   </li>
@@ -592,7 +599,7 @@
 
 
   <li class="md-nav__item">
-    <a href="./" class="md-nav__link">
+    <a href="../../manual/functions/" class="md-nav__link">
       P Module System
     </a>
   </li>
@@ -602,18 +609,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-    <a href="./" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../../manual/functions/" class="md-nav__link">
       P Test cases
     </a>
-    
   </li>
 
         
@@ -623,7 +623,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../foriegntypesfunctions/" class="md-nav__link">
+    <a href="../../manual/foriegntypesfunctions/" class="md-nav__link">
       P Foreign Interface
     </a>
   </li>
@@ -733,9 +733,43 @@
               
                 
                 
-                  <h1>P Test cases</h1>
+                  <h1>Structure of a P Program</h1>
                 
-                
+                <p>A P program is typically divided into following four folders (or parts):</p>
+<ul>
+<li><code>PSrc</code>: contains all the state machines representing the implementation (model) of the
+  system or protocol to be verified or tested.</li>
+<li><code>PSpec</code>: contains all the specifications representing the <em>correctness</em> properties that
+  the system must satisfy.</li>
+<li>
+<p><code>PTst</code>: contains all the <em>environment</em> or <em>test harness</em> state machines that model the
+  non-deterministic scenarios under which we want to check that the system model in <code>PSrc</code>
+  satisfies the specifications in <code>PSpec</code>. P allows writing different model checking
+  scenarios as test-cases.</p>
+</li>
+<li>
+<p><code>PForeign</code>: P also supports interfacing with foreign languages like <code>Java</code>, <code>C#</code>, and
+  <code>C/C++</code>. P allows programmers to implement a part of their protocol logic in these
+  foreign languages and use them in a P program using the Foreign types and functions
+  interface (<a href="../../manual/foriegntypesfunctions/">Foreign</a>) The <code>PForeign</code> folder contains
+  all the foreign code used in the P program.</p>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Recommendation</p>
+<p>The folder structure described above is just a recommendation.
+The P compiler does not require any particular folder structure for a P project. The
+examples in the <a href="../../tutsoutline/">Tutorials</a> use the same folder structure.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Models, Specifications, Model Checking Scenario</p>
+<p>A quick primer on what a model
+is, versus a specification, and model checking scenarios: (1) A specification says what
+the system should do (correctness properties). (2) A model captures the details of how the
+system does it. (3) A model checking scenario provides the finite non-deterministc
+test-harness or environment under which the model checker should check that the system
+model satisfies its specifications.</p>
+</div>
                 
               
               
@@ -754,7 +788,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="./" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../../howtoguides/importanceliveness/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -763,19 +797,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                P Module System
+                Importance of Liveness Specifications
               </div>
             </div>
           </a>
         
         
-          <a href="../foriegntypesfunctions/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../PProject/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                P Foreign Interface
+                P Project File
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">

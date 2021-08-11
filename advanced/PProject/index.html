@@ -9,7 +9,7 @@
         <meta name="description" content="P: Modular and Safe Programming of Distributed Systems">
       
       
-        <link rel="canonical" href="http://p-org.github.io/P/manual/functions/">
+        <link rel="canonical" href="http://p-org.github.io/P/advanced/PProject/">
       
       
         <meta name="author" content="Ankush Desai">
@@ -19,7 +19,7 @@
     
     
       
-        <title>P Test cases - P</title>
+        <title>P Project File - P</title>
       
     
     
@@ -90,7 +90,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              P Test cases
+              P Project File
             
           </span>
         </div>
@@ -421,10 +421,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" checked>
     
     <label class="md-nav__link" for="nav-6">
       Power Users
@@ -444,7 +446,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../advanced/structureOfPProgram/" class="md-nav__link">
+    <a href="../structureOfPProgram/" class="md-nav__link">
       Structure of a P Program
     </a>
   </li>
@@ -454,11 +456,18 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../../advanced/PProject/" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
       P Project File
     </a>
+    
   </li>
 
         
@@ -471,12 +480,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7" checked>
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
     
     <label class="md-nav__link" for="nav-7">
       Language Manual
@@ -508,7 +515,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../events/" class="md-nav__link">
+    <a href="../../manual/events/" class="md-nav__link">
       P Events
     </a>
   </li>
@@ -520,7 +527,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../statemachines/" class="md-nav__link">
+    <a href="../../manual/statemachines/" class="md-nav__link">
       P State Machines
     </a>
   </li>
@@ -532,7 +539,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../monitors/" class="md-nav__link">
+    <a href="../../manual/monitors/" class="md-nav__link">
       P Monitors
     </a>
   </li>
@@ -544,7 +551,7 @@
 
 
   <li class="md-nav__item">
-    <a href="./" class="md-nav__link">
+    <a href="../../manual/functions/" class="md-nav__link">
       P Functions
     </a>
   </li>
@@ -556,7 +563,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../expressions/" class="md-nav__link">
+    <a href="../../manual/expressions/" class="md-nav__link">
       P Expressions
     </a>
   </li>
@@ -568,7 +575,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../statements/" class="md-nav__link">
+    <a href="../../manual/statements/" class="md-nav__link">
       P Statements
     </a>
   </li>
@@ -580,7 +587,7 @@
 
 
   <li class="md-nav__item">
-    <a href="./" class="md-nav__link">
+    <a href="../../manual/functions/" class="md-nav__link">
       P DataTypes and Operations
     </a>
   </li>
@@ -592,7 +599,7 @@
 
 
   <li class="md-nav__item">
-    <a href="./" class="md-nav__link">
+    <a href="../../manual/functions/" class="md-nav__link">
       P Module System
     </a>
   </li>
@@ -602,18 +609,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-    <a href="./" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../../manual/functions/" class="md-nav__link">
       P Test cases
     </a>
-    
   </li>
 
         
@@ -623,7 +623,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../foriegntypesfunctions/" class="md-nav__link">
+    <a href="../../manual/foriegntypesfunctions/" class="md-nav__link">
       P Foreign Interface
     </a>
   </li>
@@ -733,9 +733,35 @@
               
                 
                 
-                  <h1>P Test cases</h1>
+                  <h1>P Project File</h1>
                 
-                
+                <p>The P compiler does not support fancy project management features like separate compilation and dependency analysis (coming soon).
+The current project file interface is a simple mechanism to provide all the required inputs to the compiler in XML format.
+The P project file below is taken from the <a href="../../tutorial/clientserver/">ClientServer</a> from Tutorials.</p>
+<p><div class="highlight"><pre><span></span><code><span class="nt">&lt;Project&gt;</span>
+<span class="nt">&lt;IncludeProject&gt;</span>../CommonUtils/Common.pproj<span class="nt">&lt;/IncludeProject&gt;</span>
+<span class="nt">&lt;InputFiles&gt;</span>
+    <span class="nt">&lt;PFile&gt;</span>./PSrc/<span class="nt">&lt;/PFile&gt;</span>
+    <span class="nt">&lt;PFile&gt;</span>./PSpec/<span class="nt">&lt;/PFile&gt;</span>
+    <span class="nt">&lt;PFile&gt;</span>./PTst/<span class="nt">&lt;/PFile&gt;</span>
+<span class="nt">&lt;/InputFiles&gt;</span>
+<span class="nt">&lt;Target&gt;</span>CSharp<span class="nt">&lt;/Target&gt;</span>
+<span class="nt">&lt;ProjectName&gt;</span>ClientServer<span class="nt">&lt;/ProjectName&gt;</span>
+<span class="nt">&lt;OutputDir&gt;</span>./PGenerated/<span class="nt">&lt;/OutputDir&gt;</span>
+<span class="nt">&lt;/Project&gt;</span>
+</code></pre></div>
+The <code>&lt;InputFiles&gt;</code> block provides all the P files that must be compiled together for this project.
+In <code>&lt;PFile&gt;</code> can either specify the path to the P file or to a folder and the P compiler includes all the files in the folder during compilation.
+The <code>&lt;Target&gt;</code> block specifies the target language for code generation (options are: CSharp, C, RVM and we are adding support for Java).
+The <code>&lt;ProjectName&gt;</code> block provides the name for the project which is used as the output file name.
+The <code>&lt;OutputDir&gt;</code> block provides the output directory for the generated code.
+Finally, <code>&lt;IncludeProject&gt;</code> block provides path to other P projects that must be included as dependencies during compilation.
+The P compiler simply recursively copies all the P files in the dependency projects and compiles them together.
+This feature provides a way to split the P models for a large system into sub projects that can share models.</p>
+<div class="admonition note">
+<p class="admonition-title">Coming Soon</p>
+<p>Example about how to use <code>&lt;IncludeProject&gt;</code> feature will be added soon.</p>
+</div>
                 
               
               
@@ -754,7 +780,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="./" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../structureOfPProgram/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -763,19 +789,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                P Module System
+                Structure of a P Program
               </div>
             </div>
           </a>
         
         
-          <a href="../foriegntypesfunctions/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../../manualoutline/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                P Foreign Interface
+                Outline
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">

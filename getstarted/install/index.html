@@ -303,8 +303,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#using-the-p-tool" class="md-nav__link">
-    Using the P tool
+  <a href="#using-p" class="md-nav__link">
+    Using P
   </a>
   
 </li>
@@ -503,11 +503,61 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
     
     <label class="md-nav__link" for="nav-6">
+      Power Users
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Power Users" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        <span class="md-nav__icon md-icon"></span>
+        Power Users
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced/structureOfPProgram/" class="md-nav__link">
+      Structure of a P Program
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced/PProject/" class="md-nav__link">
+      P Project File
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
       Language Manual
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Language Manual" data-md-level="1">
-      <label class="md-nav__title" for="nav-6">
+      <label class="md-nav__title" for="nav-7">
         <span class="md-nav__icon md-icon"></span>
         Language Manual
       </label>
@@ -640,7 +690,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../manual/functions/" class="md-nav__link">
+    <a href="../../manual/foriegntypesfunctions/" class="md-nav__link">
       P Foreign Interface
     </a>
   </li>
@@ -706,14 +756,14 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-12" type="checkbox" id="nav-12">
     
-    <label class="md-nav__link" for="nav-11">
+    <label class="md-nav__link" for="nav-12">
       Contributing to P
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Contributing to P" data-md-level="1">
-      <label class="md-nav__title" for="nav-11">
+      <label class="md-nav__title" for="nav-12">
         <span class="md-nav__icon md-icon"></span>
         Contributing to P
       </label>
@@ -794,8 +844,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#using-the-p-tool" class="md-nav__link">
-    Using the P tool
+  <a href="#using-p" class="md-nav__link">
+    Using P
   </a>
   
 </li>
@@ -815,18 +865,20 @@
                 
                   <h1>Installing P</h1>
                 
-                <p>P is cross platform and can be used on Windows, Linux, and MacOS. We provide a step-by-step guide for installing P along with the required dependencies.</p>
+                <p>P is cross platform and can be used on MacOS, Linux, and Windows. We provide a step-by-step guide for installing P along with its required dependencies.
+After each step, please use the troubleshooting check to ensure that each installation step succeeded.</p>
 <h3 id="step-1-install-net-core-sdk">[Step 1] Install .Net Core SDK</h3>
-<p>The P Compiler and Checker are implemented in C# and hence requires <code>dotnet</code>. 
-P currently supports the latest version of <a href="https://docs.microsoft.com/en-us/dotnet/core/install/">.Net SDK 5.0</a> </p>
+<p>The P compiler and checker are implemented in C# and hence the tool chain requires <code>dotnet</code>. 
+P currently supports the latest version of <a href="https://docs.microsoft.com/en-us/dotnet/core/install/">.Net SDK 5.0</a>.
+To install .Net Core SDK use:</p>
 <div class="tabbed-set" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">MacOS</label><div class="tabbed-content">
-<p>Using Homebrew: <a href="https://formulae.brew.sh/cask/dotnet">details</a>
+<p>Installing .Net SDK on MacOS using Homebrew (<a href="https://formulae.brew.sh/cask/dotnet">details</a>)
 <div class="highlight"><pre><span></span><code>brew install --cask dotnet
 </code></pre></div>
-Dont have Homebrew? Directly use <a href="https://dotnet.microsoft.com/download/dotnet/thank-you/sdk-5.0.302-macos-x64-installer">installer</a>. </p>
+Dont have Homebrew? Install directly using the <a href="https://dotnet.microsoft.com/download/dotnet/thank-you/sdk-5.0.302-macos-x64-installer">installer</a>. </p>
 </div>
 <input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Ubuntu</label><div class="tabbed-content">
-<p>Installing .Net SDK on Ubuntu: <a href="https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu">details</a></p>
+<p>Installing .Net SDK on Ubuntu (<a href="https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu">details</a>)</p>
 <div class="highlight"><pre><span></span><code>wget https://packages.microsoft.com/config/ubuntu/21.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
 sudo dpkg -i packages-microsoft-prod.deb
 rm packages-microsoft-prod.deb
@@ -838,14 +890,14 @@ sudo apt-get install -y dotnet-sdk-5.0
 </code></pre></div>
 </div>
 <input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><label for="__tabbed_1_3">Amazon Linux</label><div class="tabbed-content">
-<p>Installing .Net SDK on Amazon Linux: <a href="https://docs.servicestack.net/deploy-netcore-to-amazon-linux-2-ami">details</a></p>
+<p>Installing .Net SDK on Amazon Linux (<a href="https://docs.servicestack.net/deploy-netcore-to-amazon-linux-2-ami">details</a>)</p>
 <div class="highlight"><pre><span></span><code>sudo rpm -Uvh https://packages.microsoft.com/config/centos/7/packages-microsoft-prod.rpm
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>sudo yum install aspnetcore-runtime-5.0
 </code></pre></div>
 </div>
 <input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><label for="__tabbed_1_4">Windows</label><div class="tabbed-content">
-<p>Installing .Net SDK on Windows: <a href="https://docs.microsoft.com/en-us/dotnet/core/install/windows?tabs=net50">details</a></p>
+<p>Installing .Net SDK on Windows using the installer (<a href="https://docs.microsoft.com/en-us/dotnet/core/install/windows?tabs=net50">details</a>)</p>
 </div>
 </div>
 <details class="hint"><summary>Troubleshoot: Confirm that dotnet is correctly installed on your machine.</summary><p><div class="highlight"><pre><span></span><code>dotnet --version
@@ -854,26 +906,27 @@ You must have <code>5.0.*</code> dotnet version installed.
 If you get <code>dotnet</code> command not found error, mostly likely, you need to add the path to dotnet in your <code>PATH</code>.</p>
 </details>
 <h3 id="step-2-install-java-runtime">[Step 2] Install Java Runtime</h3>
-<p>P compiler uses <a href="https://www.antlr.org/">ANTLR</a> parser and generator and hence requires <code>java</code> in the path. 
-If you have Java SDK installed please ignore this step.</p>
+<p>P compiler uses <a href="https://www.antlr.org/">ANTLR</a> parser and hence requires <code>java</code>. 
+If you already have Java installed please ignore this step. 
+To install Java use:</p>
 <div class="tabbed-set" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">MacOS</label><div class="tabbed-content">
-<p>Using Homebrew: <a href="https://mkyong.com/java/how-to-install-java-on-mac-osx/">details</a>
+<p>Installing Java on MacOS using Homebrew (<a href="https://mkyong.com/java/how-to-install-java-on-mac-osx/">details</a>)
 <div class="highlight"><pre><span></span><code>brew install java
 </code></pre></div>
 Dont have Homebrew? Directly use <a href="https://www.java.com/en/download/help/mac_install.html">installer</a>. </p>
 </div>
 <input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">Ubuntu</label><div class="tabbed-content">
-<p>Installing Java on Ubuntu: <a href="https://ubuntu.com/tutorials/install-jre#2-installing-openjdk-jre">details</a></p>
+<p>Installing Java on Ubuntu (<a href="https://ubuntu.com/tutorials/install-jre#2-installing-openjdk-jre">details</a>)</p>
 <div class="highlight"><pre><span></span><code>sudo apt install default-jre
 </code></pre></div>
 </div>
 <input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><label for="__tabbed_2_3">Amazon Linux</label><div class="tabbed-content">
-<p>Run below commands to install Java 8 on Amazon Linux</p>
+<p>Installing Java 8 on Amazon Linux (you can use any version of java &gt; 8)</p>
 <div class="highlight"><pre><span></span><code>sudo yum install java-1.8.0-openjdk
 </code></pre></div>
 </div>
 <input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><label for="__tabbed_2_4">Windows</label><div class="tabbed-content">
-<p>Installing Java on Windows: <a href="https://www.java.com/en/download/help/windows_manual_download.html">details</a></p>
+<p>Installing Java on Windows (<a href="https://www.java.com/en/download/help/windows_manual_download.html">details</a>)</p>
 </div>
 </div>
 <details class="hint"><summary>Troubleshoot: Confirm that java is correctly installed on your machine.</summary><p><div class="highlight"><pre><span></span><code>java --version
@@ -881,28 +934,36 @@ Dont have Homebrew? Directly use <a href="https://www.java.com/en/download/help/
 If you get <code>java</code> command not found error, mostly likely, you need to add the path to dotnet in your <code>PATH</code>.</p>
 </details>
 <h3 id="step-3-install-p-compiler">[Step 3] Install P compiler</h3>
-<p>We can install the P compiler tool as a <code>dotnet tool</code> using the following command:</p>
+<p>Install the P compiler as a <code>dotnet tool</code> using the following command:</p>
 <div class="highlight"><pre><span></span><code>dotnet tool install --global P
 </code></pre></div>
-<details class="help"><summary>Updating P Tool</summary><p>You can update the version of <code>P</code> tool by running the following command:</p>
-<div class="highlight"><pre><span></span><code>dotnet tool update --global P
-</code></pre></div>
-</details>
-<details class="fail"><summary><code>pc</code> not found after installation</summary><p>After installation, run <code>which pc</code> and it should show:
+<details class="hint"><summary>Troubleshoot: Confirm that <code>pc</code> is correctly installed on your machine</summary><p>After installation, run <code>which pc</code> and it should show:
 <div class="highlight"><pre><span></span><code>which pc
 /Users/&lt;user&gt;/.dotnet/tools/pc
 </code></pre></div>
-If not, add <code>$HOME/.dotnet/tools</code> to <code>$PATH</code> in your <code>.bash_profile</code> (or equivalent) and try again after restarting the shell.</p>
+If not, add <code>$HOME/.dotnet/tools</code> to <code>$PATH</code> in your <code>.bash_profile</code> (or equivalent) and try again after restarting the shell.
+If you are getting an error that <code>pc</code> command not found, its most likely that <code>$HOME/.dotnet/tools</code> is not in your <code>PATH</code>.</p>
+</details>
+<details class="help"><summary>Updating P Compiler</summary><p>You can update the version of <code>P</code> compiler by running the following command:</p>
+<div class="highlight"><pre><span></span><code>dotnet tool update --global P
+</code></pre></div>
 </details>
 <h3 id="step-4-install-p-checker">[Step 4] Install P Checker</h3>
-<p>The current P concurrency checker depends on <a href="https://microsoft.github.io/coyote/">Coyote</a> (previously <a href="https://github.com/p-org/PSharp">P#</a>)</p>
+<p>The current P checker depends on <a href="https://microsoft.github.io/coyote/">Coyote</a> (previously <a href="https://github.com/p-org/PSharp">P#</a>)</p>
 <p>Install the <code>Coyote</code> version <code>1.0.5</code> using the following command:</p>
 <div class="highlight"><pre><span></span><code>dotnet tool install --global Microsoft.Coyote.CLI --version <span class="m">1</span>.0.5
 </code></pre></div>
-<p>Now you can run <code>coyote</code> to check the correctness of P programs.</p>
+<details class="hint"><summary>Troubleshoot: Confirm that <code>coyote</code> is correctly installed on your machine</summary><p>After installation, run <code>which coyote</code> and it should show:
+<div class="highlight"><pre><span></span><code>which coyote
+coyote is /Users/&lt;user&gt;/.dotnet/tools/coyote
+</code></pre></div>
+If not, add <code>$HOME/.dotnet/tools</code> to <code>$PATH</code> in your <code>.bash_profile</code> (or equivalent) and try again after restarting the shell.
+If you are getting an error that <code>coyote</code> command not found, its most likely that <code>$HOME/.dotnet/tools</code> is not in your <code>PATH</code>.</p>
+</details>
+<p>We highly recommend that you create the following alias as we use it in the rest of tutorials and getting started guide:</p>
 <div class="tabbed-set" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">On MacOS or Linux</label><div class="tabbed-content">
-<p>We recommend that you add the following alias to the bash profile (<code>~/.bash_profile</code>) 
-so that you can invoke the P checker (pmc) from the commandline.
+<p>Add following alias to the bash profile (<code>~/.bash_profile</code> or equivalent) 
+so that you can invoke the P checker (<code>pmc</code>) directly.
 <div class="highlight"><pre><span></span><code><span class="nb">alias</span> <span class="nv">pmc</span><span class="o">=</span><span class="s1">&#39;coyote test&#39;</span>
 </code></pre></div></p>
 </div>
@@ -913,26 +974,20 @@ normally found in <code>D:\Users\&lt;username&gt;\Documents\WindowsPowerShell</c
 </code></pre></div>
 </div>
 </div>
-<details class="fail"><summary><code>coyote</code> not found after installation</summary><p>After installation, run <code>which coyote</code> and it should show:
-<div class="highlight"><pre><span></span><code>which coyote
-coyote is /Users/&lt;user&gt;/.dotnet/tools/coyote
-</code></pre></div>
-If not, add <code>$HOME/.dotnet/tools</code> to <code>$PATH</code> in your <code>.bash_profile</code> (or equivalent) and try again after restarting the shell.</p>
-</details>
 <h3 id="step-5-recommended-ide-optional">[Step 5] Recommended IDE (Optional)</h3>
 <ul>
 <li>
 <p>For developing P programs, we recommend using <a href="https://www.jetbrains.com/idea/">IntelliJ IDEA</a> as we support basic <a href="../syntaxhighlight/">P syntax highlighting</a> for IntelliJ.</p>
 </li>
 <li>
-<p>For debugging generated C# code, we recommend using <a href="https://www.jetbrains.com/rider/">Rider</a> for Mac or <a href="https://docs.microsoft.com/en-us/visualstudio/install/install-visual-studio">Visual Studio 2019</a> for Windows.</p>
+<p>For debugging generated C# code, we recommend using <a href="https://www.jetbrains.com/rider/">Rider</a> for Mac/Linux or <a href="https://docs.microsoft.com/en-us/visualstudio/install/install-visual-studio">Visual Studio 2019</a> for Windows.</p>
 </li>
 <li>
 <p>For debugging generated Java code, we recommend using <a href="https://www.jetbrains.com/idea/">IntelliJ IDEA</a></p>
 </li>
 </ul>
-<h3 id="using-the-p-tool">Using the P tool</h3>
-<p>Great! You are all set to compile and test your first P program. To learn how to use the P tool chain read <a href="../usingP/">here</a>.</p>
+<h2 id="using-p">Using P</h2>
+<p>Great <img alt="😄" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f604.svg" title=":smile:" />! You are all set to compile and test your first P program <img alt="🎓" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f393.svg" title=":mortar_board:" />. To learn how to use the P tool chain jump <a href="../usingP/">here</a>.</p>
                 
               
               
