@@ -206,8 +206,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../howdoesitwork/" class="md-nav__link">
-      How does P work
+    <a href="../../whatisP/" class="md-nav__link">
+      What is P?
     </a>
   </li>
 
@@ -488,6 +488,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../howtoguides/debuggingerror/" class="md-nav__link">
+      Debugging Error Traces (counter examples)
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -571,7 +583,19 @@
 
   <li class="md-nav__item">
     <a href="../../manualoutline/" class="md-nav__link">
-      Outline
+      P Program
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../manual/datatypes/" class="md-nav__link">
+      P DataTypes
     </a>
   </li>
 
@@ -584,6 +608,18 @@
   <li class="md-nav__item">
     <a href="../../manual/events/" class="md-nav__link">
       P Events
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../manual/interface/" class="md-nav__link">
+      P Interfaces
     </a>
   </li>
 
@@ -654,19 +690,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../manual/functions/" class="md-nav__link">
-      P DataTypes and Operations
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../manual/functions/" class="md-nav__link">
+    <a href="../../manual/modulesystem/" class="md-nav__link">
       P Module System
     </a>
   </li>
@@ -678,7 +702,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../manual/functions/" class="md-nav__link">
+    <a href="../../manual/testcases/" class="md-nav__link">
       P Test cases
     </a>
   </li>
@@ -869,13 +893,14 @@
 After each step, please use the troubleshooting check to ensure that each installation step succeeded.</p>
 <h3 id="step-1-install-net-core-sdk">[Step 1] Install .Net Core SDK</h3>
 <p>The P compiler and checker are implemented in C# and hence the tool chain requires <code>dotnet</code>. 
-P currently supports the latest version of <a href="https://docs.microsoft.com/en-us/dotnet/core/install/">.Net SDK 5.0</a>.
-To install .Net Core SDK use:</p>
+P currently uses the specific version of <a href="https://dotnet.microsoft.com/download/dotnet/3.1">.Net SDK 3.1</a>.
+To install .Net Core 3.1 SDK use:</p>
 <div class="tabbed-set" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">MacOS</label><div class="tabbed-content">
 <p>Installing .Net SDK on MacOS using Homebrew (<a href="https://formulae.brew.sh/cask/dotnet">details</a>)
-<div class="highlight"><pre><span></span><code>brew install --cask dotnet
+<div class="highlight"><pre><span></span><code>brew tap isen-ng/dotnet-sdk-versions
+brew install --cask dotnet-sdk3-1-400
 </code></pre></div>
-Dont have Homebrew? Install directly using the <a href="https://dotnet.microsoft.com/download/dotnet/thank-you/sdk-5.0.302-macos-x64-installer">installer</a>. </p>
+Dont have Homebrew? Install directly using the <a href="https://dotnet.microsoft.com/download/dotnet/thank-you/sdk-3.1.412-macos-x64-installer">installer</a>. </p>
 </div>
 <input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Ubuntu</label><div class="tabbed-content">
 <p>Installing .Net SDK on Ubuntu (<a href="https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu">details</a>)</p>
@@ -886,23 +911,23 @@ rm packages-microsoft-prod.deb
 <div class="highlight"><pre><span></span><code>sudo apt-get update; \
 sudo apt-get install -y apt-transport-https &amp;&amp; \
 sudo apt-get update &amp;&amp; \
-sudo apt-get install -y dotnet-sdk-5.0
+sudo apt-get install -y dotnet-sdk-3.1
 </code></pre></div>
 </div>
 <input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><label for="__tabbed_1_3">Amazon Linux</label><div class="tabbed-content">
 <p>Installing .Net SDK on Amazon Linux (<a href="https://docs.servicestack.net/deploy-netcore-to-amazon-linux-2-ami">details</a>)</p>
 <div class="highlight"><pre><span></span><code>sudo rpm -Uvh https://packages.microsoft.com/config/centos/7/packages-microsoft-prod.rpm
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>sudo yum install aspnetcore-runtime-5.0
+<div class="highlight"><pre><span></span><code>sudo yum install dotnet-sdk-5.0
 </code></pre></div>
 </div>
 <input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><label for="__tabbed_1_4">Windows</label><div class="tabbed-content">
-<p>Installing .Net SDK on Windows using the installer (<a href="https://docs.microsoft.com/en-us/dotnet/core/install/windows?tabs=net50">details</a>)</p>
+<p>Installing .Net SDK on Windows using the installer (<a href="https://dotnet.microsoft.com/download/dotnet/thank-you/sdk-3.1.412-windows-x64-installer">details</a>)</p>
 </div>
 </div>
-<details class="hint"><summary>Troubleshoot: Confirm that dotnet is correctly installed on your machine.</summary><p><div class="highlight"><pre><span></span><code>dotnet --version
+<details class="hint"><summary>Troubleshoot: Confirm that dotnet is correctly installed on your machine.</summary><p><div class="highlight"><pre><span></span><code>dotnet --list-sdks
 </code></pre></div>
-You must have <code>5.0.*</code> dotnet version installed. 
+You must see an SDK with <code>3.1.*</code> dotnet version installed.
 If you get <code>dotnet</code> command not found error, mostly likely, you need to add the path to dotnet in your <code>PATH</code>.</p>
 </details>
 <h3 id="step-2-install-java-runtime">[Step 2] Install Java Runtime</h3>
@@ -1006,7 +1031,7 @@ normally found in <code>D:\Users\&lt;username&gt;\Documents\WindowsPowerShell</c
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../../howdoesitwork/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../../whatisP/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -1015,7 +1040,7 @@ normally found in <code>D:\Users\&lt;username&gt;\Documents\WindowsPowerShell</c
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                How does P work
+                What is P?
               </div>
             </div>
           </a>
