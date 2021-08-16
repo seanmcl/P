@@ -715,18 +715,6 @@
 
 
   <li class="md-nav__item">
-    <a href="../../articles/" class="md-nav__link">
-      Blogs and Articles
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
     <a href="../../videos/" class="md-nav__link">
       Videos
     </a>
@@ -752,14 +740,14 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-12" type="checkbox" id="nav-12">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11">
     
-    <label class="md-nav__link" for="nav-12">
+    <label class="md-nav__link" for="nav-11">
       Contributing to P
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Contributing to P" data-md-level="1">
-      <label class="md-nav__title" for="nav-12">
+      <label class="md-nav__title" for="nav-11">
         <span class="md-nav__icon md-icon"></span>
         Contributing to P
       </label>
@@ -938,7 +926,8 @@ This feature provides a way to split the P models for a large system into sub pr
 </div>
 <input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Compile P files directly</label><div class="tabbed-content">
 <p>Compiling the ClientServer program by passing all the required inputs as commandline arguments:</p>
-<div class="highlight"><pre><span></span><code>pc PSpec/*.p PSrc/*.p PTst/*.p -generate:csharp -outputDir:PGenerated -target:ClientServer
+<div class="highlight"><pre><span></span><code>pc PSpec/*.p PSrc/*.p PTst/*.p <span class="se">\ </span>
+-generate:csharp -outputDir:PGenerated -target:ClientServer
 </code></pre></div>
 <details class="info"><summary>Expected Output</summary></details>
 <div class="highlight"><pre><span></span><code>....... includes p file: P/Tutorial/ClientServer/PSpec/Monotonic.p
@@ -982,7 +971,8 @@ to the P Checker:</p>
 <p>Expected Output:</p>
 <p><div class="highlight"><pre><span></span><code>pmc &lt;Path&gt;/ClientServer.dll
 
-Provide /method flag to qualify the <span class="nb">test</span> method name you wish to use. Possible options are:
+Provide /method flag to qualify the <span class="nb">test</span> method name you wish to use. 
+Possible options are::
 <span class="hll">PImplementation.singleClientServer.Execute
 </span><span class="hll">PImplementation.multipleClientsServer.Execute
 </span><span class="hll">PImplementation.singleClientServerWithLiveness.Execute
@@ -993,7 +983,9 @@ specify how many different schedules to explore when running this test case (by 
 For complex systems, running for 100,000 schedules typically finds most of the easy to find bugs before
 running the checker on a distributed cluster to explore billions of schedules and rule out deep bugs in the system.</p>
 <p>So you test the <code>singleClientServer</code> test case for 100 schedules, we can use the following command:</p>
-<div class="highlight"><pre><span></span><code>pmc &lt;Path&gt;/ClientServer.dll -m PImplementation.singleClientServer.Execute -i 100
+<div class="highlight"><pre><span></span><code>pmc &lt;Path&gt;/ClientServer.dll \
+    -m PImplementation.singleClientServer.Execute \
+    -i 100
 </code></pre></div>
 <details class="info"><summary>Expected Output</summary><div class="highlight"><pre><span></span><code>pmc &lt;Path&gt;/ClientServer.dll -m PImplementation.singleClientServer.Execute -i 100
 . Testing &lt;Path&gt;/ClientServer.dll
@@ -1031,7 +1023,9 @@ Starting TestingProcessScheduler in process 61218
 </details>
 <p>There is a known bug in the ClientServer example (explain in the Tutorials) which is caught by
 the <code>multipleClientsServer</code> test case. Run command:
-<div class="highlight"><pre><span></span><code>pmc &lt;Path&gt;/ClientServer.dll -m PImplementation.multipleClientsServer.Execute -i 100
+<div class="highlight"><pre><span></span><code>pmc &lt;Path&gt;/ClientServer.dll \
+    -m PImplementation.multipleClientsServer.Execute \
+    -i 100
 </code></pre></div></p>
 <details class="info"><summary>Expected Output</summary><div class="highlight"><pre><span></span><code>pmc &lt;Path&gt;/ClientServer.dll -m PImplementation.multipleClientsServer.Execute -i 100
 
