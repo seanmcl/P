@@ -384,7 +384,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../tutorial/usingP.md" class="md-nav__link">
+    <a href="../../tutorial/clientserver/" class="md-nav__link">
       Client Server
     </a>
   </li>
@@ -913,9 +913,8 @@ sudo apt-get install -y dotnet-sdk-3.1
 <p>Installing .Net SDK on Windows using the installer (<a href="https://dotnet.microsoft.com/download/dotnet/thank-you/sdk-3.1.412-windows-x64-installer">details</a>)</p>
 </div>
 </div>
-<details class="hint"><summary>Troubleshoot: Confirm that dotnet is correctly installed on your machine.</summary><p><div class="highlight"><pre><span></span><code>dotnet --list-sdks
-</code></pre></div>
-You must see an SDK with <code>3.1.*</code> dotnet version installed.
+<details class="hint"><summary>Troubleshoot: Confirm that dotnet is correctly installed on your machine.</summary><p><code>dotnet --list-sdks</code></p>
+<p>You must see an SDK with <code>3.1.*</code> dotnet version installed.
 If you get <code>dotnet</code> command not found error, mostly likely, you need to add the path to dotnet in your <code>PATH</code>.</p>
 </details>
 <h3 id="step-2-install-java-runtime">[Step 2] Install Java Runtime</h3>
@@ -942,14 +941,12 @@ Dont have Homebrew? Directly use <a href="https://www.java.com/en/download/help/
 <p>Installing Java on Windows (<a href="https://www.java.com/en/download/help/windows_manual_download.html">details</a>)</p>
 </div>
 </div>
-<details class="hint"><summary>Troubleshoot: Confirm that java is correctly installed on your machine.</summary><p><div class="highlight"><pre><span></span><code>java --version
-</code></pre></div>
-If you get <code>java</code> command not found error, mostly likely, you need to add the path to dotnet in your <code>PATH</code>.</p>
+<details class="hint"><summary>Troubleshoot: Confirm that java is correctly installed on your machine.</summary><p><code>java -version</code></p>
+<p>If you get <code>java</code> command not found error, mostly likely, you need to add the path to <code>java</code> in your <code>PATH</code>.</p>
 </details>
 <h3 id="step-3-install-p-compiler">[Step 3] Install P compiler</h3>
 <p>Install the P compiler as a <code>dotnet tool</code> using the following command:</p>
-<div class="highlight"><pre><span></span><code>dotnet tool install --global P
-</code></pre></div>
+<p><code>dotnet tool install --global P</code></p>
 <details class="hint"><summary>Troubleshoot: Confirm that <code>pc</code> is correctly installed on your machine</summary><p>After installation, run <code>which pc</code> and it should show:
 <div class="highlight"><pre><span></span><code>which pc
 /Users/&lt;user&gt;/.dotnet/tools/pc
@@ -958,14 +955,12 @@ If not, add <code>$HOME/.dotnet/tools</code> to <code>$PATH</code> in your <code
 If you are getting an error that <code>pc</code> command not found, its most likely that <code>$HOME/.dotnet/tools</code> is not in your <code>PATH</code>.</p>
 </details>
 <details class="help"><summary>Updating P Compiler</summary><p>You can update the version of <code>P</code> compiler by running the following command:</p>
-<div class="highlight"><pre><span></span><code>dotnet tool update --global P
-</code></pre></div>
+<p><code>dotnet tool update --global P</code></p>
 </details>
 <h3 id="step-4-install-p-checker">[Step 4] Install P Checker</h3>
 <p>The current P checker depends on <a href="https://microsoft.github.io/coyote/">Coyote</a> (previously <a href="https://github.com/p-org/PSharp">P#</a>)</p>
 <p>Install the <code>Coyote</code> version <code>1.0.5</code> using the following command:</p>
-<div class="highlight"><pre><span></span><code>dotnet tool install --global Microsoft.Coyote.CLI --version <span class="m">1</span>.0.5
-</code></pre></div>
+<p><code>dotnet tool install --global Microsoft.Coyote.CLI --version 1.0.5</code></p>
 <details class="hint"><summary>Troubleshoot: Confirm that <code>coyote</code> is correctly installed on your machine</summary><p>After installation, run <code>which coyote</code> and it should show:
 <div class="highlight"><pre><span></span><code>which coyote
 coyote is /Users/&lt;user&gt;/.dotnet/tools/coyote
