@@ -66,7 +66,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#primitive-data-types" class="md-skip">
+        <a href="#primitive" class="md-skip">
           Skip to content
         </a>
       
@@ -552,36 +552,43 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#primitive-data-types" class="md-nav__link">
-    Primitive Data Types
+  <a href="#primitive" class="md-nav__link">
+    Primitive
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#record-data-types" class="md-nav__link">
-    Record Data Types
+  <a href="#record" class="md-nav__link">
+    Record
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#collection-data-types" class="md-nav__link">
-    Collection Data Types
+  <a href="#collection" class="md-nav__link">
+    Collection
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#foreign-types" class="md-nav__link">
-    Foreign Types
+  <a href="#foreign" class="md-nav__link">
+    Foreign
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#user-defined-types" class="md-nav__link">
-    User Defined Types
+  <a href="#user-defined" class="md-nav__link">
+    User Defined
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#universal-supertypes" class="md-nav__link">
+    Universal Supertypes
   </a>
   
 </li>
@@ -814,36 +821,43 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#primitive-data-types" class="md-nav__link">
-    Primitive Data Types
+  <a href="#primitive" class="md-nav__link">
+    Primitive
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#record-data-types" class="md-nav__link">
-    Record Data Types
+  <a href="#record" class="md-nav__link">
+    Record
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#collection-data-types" class="md-nav__link">
-    Collection Data Types
+  <a href="#collection" class="md-nav__link">
+    Collection
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#foreign-types" class="md-nav__link">
-    Foreign Types
+  <a href="#foreign" class="md-nav__link">
+    Foreign
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#user-defined-types" class="md-nav__link">
-    User Defined Types
+  <a href="#user-defined" class="md-nav__link">
+    User Defined
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#universal-supertypes" class="md-nav__link">
+    Universal Supertypes
   </a>
   
 </li>
@@ -863,20 +877,58 @@
                 
                   <h1>P DataTypes</h1>
                 
-                <p>P Supports the following Data types:</p>
+                <p>P Supports the following data types:</p>
+<table>
+<thead>
+<tr>
+<th align="left">P Types</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><a href="#primitive-data-types">Primitive</a></td>
+<td align="left"><code>int</code>, <code>bool</code>, <code>float</code>, <code>string</code>, <code>enum</code>, <code>machine</code>, and <code>event</code>.</td>
+</tr>
+<tr>
+<td align="left"><a href="#record-data-types">Record</a></td>
+<td align="left"><code>tuple</code> and <code>named tuple</code></td>
+</tr>
+<tr>
+<td align="left"><a href="#collection-data-types">Collection</a></td>
+<td align="left"><code>map</code>, <code>seq</code>, and <code>set</code></td>
+</tr>
+<tr>
+<td align="left"><a href="#foreign-types">Foreign</a></td>
+<td align="left">These are types that are not defined in P but in an external language (e.g., C# or Java) and can be used in the P program.</td>
+</tr>
+<tr>
+<td align="left"><a href="#user-defined-types">User Defined</a></td>
+<td align="left">These are user defined types that are constructed using any of the P types listed above</td>
+</tr>
+<tr>
+<td align="left"><a href="#universal-supertypes">Universal Supertypes</a></td>
+<td align="left"><code>any</code> and <code>data</code></td>
+</tr>
+</tbody>
+</table>
+<details class="note"><summary>P Types Grammar</summary></details>
+<h3 id="primitive">Primitive</h3>
+<h3 id="record">Record</h3>
+<h3 id="collection">Collection</h3>
+<h3 id="foreign">Foreign</h3>
+<h3 id="user-defined">User Defined</h3>
+<h3 id="universal-supertypes">Universal Supertypes</h3>
+<p>P supports two universal supertypes (<code>any</code> and <code>data</code>), type that are supertypes of all
+types in the language.</p>
 <ul>
-<li><a href="#primitive-data-types">Primitive</a> data types: <code>int</code>, <code>bool</code>, <code>float</code>, <code>string</code>, and <code>enum</code>.</li>
-<li><a href="#record-data-types">Record</a> data types: <code>tuple</code> and <code>named tuple</code>. </li>
-<li><a href="#collection-data-types">Collection</a> types: <code>map</code>, <code>sequence</code>, and <code>set</code>.</li>
-<li><a href="#foreign-types">Foreign</a> types: types that are not defined in P but in an external language (e.g., C# or Java) and can be used in the P program.</li>
-<li>Finally, <a href="#user-defined-types">User Defined Types</a>: user defined types that are constructed using any of the P Datatypes listed above.</li>
+<li><code>any</code> type in P is the supertype of all types.</li>
+<li><code>data</code> type in P is the supertype of all types in P that do not have a <code>machine</code> type
+  embedded in it. This type is mainly used to represent values in P that do not have a
+  machine reference embedded in them i.e., the value is purely "data" and has no machine
+  "references" in it. For example, <code>data</code> is a supertype of <code>(key: string, value: int)</code>
+  but not <code>(key: string, client: machine)</code>.</li>
 </ul>
-<p>Programmer can create user defined types using</p>
-<h3 id="primitive-data-types">Primitive Data Types</h3>
-<h3 id="record-data-types">Record Data Types</h3>
-<h3 id="collection-data-types">Collection Data Types</h3>
-<h3 id="foreign-types">Foreign Types</h3>
-<h3 id="user-defined-types">User Defined Types</h3>
                 
               
               

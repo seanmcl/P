@@ -747,7 +747,29 @@
                 
                   <h1>P Events</h1>
                 
-                
+                <p>A P program is a collection of state machines communicating with each other by exchanging <strong>events</strong>.
+An event in P has two parts, an event name and a payload value (optional) that can be sent along with the event.</p>
+<details class="note" open="open"><summary>P Event Declaration Grammar</summary><div class="highlight"><pre><span></span><code>eventDecl :          
+    | event iden (: type)?;     # P Event Declaration
+</code></pre></div>
+<p><code>iden</code> is the name of the event and <code>type</code> is any P data type (<a href="../datatypes/">decribed here</a>).</p>
+</details>
+<p><strong>Syntax:</strong> <code>event eName : payloadType</code></p>
+<p>Where <code>eName</code> is the name of the P event and <code>type</code> and <code>payloadType</code> is the type of payload values that can sent along with this event.</p>
+<div class="tabbed-set" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Event Declarations</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="c1">// declarations of events with no payloads</span>
+<span class="n">event</span> <span class="n">ePing</span><span class="p">;</span>
+<span class="n">event</span> <span class="n">ePong</span><span class="p">;</span>
+
+<span class="c1">// declaration of events that have payloads</span>
+<span class="n">type</span> <span class="n">tRequest</span> <span class="o">=</span> <span class="p">(</span><span class="n">client</span><span class="p">:</span> <span class="n">Client</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">string</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="kt">int</span><span class="p">,</span> <span class="n">requestId</span><span class="p">:</span> <span class="kt">int</span><span class="p">);</span>
+<span class="c1">// eRequest event with payload of type tRequest</span>
+<span class="n">event</span> <span class="n">eRequest</span><span class="p">:</span> <span class="n">tRequest</span><span class="p">;</span> 
+<span class="c1">// eResponse event that can have a payload of type (requestId: int, status: bool)</span>
+<span class="n">event</span> <span class="n">eResponse</span><span class="p">:</span> <span class="p">(</span><span class="n">requestId</span><span class="p">:</span> <span class="kt">int</span><span class="p">,</span> <span class="n">status</span><span class="p">:</span> <span class="n">bool</span><span class="p">);</span> 
+</code></pre></div>
+</div>
+</div>
                 
               
               
