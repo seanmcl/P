@@ -559,6 +559,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#enum" class="md-nav__link">
+    Enum
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#record" class="md-nav__link">
     Record
   </a>
@@ -589,6 +596,13 @@
         <li class="md-nav__item">
   <a href="#universal-supertypes" class="md-nav__link">
     Universal Supertypes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#default-values-for-p-data-types" class="md-nav__link">
+    Default values for P data types
   </a>
   
 </li>
@@ -828,6 +842,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#enum" class="md-nav__link">
+    Enum
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#record" class="md-nav__link">
     Record
   </a>
@@ -858,6 +879,13 @@
         <li class="md-nav__item">
   <a href="#universal-supertypes" class="md-nav__link">
     Universal Supertypes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#default-values-for-p-data-types" class="md-nav__link">
+    Default values for P data types
   </a>
   
 </li>
@@ -912,23 +940,262 @@
 </tr>
 </tbody>
 </table>
-<details class="note"><summary>P Types Grammar</summary></details>
+<details class="note"><summary>P Types Grammar</summary><p>Data types in P:</p>
+<div class="highlight"><pre><span></span><code>type : 
+ | bool                         # PrimitiveType
+ | int                          # PrimitiveType
+ | float                        # PrimitiveType
+ | string                       # PrimitiveType
+ | event                        # PrimitiveType
+ | machine                      # PrimitiveType
+
+ | (type (, type)*)             # TupleType
+ | (iden: type (, iden: type)*) # NamedTupleType
+
+ | seq[type]                    # SeqType
+ | set[type]                    # SetType
+ | map[type, type]              # MapType
+
+ | data                         # UniversalType
+ | any                          # UniversalType
+
+ | iden                         # UserDefinedType
+ ;
+</code></pre></div>
+<p>Declaring user defined types and foreign types:
+<div class="highlight"><pre><span></span><code>typeDecl : 
+ | type iden ;                  # ForeignTypeDeclaration
+ | type iden = type ;           # UserDefinedTypeDeclaration
+ ;
+</code></pre></div></p>
+<p>Declaring enum types:</p>
+<div class="highlight"><pre><span></span><code>enumTypeDecl : 
+ | enum iden { enumElemList }
+ | enum iden { numberedEnumElemList }
+ ;
+enumElemList : enumElem (, enumElem)* ;
+enumElem : iden ;
+numberedEnumElemList : numberedEnumElem (, numberedEnumElem)* ;
+numberedEnumElem : iden = IntLiteral ;
+</code></pre></div>
+</details>
+<div class="admonition info">
+<p class="admonition-title">Operations on P data types</p>
+<p>Details for the operations that can be performed on
+P datatypes are described in the <a href="../expressions/">expressions</a> and <a href="../statements/">statements</a>.</p>
+</div>
 <h3 id="primitive">Primitive</h3>
+<p>P supports the common primitive datatypes like <code>int</code>, <code>bool</code>, <code>float</code>, and <code>string</code>. Two
+additional primitive data types that are specific to the P language are <code>event</code> and
+<code>machine</code>. <code>event</code> type represents the set of all P events. Similarly, <code>machine</code> type
+represents the set of all machine references.</p>
+<div class="tabbed-set" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Primitive Data types</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="p">...</span>
+<span class="n">event</span> <span class="n">eRequest</span><span class="p">:</span> <span class="n">bool</span><span class="p">;</span>
+<span class="p">...</span>
+
+<span class="c1">// some function body in the P program</span>
+<span class="p">{</span>
+    <span class="kd">var</span> <span class="n">i</span><span class="p">:</span> <span class="kt">int</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="n">j</span><span class="p">:</span> <span class="kt">float</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="n">k</span><span class="p">:</span> <span class="n">string</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="n">l</span><span class="p">:</span> <span class="n">bool</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="n">ev</span><span class="p">:</span> <span class="n">event</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="n">client</span><span class="p">:</span> <span class="n">machine</span><span class="p">;</span>
+
+    <span class="n">ev</span> <span class="o">=</span> <span class="n">eRequest</span><span class="p">;</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Client</span><span class="p">();</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span> <span class="n">j</span> <span class="o">=</span> <span class="mf">10.0</span><span class="p">;</span> <span class="n">k</span> <span class="o">=</span> <span class="s">&quot;Failure!!&quot;</span><span class="p">;</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="p">(</span><span class="n">j</span> <span class="n">to</span> <span class="kt">int</span><span class="p">));</span>
+    <span class="k">assert</span> <span class="n">l</span><span class="p">,</span> <span class="n">k</span><span class="p">;</span>
+
+    <span class="n">send</span> <span class="n">client</span><span class="p">,</span> <span class="n">ev</span><span class="p">,</span> <span class="n">l</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+<h3 id="enum">Enum</h3>
+<p>P supports enums, enum values in P are considered as global constants and must have unique
+name. Enums by default are given integer values starting from 0 (if no values are assigned
+to the elements). Enums in P can be coerced to <code>int</code>. Please refer to the grammar above for the syntax for declaring enums.</p>
+<div class="tabbed-set" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">Enum Declaration</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>enum tResponseStatus { ERROR, SUCCESS, TIMEOUT }
+
+// usage of enums
+var status: tResponseStatus;
+
+status = ERROR;
+
+// you can coerce an enum to int
+assert (ERROR to int) == 0;
+</code></pre></div>
+</div>
+<input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">Enum Declaration with Values</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>enum tResponseStatus { ERROR = 500, SUCCESS = 200,
+TIMEOUT = 400; }
+
+// usage of enums
+var status: tResponseStatus;
+
+status = ERROR;
+
+// you can coerce an enum to int
+assert (ERROR to int) == 500;
+</code></pre></div>
+</div>
+</div>
 <h3 id="record">Record</h3>
+<p>P supports two types of records: tuples and named tuples. The fields of a tuple can be
+accessed by using the <code>.</code> operation followed by the field index.</p>
+<div class="highlight"><pre><span></span><code>// tuple with three fields
+var tupleEx: (int, bool, int);
+
+// constructing a value of tuple type.
+tupleEx = (20, false, 21);
+
+// accessing the first and third element of the tupleEx 
+tupleEx.0 = tupleEx.0 + tupleEx.2;
+</code></pre></div>
+<p>Named tuples are similar to tuples with each field having an associated name. The fields
+of a named tuple can be accessed by using the <code>.</code> operation followed by the field name.</p>
+<div class="highlight"><pre><span></span><code>// named tuple with three fields
+var namedTupleEx: (x1: int, x2: bool, x3: int);
+
+// constructing a value of named tuple type.
+namedTupleEx = (x1 = 20, x2 = false, x3 = 21);
+
+// accessing the first and third element of the namedTupleEx 
+namedTupleEx.x1 = namedTupleEx.x1 + namedTupleEx.x3;
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Tuple and Named tuple types are disjoint, i.e., a tuple of type <code>(int,
+bool, int)</code> cannot to assigned to a variable of tuple <code>(x1: int, x2: bool, x3: int)</code>
+though the elements of the tuple have same types (and vice versa). And similarly, a named
+tuple of type <code>(x1: int, x2: bool, x3: int)</code> cannot to assigned to a variable of tuple
+<code>(y1: int, y2: bool, y3: int)</code> they are two distinct types.</p>
+</div>
 <h3 id="collection">Collection</h3>
+<p>P supports three collection types: map, sequence (lists), and set. The operations to mutate the collection types like insert, update, and remove elements are described in the <a href="../statements/">statements</a> section. One can use the <code>while</code> loop to iterate over these collection types. Other operations like <code>sizeof</code>, <code>in</code> (to check containment), <code>choose</code> (pick a value nondeterministically), <code>keys</code>, and <code>values</code> on these collection types are defined in the <a href="../expressions/">expressions</a> section.</p>
+<p><strong>Syntax</strong>: </p>
+<ul>
+<li><code>map[K, V]</code> represents a <code>map</code> type with keys of type <code>K</code> and values of type <code>V</code>.</li>
+<li><code>seq[T]</code> represents a sequence type with elements of type <code>T</code>.</li>
+<li><code>set[T]</code> represents a set type with elements of type <code>T</code>.</li>
+</ul>
 <h3 id="foreign">Foreign</h3>
+<p>P allows programmers to define (or implement) types in the external languages. We refer to these types as foreign types, they are declared in P but are implemented in an external language. They can be used inside P programs just like any other types.</p>
+<p><strong>Syntax:</strong>: <code>type tName;</code></p>
+<p><code>tName</code> is the name of the foreign type. </p>
+<p>Note that foreign types are disjoint from all other types in P. They are subtype of the <code>any</code> type.
+Details about how to define/implement foreign types in P is described <a href="../foriegntypesfunctions/">here</a>.</p>
 <h3 id="user-defined">User Defined</h3>
+<p>P supports assigning names to type i.e., creating <code>typedef</code>. Note that these typedefs are simply assigning names to P types and does not effect the sub-typing relation.</p>
+<p><strong>Syntax:</strong>:  <code>type iden = type ;</code></p>
+<div class="tabbed-set" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">User Defined Type Declaration</label><div class="tabbed-content">
+<p><div class="highlight"><pre><span></span><code><span class="c1">// defining a type tLookUpRequest</span>
+<span class="n">type</span> <span class="n">tLookUpRequest</span> <span class="o">=</span> <span class="p">(</span><span class="n">client</span><span class="p">:</span> <span class="n">machine</span><span class="p">,</span> <span class="n">requestId</span><span class="p">:</span> <span class="kt">int</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">string</span><span class="p">);</span>
+<span class="c1">// defining a type tLookUpRequestX</span>
+<span class="n">type</span> <span class="n">tLookUpRequestX</span> <span class="o">=</span> <span class="p">(</span><span class="n">client</span><span class="p">:</span> <span class="n">machine</span><span class="p">,</span> <span class="n">requestId</span><span class="p">:</span> <span class="kt">int</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">string</span><span class="p">);</span>
+</code></pre></div>
+The programmers can use type tLookUpRequest as a short hand for referring to the type (client: machine, requestId: int, key: string);
+Note that the types tLookUpRequest and tLookUpRequestX are same, the compiler does not distinguish between the two types.</p>
+</div>
+</div>
 <h3 id="universal-supertypes">Universal Supertypes</h3>
 <p>P supports two universal supertypes (<code>any</code> and <code>data</code>), type that are supertypes of all
 types in the language.</p>
 <ul>
-<li><code>any</code> type in P is the supertype of all types.</li>
+<li><code>any</code> type in P is the supertype of all types. Also, note that in P, <code>seq[any]</code> is a super type of <code>seq[int]</code> and similarly for other collection types.</li>
 <li><code>data</code> type in P is the supertype of all types in P that do not have a <code>machine</code> type
   embedded in it. This type is mainly used to represent values in P that do not have a
   machine reference embedded in them i.e., the value is purely "data" and has no machine
   "references" in it. For example, <code>data</code> is a supertype of <code>(key: string, value: int)</code>
   but not <code>(key: string, client: machine)</code>.</li>
 </ul>
+<h3 id="default-values-for-p-data-types">Default values for P data types</h3>
+<p>The <code>default</code> feature in P (checkout details in <a href="../expressions/">expressions</a>) can be used
+to obtain the default value of any P type. P variables on declaration are automatically
+initialized to their default values.</p>
+<details class="info"><summary><code>default</code> values of P types</summary><p>P variables on declaration are automatically initialized to their default values. For example:</p>
+<div class="highlight"><pre><span></span><code>var s : set[int];
+// by default a set type is initialized to an empty set
+assert sizeof(s) == 0;
+
+s += (100);
+assert sizeof(s) == 1;
+
+// reset the variable to an empty set
+s = default(set[int]);
+</code></pre></div>
+<p>Similarly,</p>
+<div class="highlight"><pre><span></span><code>type tRequest = (client: machine, requestId: int);
+type tResponse = (values: map[int, int]);
+
+...
+// initializes x to (client = null, requestId = 0);
+x = default(tRequest);
+// initializes y to (values = {}), empty map.
+y = default(tResponse);
+
+assert x.client == default(machine);
+assert sizeof(y.values) == 0;
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th align="left">P Types</th>
+<th align="left">Default Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">int</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">float</td>
+<td align="left">0.0</td>
+</tr>
+<tr>
+<td align="left">bool</td>
+<td align="left">false</td>
+</tr>
+<tr>
+<td align="left">string</td>
+<td align="left">""</td>
+</tr>
+<tr>
+<td align="left">event</td>
+<td align="left">null</td>
+</tr>
+<tr>
+<td align="left">machine</td>
+<td align="left">null</td>
+</tr>
+<tr>
+<td align="left">enum</td>
+<td align="left">element of the enum with lowest (int) value</td>
+</tr>
+<tr>
+<td align="left">Record (tuple or named tuple)</td>
+<td align="left">Each field in the record type is initialized to its default value.</td>
+</tr>
+<tr>
+<td align="left">Collection (set, seq, and map)</td>
+<td align="left">Empty collection</td>
+</tr>
+<tr>
+<td align="left">Foreign</td>
+<td align="left">null</td>
+</tr>
+<tr>
+<td align="left"><code>any</code> and <code>data</code></td>
+<td align="left">null</td>
+</tr>
+</tbody>
+</table>
+</details>
                 
               
               
