@@ -658,6 +658,47 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#operations-on-collections" class="md-nav__link">
+    Operations on Collections
+  </a>
+  
+    <nav class="md-nav" aria-label="Operations on Collections">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sizeof" class="md-nav__link">
+    sizeof
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keys-and-values" class="md-nav__link">
+    keys and values
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contains-or-in" class="md-nav__link">
+    contains (or in)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#default-value-for-a-type" class="md-nav__link">
+    Default value for a type
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -848,6 +889,47 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#operations-on-collections" class="md-nav__link">
+    Operations on Collections
+  </a>
+  
+    <nav class="md-nav" aria-label="Operations on Collections">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sizeof" class="md-nav__link">
+    sizeof
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keys-and-values" class="md-nav__link">
+    keys and values
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contains-or-in" class="md-nav__link">
+    contains (or in)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#default-value-for-a-type" class="md-nav__link">
+    Default value for a type
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -877,6 +959,7 @@ P supports the common imperative programming language expressions (just like in 
     | keys(expr)                    # KeysExpr
     | values(expr)                  # ValuesExpr
     | sizeof(expr)                  # SizeofExpr
+    | expr in expr                  # ContainsExpr
     | default(type)                 # DefaultExpr
     | new iden ( rvalueList? )      # NewExpr
     | iden ( rvalueList? )          # FunCallExpr
@@ -885,7 +968,7 @@ P supports the common imperative programming language expressions (just like in 
     | expr as type                  # CastExpr
     | expr to type                  # CoerceExpr
     | expr (&lt; | &gt; | &gt;= | &lt;= ) expr  # CompBinExpr
-    | expr in expr                  # ContainsExpr
+
     | expr (== | !=) expr           # EqualityBinExpr
     | expr (&amp;&amp; | ||) expr           # LogicalBinExpr
     | choose ( expr? )              # ChooseExpr
@@ -1006,7 +1089,37 @@ of a named tuple can be accessed by using the <code>.</code> operation followed 
 <h3 id="indexing-into-a-collection">Indexing into a Collection</h3>
 <p>P supports three collection types: <code>map</code>, <code>seq</code>, and <code>set</code>. We can index into these collection types to access its elements.</p>
 <p><strong>Syntax:</strong> <code>expr_c[expr_i]</code> </p>
-<p>If <code>expr_c</code> is a value of sequence type then <code>expr_i</code> must be in integer expression and <code>expr_c[expr_i]</code> represents the element at index <code>expr_i</code>. Similarly, If <code>expr_c</code> is a value of set type then <code>expr_i</code> must be in integer expression and <code>expr_c[expr_i]</code> represents the element at index <code>expr_i</code> but not that for a set there is no guarantee for the order in which elements are stored in the set.</p>
+<p>If <code>expr_c</code> is a value of sequence type then <code>expr_i</code> must be an integer expression and <code>expr_c[expr_i]</code> represents the element at index <code>expr_i</code>. Similarly, If <code>expr_c</code> is a value of set type then <code>expr_i</code> must be an integer expression and <code>expr_c[expr_i]</code> represents the element at index <code>expr_i</code> but not that for a set there is no guarantee for the order in which elements are stored in the set.
+Finally, if <code>expr_c</code> is a value of map type then <code>expr_i</code> represents the key to look up and <code>expr_c[expr_i]</code> represents the value for the key <code>expr_i</code>.</p>
+<h3 id="operations-on-collections">Operations on Collections</h3>
+<p>P supports four other operations on collection types:</p>
+<h4 id="sizeof">sizeof</h4>
+<p><strong>Syntax:</strong>: <code>sizeof(expr)</code> where <code>expr</code> is a value of type <code>set</code>, <code>seq</code> or <code>map</code> and it returns an integer value representing the size or length of the collection.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="n">sq</span><span class="p">:</span> <span class="n">seq</span><span class="o">[</span><span class="kt">int</span><span class="o">]</span><span class="p">;</span>
+<span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">sizeof</span><span class="p">(</span><span class="n">sq</span><span class="p">)</span><span class="o">&gt;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">...</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="keys-and-values">keys and values</h4>
+<p>Programmers can use <code>keys</code> and <code>values</code> functions to get access to a sequence of all the keys or values in map respectively.</p>
+<p><strong>Syntax:</strong>: <code>keys(expr)</code> or <code>values(expr)</code></p>
+<p><code>expr</code> must be a map value, if <code>expr : map[K, V]</code> then <code>keys(expr)</code> returns a sequence of all keys in the map (of type <code>seq[K]</code>) and similarly, <code>values(expr)</code> returns a sequence of all values in the map (of type <code>seq[V]</code>).</p>
+<p>Primarily, <code>keys</code> and <code>values</code> are used to get contents of the map and then operate over it.</p>
+<h4 id="contains-or-in">contains (or <code>in</code>)</h4>
+<p>To check if an element (or key in the case of a map) belongs to a collection, P provides the <code>in</code> operation.</p>
+<p><strong>Syntax:</strong> <code>expr_e in expr_c</code> </p>
+<p><code>expr_e</code> is the element (or key in the case of map) and <code>expr_c</code> is the collection value. The <code>in</code> expression evaluates to <code>true</code> if the element belongs to the collection and <code>false</code> otherwise.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="n">sq</span><span class="p">:</span> <span class="n">seq</span><span class="o">[</span><span class="n">tRequest</span><span class="o">]</span><span class="p">;</span>
+<span class="kd">var</span> <span class="n">mp</span><span class="p">:</span> <span class="n">map</span><span class="o">[</span><span class="kt">int</span><span class="p">,</span> <span class="n">tRequest</span><span class="o">]</span><span class="p">;</span>
+<span class="kd">var</span> <span class="n">rr</span><span class="p">:</span> <span class="n">tRequest</span><span class="p">;</span> <span class="kd">var</span> <span class="n">i</span><span class="p">:</span> <span class="kt">int</span><span class="p">;</span>
+<span class="p">...</span>
+<span class="k">if</span><span class="p">(</span><span class="n">rr</span> <span class="n">in</span> <span class="n">sq</span> <span class="o">&amp;&amp;</span> <span class="n">rr</span> <span class="n">in</span> <span class="nf">values</span><span class="p">(</span><span class="n">mp</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">i</span> <span class="n">in</span> <span class="n">mp</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="default-value-for-a-type">Default value for a type</h3>
                 
               
               
