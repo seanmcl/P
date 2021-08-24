@@ -65,6 +65,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#named-module" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -622,9 +627,57 @@
     <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
     
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        P Module System
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
     <a href="./" class="md-nav__link md-nav__link--active">
       P Module System
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#named-module" class="md-nav__link">
+    Named Module
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#primitive-module" class="md-nav__link">
+    Primitive Module
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#union-module" class="md-nav__link">
+    Union Module
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assert-monitors-module" class="md-nav__link">
+    Assert Monitors Module
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -739,6 +792,55 @@
               </div>
             
             
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#named-module" class="md-nav__link">
+    Named Module
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#primitive-module" class="md-nav__link">
+    Primitive Module
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#union-module" class="md-nav__link">
+    Union Module
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assert-monitors-module" class="md-nav__link">
+    Assert Monitors Module
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content">
             <article class="md-content__inner md-typeset">
@@ -750,22 +852,82 @@
                 <p>The P module system allows programmers to decompose their complex system into modules to
 implement and test the system compositionally. More details about the underlying theory
 for the P module system (assume-guarantee style compositional reasoning) is described in
-the <a href="https://ankushdesai.github.io/assets/papers/modp.pdf">research paper</a></p>
-<details class="note" open="open"><summary>P Modules Grammar</summary><div class="highlight"><pre><span></span><code>modExpr 
-    : LPAREN modExpr RPAREN                                               # AnnonymousModuleExpr
-    | LBRACE bindslist+=bindExpr (COMMA bindslist+=bindExpr)* RBRACE      # PrimitiveModuleExpr
-    | iden                                                                # NamedModule
-    | op=COMPOSE mexprs+=modExpr (COMMA mexprs+=modExpr)+                 # ComposeModuleExpr
-    | op=UNION   mexprs+=modExpr (COMMA  mexprs+=modExpr)+                # UnionModuleExpr
-    | op=HIDEE  nonDefaultEventList IN modExpr                            # HideEventsModuleExpr
-    | op=HIDEI idenList IN modExpr                                        # HideInterfacesModuleExpr
-    | op=ASSERT  idenList IN modExpr                                      # AssertModuleExpr
-    ;
-bindExpr : (mName=iden | mName=iden RARROW iName=iden) ;
+the <a href="https://ankushdesai.github.io/assets/papers/modp.pdf">paper</a></p>
+<p>In its simplest form, a module in P is a collection of state machines. The P module system allows constructing larger modules by composing or unioning modules together. Hence, a distributed system under test which is a composition of multiple components together can be constructed by composing (or unioning) modules corresponding to those components. The <a href="../testcases/">P test cases</a> takes as input a module that represents the <strong>closed</strong><sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> system to be validated which is the union or composition of all the component modules.</p>
+<details class="note" open="open"><summary>P Modules Grammar</summary><div class="highlight"><pre><span></span><code>modExpr :
+| ( modExpr )                               # AnnonymousModuleExpr
+| { bindExpr (, bindExpr)* }                # PrimitiveModuleExpr
+| union modExpr (, modExpr)+                # UnionModuleExpr
+| assert idenList in modExpr                # AssertModuleExpr
+| iden                                      # NamedModule
+;
 
-namedModuleDecl : MODULE name=iden ASSIGN modExpr SEMI ;
+# Bind a machine to an interface
+
+bindExpr : (iden | iden -&gt; iden) ;          # MachineBindExpr
+
+# Create a named module i.e., assign a name to a module
+
+namedModuleDecl : module iden = modExpr ;   # Named module declaration
 </code></pre></div>
 </details>
+<p>(Add a link to the client server and two phase commit example to describe this further).</p>
+<h3 id="named-module">Named Module</h3>
+<p>A named module declaration simply assigns a name to a module expression.</p>
+<p><strong>Syntax</strong>: <code>module mName = modExpr;</code></p>
+<p><code>mName</code> is the assiged name for the module <code>modExpr</code> where <code>modExpr</code> is any of the modules described below.</p>
+<div class="tabbed-set" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Named Module</label><div class="tabbed-content">
+<p><code>module serverModule = { Server, Timer };</code></p>
+<p>The above line assigns the name <code>serverModule</code> to a primitive module consisting of machines <code>Server</code> and <code>Timer</code>.</p>
+</div>
+</div>
+<h3 id="primitive-module">Primitive Module</h3>
+<p>A primitive module is a (annonymous) collection of state machines.</p>
+<p><strong>Syntax</strong>: <code>{ bindExpr (, bindExpr)* }</code></p>
+<p>where <code>bindExpr</code> is a binding expression which could either be just the name of a machine <code>iden</code> or a mapping <code>mName -&gt; iName</code> that maps a machine <code>mName</code> to an interface <code>iName</code>. The binding enforces that whenever a machine <code>iName</code> is created in the module (i.e., <code>new iName(..)</code>) it leads to the creation of machine <code>mName</code>. The indirection using this binding is helpful in cases where we would like to replace a machine with another machine (e.g., implementation by its abstraction). This usecase is explained in the ClientServer example (FixMe with a link).</p>
+<p>In most cases, a primitive module is simply a list of state machines that together implement that component.</p>
+<div class="tabbed-set" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">Primitive Module</label><div class="tabbed-content">
+<p><div class="highlight"><pre><span></span><code>// Lets say there are three machines in the P program: Client, Server, and Timer
+module client = { Client };
+module server = { Server, Timer };
+</code></pre></div>
+<code>client</code> is a primitive module consisting of the <code>Client</code> machine and the <code>server</code> module is a primitive module consistency of machines <code>Server</code> and <code>Timer</code>.</p>
+</div>
+<input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">Primitive Module with Bindings</label><div class="tabbed-content">
+<p><div class="highlight"><pre><span></span><code>// Lets say there are four machines in the P program: Client, Server, AbstractServer and Timer
+module client = { Client };
+module server = { Server, Timer };
+module serverAbs = {Server -&gt; AbstractServer, Timer};
+</code></pre></div>
+<code>client</code> is a primitive module consisting of the <code>Client</code> machine and the <code>server</code> module is a primitive module consistency of machines <code>Server</code> and <code>Timer</code>. The module <code>serverAbs</code> represents a primitive module consistency of machines <code>AbstractServer</code> and <code>Timer</code> machines with the difference that wherever the <code>serverAbs</code> module is used the creation of machine <code>Server</code> will in turn lead to creation of the <code>AbstractServer</code> machine.</p>
+</div>
+</div>
+<h3 id="union-module">Union Module</h3>
+<p>P supports unioning multiple modules together to create larger, more complex modules. The idea is to implement the distributed system as a collection of components (modules), test and verify these components in isolation using the abstractions of other components, and also potentially union them together to validate the entire system together as well.</p>
+<p><strong>Syntax:</strong>: <code>union modExpr (, modExpr)+</code></p>
+<p><code>modExpr</code> is any P module. The union of two modules is simply a creation of a new module which is a union of the machines of the component modules.</p>
+<p><code>module system = (union client, server);</code></p>
+<p><code>system</code> is a module which is a union of the modules <code>client</code> and <code>server</code>. </p>
+<p><code>module systemAbs = (union client, serverAbs);</code></p>
+<p><code>systemAbs</code> is a module which is a union of the module <code>client</code> and the <code>serverAbs</code> where the <code>Client</code> machine interacts with the <code>AbstractServer</code> machine instead of the <code>Server</code> machine in the <code>system</code> module.</p>
+<h3 id="assert-monitors-module">Assert Monitors Module</h3>
+<p>P allows attaching monitors (or specifications) to modules. When attaching monitors to a module, the events observed by the monitors must be sent by some machine in the module. The way to think about assert monitors module is that: <em>testing this module asserts that each execution of the module satisfies the global properties specified by the monitors.</em></p>
+<p><strong>Syntax:</strong> <code>assert idenList in modExpr</code></p>
+<p><code>idenList</code> is a comma separated list of monitor (spec machine) names that are being asserted on the executions of the module <code>modExpr</code>.</p>
+<p><code>assert AtomicitySpec, EventualResponse in TwoPhaseCommit</code></p>
+<p>The above module asserts that the executions of the module <code>TwoPhaseCommit</code> satisfy the properties specified by the monitors <code>AtomicitySpec</code> and <code>EventualResponse</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">More module constructors</p>
+<p>P supports more complex module constructors like <code>compose</code>, <code>hide</code>, and <code>rename</code>. The description for these will be added later, they are mostly used for more advanced compositional reasoning.</p>
+</div>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>A closed system is a system where all the machines or interfaces that are created are defined or implemented in the unioned modules.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
                 
               
               
