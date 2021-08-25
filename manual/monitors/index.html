@@ -394,18 +394,6 @@
 
 
   <li class="md-nav__item">
-    <a href="../../howtoguides/modelbasedtesting/" class="md-nav__link">
-      Model based testing of implementation
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
     <a href="../../howtoguides/importanceliveness/" class="md-nav__link">
       Importance of Liveness Specifications
     </a>
@@ -542,18 +530,6 @@
           
           
 
-
-  <li class="md-nav__item">
-    <a href="../statemachines/" class="md-nav__link">
-      P State Machines
-    </a>
-  </li>
-
-        
-          
-          
-          
-
   
 
 
@@ -566,18 +542,6 @@
       P Monitors
     </a>
     
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../functions/" class="md-nav__link">
-      P Functions
-    </a>
   </li>
 
         
@@ -735,7 +699,127 @@
                 
                   <h1>P Monitors</h1>
                 
-                
+                <p>Programmers can write safety and liveness specifications in P as monitors or <code>spec</code> machines. 
+<code>spec</code> machines are monitor state machines or observer state machines that observe a set of events during the execution of the system and
+assert the desired correctness specifications based on these observations.</p>
+<div class="admonition info">
+<p class="admonition-title">Machines vs Spec Machine</p>
+<p>Syntactically, machines and spec machines in P <strong>are very similar in terms of the state machine structure</strong>. But, they have some key differences:</p>
+<ul>
+<li><code>spec</code> machines in P are <strong>observer machines</strong> (imagine runtime monitors), they observe a set of events in the execution of the system and based on these observed events (may keep track on local state) it asserts the desired global safety and liveness specifications.</li>
+<li>Since <code>spec</code> machines are observer machines, they <strong>cannot have any side effects</strong> on the system behavior and hence, <code>spec</code> machines cannot perform <code>send</code>, <code>receive</code>, <code>new</code>, and <code>annouce</code>.</li>
+<li><code>spec</code> machines are <strong>global machines</strong>, in other words, there is only a single instance of each monitor created at the start of the execution of the system. We currently do not support dynamic creation of monitors. Hence, <code>spec</code> machines cannot use <code>this</code> expression.</li>
+<li><code>spec</code> machines are <strong>synchronously composed</strong> with the system that it is monitoring. The way this is acheived is: each time there is a <code>send</code> or <code>announce</code> of an event during the execution of a system, all the monitors or specifications that are observing that event are executed synchronously at that point. Another way to imagine this is: just before <code>send</code> or <code>annouce</code> of an event, we deliver this event to all the monitors that are observing the event and <strong>synchronously</strong> execute the monitor at that point.</li>
+<li>Finally, <code>spec</code> machines can have <code>hot</code> and <code>cold</code> annotations on its states to model liveness specifiations.</li>
+</ul>
+</div>
+<details class="note" open="open"><summary>P Spec Machine Grammar</summary><p><code>specMachineDecl : spec iden observes eventsList statemachineBody ;</code></p>
+<p>As mentioned above, syntactically, the P <code>spec</code> machines are very similar to the <a href="../statemachines/">P state machines</a>. The main difference being the <code>observes</code> annotation that specifies the list of events being observed (monitored) and also the <code>hot</code> and <code>cold</code> annotations on the states of a liveness specification.</p>
+</details>
+<p><strong>Syntax:</strong> <code>spec iden observes eventsList statemachineBody ;</code></p>
+<p><code>iden</code> is the name of the spec machine, <code>eventsList</code> is the comma separated list of events observed by the spec machine and the <code>statemachineBody</code> is the implementation of the specification and its grammar is similar to the <a href="../statemachines/">P state machine</a>.</p>
+<div class="tabbed-set" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Safety specification</label><div class="tabbed-content">
+<p><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="cm">/*******************************************************************</span>
+<span class="cm">ReqIdsAreMonotonicallyIncreasing observes the eRequest event and</span>
+<span class="cm">checks that the payload (Id) associated with the requests sent</span>
+<span class="cm">by all concurrent clients in the system is always globally</span>
+<span class="cm">monotonically increasing by 1</span>
+<span class="cm">*******************************************************************/</span>
+<span class="n">spec</span> <span class="n">ReqIdsAreMonotonicallyIncreasing</span> <span class="n">observes</span> <span class="n">eRequest</span> <span class="p">{</span>
+  <span class="c1">// keep track of the Id in the previous request</span>
+    <span class="k">var</span> <span class="py">previousId</span> <span class="p">:</span> <span class="n">int</span><span class="p">;</span>
+    <span class="n">start</span> <span class="n">state</span> <span class="n">Init</span> <span class="p">{</span>
+        <span class="n">on</span> <span class="n">eRequest</span> <span class="k">do</span> <span class="p">(</span><span class="n">req</span><span class="p">:</span> <span class="n">tRequest</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">assert</span> <span class="n">req</span><span class="p">.</span><span class="n">rId</span> <span class="p">&gt;</span> <span class="n">previousId</span><span class="p">,</span>
+            <span class="n">format</span> <span class="p">(</span><span class="s">&quot;Request Ids not monotonically increasing, got {0},</span>
+            <span class="n">previously</span> <span class="n">seen</span> <span class="n">Id</span> <span class="n">was</span> <span class="p">{</span><span class="m">1</span><span class="p">}</span><span class="s">&quot;, req.rId, previousId);</span>
+            <span class="n">previousId</span> <span class="p">=</span> <span class="n">req</span><span class="p">.</span><span class="n">rId</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+The above specifications checks a very simple global invariant that all <code>eRequest</code> events that are being sent by clients in the system have a globally monotonically increasing <code>rId</code>s.</p>
+</div>
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Liveness specification</label><div class="tabbed-content">
+<p><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="cm">/**************************************************************************</span>
+<span class="cm">GuaranteedProgress observes the eRequest and eResponse events, </span>
+<span class="cm">it asserts that every request is always responded by a successful response.</span>
+<span class="cm">***************************************************************************/</span>
+<span class="n">spec</span> <span class="n">GuaranteedProgress</span> <span class="n">observes</span> <span class="n">eRequest</span><span class="p">,</span> <span class="n">eResponse</span> <span class="p">{</span>
+    <span class="c1">// keep track of the pending requests</span>
+    <span class="k">var</span> <span class="py">pendingReqs</span><span class="p">:</span> <span class="k">set</span><span class="p">[</span><span class="n">int</span><span class="p">];</span>
+    <span class="n">start</span> <span class="n">state</span> <span class="n">NopendingRequests</span> <span class="p">{</span>
+        <span class="n">on</span> <span class="n">eRequest</span> <span class="n">goto</span> <span class="n">PendingReqs</span> <span class="n">with</span> <span class="p">(</span><span class="n">req</span><span class="p">:</span> <span class="n">tRequest</span><span class="p">){</span>
+            <span class="n">pendingReqs</span> <span class="p">+=</span> <span class="p">(</span><span class="n">req</span><span class="p">.</span><span class="n">rId</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">hot</span> <span class="n">state</span> <span class="n">PendingReqs</span> <span class="p">{</span>
+        <span class="n">on</span> <span class="n">eResponse</span> <span class="k">do</span> <span class="p">(</span><span class="n">resp</span><span class="p">:</span> <span class="n">tResponse</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">assert</span> <span class="n">resp</span><span class="p">.</span><span class="n">rId</span> <span class="k">in</span> <span class="n">pendingReqs</span><span class="p">,</span> 
+              <span class="n">format</span> <span class="p">(</span><span class="s">&quot;unexpected rId: {0} received, expected one of {1}&quot;</span><span class="p">,</span> <span class="n">resp</span><span class="p">.</span><span class="n">rId</span><span class="p">,</span> <span class="n">pendingReqs</span><span class="p">);</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">resp</span><span class="p">.</span><span class="n">status</span> <span class="p">==</span> <span class="n">SUCCESS</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">pendingReqs</span> <span class="p">-=</span> <span class="p">(</span><span class="n">resp</span><span class="p">.</span><span class="n">rId</span><span class="p">);</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">sizeof</span><span class="p">(</span><span class="n">pendingReqs</span><span class="p">)</span> <span class="p">==</span> <span class="m">0</span><span class="p">)</span> <span class="c1">// requests already responded</span>
+                    <span class="n">goto</span> <span class="n">NopendingRequests</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">on</span> <span class="n">eRequest</span> <span class="n">goto</span> <span class="n">PendingReqs</span> <span class="n">with</span> <span class="p">(</span><span class="n">req</span><span class="p">:</span> <span class="n">tRequest</span><span class="p">){</span>
+            <span class="n">pendingReqs</span> <span class="p">+=</span> <span class="p">(</span><span class="n">req</span><span class="p">.</span><span class="n">rId</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+The above specification checks the global liveness property that every event <code>eRequest</code> is eventually followed by a corresponding successful <code>eResponse</code> event. The key idea is that the system satisfies a liveness specification if at the end of the execution the monitor is not in a <strong>hot</strong> state (line 13). The programmers can use <code>hot</code> annotation on states to mark them as intermediate or error states. Hence, properties like <code>eventually something holds</code> or <code>every event X is eventually followed by Y</code> or <code>eventually the system enters a convergence state</code>, all such properties can be specified by marking the intermediate state as <code>hot</code> states and the checker ensures that all the executions of the system eventually end in a non-hot state. </p>
+<p>Details about the importance of liveness specifications and how we check if the system satisfies these properties is described <a href="../../howtoguides/importanceliveness/">here</a>. </p>
+</div>
+</div>
                 
               
               
@@ -754,7 +838,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../statemachines/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../events/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -763,19 +847,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                P State Machines
+                P Events
               </div>
             </div>
           </a>
         
         
-          <a href="../functions/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../expressions/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                P Functions
+                P Expressions
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">
