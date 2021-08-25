@@ -699,6 +699,62 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#new" class="md-nav__link">
+    New
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#function-call" class="md-nav__link">
+    Function Call
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#negation-and-not" class="md-nav__link">
+    Negation and Not
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arithmetic" class="md-nav__link">
+    Arithmetic
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comparison" class="md-nav__link">
+    Comparison
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cast" class="md-nav__link">
+    Cast
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coerce" class="md-nav__link">
+    Coerce
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#choose" class="md-nav__link">
+    Choose
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -930,6 +986,62 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#new" class="md-nav__link">
+    New
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#function-call" class="md-nav__link">
+    Function Call
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#negation-and-not" class="md-nav__link">
+    Negation and Not
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arithmetic" class="md-nav__link">
+    Arithmetic
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comparison" class="md-nav__link">
+    Comparison
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cast" class="md-nav__link">
+    Cast
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coerce" class="md-nav__link">
+    Coerce
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#choose" class="md-nav__link">
+    Choose
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -965,12 +1077,11 @@ P supports the common imperative programming language expressions (just like in 
     | iden ( rvalueList? )          # FunCallExpr
     | (- | !) expr                  # UnaryExpr
     | expr (* | / | + | -) expr     # ArithBinExpr
-    | expr as type                  # CastExpr
-    | expr to type                  # CoerceExpr
-    | expr (&lt; | &gt; | &gt;= | &lt;= ) expr  # CompBinExpr
-
     | expr (== | !=) expr           # EqualityBinExpr
     | expr (&amp;&amp; | ||) expr           # LogicalBinExpr
+    | expr (&lt; | &gt; | &gt;= | &lt;= ) expr  # CompBinExpr
+    | expr as type                  # CastExpr
+    | expr to type                  # CoerceExpr
     | choose ( expr? )              # ChooseExpr
     ;
 
@@ -1114,12 +1225,45 @@ Finally, if <code>expr_c</code> is a value of map type then <code>expr_i</code> 
 <span class="kd">var</span> <span class="n">mp</span><span class="p">:</span> <span class="n">map</span><span class="o">[</span><span class="kt">int</span><span class="p">,</span> <span class="n">tRequest</span><span class="o">]</span><span class="p">;</span>
 <span class="kd">var</span> <span class="n">rr</span><span class="p">:</span> <span class="n">tRequest</span><span class="p">;</span> <span class="kd">var</span> <span class="n">i</span><span class="p">:</span> <span class="kt">int</span><span class="p">;</span>
 <span class="p">...</span>
-<span class="k">if</span><span class="p">(</span><span class="n">rr</span> <span class="n">in</span> <span class="n">sq</span> <span class="o">&amp;&amp;</span> <span class="n">rr</span> <span class="n">in</span> <span class="nf">values</span><span class="p">(</span><span class="n">mp</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">i</span> <span class="n">in</span> <span class="n">mp</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="p">...</span>
-<span class="p">}</span>
+<span class="k">if</span><span class="p">(</span><span class="n">rr</span> <span class="n">in</span> <span class="n">sq</span> <span class="o">&amp;&amp;</span> <span class="n">rr</span> <span class="n">in</span> <span class="nf">values</span><span class="p">(</span><span class="n">mp</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">i</span> <span class="n">in</span> <span class="n">mp</span><span class="p">)</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
 </code></pre></div>
 <h3 id="default-value-for-a-type">Default value for a type</h3>
+<p>The <code>default</code> primitive in P can be used to obtain the default value for any type.</p>
+<p><strong>Syntax:</strong> <code>default(type)</code></p>
+<p><code>type</code> is any P type and <code>default(type)</code> represents the default value for the <code>type</code>. The default values for all P types is provided <a href="../datatypes/#default-values-for-p-data-types">here</a>.</p>
+<h3 id="new">New</h3>
+<p>New expression is used to create an instance of a machine, <code>new</code> returns a machine reference to the newly created instance of the machine.</p>
+<p><strong>Syntax</strong>: <code>new iden (rvalue?) ;</code></p>
+<p><code>iden</code> is the name of the machine to be create and <code>rvalue</code> is the optional constructor parameter that becomes the input parameter of the entry function of the start state of the machine.</p>
+<div class="tabbed-set" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">Create a machine</label><div class="tabbed-content">
+<p><div class="highlight"><pre><span></span><code><span class="k">new</span> <span class="n">Client</span><span class="p">((</span><span class="n">id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">server</span> <span class="o">=</span> <span class="k">this</span><span class="p">));</span>
+</code></pre></div>
+Creates a dynamic instance of a Client machine and passes the constructor parameter <code>(id = 1, server = this)</code> 
+which is delivered as a payload to the entry function of the start state of the created Client machine.</p>
+</div>
+</div>
+<h3 id="function-call">Function Call</h3>
+<p>Function calls in P are similar to any other imperative programming languages.</p>
+<div class="admonition note">
+<p>Note that the parameters passed to the functions and the return values are pass-by-value!</p>
+</div>
+<p><strong>Syntax</strong>: <code>iden ( rvalueList? ) ;</code></p>
+<p><code>iden</code> is the name of the function and <code>rvalueList</code> is the comma separated list of function arguments.</p>
+<div class="tabbed-set" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">Function call</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="n">x</span> <span class="o">=</span> <span class="n">Foo</span><span class="p">();</span> 
+<span class="n">y</span> <span class="o">=</span> <span class="n">Bar</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s">&quot;haha&quot;</span><span class="p">);</span>
+</code></pre></div>
+</div>
+</div>
+<h3 id="negation-and-not">Negation and Not</h3>
+<p>P supports two unary operations: <code>-</code> on integers and floats values (i.e., negation) and <code>!</code> on boolean values(i.e., logical not).</p>
+<h3 id="arithmetic">Arithmetic</h3>
+<p>P supports the following arithmetic binary operations on integers or floats: <code>+</code> (i.e., addition), <code>-</code> (i.e., subtraction), <code>*</code> (i.e., multiplication), and <code>/</code> (i.e., division).</p>
+<h3 id="comparison">Comparison</h3>
+<p>P supports the following comparison binary operations on integers or floats: <code>&lt;</code> (i.e., less-than), <code>&lt;=</code> (i.e., less-than-equal), <code>&gt;</code> (i.e., greator-than), and <code>&gt;=</code> (i.e., greator-than-equal).</p>
+<h3 id="cast">Cast</h3>
+<h3 id="coerce">Coerce</h3>
+<h3 id="choose">Choose</h3>
                 
               
               

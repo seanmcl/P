@@ -1050,6 +1050,7 @@ lvalue : name=iden        # VarLvalue
 /* A r-value is an expression that can’t have a value assigned to it which 
 means r-value can appear on right but not on left hand side of an assignment operator(=)*/
 rvalue : expr ;
+# rvalueList is a comma separated list of rvalue.
 
 /* case block inside a receive statement */
 recvCase : case eventList : anonFunction
@@ -1289,9 +1290,9 @@ which is delivered as a payload to the entry function of the start state of the 
 </div>
 </div>
 <h3 id="function-call">Function Call</h3>
-<p>Function calls in P are similar to any other imperative programming languages. </p>
+<p>Function calls in P are similar to any other imperative programming languages.</p>
 <div class="admonition note">
-<p>Note that the parameters passed to the functions and the return values are pass-by-value! </p>
+<p>Note that the parameters passed to the functions and the return values are pass-by-value!</p>
 </div>
 <p><strong>Syntax</strong>: <code>iden ( rvalue? ) ;</code></p>
 <div class="tabbed-set" data-tabs="11:1"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><label for="__tabbed_11_1">Function call</label><div class="tabbed-content">
