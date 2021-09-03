@@ -370,13 +370,13 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
     
     <label class="md-nav__link" for="nav-5">
-      How-to guides
+      How-to Guides
       <span class="md-nav__icon md-icon"></span>
     </label>
-    <nav class="md-nav" aria-label="How-to guides" data-md-level="1">
+    <nav class="md-nav" aria-label="How-to Guides" data-md-level="1">
       <label class="md-nav__title" for="nav-5">
         <span class="md-nav__icon md-icon"></span>
-        How-to guides
+        How-to Guides
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -432,13 +432,13 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
     
     <label class="md-nav__link" for="nav-6">
-      Power Users
+      Advanced Users
       <span class="md-nav__icon md-icon"></span>
     </label>
-    <nav class="md-nav" aria-label="Power Users" data-md-level="1">
+    <nav class="md-nav" aria-label="Advanced Users" data-md-level="1">
       <label class="md-nav__title" for="nav-6">
         <span class="md-nav__icon md-icon"></span>
-        Power Users
+        Advanced Users
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -620,8 +620,32 @@
 
 
   <li class="md-nav__item">
+    <a href="../statemachines/" class="md-nav__link">
+      P State Machines
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../monitors/" class="md-nav__link">
       P Monitors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../functions/" class="md-nav__link">
+      P Functions
     </a>
   </li>
 
@@ -1046,7 +1070,7 @@ Details about how to define/implement foreign types in P is described <a href=".
 <p><strong>Syntax:</strong>:  <code>type iden = type ;</code></p>
 <div class="tabbed-set" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">User Defined Type Declaration</label><div class="tabbed-content">
 <p><div class="highlight"><pre><span></span><code><span class="c1">// defining a type tLookUpRequest</span>
-<span class="o">&lt;</span><span class="n">b</span><span class="o">&gt;</span><span class="n">type</span><span class="o">&lt;/</span><span class="n">b</span><span class="o">&gt;</span> <span class="n">tLookUpRequest</span> <span class="o">=</span> <span class="p">(</span><span class="n">client</span><span class="p">:</span> <span class="n">machine</span><span class="p">,</span> <span class="n">requestId</span><span class="p">:</span> <span class="kt">int</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">string</span><span class="p">);</span>
+<span class="n">type</span> <span class="n">tLookUpRequest</span> <span class="o">=</span> <span class="p">(</span><span class="n">client</span><span class="p">:</span> <span class="n">machine</span><span class="p">,</span> <span class="n">requestId</span><span class="p">:</span> <span class="kt">int</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">string</span><span class="p">);</span>
 <span class="c1">// defining a type tLookUpRequestX</span>
 <span class="n">type</span> <span class="n">tLookUpRequestX</span> <span class="o">=</span> <span class="p">(</span><span class="n">client</span><span class="p">:</span> <span class="n">machine</span><span class="p">,</span> <span class="n">requestId</span><span class="p">:</span> <span class="kt">int</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">string</span><span class="p">);</span>
 </code></pre></div>

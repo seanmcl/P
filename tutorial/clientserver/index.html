@@ -374,13 +374,13 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
     
     <label class="md-nav__link" for="nav-5">
-      How-to guides
+      How-to Guides
       <span class="md-nav__icon md-icon"></span>
     </label>
-    <nav class="md-nav" aria-label="How-to guides" data-md-level="1">
+    <nav class="md-nav" aria-label="How-to Guides" data-md-level="1">
       <label class="md-nav__title" for="nav-5">
         <span class="md-nav__icon md-icon"></span>
-        How-to guides
+        How-to Guides
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -436,13 +436,13 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
     
     <label class="md-nav__link" for="nav-6">
-      Power Users
+      Advanced Users
       <span class="md-nav__icon md-icon"></span>
     </label>
-    <nav class="md-nav" aria-label="Power Users" data-md-level="1">
+    <nav class="md-nav" aria-label="Advanced Users" data-md-level="1">
       <label class="md-nav__title" for="nav-6">
         <span class="md-nav__icon md-icon"></span>
-        Power Users
+        Advanced Users
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -539,8 +539,32 @@
 
 
   <li class="md-nav__item">
+    <a href="../../manual/statemachines/" class="md-nav__link">
+      P State Machines
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../manual/monitors/" class="md-nav__link">
       P Monitors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../manual/functions/" class="md-nav__link">
+      P Functions
     </a>
   </li>
 
@@ -702,91 +726,8 @@
                 <p>A P program is a collection of event and machine declarations.
 Here is a basic P program containing a Client machine and a Server machine
 communicating with each other via Ping and Pong events.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>// PingPong.p
-event PING assert 1: machine;
-event PONG assert 1;
-event SUCCESS;
-
-main machine Client {
-    var server: machine;
-
-    start state Init {
-        entry {
-            server = new Server();
-            raise SUCCESS;         
-        }
-        on SUCCESS goto SendPing;
-    }
-
-    state SendPing {
-        entry {
-              send server, PING, this;
-              raise SUCCESS;
-    }
-        on SUCCESS goto WaitPong;
-    }
-
-    state WaitPong {
-        on PONG goto SendPing;
-    }
-}
-
-machine Server {
-    start state WaitPing {
-        on PING goto SendPong;
-    }
-
-    state SendPong {
-          entry (payload: machine) {
-              send payload, PONG;
-              raise SUCCESS;              
-          }
-        on SUCCESS goto WaitPing;
-    }
-}
+<div class="highlight"><pre><span></span><code>--8&lt;--​  &quot;Client.p&quot; 
 </code></pre></div>
-</td></tr></table>
 <p>We now take a closer look at the event and machine declarations in this program.
 The declaration of event <code>PING</code> indicates that it is accompanied with
 a data value of <code>machine</code> type.
