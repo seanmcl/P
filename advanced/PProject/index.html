@@ -747,19 +747,22 @@
                 
                   <h1>P Project File</h1>
                 
-                <p>The P compiler does not support fancy project management features like separate compilation and dependency analysis (coming soon).
+                <p>The P compiler does not support advanced project management features like separate compilation and dependency analysis (coming soon).
 The current project file interface is a simple mechanism to provide all the required inputs to the compiler in XML format.
-The P project file below is taken from the <a href="../../tutorial/clientserver/">ClientServer</a> from Tutorials.</p>
-<p><div class="highlight"><pre><span></span><code><span class="nt">&lt;Project&gt;</span>
-<span class="nt">&lt;IncludeProject&gt;</span>../CommonUtils/Common.pproj<span class="nt">&lt;/IncludeProject&gt;</span>
+The P project file below is taken from the <a href="[../tutorial/clientserver.md](https://github.com/p-org/P/blob/master/Tutorial/2_TwoPhaseCommit/TwoPhaseCommit.pproj)">TwoPhaseCommit</a> example in Tutorials.</p>
+<p><div class="highlight"><pre><span></span><code><span class="c">&lt;!-- P project file for the Two Phase Commit example --&gt;</span>
+<span class="nt">&lt;Project&gt;</span>
+<span class="nt">&lt;ProjectName&gt;</span>TwoPhaseCommit<span class="nt">&lt;/ProjectName&gt;</span>
 <span class="nt">&lt;InputFiles&gt;</span>
     <span class="nt">&lt;PFile&gt;</span>./PSrc/<span class="nt">&lt;/PFile&gt;</span>
     <span class="nt">&lt;PFile&gt;</span>./PSpec/<span class="nt">&lt;/PFile&gt;</span>
     <span class="nt">&lt;PFile&gt;</span>./PTst/<span class="nt">&lt;/PFile&gt;</span>
 <span class="nt">&lt;/InputFiles&gt;</span>
-<span class="nt">&lt;Target&gt;</span>CSharp<span class="nt">&lt;/Target&gt;</span>
-<span class="nt">&lt;ProjectName&gt;</span>ClientServer<span class="nt">&lt;/ProjectName&gt;</span>
 <span class="nt">&lt;OutputDir&gt;</span>./PGenerated/<span class="nt">&lt;/OutputDir&gt;</span>
+<span class="c">&lt;!-- Add the dependencies for the Timer machine --&gt;</span>
+<span class="nt">&lt;IncludeProject&gt;</span>../Common/Timer/Timer.pproj<span class="nt">&lt;/IncludeProject&gt;</span>
+<span class="c">&lt;!-- Add the dependencies for the FailureInjector machine --&gt;</span>
+<span class="nt">&lt;IncludeProject&gt;</span>../Common/FailureInjector/FailureInjector.pproj<span class="nt">&lt;/IncludeProject&gt;</span>
 <span class="nt">&lt;/Project&gt;</span>
 </code></pre></div>
 The <code>&lt;InputFiles&gt;</code> block provides all the P files that must be compiled together for this project.

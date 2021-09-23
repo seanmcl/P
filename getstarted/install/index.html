@@ -877,8 +877,10 @@
                 
                   <h1>Installing P</h1>
                 
-                <p>P is cross platform and can be used on MacOS, Linux, and Windows. We provide a step-by-step guide for installing P along with its required dependencies.
-After each step, please use the troubleshooting check to ensure that each installation step succeeded.</p>
+                <p>P is built to be cross platform and can be used on MacOS, Linux, and Windows. We provide a step-by-step guide for installing P along with its required dependencies.</p>
+<div class="admonition info">
+<p>After each step, please use the troubleshooting check to ensure that each installation step succeeded.</p>
+</div>
 <h3 id="step-1-install-net-core-sdk">[Step 1] Install .Net Core SDK</h3>
 <p>The P compiler and checker are implemented in C# and hence the tool chain requires <code>dotnet</code>. 
 P currently uses the specific version of <a href="https://dotnet.microsoft.com/download/dotnet/3.1">.Net SDK 3.1</a>.
@@ -888,7 +890,7 @@ To install .Net Core 3.1 SDK use:</p>
 <div class="highlight"><pre><span></span><code>brew tap isen-ng/dotnet-sdk-versions
 brew install --cask dotnet-sdk3-1-400
 </code></pre></div>
-Dont have Homebrew? Install directly using the <a href="https://dotnet.microsoft.com/download/dotnet/thank-you/sdk-3.1.412-macos-x64-installer">installer</a>. </p>
+Dont have Homebrew? <img alt="🙃" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f643.svg" title=":upside_down_face:" /> Install directly using the <a href="https://dotnet.microsoft.com/download/dotnet/thank-you/sdk-3.1.412-macos-x64-installer">installer</a>. </p>
 </div>
 <input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Ubuntu</label><div class="tabbed-content">
 <p>Installing .Net SDK on Ubuntu (<a href="https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu">details</a>)</p>
@@ -918,8 +920,8 @@ sudo apt-get install -y dotnet-sdk-3.1
 If you get <code>dotnet</code> command not found error, mostly likely, you need to add the path to dotnet in your <code>PATH</code>.</p>
 </details>
 <h3 id="step-2-install-java-runtime">[Step 2] Install Java Runtime</h3>
-<p>P compiler uses <a href="https://www.antlr.org/">ANTLR</a> parser and hence requires <code>java</code>. 
-If you already have Java installed please ignore this step. 
+<p>P compiler uses <a href="https://www.antlr.org/">ANTLR</a> parser and hence requires <code>java</code>.
+If you already have Java installed <img alt="😇" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f607.svg" title=":innocent:" />, ignore this step.
 To install Java use:</p>
 <div class="tabbed-set" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">MacOS</label><div class="tabbed-content">
 <p>Installing Java on MacOS using Homebrew (<a href="https://mkyong.com/java/how-to-install-java-on-mac-osx/">details</a>)
@@ -946,7 +948,8 @@ Dont have Homebrew? Directly use <a href="https://www.java.com/en/download/help/
 </details>
 <h3 id="step-3-install-p-compiler">[Step 3] Install P Compiler</h3>
 <p>Install the P compiler as a <code>dotnet tool</code> using the following command:</p>
-<p><code>dotnet tool install --global P</code></p>
+<div class="highlight"><pre><span></span><code>dotnet tool install --global P
+</code></pre></div>
 <details class="hint"><summary>Troubleshoot: Confirm that <code>pc</code> is correctly installed on your machine</summary><p>After installation, run <code>which pc</code> and it should show:
 <div class="highlight"><pre><span></span><code>which pc
 /Users/&lt;user&gt;/.dotnet/tools/pc
@@ -960,7 +963,8 @@ If you are getting an error that <code>pc</code> command not found, its most lik
 <h3 id="step-4-install-p-checker">[Step 4] Install P Checker</h3>
 <p>The current P checker depends on <a href="https://microsoft.github.io/coyote/">Coyote</a> (previously <a href="https://github.com/p-org/PSharp">P#</a>)</p>
 <p>Install the <code>Coyote</code> version <code>1.0.5</code> using the following command:</p>
-<p><code>dotnet tool install --global Microsoft.Coyote.CLI --version 1.0.5</code></p>
+<div class="highlight"><pre><span></span><code>dotnet tool install --global Microsoft.Coyote.CLI --version 1.0.5
+</code></pre></div>
 <details class="hint"><summary>Troubleshoot: Confirm that <code>coyote</code> is correctly installed on your machine</summary><p>After installation, run <code>which coyote</code> and it should show:
 <div class="highlight"><pre><span></span><code>which coyote
 coyote is /Users/&lt;user&gt;/.dotnet/tools/coyote
