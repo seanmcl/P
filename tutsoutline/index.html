@@ -65,6 +65,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#example-1-client-server" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -202,7 +207,7 @@
 
   <li class="md-nav__item">
     <a href="../whatisP/" class="md-nav__link">
-      What is P
+      What is P?
     </a>
   </li>
 
@@ -304,10 +309,84 @@
     <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
     
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Outline
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
     <a href="./" class="md-nav__link md-nav__link--active">
       Outline
     </a>
     
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#example-1-client-server" class="md-nav__link">
+    [Example 1] Client Server
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-2-two-phase-commit" class="md-nav__link">
+    [Example 2] Two Phase Commit
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-3-espresso-machine" class="md-nav__link">
+    [Example 3] Espresso Machine
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-4-failure-detector" class="md-nav__link">
+    [Example 4] Failure Detector
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-5-simple-paxos" class="md-nav__link">
+    [Example 5] Simple Paxos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-timer-failure-injector-and-shared-memory" class="md-nav__link">
+    [Common] Timer, Failure Injector, and Shared Memory
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tutorial/psemantics/" class="md-nav__link">
+      P Semantics
+    </a>
   </li>
 
         
@@ -727,6 +806,69 @@
               </div>
             
             
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#example-1-client-server" class="md-nav__link">
+    [Example 1] Client Server
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-2-two-phase-commit" class="md-nav__link">
+    [Example 2] Two Phase Commit
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-3-espresso-machine" class="md-nav__link">
+    [Example 3] Espresso Machine
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-4-failure-detector" class="md-nav__link">
+    [Example 4] Failure Detector
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-5-simple-paxos" class="md-nav__link">
+    [Example 5] Simple Paxos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-timer-failure-injector-and-shared-memory" class="md-nav__link">
+    [Common] Timer, Failure Injector, and Shared Memory
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content">
             <article class="md-content__inner md-typeset">
@@ -735,30 +877,54 @@
                 
                   <h1>Outline</h1>
                 
-                <p>To get familiar with the P langauage and the tool chain, we provide a series of examples along with excercise problems. </p>
-<div class="admonition note">
-<p>We recommend to work through the examples in the tutorials one-by-one by solving the accompanying exercise problems before moving to the next example.</p>
+                <div class="admonition tip">
+<p class="admonition-title">P Language Semantics</p>
+<p>Before we get started with the tutorials, please read <a href="../tutorial/psemantics/"><mark class="critic">this</mark></a> to get an informal overview of the P language semantics.</p>
 </div>
-<ul>
-<li><strong>Client Server:</strong> A simple client-server example where a client sends requests to withdraw money from a bank server. The bank server uses a database service to store the clients bank balance and on receiving a withdraw request updates the database and responds back to the client wit the new balance in the account. In this simple example, we would like to ensure that the bank never lies about the bank balance for a client and the withdraw request always succeeds if there is enough balance in the account. We will use this example to understand P syntax, semantics, how to write specifications, run the checker to find a bug, and then fix the bug.</li>
-</ul>
-<p>Now that we understand the basic features of the P language, lets try to model a distributed protocol in P and the first choice is to start with the well known two phase commit protocol!</p>
-<ul>
-<li><strong>Two Phase Commit:</strong> Two phase commit protocol where a coordinator state machine communicates with participant state machines to ensure atomicity guarantees for transactions.
-We will use this example to dive deeper into how to model non-determinism in systems, how to write more complex properties in P, run the model checker, find and fix the existing bug.</li>
-</ul>
-<p>Now, we have reached the middle of our tutorials and its time to take a break and have some espresso coffee! In the next example, instead of modeling a distributed protocol, we consider the fun example of modeling an espresso machine and see how we can use the P state machine to model its desired behavior.</p>
-<ul>
-<li>
-<p><strong>Espresso Machine:</strong></p>
-</li>
-<li>
-<p><strong>Failure Detector:</strong> We will use this protocol as an exercise to understand how to model node failures in P.</p>
-</li>
-<li>
-<p><strong>Simple Paxos:</strong></p>
-</li>
-</ul>
+<p>In this tutorial, we use a series of examples along with excercise problems to help you get familiar with the P language and the associated tool chain.</p>
+<div class="admonition check">
+<p class="admonition-title">How to use this tutorial</p>
+<p>We recommend that you work through these examples one-by-one by solving the accompanying exercise problems before moving to the next example. If you have any doubts or questions, <strong>please feel free to ask them in <a href="https://github.com/p-org/P/discussions/categories/q-a">discussions</a> or ping (email) Ankush Desai</strong>.</p>
+</div>
+<hr />
+<h3 id="example-1-client-server">[Example 1] <strong>Client Server</strong></h3>
+<p>A simple client-server example where a client sends requests to withdraw money from a bank server. The bank server uses a database service to store the clients bank balance and on receiving a withdraw request updates the database and responds back to the client wit the new balance in the account. In this simple example, we would like to ensure that the bank never lies about the bank balance for a client and the withdraw request always succeeds if there is enough balance in the account. We will use this example to understand P syntax, semantics, how to write specifications, run the checker to find a bug, and then fix the bug.</p>
+<div class="admonition summary">
+<p class="admonition-title">Summary</p>
+<p>In this example, you will learn about P state machines, writing simple safety and liveness specifications as P monitors, and finally writing multiple model checking scenarios to check the correctness of the P program.</p>
+</div>
+<hr />
+<p><em>Now that we understand the basic features of the P language, lets spice things up by looking at a distributed protocol, and the first choice is to start with the textbook example of a two phase commit protocol!</em></p>
+<hr />
+<h3 id="example-2-two-phase-commit">[Example 2] <strong>Two Phase Commit</strong></h3>
+<p>Two phase commit protocol where a coordinator state machine communicates with participant state machines to ensure atomicity guarantees for transactions.
+We will use this example to dive deeper into how to model non-determinism in systems, how to write more complex properties in P, run the model checker, find and fix the existing bug.</p>
+<hr />
+<p><em>Wow, we have reached the middle of our tutorials, its time to take a break and have an espresso coffee! In the next example, instead of modeling a distributed protocol, we consider the fun example of modeling an espresso machine and see how we can use the P state machine to model a reactive system that must respond correctly to user inputs.</em></p>
+<hr />
+<h3 id="example-3-espresso-machine">[Example 3] <strong>Espresso Machine</strong></h3>
+<div class="admonition summary">
+<p class="admonition-title">Summary</p>
+<p>In this example, you will learn about P state machines, writing simple safety and liveness specifications as P monitors, and finally writing multiple model checking scenarios to check the correctness of the P program.</p>
+</div>
+<hr />
+<h3 id="example-4-failure-detector">[Example 4] <strong>Failure Detector</strong></h3>
+<div class="admonition summary">
+<p class="admonition-title">Summary</p>
+<p>In this example, you will learn about P state machines, writing simple safety and liveness specifications as P monitors, and finally writing multiple model checking scenarios to check the correctness of the P program.</p>
+</div>
+<hr />
+<h3 id="example-5-simple-paxos">[Example 5] <strong>Simple Paxos</strong></h3>
+<div class="admonition summary">
+<p class="admonition-title">Summary</p>
+<p>In this example, you will learn about P state machines, writing simple safety and liveness specifications as P monitors, and finally writing multiple model checking scenarios to check the correctness of the P program.</p>
+</div>
+<hr />
+<h3 id="common-timer-failure-injector-and-shared-memory">[Common] <strong>Timer, Failure Injector, and Shared Memory</strong></h3>
+<p>We also describe how to model system's interaction with an OS Timer <a href="https://github.com/p-org/P/blob/master/Tutorial/Common/Timer/">Timer</a>, and how to model injecting node failures in the system <a href="">Failure Injector</a>. These models are used in the Two Phase Commit, Espresso Machine, and Failure Detector models. </p>
+<p>P is a purely messaging passing based programming language and hence does not support primitives for modeling shared memory based concurrency. But one can always model shared memory concurrency using message passing. We have used this style of modeling when checking the correctness of single node file systems. Please check out [Shared Memory] project on how to model shared memory concurrency using P.</p>
+<hr />
+<p><img alt="🤠" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f920.svg" title=":face_with_cowboy_hat:" /> <img alt="🤠" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f920.svg" title=":face_with_cowboy_hat:" /> <strong>Alright, alright, alright ... lets go!</strong> <img alt="👩‍💻" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f469-200d-1f4bb.svg" title=":woman_technologist:" /></p>
                 
               
               
@@ -792,13 +958,13 @@ We will use this example to dive deeper into how to model non-determinism in sys
           </a>
         
         
-          <a href="../tutorial/clientserver/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../tutorial/psemantics/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Client Server
+                P Semantics
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">

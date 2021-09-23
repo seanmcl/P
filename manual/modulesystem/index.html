@@ -207,7 +207,7 @@
 
   <li class="md-nav__item">
     <a href="../../whatisP/" class="md-nav__link">
-      What is P
+      What is P?
     </a>
   </li>
 
@@ -303,6 +303,18 @@
   <li class="md-nav__item">
     <a href="../../tutsoutline/" class="md-nav__link">
       Outline
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorial/psemantics/" class="md-nav__link">
+      P Semantics
     </a>
   </li>
 
@@ -842,7 +854,7 @@ implement and test the system compositionally. More details about the underlying
 for the P module system (assume-guarantee style compositional reasoning) is described in
 the <a href="https://ankushdesai.github.io/assets/papers/modp.pdf">paper</a></p>
 <p>In its simplest form, a module in P is a collection of state machines. The P module system allows constructing larger modules by composing or unioning modules together. Hence, a distributed system under test which is a composition of multiple components together can be constructed by composing (or unioning) modules corresponding to those components. The <a href="../testcases/">P test cases</a> takes as input a module that represents the <strong>closed</strong><sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> system to be validated which is the union or composition of all the component modules.</p>
-<details class="note" open="open"><summary>P Modules Grammar</summary><div class="highlight"><pre><span></span><code>modExpr :
+<details class="note"><summary>P Modules Grammar</summary><div class="highlight"><pre><span></span><code>modExpr :
 | ( modExpr )                               # AnnonymousModuleExpr
 | { bindExpr (, bindExpr)* }                # PrimitiveModuleExpr
 | union modExpr (, modExpr)+                # UnionModuleExpr

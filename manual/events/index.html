@@ -202,7 +202,7 @@
 
   <li class="md-nav__item">
     <a href="../../whatisP/" class="md-nav__link">
-      What is P
+      What is P?
     </a>
   </li>
 
@@ -298,6 +298,18 @@
   <li class="md-nav__item">
     <a href="../../tutsoutline/" class="md-nav__link">
       Outline
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorial/psemantics/" class="md-nav__link">
+      P Semantics
     </a>
   </li>
 
@@ -737,7 +749,7 @@
                 
                 <p>A P program is a collection of state machines communicating with each other by exchanging <strong>events</strong>.
 An event in P has two parts, an event name and a payload value (optional) that can be sent along with the event.</p>
-<details class="note" open="open"><summary>P Event Declaration Grammar</summary><div class="highlight"><pre><span></span><code>eventDecl :          
+<details class="note"><summary>P Event Declaration Grammar</summary><div class="highlight"><pre><span></span><code>eventDecl :          
     | event iden (: type)?;     # P Event Declaration
 </code></pre></div>
 <p><code>iden</code> is the name of the event and <code>type</code> is any P data type (<a href="../datatypes/">decribed here</a>).</p>
