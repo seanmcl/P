@@ -9,7 +9,7 @@
         <meta name="description" content="P: Modular and Safe Programming of Distributed Systems">
       
       
-        <link rel="canonical" href="http://p-org.github.io/P/tutorial/psemantics/">
+        <link rel="canonical" href="http://p-org.github.io/P/tutorial/common/">
       
       
         <meta name="author" content="Ankush Desai">
@@ -19,7 +19,7 @@
     
     
       
-        <title>P Semantics - P</title>
+        <title>Timer, Failure, and Shared Memory - P</title>
       
     
     
@@ -90,7 +90,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              P Semantics
+              Timer, Failure, and Shared Memory
             
           </span>
         </div>
@@ -308,25 +308,6 @@
           
           
 
-  
-
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-    <a href="./" class="md-nav__link md-nav__link--active">
-      P Semantics
-    </a>
-    
-  </li>
-
-        
-          
-          
-          
-
 
   <li class="md-nav__item">
     <a href="../clientserver/" class="md-nav__link">
@@ -380,6 +361,25 @@
     <a href="../paxos/" class="md-nav__link">
       Paxos Made Simple
     </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
+      Timer, Failure, and Shared Memory
+    </a>
+    
   </li>
 
         
@@ -470,6 +470,18 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced/psemantics/" class="md-nav__link">
+      P Semantics
+    </a>
+  </li>
+
         
           
           
@@ -745,28 +757,10 @@
               
                 
                 
-                  <h1>P Semantics</h1>
+                  <h1>Timer, Failure, and Shared Memory</h1>
                 
-                <p>Before getting started with the tutorials, we provide a quick informal overview of the P language semantics so that the readers can keep it at the back of their mind as they walk through the <a href="../../tutsoutline/">tutorials</a> and the <a href="../../manualoutline/">language manual</a>.</p>
-<p><strong>P is a programming language.</strong> P is a state machine based <em>programming language</em> and hence, just like any other imperative programming language it supports basic <a href="../../manual/datatypes/">data types</a>, <a href="../../manual/expressions/">expressions</a>, and <a href="../../manual/statemachines/">statements</a> that enables programmers to capture complex distributed systems protocol logic as a collection of event-handlers or <a href="../../manual/functions/">functions</a> (in P state machines).</p>
-<p><strong>P State machines.</strong> The underlying model of computation for P state machines is similar to that of <a href="http://osl.cs.illinois.edu/members/agha.html">Gul Agha's</a> <a href="https://dspace.mit.edu/handle/1721.1/6952">Actor-model-of-computation</a> (<a href="https://en.wikipedia.org/wiki/Actor_model">wiki</a>). A P program is a collection of concurrently executing state machines that communicate with eachother by sending events (or messages) asynchronously. Each P state machine has an <strong>unbounded FIFO buffer</strong> associated with it. 
-Sends are <strong>asynchronous</strong>, i.e., executing a send operation <code>send t,e,v;</code> adds event <code>e</code> with payload value <code>v</code> into the FIFO buffer of the target machine <code>t</code>. 
-Each state in the P state machine has an entry function associated with it which gets executed when the state machine enters that state. After executing the entry
-function, the machine tries to dequeue an event from the input buffer or blocks if the buffer is empty. Upon dequeuing an event from the input queue of the machine, the attached handler is executed which might transition the machine to a different state. We will provide more details about the P state machines in tutorials as well as the language manual. 
-For detailed formal semantics of P state machines, we refer the readers to the <a href="https://ankushdesai.github.io/assets/papers/p.pdf">original P paper</a> and the <a href="https://ankushdesai.github.io/assets/papers/modp.pdf">more recent paper</a> with updated semantics.</p>
-<p>There are <strong>two main distinctions</strong> with actor model of computation: (1) P adds the <strong>syntactic sugar</strong> of state machines to actors, and (2) each state machine in P has an <strong>unbounded FIFO buffer</strong> associated with it instead of an unbounded bag in actors (semantic difference). </p>
-<div class="admonition danger">
-<p class="admonition-title">[Important] Send semantics in P</p>
-<p>Sends are reliable, buffered, non-blocking, and directed (not broadcast). Sends are <strong>reliable</strong> i.e., executing a send operation in P adds an event into the target machines buffer. Hence, if one wants to model message loss it has to be modeled explicitly (discussed in the Failure Detector example in the tutorial). Similarly, as P state machine buffers are FIFO, events are dequeued at the state machine in the <strong>causal order</strong> in which they were sent. Note that events that are sent by two different concurrent machines will be interleaved by the checker and hence, will appear in different order at the target machine but the events sent by the same machine will always appear in the same order at the target state machine. So, just like message loss, arbitrary message re-ordering also has to be explicitly modeled in P (explained in the Paxos example in the tutorials). In general, we find that re-ordering messages/events coming from the same machine is not important and does not lead to any interesting behaviors. More interesting behaviors happen because of interleaving of messages across different state machines which the P checker explores automatically.</p>
-<p>Summary, by default, the communication between state machines using <code>send</code> operation follows the above semantics. If you would like check your system correctness against an arbitrarily network then one would have to model the corresponding <code>send</code> semantics in P explicitly. One can then make the arbitrarily network behave as expected with message duplicates, loss, re-order, etc. </p>
-<p>If you have any further doubts related to this topic and modeling network semantics when reasoning using P, feel free to get in touch with Ankush Desai. We have several examples of such cases.</p>
-</div>
-<div class="admonition danger">
-<p class="admonition-title">[Important] New semantics in P</p>
-<p>State machines in P can be dynamically created during the execution of the Program using <code>new</code> primitive (<a href="../../manual/statements/#new">see</a>). Creation of a state machine is also an asynchronous, non-blocking operation.</p>
-</div>
-<p><strong>P Monitors.</strong> Specifications in P are written as global runtime monitors. These global monitors observe the execution of the system and can assert any global safety or liveness invariants on the system. Note that the monitors are synchronously composed with the P state machines. Details are explained in the <a href="../../manual/monitors/">language manual</a> and we will describe more using examples in the tutorials.</p>
-<p><strong>P Checker.</strong> The P Checker systematically explores all possible behaviors of the P program which includes behaviors arising out of: (1) <strong>concurrency:</strong> different interleavings of events from concurrently executing state machines as well as (2) <strong>data nondeterminism:</strong> different data input choices in the P program modeled using the <code>choose</code> (<a href="../../manual/expressions/#choose">see</a>) operation. The P checker explores different executions of the system that can happen because of these two forms of nondeterminism and asserts that for each of these executions the system satisfies the desired property specified by the P Monitors.</p>
+                <p>We also describe how to model system's interaction with an OS Timer <a href="https://github.com/p-org/P/blob/master/Tutorial/Common/Timer/">Timer</a>, and how to model injecting node failures in the system <a href="https://github.com/p-org/P/tree/master/Tutorial/Common/FailureInjector">Failure Injector</a>. These models are used in the Two Phase Commit, Espresso Machine, and Failure Detector models. </p>
+<p>P is a purely messaging passing based programming language and hence does not support primitives for modeling shared memory based concurrency. But one can always model shared memory concurrency using message passing. We have used this style of modeling when checking the correctness of single node file systems. Please check out <a href="../../howtoguides/sharedmemory/">Shared Memory</a> project on how to model shared memory concurrency using P.</p>
                 
               
               
@@ -785,7 +779,7 @@ For detailed formal semantics of P state machines, we refer the readers to the <
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../../tutsoutline/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../paxos/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -794,19 +788,19 @@ For detailed formal semantics of P state machines, we refer the readers to the <
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Outline
+                Paxos Made Simple
               </div>
             </div>
           </a>
         
         
-          <a href="../clientserver/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../../howtoguides/sharedmemory/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Client Server
+                Modeling Shared Memory Concurrency
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">

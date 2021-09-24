@@ -310,18 +310,6 @@
 
 
   <li class="md-nav__item">
-    <a href="../psemantics/" class="md-nav__link">
-      P Semantics
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
     <a href="../clientserver/" class="md-nav__link">
       Client Server
     </a>
@@ -379,6 +367,18 @@
   <li class="md-nav__item">
     <a href="../paxos/" class="md-nav__link">
       Paxos Made Simple
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../common/" class="md-nav__link">
+      Timer, Failure, and Shared Memory
     </a>
   </li>
 
@@ -470,6 +470,18 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced/psemantics/" class="md-nav__link">
+      P Semantics
+    </a>
+  </li>
+
         
           
           
@@ -747,7 +759,12 @@
                 
                   <h1>Failure Detector</h1>
                 
-                
+                <p>Energized with the Coffee <img alt="☕" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/2615.svg" title=":coffee:" />, lets get back to distributed systems. After the two phase commit protocol, the next protocol that we will jump to is a simple broadcast-based failure detector!</p>
+<p>By this point in the tutorial, we have gotten familiar with the P language and most of its features. So, working through this example should be super fast! We use a broadcast based failure detector to show how to model network message loss in P. The failure detector basically broadcasts ping messages to all nodes in the system and uses a timer to wait for a pong response from all nodes. If certain node does not respond with a pong after multiple attempts, the failure detector marks the node as down and notifies the clients that have registered with the failure detector. We check using a liveness specification that if the failure injecter shutsdown a particular node then the failure detector always eventually detects that node as failed and notifies client.</p>
+<div class="admonition summary">
+<p class="admonition-title">Summary</p>
+<p>In this example, we demonstrate how to use data nondeterminism to model message loss and unreliable sends. We also discuss how to model other types of network nondeterminism. Finally, we give another example of a liveness specification that the failure detector must satisfy.</p>
+</div>
                 
               
               

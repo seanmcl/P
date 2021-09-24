@@ -374,18 +374,6 @@
 
 
   <li class="md-nav__item">
-    <a href="../tutorial/psemantics/" class="md-nav__link">
-      P Semantics
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
     <a href="../tutorial/clientserver/" class="md-nav__link">
       Client Server
     </a>
@@ -436,6 +424,18 @@
   <li class="md-nav__item">
     <a href="../tutorial/paxos/" class="md-nav__link">
       Paxos Made Simple
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tutorial/common/" class="md-nav__link">
+      Timer, Failure, and Shared Memory
     </a>
   </li>
 
@@ -527,6 +527,18 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../advanced/psemantics/" class="md-nav__link">
+      P Semantics
+    </a>
+  </li>
+
         
           
           
@@ -867,9 +879,9 @@
 </style>
 
 <p><img align="center" alt="Placeholder" src="../distsystem.png" /></p>
-<p>Distributed systems are notoriously hard to get right (<em>guaranteeing correctness</em>) as the
+<p>Distributed systems are notoriously hard to get right (i.e., guaranteeing correctness) as the
 programmer needs to reason about numerous control paths resulting from the myriad
-interleaving of events (<em>messages</em> or <em>failures</em>). Unsurprisingly, programmers can easily
+interleaving of events (or messages or failures). Unsurprisingly, programmers can easily
 introduce subtle errors when designing these systems. Moreover, it is extremely
 difficult to test distributed systems, most control paths remain untested, and serious
 bugs lie dormant for months or even years after deployment.</p>
@@ -884,13 +896,14 @@ distributed systems.</em></p>
 <h4 id="p-language">P Language</h4>
 <p>P provides a high-level <strong>state machine based programming language</strong> to formally model and specify
 distributed systems. The syntactic sugar of state machines allows programmers to capture
-their system design (or <em>protocol logic</em>) as communicating state machines, which is how generally programmers tend to
-think about their system design. P is more of a programming language than a mathematical
-modelling language, making it easier for the programmers to both: (1) create formal models that are closer
+their system design (or <em>protocol logic</em>) as communicating state machines, which is how programmers generally
+think about their system's design. P is more of a programming language than a mathematical
+modelling language and hence, making it easier for the programmers to both: (1) create formal models that are closer
 to the implementation (sufficiently detailed) and also (2) maintain these models as the system design evolves.
-P supports specifying and checking both safety as well as liveness specifications (global invariants). The P module system enables programmers to model their system <em>modularly</em> and
-perform <em>compositional</em> testing to scale the analysis to large distributed systems.
-Programmers can easily write different scenarios under which they would like to check that the system satisfies the desired correctness specification.</p>
+P supports specifying and checking both safety as well as liveness specifications (global invariants).
+Programmers can easily write different scenarios under which they would like to check that the system satisfies the desired correctness specification.
+The P module system enables programmers to model their system <em>modularly</em> and
+perform <em>compositional</em> testing to scale the analysis to large distributed systems.</p>
 <div class="admonition tip">
 <p class="admonition-title">Models, Specifications, Model Checking Scenario</p>
 <p>A quick primer on what a model
@@ -900,17 +913,17 @@ system does it. (3) A model checking scenario provides the finite non-determinis
 test-harness or environment under which the model checker should check that the system
 model satisfies its specifications.</p>
 </div>
-<p>The underlying model of computation for P programs is communicating state machines (or <a href="https://en.wikipedia.org/wiki/Actor_model">actors</a>). The detailed formal semantics for P can be found <a href="https://ankushdesai.github.io/assets/papers/modp.pdf">here</a>.</p>
+<p>The underlying model of computation for P programs is communicating state machines (or <a href="https://en.wikipedia.org/wiki/Actor_model">actors</a>). The detailed formal semantics for P can be found <a href="https://ankushdesai.github.io/assets/papers/modp.pdf">here</a> and an informal discussion <a href="../advanced/psemantics/">here</a>.</p>
 <h4 id="backend-analysis-engines">Backend Analysis Engines</h4>
-<p>P provides a backend analysis engine to systematically explores behaviors of the system model (<em>resulting from interleaving of messages and failures</em>) and check that it satisfies the desired <em>correctness</em> specifications.
+<p>P provides a backend analysis engine to systematically explore behaviors of the system model (<em>resulting from interleaving of messages and failures</em>) and check that the model satisfies the desired <em>correctness</em> specifications.
 To reason about complex distributed system, the P checker needs to tackle the well-known problem of <em>state space explosion</em>. The P checker employs <a href="https://ankushdesai.github.io/assets/papers/fse-desai.pdf">search prioritization heuristics</a> to drive the exploration along different parts of the state space that are most likely to have concurrency related issues. The P checker is really <strong>efficient at uncovering deep bugs</strong> (i.e., require complex interleaving of events) in the system design that have a really low probability of occurance in real-world. On finding a bug, the checker provides a reproducible error-trace which the programmer can use for debugging.</p>
-<p>Though, the current P checker is great at finding <em>deep-hard-to-find</em> bugs ("<a href="https://en.wikipedia.org/wiki/Heisenbug">Heisenbugs</a>") in the system, it <strong>cannot provide a proof</strong> of correctness.
+<p>Though, the current P checker is great at finding <em>deep-hard-to-find</em> bugs ("<a href="https://en.wikipedia.org/wiki/Heisenbug">Heisenbugs</a>"), it <strong>cannot provide a proof</strong> of correctness.
 We are actively working on addressing this challenge and are building two new backends for P. First, a <em>symbolic execution engine</em> that can scale the P checker to models of large
-distributed systems and provide <strong>sound guarantees</strong> of exploring all possible behaviors. Second, a deductive verification engine to perform <strong>mathematical proof</strong> of correctness for P programs. Both these backends will be released publicly by end of this year (2021)<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>.</p>
+distributed systems and provide <strong>sound guarantees</strong> of exploring all possible behaviors. Second, a deductive verification engine to perform <strong>mathematical proof</strong> of correctness for P programs. Both these backends will be soon released publicly.</p>
 <h4 id="code-generation">Code Generation</h4>
 <p>P compiler currently generates C# and C code. The generated code when combined with the P Runtime (that executes the P state machines) can be deployed on any target platform.
 The generated C code has been used to program <a href="https://ankushdesai.github.io/assets/papers/p.pdf">device drivers</a> and <a href="https://ankushdesai.github.io/assets/papers/drona.pdf">robotics systems</a>. The generated C# code has been used to program <a href="https://ankushdesai.github.io/assets/papers/modp.pdf">distributed systems</a>.</p>
-<p>We are currently working on adding support for a Java backend for P. We will also be adding support for generating <em>runtime monitors</em> for specifications that can be then used to check if the implementation conforms to the high-level P specifications. Both these backends will be released publicly by end of this year (2021).</p>
+<p>We are currently working on adding support for a Java backend for P. We will also be adding support for generating <em>runtime monitors</em> for specifications that can be then used to check if the implementation conforms to the high-level P specifications.</p>
 <div class="footnote">
 <hr />
 <ol>

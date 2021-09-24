@@ -310,18 +310,6 @@
 
 
   <li class="md-nav__item">
-    <a href="../psemantics/" class="md-nav__link">
-      P Semantics
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
     <a href="../clientserver/" class="md-nav__link">
       Client Server
     </a>
@@ -380,6 +368,18 @@
       Paxos Made Simple
     </a>
     
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../common/" class="md-nav__link">
+      Timer, Failure, and Shared Memory
+    </a>
   </li>
 
         
@@ -470,6 +470,18 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced/psemantics/" class="md-nav__link">
+      P Semantics
+    </a>
+  </li>
+
         
           
           
@@ -747,7 +759,12 @@
                 
                   <h1>Paxos Made Simple</h1>
                 
-                
+                <p>How can we finish our tutorials on modeling distributed systems without giving tribute to the Paxos protocol <img alt="🙏" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f64f.svg" title=":pray:" /> (and our inspiration <a href="http://www.lamport.org/">Leslie Lamport</a>). Lets end the tutorial with a simplified <strong><a href="https://mwhittaker.github.io/blog/single_decree_paxos/">single decree paxos</a></strong>.</p>
+<p>In this example, we present a simplified model of the single decree paxos. We say simplified because general paxos is resilient against arbitrary network (lossy, duplicate, re-order, and delay), in our case we only model message loss and delay, and check correctness of paxos in the presence of such a network. This is a fun exercise, we encourage you to play around and create variants of paxos!</p>
+<div class="admonition summary">
+<p class="admonition-title">Summary</p>
+<p>In this example, we present a simplified model of the single decree paxos. (Todo: add details about the properties checked)</p>
+</div>
                 
               
               
@@ -781,13 +798,13 @@
           </a>
         
         
-          <a href="../../howtoguides/sharedmemory/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../common/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Modeling Shared Memory Concurrency
+                Timer, Failure, and Shared Memory
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">

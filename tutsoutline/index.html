@@ -358,8 +358,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#example-5-simple-paxos" class="md-nav__link">
-    [Example 5] Simple Paxos
+  <a href="#example-5-single-decree-paxos" class="md-nav__link">
+    [Example 5] Single Decree Paxos
   </a>
   
 </li>
@@ -375,18 +375,6 @@
   
 </nav>
     
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../tutorial/psemantics/" class="md-nav__link">
-      P Semantics
-    </a>
   </li>
 
         
@@ -446,6 +434,18 @@
   <li class="md-nav__item">
     <a href="../tutorial/paxos/" class="md-nav__link">
       Paxos Made Simple
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tutorial/common/" class="md-nav__link">
+      Timer, Failure, and Shared Memory
     </a>
   </li>
 
@@ -537,6 +537,18 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../advanced/psemantics/" class="md-nav__link">
+      P Semantics
+    </a>
+  </li>
+
         
           
           
@@ -849,8 +861,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#example-5-simple-paxos" class="md-nav__link">
-    [Example 5] Simple Paxos
+  <a href="#example-5-single-decree-paxos" class="md-nav__link">
+    [Example 5] Single Decree Paxos
   </a>
   
 </li>
@@ -879,7 +891,7 @@
                 
                 <div class="admonition tip">
 <p class="admonition-title">P Language Semantics</p>
-<p>Before we get started with the tutorials, please read <a href="../tutorial/psemantics/"><mark class="critic">this</mark></a> to get an informal overview of the P language semantics.</p>
+<p>Before we get started with the tutorials, please read <a href="../advanced/psemantics/"><mark class="critic">this</mark></a> to get an informal overview of the P language semantics.</p>
 </div>
 <p>In this tutorial, we use a series of examples along with excercise problems to help you get familiar with the P language and the associated tool chain.</p>
 <div class="admonition check">
@@ -901,7 +913,7 @@
 <hr />
 <h3 id="example-2-two-phase-commit">[Example 2] <strong><a href="../tutorial/twophasecommit/">Two Phase Commit</a></strong></h3>
 <p>We use a simplified version of the <a href="https://s2.smu.edu/~mhd/8330f11/p133-gray.pdf">classic two phase commit protocol</a> to model a transaction commit service. The protocol uses a single coordinator to gain consensus for a transaction spanning across multiple participants. A transaction is simply a <code>put</code> operation for a key-value data store where the data store is replicated across participants.</p>
-<p><strong>Assumptions:</strong> Note that our transaction commit system is ridiculously simplified, for example, it is not fault tolerant to node failures, failure of either coordinator or any of the participants will block the progress forever. Also, we rely on <a href="../tutorial/psemantics/">P's send semantics</a> to model the behavior of the underlying network.</p>
+<p><strong>Assumptions:</strong> Note that our transaction commit system is ridiculously simplified, for example, it is not fault tolerant to node failures, failure of either coordinator or any of the participants will block the progress forever. Also, we rely on <a href="../advanced/psemantics/">P's send semantics</a> to model the behavior of the underlying network.</p>
 <div class="admonition summary">
 <p class="admonition-title">Summary</p>
 <p>We will use this example to dive deeper into: (1) modeling non-determinism in the systems, in particular, time-outs (2) writing complex safety properties like atomicity of transactions in P, and finally, modeling node failures in P using a failure injector state machine. We also use a very simple example to show how P allows invoking foreign code from the P programs. More details in <a href="../manual/foriegntypesfunctions/">P foreign interface</a>.</p>
@@ -928,14 +940,14 @@ In this example, we consider the example of an Espresso coffee machine where the
 </div>
 <hr />
 <p>How can we finish our tutorials on modeling distributed systems without giving tribute to the Paxos protocol <img alt="🙏" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f64f.svg" title=":pray:" /> (and our inspiration <a href="http://www.lamport.org/">Leslie Lamport</a>). Lets end the tutorial with a simplified <strong><a href="https://mwhittaker.github.io/blog/single_decree_paxos/">single decree paxos</a></strong>.</p>
-<h3 id="example-5-simple-paxos">[Example 5] <strong>Simple Paxos</strong></h3>
+<h3 id="example-5-single-decree-paxos">[Example 5] <strong><a href="../tutorial/paxos/">Single Decree Paxos</a></strong></h3>
 <p>In this example, we present a simplified model of the single decree paxos. We say simplified because general paxos is resilient against arbitrary network (lossy, duplicate, re-order, and delay), in our case we only model message loss and delay, and check correctness of paxos in the presence of such a network. This is a fun exercise, we encourage you to play around and create variants of paxos!</p>
 <div class="admonition summary">
 <p class="admonition-title">Summary</p>
 <p>In this example, we present a simplified model of the single decree paxos. (Todo: add details about the properties checked)</p>
 </div>
 <hr />
-<h3 id="common-timer-failure-injector-and-shared-memory">[Common] <strong>Timer, Failure Injector, and Shared Memory</strong></h3>
+<h3 id="common-timer-failure-injector-and-shared-memory">[Common] <strong><a href="../tutorial/common/">Timer, Failure Injector, and Shared Memory</a></strong></h3>
 <p>We also describe how to model system's interaction with an OS Timer <a href="https://github.com/p-org/P/blob/master/Tutorial/Common/Timer/">Timer</a>, and how to model injecting node failures in the system <a href="https://github.com/p-org/P/tree/master/Tutorial/Common/FailureInjector">Failure Injector</a>. These models are used in the Two Phase Commit, Espresso Machine, and Failure Detector models. </p>
 <p>P is a purely messaging passing based programming language and hence does not support primitives for modeling shared memory based concurrency. But one can always model shared memory concurrency using message passing. We have used this style of modeling when checking the correctness of single node file systems. Please check out <a href="../howtoguides/sharedmemory/">Shared Memory</a> project on how to model shared memory concurrency using P.</p>
 <hr />
@@ -973,13 +985,13 @@ In this example, we consider the example of an Espresso coffee machine where the
           </a>
         
         
-          <a href="../tutorial/psemantics/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../tutorial/clientserver/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                P Semantics
+                Client Server
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">

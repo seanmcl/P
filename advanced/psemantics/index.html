@@ -9,7 +9,7 @@
         <meta name="description" content="P: Modular and Safe Programming of Distributed Systems">
       
       
-        <link rel="canonical" href="http://p-org.github.io/P/tutorial/espressomachine/">
+        <link rel="canonical" href="http://p-org.github.io/P/advanced/psemantics/">
       
       
         <meta name="author" content="Ankush Desai">
@@ -19,7 +19,7 @@
     
     
       
-        <title>Espresso Maker - P</title>
+        <title>P Semantics - P</title>
       
     
     
@@ -90,7 +90,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Espresso Maker
+              P Semantics
             
           </span>
         </div>
@@ -273,12 +273,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
     
     <label class="md-nav__link" for="nav-4">
       Tutorials
@@ -310,7 +308,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../clientserver/" class="md-nav__link">
+    <a href="../../tutorial/clientserver/" class="md-nav__link">
       Client Server
     </a>
   </li>
@@ -322,7 +320,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../twophasecommit/" class="md-nav__link">
+    <a href="../../tutorial/twophasecommit/" class="md-nav__link">
       Two Phase Commit
     </a>
   </li>
@@ -332,18 +330,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-    <a href="./" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../../tutorial/espressomachine/" class="md-nav__link">
       Espresso Maker
     </a>
-    
   </li>
 
         
@@ -353,7 +344,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../failuredetector/" class="md-nav__link">
+    <a href="../../tutorial/failuredetector/" class="md-nav__link">
       Failure Detector
     </a>
   </li>
@@ -365,7 +356,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../paxos/" class="md-nav__link">
+    <a href="../../tutorial/paxos/" class="md-nav__link">
       Paxos Made Simple
     </a>
   </li>
@@ -377,7 +368,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../common/" class="md-nav__link">
+    <a href="../../tutorial/common/" class="md-nav__link">
       Timer, Failure, and Shared Memory
     </a>
   </li>
@@ -454,10 +445,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" checked>
     
     <label class="md-nav__link" for="nav-6">
       Advanced Users
@@ -475,11 +468,18 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../../advanced/psemantics/" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
       P Semantics
     </a>
+    
   </li>
 
         
@@ -489,7 +489,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../advanced/structureOfPProgram/" class="md-nav__link">
+    <a href="../structureOfPProgram/" class="md-nav__link">
       Structure of a P Program
     </a>
   </li>
@@ -501,7 +501,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../advanced/PProject/" class="md-nav__link">
+    <a href="../PProject/" class="md-nav__link">
       P Project File
     </a>
   </li>
@@ -757,16 +757,28 @@
               
                 
                 
-                  <h1>Espresso Maker</h1>
+                  <h1>P Semantics</h1>
                 
-                <p>Wow, we have reached the middle of our tutorials <img alt="🥱" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f971.svg" title=":yawning_face:" />, its time to take a break and have an espresso coffee! <img alt="☕" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/2615.svg" title=":coffee:" />
-In the next example, instead of modeling a distributed protocol, we consider the fun example of modeling an espresso machine and see how we can use the P state machine to model a reactive system that must respond correctly to various user inputs.</p>
-<p>P has been used in the past to implement device drivers and robotics systems (<a href="casestudies.md">case studies</a>). One of the many challenges in implementing these systems is that they are reactive system and hence, must handle various streams of events (inputs) appropriately depending on its current mode of operation.
-In this example, we consider the example of an Espresso coffee machine where the user interacts with the coffee machine through its control panel. The control panel must correctly interprets inputs from the user and sends commands to the coffee maker. We use this example to demonstrate how using P state machine, one can capture the required reactive behavior of a coffee maker and define how it must handle different user inputs.</p>
-<div class="admonition summary">
-<p class="admonition-title">Summary</p>
-<p>This is a just for fun example to demonstrate how to model a reactive system as a P state machine. We also show how using P monitors we can check that the system moves through the correct modes of operation.</p>
+                <p>Before getting started with the tutorials, we provide a quick informal overview of the P language semantics so that the readers can keep it at the back of their mind as they walk through the <a href="../../tutsoutline/">tutorials</a> and the <a href="../../manualoutline/">language manual</a>.</p>
+<p><strong>P is a programming language.</strong> P is a state machine based <em>programming language</em> and hence, just like any other imperative programming language it supports basic <a href="../../manual/datatypes/">data types</a>, <a href="../../manual/expressions/">expressions</a>, and <a href="../../manual/statemachines/">statements</a> that enables programmers to capture complex distributed systems protocol logic as a collection of event-handlers or <a href="../../manual/functions/">functions</a> (in P state machines).</p>
+<p><strong>P State machines.</strong> The underlying model of computation for P state machines is similar to that of <a href="http://osl.cs.illinois.edu/members/agha.html">Gul Agha's</a> <a href="https://dspace.mit.edu/handle/1721.1/6952">Actor-model-of-computation</a> (<a href="https://en.wikipedia.org/wiki/Actor_model">wiki</a>). A P program is a collection of concurrently executing state machines that communicate with eachother by sending events (or messages) asynchronously. Each P state machine has an <strong>unbounded FIFO buffer</strong> associated with it. 
+Sends are <strong>asynchronous</strong>, i.e., executing a send operation <code>send t,e,v;</code> adds event <code>e</code> with payload value <code>v</code> into the FIFO buffer of the target machine <code>t</code>. 
+Each state in the P state machine has an entry function associated with it which gets executed when the state machine enters that state. After executing the entry
+function, the machine tries to dequeue an event from the input buffer or blocks if the buffer is empty. Upon dequeuing an event from the input queue of the machine, the attached handler is executed which might transition the machine to a different state. We will provide more details about the P state machines in tutorials as well as the language manual. 
+For detailed formal semantics of P state machines, we refer the readers to the <a href="https://ankushdesai.github.io/assets/papers/p.pdf">original P paper</a> and the <a href="https://ankushdesai.github.io/assets/papers/modp.pdf">more recent paper</a> with updated semantics.</p>
+<p>There are <strong>two main distinctions</strong> with actor model of computation: (1) P adds the <strong>syntactic sugar</strong> of state machines to actors, and (2) each state machine in P has an <strong>unbounded FIFO buffer</strong> associated with it instead of an unbounded bag in actors (semantic difference). </p>
+<div class="admonition danger">
+<p class="admonition-title">[Important] Send semantics in P</p>
+<p>Sends are reliable, buffered, non-blocking, and directed (not broadcast). Sends are <strong>reliable</strong> i.e., executing a send operation in P adds an event into the target machines buffer. Hence, if one wants to model message loss it has to be modeled explicitly (discussed in the Failure Detector example in the tutorial). Similarly, as P state machine buffers are FIFO, events are dequeued at the state machine in the <strong>causal order</strong> in which they were sent. Note that events that are sent by two different concurrent machines will be interleaved by the checker and hence, will appear in different order at the target machine but the events sent by the same machine will always appear in the same order at the target state machine. So, just like message loss, arbitrary message re-ordering also has to be explicitly modeled in P (explained in the Paxos example in the tutorials). In general, we find that re-ordering messages/events coming from the same machine is not important and does not lead to any interesting behaviors. More interesting behaviors happen because of interleaving of messages across different state machines which the P checker explores automatically.</p>
+<p>Summary, by default, the communication between state machines using <code>send</code> operation follows the above semantics. If you would like check your system correctness against an arbitrarily network then one would have to model the corresponding <code>send</code> semantics in P explicitly. One can then make the arbitrarily network behave as expected with message duplicates, loss, re-order, etc. </p>
+<p>If you have any further doubts related to this topic and modeling network semantics when reasoning using P, feel free to get in touch with Ankush Desai. We have several examples of such cases.</p>
 </div>
+<div class="admonition danger">
+<p class="admonition-title">[Important] New semantics in P</p>
+<p>State machines in P can be dynamically created during the execution of the Program using <code>new</code> primitive (<a href="../../manual/statements/#new">see</a>). Creation of a state machine is also an asynchronous, non-blocking operation.</p>
+</div>
+<p><strong>P Monitors.</strong> Specifications in P are written as global runtime monitors. These global monitors observe the execution of the system and can assert any global safety or liveness invariants on the system. Note that the monitors are synchronously composed with the P state machines. Details are explained in the <a href="../../manual/monitors/">language manual</a> and we will describe more using examples in the tutorials.</p>
+<p><strong>P Checker.</strong> The P Checker systematically explores all possible behaviors of the P program which includes behaviors arising out of: (1) <strong>concurrency:</strong> different interleavings of events from concurrently executing state machines as well as (2) <strong>data nondeterminism:</strong> different data input choices in the P program modeled using the <code>choose</code> (<a href="../../manual/expressions/#choose">see</a>) operation. The P checker explores different executions of the system that can happen because of these two forms of nondeterminism and asserts that for each of these executions the system satisfies the desired property specified by the P Monitors.</p>
                 
               
               
@@ -785,7 +797,7 @@ In this example, we consider the example of an Espresso coffee machine where the
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../twophasecommit/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../../howtoguides/debuggingerror/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -794,19 +806,19 @@ In this example, we consider the example of an Espresso coffee machine where the
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Two Phase Commit
+                Debugging Error Traces (counter examples)
               </div>
             </div>
           </a>
         
         
-          <a href="../failuredetector/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../structureOfPProgram/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Failure Detector
+                Structure of a P Program
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">

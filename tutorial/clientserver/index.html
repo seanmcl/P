@@ -308,18 +308,6 @@
           
           
 
-
-  <li class="md-nav__item">
-    <a href="../psemantics/" class="md-nav__link">
-      P Semantics
-    </a>
-  </li>
-
-        
-          
-          
-          
-
   
 
 
@@ -379,6 +367,18 @@
   <li class="md-nav__item">
     <a href="../paxos/" class="md-nav__link">
       Paxos Made Simple
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../common/" class="md-nav__link">
+      Timer, Failure, and Shared Memory
     </a>
   </li>
 
@@ -470,6 +470,18 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced/psemantics/" class="md-nav__link">
+      P Semantics
+    </a>
+  </li>
+
         
           
           
@@ -747,95 +759,11 @@
                 
                   <h1>Client Server</h1>
                 
-                <p>A P program is a collection of event and machine declarations.
-Here is a basic P program containing a Client machine and a Server machine
-communicating with each other via Ping and Pong events.</p>
-<div class="highlight"><pre><span></span><code>--8&lt;--​  &quot;Client.p&quot; 
-</code></pre></div>
-<p>We now take a closer look at the event and machine declarations in this program.
-The declaration of event <code>PING</code> indicates that it is accompanied with
-a data value of <code>machine</code> type.
-The <code>machine</code> type contains the addresses of all dynamically-created
-P machines.
-This declaration also indicates that at most one instance of the <code>PING</code>
-event may be present in the input queue of any machine.</p>
-<p>A machine declaration contains a collection of variable and state
-declarations.
-For example, the machine <code>Client</code> has a variable <code>server</code> and three
-states, <code>Init</code>, <code>SendPing</code>, and <code>WaitPong</code>, declared inside it.
-The storage for the <code>server</code> variable is local to a particular instance
-of the <code>Client</code> machine.
-State <code>Init</code> is declared to be the start state to indicate that
-an instance of <code>Client</code> begins executing by entering the <code>Init</code> state.</p>
-<p>There can be many different declarations inside a state.
-A code block indicated by entry { ... } is executed when
-the state is entered.
-Similarly, a code block indicated by exit { ... }
-(not used in our example) is executed when the state is exited.
-Other than these two declarations, all other declarations inside a
-state are related to event handling.
-The declaration <code>on SUCCESS goto SendPing</code> in state <code>Init</code> is an
-example of such a declaration indicating that the <code>SUCCESS</code> event
-must be handled by moving to state <code>SendPing</code>.
-Different states can choose to handle a particular event
-differently.
-For example, state <code>Init</code> handles <code>SUCCESS</code> by moving to state <code>SendPing</code>
-but state <code>SendPing</code> handled <code>SUCCESS</code> by moving to state <code>WaitPong</code>.</p>
-<p>Next, we look at the contents of the entry code block in state <code>Init</code>
-of machine <code>Client</code>.
-This code block has two statements.
-The first statement creates an
-instance of the Server machine and stores the address of this
-instance in variable <code>server</code>.
-The second statement raises an event <code>SUCCESS</code>
-which causes control to exit <code>Init</code> and enter <code>SendPing</code>.
-In P, when a machine sends an event to another machine (or itself),
-the event is enqueued in the target machine's input queue.
-However, a raised event does not go through the queue;
-rather it terminates execution of the enclosing code block and is
-handled immediately.</p>
-<p>The entry code block in state <code>SendPing</code> shows an example of the "send"
-statement for sending a <code>PING</code> event to the machine whose address
-is stored in the variable server.
-The keyword <code>this</code> evaluates to the address of the machine
-executing the current statement.</p>
-<p>Finally, the entry code block in state <code>SendPong</code> of machine <code>Server</code>
-shows that the data value associated with a received event can be
-retrieved through a parameter of the apppriate type to the event handler.
-In this code block, the <code>payload</code> parameter evaluates to the data attached to the
-<code>PING</code> event whose handling caused control to enter <code>SendPong</code>.
-This data value is the address of the instance of the <code>Client</code> machine
-that sent the <code>PING</code> event.
-Similarly, a parameter can be used to retrieve the argument
-to the constructor of a freshly-created machine when it starts execution
-in the entry block of its <code>start</code> state.</p>
-<p>The attentive reader might be wondering how the PingPong program
-begins execution.
-The machine <code>Client</code> is annotated with <code>main</code> to indicate that program
-execution begins with a single instance of <code>Client</code> entering state <code>Init</code>.
-Let us call this <code>Client</code> instance X.
-X creates an instance of <code>Server</code> and raises <code>SUCCESS</code> to enter state
-<code>SendPing</code>.
-Let us call this <code>Server</code> instance Y; it begins execution in state <code>WaitPing</code>
-of <code>Server</code>.
-From this point on, X and Y exchange <code>PING</code> and <code>PONG</code> messages, where X
-cycles between <code>SendPing</code> and <code>WaitPong</code> and Y cycles between <code>WaitPing</code> and
-<code>SendPong</code>.</p>
-<p>The most important safety specification of a P program is that every event
-dequeued by a machine is handled; otherwise, the P runtime throws an "UnhandledEvent" exception.
-The PingPong program satisfies this specification, since the <code>Server</code>
-machine handles the <code>PING</code> event, and the <code>Client</code> machine handles
-the <code>PONG</code> event in every state where an event dequeue is possible.</p>
-<p>In order to terminate a state machine cleanly, there is a special <code>halt</code> event.
-Termination of a machine due to an unhandled <code>halt</code> event is a valid behavior
-and does not throw the UnhandledEvent exception.
-Therefore, a machine can be halted by queuing a <code>halt</code> event to it.
-From the point of view of formal operational semantics,
-a halted machine is fully receptive and consumes any event that is sent to it.
-The P runtime implements this semantics efficiently by cleaning up resources
-allocated with the halting machine and recording that the machine has halted.
-An event sent to a halted machine is simply dropped.
-A halted machine cannot be restarted; it remains halted forever. </p>
+                <p>We start with a simple client-server example where clients send requests to withdraw money from a bank server. The bank server uses a backend database service to store the bank balance for its clients and on receiving a withdraw request updates the database and responds back to the client with the new balance in the account. In this example, there is not much complexity, there are multiple clients issueing withdraw requests concurrently and a single bank server that services these requests one-by-one. We will use this simple example to demonstrate how to implement such a systems as a collection of P state machines and also check correctness the property that the bank always responds with the correct bank balance for a client and a withdraw request always succeeds if there is enough balance in the account. We will also use P's capability to write multiple model checking scenarios and demonstrate how one replace components in P models with its abstraction.</p>
+<div class="admonition summary">
+<p class="admonition-title">Summary</p>
+<p>In this example, you will learn about P state machines, writing simple safety and liveness specifications as P monitors, writing multiple model checking scenarios to check the correctness of the P program, and finally, replacing complex components in P with their abstractions using P's module system.</p>
+</div>
                 
               
               
@@ -854,7 +782,7 @@ A halted machine cannot be restarted; it remains halted forever. </p>
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../psemantics/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../../tutsoutline/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -863,7 +791,7 @@ A halted machine cannot be restarted; it remains halted forever. </p>
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                P Semantics
+                Outline
               </div>
             </div>
           </a>
