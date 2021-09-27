@@ -65,6 +65,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#error-trace" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -438,9 +443,77 @@
     <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
     
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Debugging Error Traces (counter examples)
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
     <a href="./" class="md-nav__link md-nav__link--active">
       Debugging Error Traces (counter examples)
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#error-trace" class="md-nav__link">
+    Error Trace
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-schedule-single-stepping-through-error-trace" class="md-nav__link">
+    Error Schedule (single stepping through error trace)
+  </a>
+  
+    <nav class="md-nav" aria-label="Error Schedule (single stepping through error trace)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-0-install-rider-or-visual-studio" class="md-nav__link">
+    [Step 0]: Install Rider (or Visual Studio)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-1-update-the-testcs-file" class="md-nav__link">
+    [Step 1]: Update the Test.cs file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-add-breakpoints-to-start-debugging" class="md-nav__link">
+    [Step 2]: Add breakpoints to start debugging
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#replaying-the-error-schedule" class="md-nav__link">
+    Replaying the Error Schedule
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -751,6 +824,75 @@
               </div>
             
             
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#error-trace" class="md-nav__link">
+    Error Trace
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-schedule-single-stepping-through-error-trace" class="md-nav__link">
+    Error Schedule (single stepping through error trace)
+  </a>
+  
+    <nav class="md-nav" aria-label="Error Schedule (single stepping through error trace)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-0-install-rider-or-visual-studio" class="md-nav__link">
+    [Step 0]: Install Rider (or Visual Studio)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-1-update-the-testcs-file" class="md-nav__link">
+    [Step 1]: Update the Test.cs file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-add-breakpoints-to-start-debugging" class="md-nav__link">
+    [Step 2]: Add breakpoints to start debugging
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#replaying-the-error-schedule" class="md-nav__link">
+    Replaying the Error Schedule
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content">
             <article class="md-content__inner md-typeset">
@@ -759,7 +901,111 @@
                 
                   <h1>Debugging Error Traces (counter examples)</h1>
                 
-                
+                <p>As described in the <a href="../../getstarted/usingP/">using P compiler and checker</a> guide, running the checker on the <code>tcSingleClientAbstractServer</code> test case finds an error.</p>
+<div class="highlight"><pre><span></span><code>pmc &lt;Path&gt;/ClientServer.dll \
+    -m PImplementation.tcSingleClientAbstractServer.Execute \
+    -i 100
+</code></pre></div>
+<details class="info"><summary>Expected Output</summary><div class="highlight"><pre><span></span><code>pmc &lt;Path&gt;/ClientServer.dll -m PImplementation.multipleClientsServer.Execute -i 100
+
+. Testing &lt;Path&gt;/ClientServer.dll
+... Method PImplementation.tcSingleClientAbstractServer.Execute
+Starting TestingProcessScheduler in process 72578
+... Created &#39;1&#39; testing task.
+... Task 0 is using &#39;random&#39; strategy (seed:574049731).
+..... Iteration #1
+<span class="hll">... Task 0 found a bug.
+</span>... Emitting task 0 traces:
+<span class="hll">..... Writing /POutput/netcoreapp3.1/Output/ClientServer.dll/CoyoteOutput/ClientServer_0_0.txt
+</span><span class="hll">..... Writing /POutput/netcoreapp3.1/Output/ClientServer.dll/CoyoteOutput/ClientServer_0_0.schedule
+</span>... Elapsed 0.1971223 sec.
+... Testing statistics:
+<span class="hll">..... Found 1 bug.
+</span>... Scheduling statistics:
+..... Explored 1 schedule: 1 fair and 0 unfair.
+..... Found 100.00% buggy schedules.
+..... Number of scheduling points in fair terminating schedules: 132 (min), 132 (avg), 132 (max).
+... Elapsed 0.3081316 sec.
+. Done
+</code></pre></div>
+</details>
+<p>The P checker on finding a bug generates two artifacts (highlighted in the expected output above):
+(1) a <strong>textual trace file</strong> (e.g., <code>ClientServer_0_0.txt</code>) that has the readable error trace representing the
+sequence of steps from the intial state to the error state.
+(2) a <strong>schedule file</strong> (e.g., <code>ClientServer_0_0.schedule</code>) that can be used to replay the error
+trace and single step through the P program with the generated error trace for debugging.</p>
+<h3 id="error-trace">Error Trace</h3>
+<p>The <code>*.txt</code> file represents an textual error trace representing the sequence of steps (i.e, messages sent, messages received, machines created) from the initial state to the final error state. In the end of the error trace is the final error message, for example, in the case of ClientServer example above, you must see the following in the end of the error trace.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;ErrorLog&gt;</span> Assertion Failed: Bank must accept the with draw request for 1, 
+  bank balance is 11!
+</code></pre></div>
+<p>In most cases, you can ignore the stack trace and information below the <code>ErrorLog</code>.</p>
+<h3 id="error-schedule-single-stepping-through-error-trace">Error Schedule (single stepping through error trace)</h3>
+<p>In certain cases, the trace log is not enough for debugging the issue and we would like to single step through the error state and look at the internal state of the state machines that is not captured in the trace log. We present the step-by-step guide to show how we can use the <code>.schedule</code> file to single step through the C# representation of the P program.</p>
+<h4 id="step-0-install-rider-or-visual-studio">[Step 0]: Install Rider (or Visual Studio)</h4>
+<div class="admonition info">
+<p>Before starting, we recommend that you have <a href="https://www.jetbrains.com/rider/">Rider</a> installed on your machine, we will use Rider's C# debugger.</p>
+</div>
+<h4 id="step-1-update-the-testcs-file">[Step 1]: Update the <code>Test.cs</code> file</h4>
+<p>On compiling any P project, the compiler generates two files a <code>Test.cs</code> file and a C# project <code>*.csproj</code> file.
+For debugging the error trace, you must open the generated <code>csproj</code> file (its generally, <code>&lt;ProjectName&gt;.csproj</code>) using Rider and then edit the <code>Test.cs</code> file as follows:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">public</span> <span class="k">class</span> <span class="nc">_TestRegression</span> <span class="p">{</span>
+  <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
+  <span class="p">{</span> 
+    <span class="n">Configuration</span> <span class="n">configuration</span> <span class="p">=</span> <span class="n">Configuration</span><span class="p">.</span><span class="n">Create</span><span class="p">();</span>
+    <span class="n">configuration</span><span class="p">.</span><span class="n">WithVerbosityEnabled</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+    <span class="c1">// update the path to the schedule file.</span>
+<span class="hll">    <span class="kt">string</span> <span class="n">schedule</span> <span class="p">=</span> <span class="n">File</span><span class="p">.</span><span class="n">ReadAllText</span><span class="p">(</span><span class="s">&quot;absolute path to *.schedule file&quot;</span><span class="p">);</span>
+</span>    <span class="n">configuration</span><span class="p">.</span><span class="n">WithReplayStrategy</span><span class="p">(</span><span class="n">schedule</span><span class="p">);</span>
+<span class="hll">    <span class="n">TestingEngine</span> <span class="n">engine</span> <span class="p">=</span> <span class="n">TestingEngine</span><span class="p">.</span><span class="n">Create</span><span class="p">(</span><span class="n">configuration</span><span class="p">,</span> <span class="p">(</span><span class="n">Action</span><span class="p">&lt;</span><span class="n">IActorRuntime</span><span class="p">&gt;)</span><span class="n">PImplementation</span><span class="p">.&lt;</span><span class="n">Name</span> <span class="n">of</span> <span class="n">the</span> <span class="n">test</span> <span class="k">case</span><span class="p">&gt;.</span><span class="n">Execute</span><span class="p">);</span>
+</span>    <span class="n">engine</span><span class="p">.</span><span class="n">Run</span><span class="p">();</span>
+    <span class="kt">string</span> <span class="n">bug</span> <span class="p">=</span> <span class="n">engine</span><span class="p">.</span><span class="n">TestReport</span><span class="p">.</span><span class="n">BugReports</span><span class="p">.</span><span class="n">FirstOrDefault</span><span class="p">();</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">bug</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">bug</span><span class="p">);</span>
+    <span class="p">}</span>
+
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+<ul>
+<li>
+<p><strong>Update the path of .schedule file</strong>: Edit the <code>Test.cs</code> file and update the line 7 above with the absolute path to the <code>.schedule</code> file that represents the error schedule you want to debug.</p>
+</li>
+<li>
+<p><strong>Update the test case name</strong>: Update the test case name on line 9 above. In our case, for the clientserver example it would become <code>PImplementation.tcSingleClientAbstractServer.Execute</code>.</p>
+</li>
+</ul>
+<h4 id="step-2-add-breakpoints-to-start-debugging">[Step 2]: Add breakpoints to start debugging</h4>
+<p>You must next add the necessary break points in the Generated C# code. If you want to stop the execution at a particular P function/handler, locate that function in the generated code and add a break point. Now, you can start debugging using Rider just like you would debug anyother C# or Java program.</p>
+<p>For example, you can add a breakpoint at line 904 in the generated code ClientServer.cs in PGenerated folder to hit the assertion that failed.
+<div class="highlight"><pre><span></span><code>String.Format(&quot;Bank must accept the with draw request for {0}, bank balance is {1}!&quot;,TMP_tmp38,TMP_tmp40);
+</code></pre></div></p>
+<h3 id="replaying-the-error-schedule">Replaying the Error Schedule</h3>
+<p>One can also replay the error schedule using commandline and enabling verbose feature to dump out the error trace on the commandline.</p>
+<div class="highlight"><pre><span></span><code>pmc &lt;path to dll&gt;.dll --schedule &lt;buggy&gt;.schedule -m &lt;testcaseName&gt; -v 
+</code></pre></div>
+<p>For example,</p>
+<div class="highlight"><pre><span></span><code>pmc ClientServer.dll --schedule ClientServer_0_0.schedule -m PImplementation.tcSingleClientAbstractServer.Execute -v 
+</code></pre></div>
                 
               
               
