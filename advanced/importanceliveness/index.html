@@ -9,7 +9,7 @@
         <meta name="description" content="P: Modular and Safe Programming of Distributed Systems">
       
       
-        <link rel="canonical" href="http://p-org.github.io/P/howtoguides/sharedmemory/">
+        <link rel="canonical" href="http://p-org.github.io/P/advanced/importanceliveness/">
       
       
         <meta name="author" content="Ankush Desai">
@@ -19,7 +19,7 @@
     
     
       
-        <title>Modeling Shared Memory Concurrency - P</title>
+        <title>Importance of Liveness Specifications - P</title>
       
     
     
@@ -90,7 +90,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Modeling Shared Memory Concurrency
+              Importance of Liveness Specifications
             
           </span>
         </div>
@@ -391,16 +391,28 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
     
     <label class="md-nav__link" for="nav-5">
-      How-to Guides
+      Advanced User Guide
       <span class="md-nav__icon md-icon"></span>
     </label>
-    <nav class="md-nav" aria-label="How-to Guides" data-md-level="1">
+    <nav class="md-nav" aria-label="Advanced User Guide" data-md-level="1">
       <label class="md-nav__title" for="nav-5">
         <span class="md-nav__icon md-icon"></span>
-        How-to Guides
+        Advanced User Guide
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../psemantics/" class="md-nav__link">
+      P Semantics
+    </a>
+  </li>
+
         
           
           
@@ -415,7 +427,7 @@
     
     
     <a href="./" class="md-nav__link md-nav__link--active">
-      Modeling Shared Memory Concurrency
+      Importance of Liveness Specifications
     </a>
     
   </li>
@@ -427,8 +439,20 @@
 
 
   <li class="md-nav__item">
-    <a href="../importanceliveness/" class="md-nav__link">
-      Importance of Liveness Specifications
+    <a href="../structureOfPProgram/" class="md-nav__link">
+      Structure of a P Program
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../PProject/" class="md-nav__link">
+      P Project File
     </a>
   </li>
 
@@ -460,73 +484,11 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
     
     <label class="md-nav__link" for="nav-6">
-      Advanced Users
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="Advanced Users" data-md-level="1">
-      <label class="md-nav__title" for="nav-6">
-        <span class="md-nav__icon md-icon"></span>
-        Advanced Users
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../advanced/psemantics/" class="md-nav__link">
-      P Semantics
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../advanced/structureOfPProgram/" class="md-nav__link">
-      Structure of a P Program
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../advanced/PProject/" class="md-nav__link">
-      P Project File
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
-    
-    <label class="md-nav__link" for="nav-7">
       Language Manual
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Language Manual" data-md-level="1">
-      <label class="md-nav__title" for="nav-7">
+      <label class="md-nav__title" for="nav-6">
         <span class="md-nav__icon md-icon"></span>
         Language Manual
       </label>
@@ -713,14 +675,14 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
     
-    <label class="md-nav__link" for="nav-11">
+    <label class="md-nav__link" for="nav-10">
       Contributing to P
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Contributing to P" data-md-level="1">
-      <label class="md-nav__title" for="nav-11">
+      <label class="md-nav__title" for="nav-10">
         <span class="md-nav__icon md-icon"></span>
         Contributing to P
       </label>
@@ -757,9 +719,17 @@
               
                 
                 
-                  <h1>Modeling Shared Memory Concurrency</h1>
+                  <h1>Importance of Liveness Specifications</h1>
                 
-                
+                <p>When reasoning about the correctness of a distributed system, <strong>it is really important to specify both safety as well as liveness specifications</strong>.</p>
+<div class="admonition note">
+<p>The examples in <a href="../../tutsoutline/">Tutorials</a> show how to specify both safety and liveness specifications using <a href="../../manual/monitors/">P Monitors.</a></p>
+</div>
+<div class="admonition danger">
+<p class="admonition-title">Always specify both safety and liveness specifications</p>
+<p>Only specifying safety property for a system is not enough, this is mainly because, a system model may be incorrect and in the worst case drop all requests on to the ether and not perform any operation. Such a system trivially satisfies all correctness specifications! Hence, it becomes essentially to combine that safety property with liveness properties to check that the system is making progress and servicing the requests. Running the checker on models that have both safety and liveness properties ensure that for all executions explored by the checker, requests are eventually serviced by the system (by sending responses potentially) and all the responses sent by the system satisfy the desired correctness safety specification. This helps ensure that your models are not doing something trivially incorrect like always doing nothing <img alt="😄" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f604.svg" title=":smile:" />, in which case running the checker on such a model adds no value.</p>
+</div>
+<p>For example, in the case of the client server example, the <a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSpec/BankBalanceCorrect.p#L4">BankBalanceIsAlwaysCorrect</a> safety property checks that the response sent by the bank server is always correct and combining it with the <a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSpec/BankBalanceCorrect.p#L91">GuaranteedWithDrawProgress</a> liveness property ensures that system will always eventually send a response which will be checked for correctness by the safety property.</p>
                 
               
               
@@ -778,7 +748,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../../tutorial/common/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../psemantics/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -787,19 +757,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Timer, Failure, and Shared Memory
+                P Semantics
               </div>
             </div>
           </a>
         
         
-          <a href="../importanceliveness/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../structureOfPProgram/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Importance of Liveness Specifications
+                Structure of a P Program
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">

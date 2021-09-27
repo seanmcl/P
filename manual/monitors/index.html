@@ -389,75 +389,13 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
     
     <label class="md-nav__link" for="nav-5">
-      How-to Guides
+      Advanced User Guide
       <span class="md-nav__icon md-icon"></span>
     </label>
-    <nav class="md-nav" aria-label="How-to Guides" data-md-level="1">
+    <nav class="md-nav" aria-label="Advanced User Guide" data-md-level="1">
       <label class="md-nav__title" for="nav-5">
         <span class="md-nav__icon md-icon"></span>
-        How-to Guides
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../howtoguides/sharedmemory/" class="md-nav__link">
-      Modeling Shared Memory Concurrency
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../howtoguides/importanceliveness/" class="md-nav__link">
-      Importance of Liveness Specifications
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../howtoguides/debuggingerror/" class="md-nav__link">
-      Debugging Error Traces (counter examples)
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
-    
-    <label class="md-nav__link" for="nav-6">
-      Advanced Users
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="Advanced Users" data-md-level="1">
-      <label class="md-nav__title" for="nav-6">
-        <span class="md-nav__icon md-icon"></span>
-        Advanced Users
+        Advanced User Guide
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -470,6 +408,18 @@
   <li class="md-nav__item">
     <a href="../../advanced/psemantics/" class="md-nav__link">
       P Semantics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced/importanceliveness/" class="md-nav__link">
+      Importance of Liveness Specifications
     </a>
   </li>
 
@@ -498,6 +448,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../advanced/debuggingerror/" class="md-nav__link">
+      Debugging Error Traces (counter examples)
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -512,14 +474,14 @@
 
   <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7" checked>
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" checked>
     
-    <label class="md-nav__link" for="nav-7">
+    <label class="md-nav__link" for="nav-6">
       Language Manual
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Language Manual" data-md-level="1">
-      <label class="md-nav__title" for="nav-7">
+      <label class="md-nav__title" for="nav-6">
         <span class="md-nav__icon md-icon"></span>
         Language Manual
       </label>
@@ -713,14 +675,14 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
     
-    <label class="md-nav__link" for="nav-11">
+    <label class="md-nav__link" for="nav-10">
       Contributing to P
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Contributing to P" data-md-level="1">
-      <label class="md-nav__title" for="nav-11">
+      <label class="md-nav__title" for="nav-10">
         <span class="md-nav__icon md-icon"></span>
         Contributing to P
       </label>
@@ -877,7 +839,7 @@ The above specifications checks a very simple global invariant that all <code>eR
 </code></pre></div>
 </td></tr></table>
 The above specification checks the global liveness property that every event <code>eRequest</code> is eventually followed by a corresponding successful <code>eResponse</code> event. The key idea is that the system satisfies a liveness specification if at the end of the execution the monitor is not in a <strong>hot</strong> state (line 13). The programmers can use <code>hot</code> annotation on states to mark them as intermediate or error states. Hence, properties like <code>eventually something holds</code> or <code>every event X is eventually followed by Y</code> or <code>eventually the system enters a convergence state</code>, all such properties can be specified by marking the intermediate state as <code>hot</code> states and the checker ensures that all the executions of the system eventually end in a non-hot state. </p>
-<p>Details about the importance of liveness specifications and how we check if the system satisfies these properties is described <a href="../../howtoguides/importanceliveness/">here</a>. </p>
+<p>Details about the importance of liveness specifications and how we check if the system satisfies these properties is described <a href="../howtoguides/importanceliveness.md">here</a>. </p>
 </div>
 </div>
                 
