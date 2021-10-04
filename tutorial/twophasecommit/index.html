@@ -723,11 +723,12 @@
                 
                 <p>Now that we understand the basic features of the P language, lets spice things up by looking at a well known distributed protocol, and the obvious choice is to start with the textbook example of a two phase commit protocol <img alt="🤹‍♂️" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f939-200d-2642-fe0f.svg" title=":man_juggling:" />!</p>
 <p>We use a simplified version of the <a href="https://s2.smu.edu/~mhd/8330f11/p133-gray.pdf">classic two phase commit protocol</a> to model a transaction commit service. The protocol uses a single coordinator to gain consensus for a transaction spanning across multiple participants. A transaction is simply a <code>put</code> operation for a key-value data store where the data store is replicated across participants.</p>
-<p><strong>Assumptions:</strong> Note that our transaction commit system is ridiculously simplified, for example, it is not fault tolerant to node failures, failure of either coordinator or any of the participants will block the progress forever. Also, we rely on <a href="advanced/psemantics.md">P's send semantics</a> to model the behavior of the underlying network.</p>
+<p><strong>Assumptions:</strong> Note that our transaction commit system is ridiculously simplified, for example, it is not fault tolerant to node failures, failure of either coordinator or any of the participants will block the progress forever. Also, we rely on <a href="../../advanced/psemantics/">P's send semantics</a> to model the behavior of the underlying network.</p>
 <div class="admonition summary">
 <p class="admonition-title">Summary</p>
-<p>We will use this example to dive deeper into: (1) modeling non-determinism in the systems, in particular, time-outs (2) writing complex safety properties like atomicity of transactions in P, and finally, modeling node failures in P using a failure injector state machine. We also use a very simple example to show how P allows invoking foreign code from the P programs. More details in <a href="manual/foriegntypesfunctions.md">P foreign interface</a>.</p>
+<p>We will use this example to dive deeper into: (1) modeling non-determinism in the systems, in particular, time-outs (2) writing complex safety properties like atomicity of transactions in P, and finally, modeling node failures in P using a failure injector state machine. We also use a very simple example to show how P allows invoking foreign code from the P programs. More details in <a href="../../manual/foriegntypesfunctions/">P foreign interface</a>.</p>
 </div>
+<p><img align="center" alt="Placeholder" src="../twophasecommit.png" /></p>
                 
               
               
