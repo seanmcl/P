@@ -836,13 +836,12 @@
                   <h1>Case Studies</h1>
                 
                 <h3 id="aws-amazon-s3-strong-consistency">[AWS] Amazon S3 Strong Consistency</h3>
-<p>In Dec 2020, Amazon S3 launched
-<a href="https://aws.amazon.com/s3/consistency/">Strong Consistency</a> with guaranteed
+<p>In Dec 2020, Amazon S3 launched <a href="https://aws.amazon.com/s3/consistency/">Strong Consistency</a> with guaranteed
 <a href="https://aws.amazon.com/blogs/aws/amazon-s3-update-strong-read-after-write-consistency/">strong read-after-write consistency</a>.
-The S3 team used automated reasoning for ensuring the correctness of S3's Strong
+The S3 team leveraged automated reasoning for ensuring the correctness of S3's Strong
 Consistency design. Werner had a detailed blog post about the challenges involved.</p>
-<div class="admonition abstract">
-<p class="admonition-title">Qoute from Werners blog:<a href="https://www.allthingsdistributed.com/2021/04/s3-strong-consistency.html">Diving Deep on S3 Consistency</a></p>
+<div class="admonition quote">
+<p class="admonition-title">Qoute from Werners blog: <a href="https://www.allthingsdistributed.com/2021/04/s3-strong-consistency.html">Diving Deep on S3 Consistency</a></p>
 <p>Common testing techniques like unit testing and integration testing are valuable,
 necessary tools in any production system. But they aren’t enough when you need to build a
 system with such a high bar for correctness. We want a system that’s “provably correct”,
@@ -853,9 +852,9 @@ coherence algorithm, model checking to formalize our consistency design and to d
 its correctness, and we expanded on our model checking to examine actual runnable code.</p>
 </div>
 <p>P was used for creating formal models of all the core distributed protocols involved in
-S3's strong consistency and model checking that the system satisfies the desired
+S3's strong consistency and checking that the system model satisfies the desired
 correctness guarantees. Details about P and how it is being used by the S3 team can be
-found in the <a href="https://pages.awscloud.com/pi-week-2021.html">AWS Pi-Week</a> Talk on
+found in the <a href="https://pages.awscloud.com/pi-week-2021.html">AWS Pi-Week Talk</a>:
 <a href="https://www.twitch.tv/videos/962963706?t=0h26m57s"><strong>Use of Automated Reasoning for S3 Strong Consistency Launch</strong></a>.</p>
 <h3 id="aws-amazon-iot-devices-ota-protocol">[AWS] Amazon IoT Devices: OTA Protocol</h3>
 <p>AWS FreeRTOS is a real-time operating system designed to run on IoT devices to enable them
@@ -869,7 +868,7 @@ securely --- keeping all devices in a consistent state --- in the presence of ar
 failures of devices and communication. The heart of the OTA system is an intricate
 distributed protocol, the OTA protocol, that co-ordinates the execution of the different
 agents involved.</p>
-<p>P was used for creating formal models of the OTA protocol and model checking its
+<p>P was used for creating formal models of the OTA protocol and checking its
 correctness. During this process the team found 3 bugs in the model that pointed to
 potential issues in the actual implementation itself.</p>
 <p>Related Blog:
