@@ -674,6 +674,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#compiling-priorityqueue-project" class="md-nav__link">
+    Compiling PriorityQueue project
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#running-priorityqueue-test-case" class="md-nav__link">
+    Running PriorityQueue test case
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -815,6 +829,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#compiling-priorityqueue-project" class="md-nav__link">
+    Compiling PriorityQueue project
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#running-priorityqueue-test-case" class="md-nav__link">
+    Running PriorityQueue test case
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -835,20 +863,95 @@
                 
                   <h1>P Foreign Interface</h1>
                 
-                <p>P Supports implementing types and functions in a foreign language, and then using them in P programs just like any other P types and functions.</p>
+                <div class="admonition note">
+<p class="admonition-title">Foreign Types</p>
+<p>Foreign types in P are types that are declared in P but defined or implemented in the foreign language (<a href="../datatypes/#foreign">foreign type</a>).</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Foreign Functions</p>
+<p>Foreign functions in P are local or global functions that are declared in P but defined or implemented in the foreign language (<a href="../functions/#foreign-functions">foreign functions</a>).</p>
+</div>
 <div class="admonition hint">
 <p class="admonition-title">Recommendation: Using Foreign Types and Functions</p>
 <p>Programmers can consider implementing a particular type as Foreign type in P if its a complicated data structure and implementing them using P types is either not possible or too combursome. For example, P does not support declaring recursive data types, and hence, implementing a linked-list or a tree like data-structure in P is hard. Hence, we recommend programmers to implement such types as foreign types.</p>
-<p>When modeling complex systems, many a times programmers need to implement complicated logic/functions that manupulate or iterate over data-structures. Such functions can be easily implemented in foreign languages like Java and C# as compared to P. For example, iterating over collections and manipulating them is easier in Java and C#, and verbose in P as P only supports <code>while</code> loop and not a iterator like <code>foreach</code>. Also functions that operate on foreign types are implemented as foreign functions.   </p>
+<p>When modeling complex systems, many a times programmers need to implement complicated logic/functions that manupulate or iterate over data-structures. Such functions can be easily implemented in foreign languages like Java and C# as compared to P. For example, iterating over collections and manipulating them is easier in Java and C#, and verbose in P as P only supports <code>while</code> loop and not a iterator like <code>foreach</code>. Also, functions that manipulate foreign types are implemented as foreign functions.   </p>
 </div>
-<p>The <a href="../../tutorial/twophasecommit/">Two Phase Commit</a> example had introduced the Foreign function feature. We now use a simple PriorityQueue example to go into the details of foreign interface in P.</p>
-<h3 id="priorityqueue"><a href="">PriorityQueue</a></h3>
-<p>The PriorityQueue project presents an example where a <code>Client</code> uses a priority queue implemented as foreign types and functions.</p>
+<p>The <a href="../../tutorial/twophasecommit/">Two Phase Commit</a> example had introduced the foreign function feature. We will now use a simple PriorityQueue example to go into the details of foreign interface in P.</p>
+<h3 id="priorityqueue"><a href="https://github.com/p-org/P/tree/master/Tutorial/PriorityQueue">PriorityQueue</a></h3>
+<p>The PriorityQueue <a href="https://github.com/p-org/P/blob/master/Tutorial/PriorityQueue/PriorityQueue.pproj">project</a> presents an example where a <code>Client</code> uses a priority queue implemented as foreign types and functions.</p>
 <h4 id="p-source">P Source</h4>
-<p>The <a href="">PriorityQueue.p</a> file declares the foreign type <a href=""><code>tPriorityQueue</code></a> and also <a href="">global foreign functions</a> that can be used to operate or interact with the priority queue.</p>
+<p>The <a href="https://github.com/p-org/P/blob/master/Tutorial/PriorityQueue/PSrc/PriorityQueue.p">PriorityQueue.p</a> file declares:  (1) a foreign type <a href="https://github.com/p-org/P/blob/master/Tutorial/PriorityQueue/PSrc/PriorityQueue.p#L3"><code>tPriorityQueue</code></a> and (2) <a href="https://github.com/p-org/P/blob/master/Tutorial/PriorityQueue/PSrc/PriorityQueue.p#L7-L22">global foreign functions</a> are used to operate or interact with the priority queue.</p>
+<div class="admonition danger">
+<p class="admonition-title">P has Value Semantics (no Pass by Reference!!)</p>
+<p>Note that P does not support pass by references, everything in P is always pass by value. Hence the functions above must return a priority queue after adding the element into the queue (mutated queue).</p>
+</div>
 <h4 id="p-test">P Test</h4>
-<p>The <a href="">Client.p</a> files presents a <code>Client</code> state machine that uses the priority queue and performs operations on it by calling the foreign function. The <code>Client</code> machine also declares a <a href="">local foreign function</a> to add an element into the queue.</p>
+<p>The <a href="https://github.com/p-org/P/blob/master/Tutorial/PriorityQueue/PTst/Client.p">Client.p</a> files presents a <a href="https://github.com/p-org/P/blob/master/Tutorial/PriorityQueue/PTst/Client.p#L5"><code>Client</code></a> state machine that uses the priority queue and performs operations on it by calling the foreign function. The <code>Client</code> machine also declares a <a href="https://github.com/p-org/P/blob/master/Tutorial/PriorityQueue/PTst/Client.p#L46-L47">local foreign function</a> to add an element into the queue.</p>
 <h4 id="p-foreign-code">P Foreign Code</h4>
+<p>The implementation of the <code>tPriorityQueue</code> is available in <a href="https://github.com/p-org/P/blob/master/Tutorial/PriorityQueue/PForeign/PriorityQueue.cs">PriorityQueue.cs</a></p>
+<div class="admonition note">
+<p>If you want to pretty print the foreign type value, you can also override the ToString() function in their implementation.</p>
+</div>
+<p>The implementation of the global functions in PriorityQueue.p is available in <a href="https://github.com/p-org/P/blob/master/Tutorial/PriorityQueue/PForeign/PriorityQueueFunctions.cs">PriorityQueueFunctions.cs</a>.
+Finally, the implementation of the local function in the Client machine is available in <a href="https://github.com/p-org/P/blob/master/Tutorial/PriorityQueue/PForeign/ClientFunctions.cs">ClientFunctions.cs</a>.</p>
+<h4 id="compiling-priorityqueue-project">Compiling PriorityQueue project</h4>
+<p>Run the following command:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span> P/Tutorial/PriorityQueue
+pc -proj:PriorityQueue.pproj
+</code></pre></div>
+<details class="note"><summary>Expected Output</summary><div class="highlight"><pre><span></span><code>----------------------------------------
+==== Loading project file: PriorityQueue.pproj
+....... includes p file: P/Tutorial/PriorityQueue/PSrc/PriorityQueue.p
+....... includes p file: P/Tutorial/PriorityQueue/PTst/Client.p
+....... includes p file: P/Tutorial/PriorityQueue/PTst/TestScripts.p
+----------------------------------------
+----------------------------------------
+Parsing ..
+Type checking ...
+Code generation ....
+Generated PriorityQueue.cs
+----------------------------------------
+Compiling PriorityQueue.csproj ..
+
+Microsoft (R) Build Engine version 16.10.2+857e5a733 for .NET
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  Determining projects to restore...
+  Restored P/Tutorial/PriorityQueue/PriorityQueue.csproj (in 757 ms).
+  PriorityQueue -&gt; P/Tutorial/PriorityQueue/POutput/netcoreapp3.1/PriorityQueue.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+</code></pre></div>
+</details>
+<h4 id="running-priorityqueue-test-case">Running PriorityQueue test case</h4>
+<p>Run the following command to run the test case <a href="https://github.com/p-org/P/blob/master/Tutorial/PriorityQueue/PTst/TestScripts.p#L2"><code>tcCheckPriorityQueue</code></a>:</p>
+<div class="highlight"><pre><span></span><code>pmc &lt;path&gt;/PriorityQueue.dll -v
+</code></pre></div>
+<details class="note"><summary>Expected Output</summary><div class="highlight"><pre><span></span><code>. Testing /Users/ankushpd/Workspace/github/P/Tutorial/PriorityQueue/POutput/netcoreapp3.1/PriorityQueue.dll
+Starting TestingProcessScheduler in process 49983
+... Created &#39;1&#39; testing task.
+... Task 0 is using &#39;random&#39; strategy (seed:3421113095).
+..... Iteration #1
+&lt;TestLog&gt; Running test &#39;PImplementation.tcCheckPriorityQueue.Execute&#39;.
+&lt;CreateLog&gt; Plang.CSharpRuntime._GodMachine(1) was created by task &#39;2&#39;.
+&lt;CreateLog&gt; PImplementation.Client(2) was created by Plang.CSharpRuntime._GodMachine(1).
+&lt;StateLog&gt; PImplementation.Client(2) enters state &#39;Init&#39;.
+&lt;PrintLog&gt; Creating Priority Queue!
+&lt;PrintLog&gt; Adding Element in the Priority Queue!
+&lt;PrintLog&gt; Adding Element in the Priority Queue!
+&lt;PrintLog&gt; Adding Element in the Priority Queue!
+&lt;PrintLog&gt; Choosing element at location: 1
+&lt;PrintLog&gt; --------------
+&lt;PrintLog&gt; Hello
+&lt;PrintLog&gt; World
+&lt;PrintLog&gt; !!
+&lt;PrintLog&gt; 123
+&lt;PrintLog&gt; --------------
+</code></pre></div>
+</details>
+<p>Hope you exploit the P Foreign interface to implement and test complex systems. If you have any questions, please feel free to post them in the discussions or issues.</p>
                 
               
               
