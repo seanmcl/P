@@ -728,11 +728,11 @@ assert the desired correctness specifications based on these observations.</p>
 <p class="admonition-title">Machines vs Spec Machine</p>
 <p>Syntactically, machines and spec machines in P <strong>are very similar in terms of the state machine structure</strong>. But, they have some key differences:</p>
 <ul>
-<li><code>spec</code> machines in P are <strong>observer machines</strong> (imagine runtime monitors), they observe a set of events in the execution of the system and based on these observed events (may keep track on local state) it asserts the desired global safety and liveness specifications.</li>
+<li><code>spec</code> machines in P are <strong>observer machines</strong> (imagine runtime monitors), they observe a set of events in the execution of the system and based on these observed events (may keep track on local state) assert the desired global safety and liveness specifications.</li>
 <li>Since <code>spec</code> machines are observer machines, they <strong>cannot have any side effects</strong> on the system behavior and hence, <code>spec</code> machines cannot perform <code>send</code>, <code>receive</code>, <code>new</code>, and <code>annouce</code>.</li>
 <li><code>spec</code> machines are <strong>global machines</strong>, in other words, there is only a single instance of each monitor created at the start of the execution of the system. We currently do not support dynamic creation of monitors. Hence, <code>spec</code> machines cannot use <code>this</code> expression.</li>
-<li><code>spec</code> machines are <strong>synchronously composed</strong> with the system that it is monitoring. The way this is acheived is: each time there is a <code>send</code> or <code>announce</code> of an event during the execution of a system, all the monitors or specifications that are observing that event are executed synchronously at that point. Another way to imagine this is: just before <code>send</code> or <code>annouce</code> of an event, we deliver this event to all the monitors that are observing the event and <strong>synchronously</strong> execute the monitor at that point.</li>
-<li>Finally, <code>spec</code> machines can have <code>hot</code> and <code>cold</code> annotations on its states to model liveness specifiations.</li>
+<li><code>spec</code> machines are <strong>synchronously composed</strong> with the system that it is monitored. The way this is achieved is: each time there is a <code>send</code> or <code>announce</code> of an event during the execution of a system, all the monitors or specifications that are observing that event are executed synchronously at that point. Another way to imagine this is: just before <code>send</code> or <code>annouce</code> of an event, we deliver this event to all the monitors that are observing the event and <strong>synchronously</strong> execute the monitor at that point.</li>
+<li>Finally, <code>spec</code> machines can have <code>hot</code> and <code>cold</code> annotations on their states to model liveness specifications.</li>
 </ul>
 </div>
 <details class="note" open="open"><summary>P Spec Machine Grammar</summary><p><code>specMachineDecl : spec iden observes eventsList statemachineBody ;</code></p>
@@ -778,7 +778,7 @@ assert the desired correctness specifications based on these observations.</p>
 <span class="p">}</span>
 </code></pre></div>
 </td></tr></table>
-The above specifications checks a very simple global invariant that all <code>eRequest</code> events that are being sent by clients in the system have a globally monotonically increasing <code>rId</code>s.</p>
+The above specification checks a very simple global invariant that all <code>eRequest</code> events that are being sent by clients in the system have a globally monotonically increasing <code>rId</code>.</p>
 </div>
 <input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Liveness specification</label><div class="tabbed-content">
 <p><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1

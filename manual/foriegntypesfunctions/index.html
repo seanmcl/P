@@ -65,6 +65,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#priorityqueue" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -620,9 +625,63 @@
     <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
     
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        P Foreign Interface
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
     <a href="./" class="md-nav__link md-nav__link--active">
       P Foreign Interface
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#priorityqueue" class="md-nav__link">
+    PriorityQueue
+  </a>
+  
+    <nav class="md-nav" aria-label="PriorityQueue">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#p-source" class="md-nav__link">
+    P Source
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p-test" class="md-nav__link">
+    P Test
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p-foreign-code" class="md-nav__link">
+    P Foreign Code
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -713,6 +772,61 @@
               </div>
             
             
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#priorityqueue" class="md-nav__link">
+    PriorityQueue
+  </a>
+  
+    <nav class="md-nav" aria-label="PriorityQueue">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#p-source" class="md-nav__link">
+    P Source
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p-test" class="md-nav__link">
+    P Test
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p-foreign-code" class="md-nav__link">
+    P Foreign Code
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content">
             <article class="md-content__inner md-typeset">
@@ -721,7 +835,20 @@
                 
                   <h1>P Foreign Interface</h1>
                 
-                
+                <p>P Supports implementing types and functions in a foreign language, and then using them in P programs just like any other P types and functions.</p>
+<div class="admonition hint">
+<p class="admonition-title">Recommendation: Using Foreign Types and Functions</p>
+<p>Programmers can consider implementing a particular type as Foreign type in P if its a complicated data structure and implementing them using P types is either not possible or too combursome. For example, P does not support declaring recursive data types, and hence, implementing a linked-list or a tree like data-structure in P is hard. Hence, we recommend programmers to implement such types as foreign types.</p>
+<p>When modeling complex systems, many a times programmers need to implement complicated logic/functions that manupulate or iterate over data-structures. Such functions can be easily implemented in foreign languages like Java and C# as compared to P. For example, iterating over collections and manipulating them is easier in Java and C#, and verbose in P as P only supports <code>while</code> loop and not a iterator like <code>foreach</code>. Also functions that operate on foreign types are implemented as foreign functions.   </p>
+</div>
+<p>The <a href="../../tutorial/twophasecommit/">Two Phase Commit</a> example had introduced the Foreign function feature. We now use a simple PriorityQueue example to go into the details of foreign interface in P.</p>
+<h3 id="priorityqueue"><a href="">PriorityQueue</a></h3>
+<p>The PriorityQueue project presents an example where a <code>Client</code> uses a priority queue implemented as foreign types and functions.</p>
+<h4 id="p-source">P Source</h4>
+<p>The <a href="">PriorityQueue.p</a> file declares the foreign type <a href=""><code>tPriorityQueue</code></a> and also <a href="">global foreign functions</a> that can be used to operate or interact with the priority queue.</p>
+<h4 id="p-test">P Test</h4>
+<p>The <a href="">Client.p</a> files presents a <code>Client</code> state machine that uses the priority queue and performs operations on it by calling the foreign function. The <code>Client</code> machine also declares a <a href="">local foreign function</a> to add an element into the queue.</p>
+<h4 id="p-foreign-code">P Foreign Code</h4>
                 
               
               

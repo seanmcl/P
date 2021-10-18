@@ -65,6 +65,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#p-project" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -328,9 +333,91 @@
     <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
     
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Two Phase Commit
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
     <a href="./" class="md-nav__link md-nav__link--active">
       Two Phase Commit
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#p-project" class="md-nav__link">
+    P Project
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#models" class="md-nav__link">
+    Models
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#specifications" class="md-nav__link">
+    Specifications
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-scenarios" class="md-nav__link">
+    Test Scenarios
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-testdriverp" class="md-nav__link">
+    - TestDriver.p
+  </a>
+  
+    <nav class="md-nav" aria-label="- TestDriver.p">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#compiling-twophasecommit" class="md-nav__link">
+    Compiling TwoPhaseCommit
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing-twophasecommit" class="md-nav__link">
+    Testing TwoPhaseCommit
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-problem" class="md-nav__link">
+    Exercise Problem
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -713,6 +800,89 @@
               </div>
             
             
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#p-project" class="md-nav__link">
+    P Project
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#models" class="md-nav__link">
+    Models
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#specifications" class="md-nav__link">
+    Specifications
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-scenarios" class="md-nav__link">
+    Test Scenarios
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-testdriverp" class="md-nav__link">
+    - TestDriver.p
+  </a>
+  
+    <nav class="md-nav" aria-label="- TestDriver.p">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#compiling-twophasecommit" class="md-nav__link">
+    Compiling TwoPhaseCommit
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing-twophasecommit" class="md-nav__link">
+    Testing TwoPhaseCommit
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercise-problem" class="md-nav__link">
+    Exercise Problem
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content">
             <article class="md-content__inner md-typeset">
@@ -721,15 +891,69 @@
                 
                   <h1>Two Phase Commit</h1>
                 
-                <p>Now that we understand the basic features of the P language, lets look at modeling and analysis of a distributed system <img alt="🤹‍♂️" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f939-200d-2642-fe0f.svg" title=":man_juggling:" />!</p>
+                <details class="note"><summary>How to use this example</summary><p>We assume that you have cloned the P repository locally.
+<div class="highlight"><pre><span></span><code>git clone https://github.com/p-org/P.git
+</code></pre></div></p>
+<p>The recommended way to work through this example is to open the <a href="https://github.com/p-org/P/tree/master/Tutorial">P\Tutorial</a> folder in IntelliJ side-by-side a browser using which you can simulatenously read the description for each example and browser the P program in IntelliJ. </p>
+</details>
+<p>Now that we understand the basic features of the P language, lets look at modeling and analysis of a distributed system <img alt="🤹‍♂️" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f939-200d-2642-fe0f.svg" title=":man_juggling:" />!</p>
 <p><strong>System:</strong> We use a simplified version of the <a href="https://s2.smu.edu/~mhd/8330f11/p133-gray.pdf">classic two phase commit protocol</a> to model a transaction commit service. The two phase commit protocol uses a single coordinator to gain consensus for a transaction spanning across multiple participants. A transaction in our case is simply a <code>write</code> operation for a key-value data store where the data store is replicated across participants, in other words, a <code>write</code> transaction must be committed only if its accepted by all the participant replicas and aborted if any one of the participant replica rejects the <code>write</code> request.</p>
 <p><img align="center" alt="Placeholder" src="../twophasecommit.png" /></p>
 <p>A two phase commit protocol consists of two phases <img alt="😆" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f606.svg" title=":laughing:" /> (figure above). On receiving a write transaction, the coordinator starts the first phase in which it sends a <code>prepare</code> request to all the participants and waits for a <code>prepare success</code> or <code>prepare failure</code> response. On receiving prepare response from all the participants, the coordinator moves the second phase where it sends a <code>commit</code> or <code>abort</code> message to the participants and also responds back to the client if the write transaction was committed or aborted by the service. </p>
 <p><strong>Assumptions:</strong> Note that our transaction commit system is ridiculously simplified, for example, (1) it does allow multiple concurrent clients to issue transactions in parallel but the coordinator serializes these transaction and services them one-by-one, (2) it is not fault tolerant to node failures, failure of either coordinator or any of the participants will block the progress forever. Also, we rely on <a href="../../advanced/psemantics/">P's reliable send semantics</a> to model the behavior of the underlying network, hence, our models assume reliable delivery of messages.</p>
 <p><strong>Correctness Specification:</strong> We would like our transaction commit service to provide atomicity guarantees for each transaction, i.e., if the service responds to the client that a transaction was committed then that transaction must have been committed by each of its participants and if a transaction is aborted then atleast one of the participant must have rejected the transaction. We would also like to check that under the assumptions above (no node failures and reliable network), each transaction request is eventually responded by the transaction commit service.</p>
+<h3 id="p-project">P Project</h3>
+<p>The <a href="https://github.com/p-org/P/tree/master/Tutorial/2_TwoPhaseCommit">2_TwoPhaseCommit</a> folder contains the source code for the <a href="https://github.com/p-org/P/blob/master/Tutorial/2_TwoPhaseCommit/TwoPhaseCommit.pproj">TwoPhaseCommit</a> project. Please feel free to read details about the typical <a href="../../advanced/structureOfPProgram/">P program structure</a> and <a href="../../advanced/PProject/">P project file</a>.</p>
+<h3 id="models">Models</h3>
+<p>The P models (<a href="https://github.com/p-org/P/tree/master/Tutorial/2_TwoPhaseCommit/PSrc">PSrc</a>) for the TwoPhaseCommit example consists of three files:</p>
+<ol>
+<li><a href="https://github.com/p-org/P/blob/master/Tutorial/2_TwoPhaseCommit/PSrc/Coordinator.p">Coordinator.p</a>: Implements the Coordinator state machine.</li>
+</ol>
+<details class="tip"><summary>[Expand]: Lets walk through Coordinator.p</summary><p>...</p>
+</details>
+<ul>
+<li><a href="https://github.com/p-org/P/blob/master/Tutorial/2_TwoPhaseCommit/PSrc/Participant.p">Participant.p</a>: Implements the Participant state machine.</li>
+</ul>
+<details class="tip"><summary>[Expand]: Lets walk through Participant.p</summary><p>...</p>
+</details>
+<ul>
+<li><a href="https://github.com/p-org/P/blob/master/Tutorial/2_TwoPhaseCommit/PSrc/TwoPhaseCommitModules.p">TwoPhaseCommitModules.p</a>: Declares the P modules corresponding to each component in the system.</li>
+</ul>
+<details class="tip"><summary>[Expand]: Lets walk through TwoPhaseCommitModules.p</summary><p>...</p>
+</details>
+<h3 id="specifications">Specifications</h3>
+<p>The P Specifications (<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSpec">PSpec</a>) for the TwoPhaseCommit example are implemented in the <a href="https://github.com/p-org/P/blob/master/Tutorial/2_TwoPhaseCommit/PSpec/Atomicity.p">Atomicity.p</a> file. We define two specifications:</p>
+<ul>
+<li>
+<p>Atomicity (safety property): if a transaction is committed by the coordinator then it was agreed on by all participants.</p>
+</li>
+<li>
+<p>Progress (liveness property): every received transaction from a client must be eventually responded back.</p>
+</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Note</p>
+<p>BankBalanceIsCorrect also checks that if there is enough money in the account then the withdraw request must not error. Hence, the two properties above together ensure that every withdraw request if allowed will eventually succeed and the bank cannot block correct withdrawal requests.</p>
+</div>
+<details class="tip"><summary>[Expand]: Lets walk through Atomicity.p</summary><p>...</p>
+</details>
+<h3 id="test-scenarios">Test Scenarios</h3>
+<p>The test scenarios folder consists of two parts: (1) TestDrivers: These are collection of state machines that implement the test harnesses or environment state machines for different test scenarios and (2) TestScripts: These are collection of test cases that are automatically discharged by the P checker.</p>
+<p>The test scenarios folder for TwoPhaseCommit (<a href="https://github.com/p-org/P/tree/master/Tutorial/1_ClientServer/PTst">PTst</a>) consists of three files:</p>
+<h2 id="-testdriverp">- <a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PTst/TestDriver.p">TestDriver.p</a></h2>
+<ul>
+<li><a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PTst/Testscript.p">TestScript.p</a>.</li>
+</ul>
+<details class="tip"><summary>[Expand]: Lets walk through TestDriver.p</summary><p>...</p>
+</details>
+<details class="tip"><summary>[Expand]: Lets walk through TestScript.p</summary><p>...</p>
+</details>
+<h3 id="compiling-twophasecommit">Compiling TwoPhaseCommit</h3>
+<h3 id="testing-twophasecommit">Testing TwoPhaseCommit</h3>
+<h3 id="exercise-problem">Exercise Problem</h3>
 <div class="admonition summary">
-<p class="admonition-title">Summary</p>
-<p>We will use this example to dive deeper into: (1) modeling non-determinism in the systems, in particular, time-outs (2) writing complex safety properties like atomicity of transactions in P, and finally, modeling node failures in P using a failure injector state machine. We also use a very simple example to show how P allows invoking foreign code from the P programs. More details in <a href="../../manual/foriegntypesfunctions/">P foreign interface</a>.</p>
+<p class="admonition-title">What did we learn through this example?</p>
+<p>We dived deeper into: (1) modeling non-determinism in distributed systems, in particular, time-outs (2) writing complex safety properties like atomicity of transactions in P and finally, (3) modeling node failures in P using a failure injector state machine. We will also show how P allows invoking foreign code from the P programs. More details in <a href="../../manual/foriegntypesfunctions/">P foreign interface</a>.</p>
 </div>
                 
               

@@ -858,7 +858,7 @@ namedModuleDecl : module iden = modExpr ;   # Named module declaration
 <h3 id="primitive-module">Primitive Module</h3>
 <p>A primitive module is a (annonymous) collection of state machines.</p>
 <p><strong>Syntax</strong>: <code>{ bindExpr (, bindExpr)* }</code></p>
-<p>where <code>bindExpr</code> is a binding expression which could either be just the name of a machine <code>iden</code> or a mapping <code>mName -&gt; iName</code> that maps a machine <code>mName</code> to an interface <code>iName</code>. The binding enforces that whenever a machine <code>iName</code> is created in the module (i.e., <code>new iName(..)</code>) it leads to the creation of machine <code>mName</code>. The indirection using this binding is helpful in cases where we would like to replace a machine with another machine (e.g., implementation by its abstraction). This usecase is explained in the ClientServer example (FixMe with a link).</p>
+<p>where <code>bindExpr</code> is a binding expression which could either be just the name of a machine <code>iden</code> or a mapping <code>mName -&gt; replaceName</code> that maps a machine <code>mName</code> to a machine name <code>replaceName</code> that we want to replace. The binding enforces that whenever a machine <code>replaceName</code> is created in the module (i.e., <code>new replaceName(..)</code>) it leads to the creation of machine <code>mName</code>. The indirection using this binding is helpful in cases where we would like to replace a machine with another machine (e.g., implementation by its abstraction). This usecase is explained in the ClientServer example.</p>
 <p>In most cases, a primitive module is simply a list of state machines that together implement that component.</p>
 <div class="tabbed-set" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">Primitive Module</label><div class="tabbed-content">
 <p><div class="highlight"><pre><span></span><code>// Lets say there are three machines in the P program: Client, Server, and Timer
@@ -871,9 +871,9 @@ module server = { Server, Timer };
 <p><div class="highlight"><pre><span></span><code>// Lets say there are four machines in the P program: Client, Server, AbstractServer and Timer
 module client = { Client };
 module server = { Server, Timer };
-module serverAbs = {Server -&gt; AbstractServer, Timer};
+module serverAbs = {AbstractServer -&gt; Server, Timer};
 </code></pre></div>
-<code>client</code> is a primitive module consisting of the <code>Client</code> machine and the <code>server</code> module is a primitive module consistency of machines <code>Server</code> and <code>Timer</code>. The module <code>serverAbs</code> represents a primitive module consistency of machines <code>AbstractServer</code> and <code>Timer</code> machines with the difference that wherever the <code>serverAbs</code> module is used the creation of machine <code>Server</code> will in turn lead to creation of the <code>AbstractServer</code> machine.</p>
+<code>client</code> is a primitive module consisting of the <code>Client</code> machine and the <code>server</code> module is a primitive module consisting of machines <code>Server</code> and <code>Timer</code>. The module <code>serverAbs</code> represents a primitive module consisting of machines <code>AbstractServer</code> and <code>Timer</code> machines with the difference that wherever the <code>serverAbs</code> module is used the creation of machine <code>Server</code> will in turn lead to creation of the <code>AbstractServer</code> machine.</p>
 </div>
 </div>
 <h3 id="union-module">Union Module</h3>

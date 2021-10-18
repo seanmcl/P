@@ -1174,12 +1174,12 @@ of a named tuple can be accessed by using the <code>.</code> operation followed 
 <h3 id="indexing-into-a-collection">Indexing into a Collection</h3>
 <p>P supports three collection types: <code>map</code>, <code>seq</code>, and <code>set</code>. We can index into these collection types to access its elements.</p>
 <p><strong>Syntax:</strong> <code>expr_c[expr_i]</code> </p>
-<p>If <code>expr_c</code> is a value of sequence type then <code>expr_i</code> must be an integer expression and <code>expr_c[expr_i]</code> represents the element at index <code>expr_i</code>. Similarly, If <code>expr_c</code> is a value of set type then <code>expr_i</code> must be an integer expression and <code>expr_c[expr_i]</code> represents the element at index <code>expr_i</code> but not that for a set there is no guarantee for the order in which elements are stored in the set.
+<p>If <code>expr_c</code> is a value of sequence type then <code>expr_i</code> must be an integer expression and <code>expr_c[expr_i]</code> represents the element at index <code>expr_i</code>. Similarly, If <code>expr_c</code> is a value of set type then <code>expr_i</code> must be an integer expression and <code>expr_c[expr_i]</code> represents the element at index <code>expr_i</code> but note that for a set there is no guarantee for the order in which elements are stored in the set.
 Finally, if <code>expr_c</code> is a value of map type then <code>expr_i</code> represents the key to look up and <code>expr_c[expr_i]</code> represents the value for the key <code>expr_i</code>.</p>
 <h3 id="operations-on-collections">Operations on Collections</h3>
 <p>P supports four other operations on collection types:</p>
 <h4 id="sizeof">sizeof</h4>
-<p><strong>Syntax:</strong>: <code>sizeof(expr)</code> where <code>expr</code> is a value of type <code>set</code>, <code>seq</code> or <code>map</code> and it returns an integer value representing the size or length of the collection.</p>
+<p><strong>Syntax:</strong>: <code>sizeof(expr)</code>, where <code>expr</code> is a value of type <code>set</code>, <code>seq</code> or <code>map</code>, returns an integer value representing the size or length of the collection.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="n">sq</span><span class="p">:</span> <span class="n">seq</span><span class="o">[</span><span class="kt">int</span><span class="o">]</span><span class="p">;</span>
 <span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">sizeof</span><span class="p">(</span><span class="n">sq</span><span class="p">)</span><span class="o">&gt;</span><span class="p">)</span> <span class="p">{</span>
     <span class="p">...</span>
@@ -1208,7 +1208,7 @@ Finally, if <code>expr_c</code> is a value of map type then <code>expr_i</code> 
 <h3 id="new">New</h3>
 <p>New expression is used to create an instance of a machine, <code>new</code> returns a machine reference to the newly created instance of the machine.</p>
 <p><strong>Syntax</strong>: <code>new iden (rvalue?) ;</code></p>
-<p><code>iden</code> is the name of the machine to be create and <code>rvalue</code> is the optional constructor parameter that becomes the input parameter of the entry function of the start state of the machine.</p>
+<p><code>iden</code> is the name of the machine to be created and <code>rvalue</code> is the optional constructor parameter that becomes the input parameter of the entry function of the start state of the machine.</p>
 <div class="tabbed-set" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">Create a machine</label><div class="tabbed-content">
 <p><div class="highlight"><pre><span></span><code><span class="k">new</span> <span class="n">Client</span><span class="p">((</span><span class="n">id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">server</span> <span class="o">=</span> <span class="k">this</span><span class="p">));</span>
 </code></pre></div>
@@ -1230,11 +1230,11 @@ which is delivered as a payload to the entry function of the start state of the 
 </div>
 </div>
 <h3 id="negation-and-not">Negation and Not</h3>
-<p>P supports two unary operations: <code>-</code> on integers and floats values (i.e., negation) and <code>!</code> on boolean values(i.e., logical not).</p>
+<p>P supports two unary operations: <code>-</code> on integers and floats values (i.e., negation) and <code>!</code> on boolean values (i.e., logical not).</p>
 <h3 id="arithmetic">Arithmetic</h3>
 <p>P supports the following arithmetic binary operations on integers or floats: <code>+</code> (i.e., addition), <code>-</code> (i.e., subtraction), <code>*</code> (i.e., multiplication), and <code>/</code> (i.e., division).</p>
 <h3 id="comparison">Comparison</h3>
-<p>P supports the following comparison binary operations on integers or floats: <code>&lt;</code> (i.e., less-than), <code>&lt;=</code> (i.e., less-than-equal), <code>&gt;</code> (i.e., greator-than), and <code>&gt;=</code> (i.e., greator-than-equal).</p>
+<p>P supports the following comparison binary operations on integers or floats: <code>&lt;</code> (i.e., less-than), <code>&lt;=</code> (i.e., less-than-equal), <code>&gt;</code> (i.e., greater-than), and <code>&gt;=</code> (i.e., greater-than-equal).</p>
 <h3 id="cast">Cast</h3>
 <p>P supports two super types <code>any</code> and <code>data</code> (<a href="../datatypes/#universal-supertypes">more details</a>). To cast values from these supertypes to the actual types, P supports the <code>as</code> cast expression.</p>
 <p><strong>Syntax:</strong> <code>expr as T</code></p>
@@ -1270,9 +1270,9 @@ which is delivered as a payload to the entry function of the start state of the 
 <h3 id="choose">Choose</h3>
 <p>P provides the <code>choose</code> primitive to model data nondeterminism in P programs. The P checker then explores the behavior of the program for all possible values that can be returned by the <code>choose</code> operation.</p>
 <p><strong>Syntax:</strong> <code>choose()</code> or <code>choose(expr)</code></p>
-<p><code>expr</code> can either be a <code>int</code> value or a collection. For <code>choose(x)</code>, when <code>x</code> is an integer, <code>choose(x)</code> returns a random value between <code>0 to x</code> (including x), when <code>x</code> is a collection then <code>choose(x)</code> returns a random element from the collection.</p>
+<p><code>expr</code> can either be a <code>int</code> value or a collection. For <code>choose(x)</code>, when <code>x</code> is an integer, <code>choose(x)</code> returns a random value between <code>0 to x</code> (excluding x), when <code>x</code> is a collection then <code>choose(x)</code> returns a random element from the collection.</p>
 <div class="highlight"><pre><span></span><code><span class="n">choose</span><span class="p">()</span> <span class="c1">// returns true or false, is equivalent to $</span>
-<span class="n">choose</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="c1">// returns an integer x, 0 &lt;= x &lt;= 10</span>
+<span class="n">choose</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="c1">// returns an integer x, 0 &lt;= x &lt; 10</span>
 <span class="n">choose</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1">// if x is set or seq then returns a value from that collection</span>
 </code></pre></div>
 <p>The choose operation can be used to model nondeterministic environment machines that generate random inputs for the system. Another use case could be to model nondeterministic behavior within the system itself where the system can randomly choose to <code>timeout</code> or <code>fail</code> or <code>drop messages</code>.</p>
