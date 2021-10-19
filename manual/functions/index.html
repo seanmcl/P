@@ -597,12 +597,18 @@
     Named Functions
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
+    <nav class="md-nav" aria-label="Named Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#foreign-functions" class="md-nav__link">
     Foreign Functions
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -792,12 +798,18 @@
     Named Functions
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
+    <nav class="md-nav" aria-label="Named Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#foreign-functions" class="md-nav__link">
     Foreign Functions
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -823,7 +835,12 @@
                 
                   <h1>P Functions</h1>
                 
-                <p>There are two types of functions in P, anonymous functions and named functions. Anonymous functions are unnamed functions that can appear as an entry or exit functions or as event-handlers. Named function in P can either be declared inside a state machine or globally as a top-level declaration. The named functions declared within a state machine are local to that machine and hence can access the local-variables of the machine. Global named functions are shared across state machines. Note that the purpose of having named functions is to enable code reuse, named functions can be used as entry/exit functions and also as event handlers. You can look at the <a href="../statemachines/">P State machine</a> to get more details about the declaration of these functions.</p>
+                <p>There are two types of functions in P: (1) anonymous functions, and (2) named functions. </p>
+<ul>
+<li><strong>Anonymous functions</strong> are unnamed functions that can appear as an entry functions or exit functions or as event-handlers. </li>
+<li><strong>Named functions</strong> can either be declared inside a state machine or globally as a top-level declaration. The named functions declared within a state machine are local to that machine and hence can access the local-variables of the machine. Global named functions are shared across state machines. Note that the purpose of having named functions is to enable code reuse. Named functions can be also be used as entry/exit functions and also as event handlers.</li>
+</ul>
+<p>Please look at <a href="../statemachines/">P state machine</a> for more details about the declaration of these functions.</p>
 <details class="note"><summary>P Functions Grammar</summary><div class="highlight"><pre><span></span><code>  anonEventHandler : (funParam?) functionBody                     # AnonymousFunDecl
 
   namedfunDecl : 
@@ -840,12 +857,20 @@
 </code></pre></div>
 </details>
 <h3 id="anonymous-functions">Anonymous Functions</h3>
+<p>Anonymous functions are unnamed functions that appear as entry or exit or event-handler functions.</p>
+<p><strong>Syntax</strong>: <code>(funParam?) functionBody</code></p>
+<p><code>funParam</code> is the optional <strong>single</strong> parameter allowed with the annonymous functions. To know more about the places annonymous functions can be used, please checkout the grammar of <a href="../statemachines/">p state machines</a> and <a href="../statements/#receive">receive statements</a>.</p>
 <h3 id="named-functions">Named Functions</h3>
-<h3 id="foreign-functions">Foreign Functions</h3>
-<p>P function declarations without any function body are referred to as foreign functions. Foreign functions are functions that are declared in P and can be used in the P program just like any other function but the implementation of these functions is provided in the foreign native language. </p>
+<p>Named functions in P can be declared within P state machines as local functions that can access the local variables of the state machine. Named functions that are declared as top-level declarations are global functions that can be used across state machines.</p>
+<p>Check out the grammar of <a href="../statemachines/">P state machines</a> for local functions declarations and <a href="../../manualoutline/">top-level declarations</a> grammar for the global function declarations.</p>
 <p><strong>Syntax</strong>: <code>fun name (funParamList?) (: returnType)? functionBody</code></p>
+<p><code>name</code> is the name of the named function, <code>funParamList</code> is the optional function parameters, and <code>returnType</code> is the optional return type of the function.</p>
+<h4 id="foreign-functions">Foreign Functions</h4>
+<p>P named function declarations without any function body are referred to as foreign functions. Foreign functions are functions that are declared in P and can be used in the P program just like any other function but the implementation of these functions is provided in the foreign language.</p>
+<p><strong>Syntax</strong>: <code>fun name (funParamList?) (: returnType)? ;</code></p>
+<p><code>name</code> is the name of the named function, <code>funParamList</code> is the optional function parameters, and <code>returnType</code> is the optional return type of the function.</p>
 <h3 id="function-body">Function Body</h3>
-<p>Body of any function in P is similar to any other programming language which a restriction that P uses C style local variable declarations.
+<p>Function body in P is similar to other programming languages with a restriction that P function-local variables uses C style local variable declarations.
 Declaration of local variables in a function must come before any other statement in the function body. So, the body of a function in P is a sequence of variable declarations followed by a sequence of <a href="../statements/">statements</a>.</p>
 <div class="highlight"><pre><span></span><code>functionBody : { varDecl* statement* }                          
 </code></pre></div>

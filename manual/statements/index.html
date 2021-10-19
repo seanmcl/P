@@ -1395,13 +1395,11 @@ The optional payload accompanying the goto statement becomes the input parameter
 </div>
 <h3 id="receive">Receive</h3>
 <p>Receive statements in P are used to perform blocking await/receive for a set of events inside a function.</p>
-<p><strong>Syntax</strong>:</p>
-<div class="highlight"><pre><span></span><code>```
-receive { recvCase+ }
+<p><strong>Syntax</strong>:
+<div class="highlight"><pre><span></span><code>receive { recvCase+ }
 /* case block inside a receive statement */
 recvCase : case eventList : anonFunction
-```
-</code></pre></div>
+</code></pre></div></p>
 <p>Each <code>receive</code> statement can block or wait on a set of events, all other events are automatically deferred by the state machine. 
 On receiving an event that the <code>receive</code> is blocking on (case blocks), the state machine unblocks, executes the corresponding case-handler 
 and resumes executing the next statement after receive.</p>
