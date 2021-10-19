@@ -881,8 +881,8 @@ Build succeeded.
 ----------------------------------------
 </code></pre></div>
 </details>
-<details class="info"><summary>P Project File Details</summary><p>The P compiler does not support advacned project management features like separate compilation and dependency analysis (<em>coming soon</em>).
-The current project file interface is a simple mechanism to provide all the required inputs to the compiler in a XML format (<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/ClientServer.pproj">ClientServer.pproj</a>).
+<details class="info"><summary>P Project File Details</summary><p>The P compiler does not support advanced project management features like separate compilation and dependency analysis (<em>coming soon</em>).
+The current project file interface is a simple mechanism to provide all the required inputs to the compiler in an XML format (<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/ClientServer.pproj">ClientServer.pproj</a>).
 <div class="highlight"><pre><span></span><code><span class="c">&lt;!-- P Project file for the Client Server example --&gt;</span>
 <span class="nt">&lt;Project&gt;</span>
 <span class="nt">&lt;ProjectName&gt;</span>ClientServer<span class="nt">&lt;/ProjectName&gt;</span>
@@ -898,7 +898,7 @@ The <code>&lt;InputFiles&gt;</code> block provides all the P files that must be 
 In <code>&lt;PFile&gt;</code> one can either specify the path to a P file or to a folder and the P compiler includes all the <code>*.p</code> files in the folder during compilation.
 The <code>&lt;ProjectName&gt;</code> block provides the name for the project which is used as the output file name for the generated code.
 The <code>&lt;OutputDir&gt;</code> block provides the output directory for the generated code.
-Finally, <code>&lt;IncludeProject&gt;</code> block provides path to other P projects that must be included as dependencies during compilation. 
+Finally, the <code>&lt;IncludeProject&gt;</code> block provides a path to other P projects that must be included as dependencies during compilation. 
 The P compiler simply recursively copies all the P files in the dependency projects (transitively including all P files in dependent projects) and compiles them together. 
 This feature provides a way to split the P models for a large system into sub projects that can share models.</p>
 </details>
@@ -1007,7 +1007,7 @@ the <code>tcSingleClientAbstractServer</code> test case. Run command:
     -m PImplementation.tcSingleClientAbstractServer.Execute \
     -i 100
 </code></pre></div></p>
-<details class="info"><summary>Expected Output</summary><div class="highlight"><pre><span></span><code>pmc &lt;Path&gt;/ClientServer.dll -m PImplementation.multipleClientsServer.Execute -i 100
+<details class="info"><summary>Expected Output</summary><div class="highlight"><pre><span></span><code>pmc &lt;Path&gt;/ClientServer.dll -m PImplementation.tcSingleClientAbstractServer.Execute -i 100
 
 . Testing &lt;Path&gt;/ClientServer.dll
 ... Method PImplementation.tcSingleClientAbstractServer.Execute
@@ -1032,7 +1032,7 @@ Starting TestingProcessScheduler in process 72578
 </details>
 <p>The P checker on finding a bug generates two artifacts (highlighted in the expected output above):
 (1) a <strong>textual trace file</strong> (e.g., <code>ClientServer_0_0.txt</code>) that has the readable error trace representing the
-sequence of steps from the intial state to the error state.
+sequence of steps from the intial state to the error state;
 (2) a <strong>schedule file</strong> (e.g., <code>ClientServer_0_0.schedule</code>) that can be used to replay the error
 trace and single step through the P program with the generated error trace for debugging
 (more details about debugging P error traces: <a href="../../advanced/debuggingerror/">here</a>).</p>
