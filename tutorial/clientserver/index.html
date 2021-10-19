@@ -909,29 +909,42 @@ the interaction between the BankServer and Database. We use the <code>AbstractBa
 <li><a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSrc/ClientServerModules.p">ClientServerModules.p</a>: Declares the P modules corresponding to each component in the system.</li>
 </ul>
 <details class="tip"><summary>[Expand]: Lets walk through ClientServerModules.p</summary><ul>
-<li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSrc/ClientServerModules.p#L1-L5">L1 - L5</a>) &rarr; Declares the <code>Client</code> and <code>BankServer</code> module</li>
+<li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSrc/ClientServerModules.p#L1-L5">L1 - L5</a>) &rarr; Declares the <code>Client</code> and <code>Bank</code> modules. A module in P is a collection of state machines that together implement that module or component. A system model in P is then a composition or union of modules. The <code>Client</code> module consist of a single machine <code>Client</code> and the <code>Bank</code> module is implemented by machines <code>BankServer</code> and <code>Database</code> together (manual: <a href="../../manual/modulesystem/">P module system</a>).  The <code>AbstractBank</code> module using the <code>binding</code> feature in P modules to bind the <code>BankServer</code> machine to <code>AbstractBankServer</code> machine. Basically, what this implies is that whenever <code>AbstractBank</code> module is used creation of the <code>BankServer</code> machine will result in creation of <code>AbstractBankServer</code>, replacing the implementation with its abstraction (manual: <a href="../../manual/modulesystem/#primitive-module">primitive modules</a>).</li>
 </ul>
 </details>
 <h3 id="specifications">Specifications</h3>
 <p>The P Specifications (<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSpec">PSpec</a>) for the ClientServer example are implemented in the <a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSpec/BankBalanceCorrect.p">BankBalanceCorrect.p</a> file. We define two specifications:</p>
 <ul>
 <li>
-<p>BankBalanceIsAlwaysCorrect (safety property): BankBalanceIsCorrect spec checks the global invariant that the account-balance communicated to the client by the bank is always correct and the bank never removes more money from the account than what is withdrawn by the client! Also, if the bank denies a withdraw request then its only because the withdrawal will reduce the account balance to below 10.</p>
+<p><strong>BankBalanceIsAlwaysCorrect</strong> (safety property): BankBalanceIsCorrect spec checks the global invariant that the account-balance communicated to the client by the bank is always correct and the bank never removes more money from the account than what is withdrawn by the client! Also, if the bank denies a withdraw request then its only because the withdrawal will reduce the account balance to below 10.</p>
 </li>
 <li>
-<p>GuaranteedWithDrawProgress (liveness property): GuaranteedWithDrawProgress checks the liveness (or progress) property that all withdraw requests submitted by the client are eventually responded.</p>
+<p><strong>GuaranteedWithDrawProgress</strong> (liveness property): GuaranteedWithDrawProgress checks the liveness (or progress) property that all withdraw requests submitted by the client are eventually responded.</p>
 </li>
 </ul>
 <div class="admonition info">
-<p>BankBalanceIsCorrect also checks that if there is enough money in the account then the withdraw request must not error. Hence, the two properties above together ensure that every withdraw request if allowed will eventually succeed and the bank cannot block correct withdrawal requests.</p>
+<p>BankBalanceIsAlwaysCorrect also checks that if there is enough money in the account then the withdraw request must not error. Hence, the two properties above together ensure that every withdraw request if allowed will eventually succeed and the bank cannot block correct withdrawal requests.</p>
 </div>
-<details class="tip"><summary>[Expand]: Lets walk through BankBalanceCorrect.p</summary></details>
-<h3 id="test-scenarios">Test Scenarios</h3>
-<p>The test scenarios folder in P consists of two parts: (1) TestDrivers: These are collection of state machines that implement the test harnesses or environment state machines for different test scenarios and (2) TestScripts: These are collection of test cases that are automatically discharged by the P checker.</p>
-<p>The test scenarios folder for ClientServer (<a href="https://github.com/p-org/P/tree/master/Tutorial/1_ClientServer/PTst">PTst</a>) consists of two files <a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PTst/TestDriver.p">TestDriver.p</a> and <a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PTst/Testscript.p">TestScript.p</a>.</p>
-<details class="tip"><summary>[Expand]: Lets walk through TestDriver.p</summary><p>...</p>
+<details class="tip"><summary>[Expand]: Lets walk through BankBalanceCorrect.p</summary><ul>
+<li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSpec/BankBalanceCorrect.p#L20">L20</a>) &rarr; Event <code>eSpec_BankBalanceIsAlwaysCorrect_Init</code> is used to inform the monitors about the initial state of the Bank. The event is announced by the TestDrivers when setting up the system (<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PTst/TestDriver.p#L51">here</a>).</li>
+<li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSpec/BankBalanceCorrect.p#L36-L86">L36 - L86</a>) &rarr; Declares the <code>BankBalanceIsAlwaysCorrect</code> safety spec machine that observes the events <code>eWithDrawReq</code>,  <code>eWithDrawResp</code>, and <code>eSpec_BankBalanceIsAlwaysCorrect_Init</code> to assert the required global invariant.</li>
+<li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSpec/BankBalanceCorrect.p#L92-L115">L92 - L115</a>) &rarr; Declares the <code>GuaranteedWithDrawProgress</code> liveness spec machine that observes the events <code>eWithDrawReq</code> and <code>eWithDrawResp</code> to assert the required liveness property that every request is eventually responded by the Bank.</li>
+<li>To understand the semantics of the P spec machines, please read manual: <a href="../../manual/monitors/">p monitors</a>.</li>
+</ul>
 </details>
-<details class="tip"><summary>[Expand]: Lets walk through TestScript.p</summary><p>...</p>
+<h3 id="test-scenarios">Test Scenarios</h3>
+<p>The test scenarios folder in P has two parts: (1) TestDrivers: These are collection of state machines that implement the test harnesses or environment state machines for different test scenarios and (2) TestScripts: These are collection of test cases that are automatically discharged by the P checker.</p>
+<p>The test scenarios folder for ClientServer (<a href="https://github.com/p-org/P/tree/master/Tutorial/1_ClientServer/PTst">PTst</a>) consists of two files <a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PTst/TestDriver.p">TestDriver.p</a> and <a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PTst/Testscript.p">TestScript.p</a>.</p>
+<details class="tip"><summary>[Expand]: Lets walk through TestDriver.p</summary><ul>
+<li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PTst/TestDriver.p#L36-L60">L36 - L60</a>) &rarr; Function <code>SetupClientServerSystem</code> takes as input the number of clients to be created and setups the ClientServer system by creating the <code>Client</code> and <code>BankServer</code> machines. The <a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PTst/TestDriver.p#L25-L34"><code>CreateRandomInitialAccounts</code></a> function uses the <a href="../../manual/expressions/#choose"><code>choose</code></a> primitive to randomly initialize the accounts map.</li>
+<li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PTst/TestDriver.p#L3-L22">L3 - L22</a>) &rarr; Machines <code>TestWithSingleClient</code> and <code>TestWithMultipleClients</code> are simple test driver machines that setup the system to be checked by the P checker for different scenarios. In this case, test the ClientServer system by first randomly initializing the accounts map and with one <code>Client</code> and with multiple <code>Client</code>s (between 2 to 4)).</li>
+</ul>
+</details>
+<details class="tip"><summary>[Expand]: Lets walk through TestScript.p</summary><p>P allows programmers to write different test cases each of which can be checked separately and each can use a different test driver that triggers different behaviors in the system under test using different system configurations and input generators.</p>
+<ul>
+<li>To better understand the P test cases, please look at manual: <a href="../../manual/testcases/">P test cases</a>.</li>
+<li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PTst/Testscript.p#L4-L16">L4 - L16</a>) &rarr; Declares three test cases each checking a different scenario and system. The system under test is the <code>union</code> of the modules representing each component in the system (manual: <a href="../../manual/modulesystem/#union-module">P module system</a>).</li>
+</ul>
 </details>
 <h3 id="compiling-clientserver">Compiling ClientServer</h3>
 <p>Run the following command to compile the ClientServer project:</p>
@@ -1000,7 +1013,7 @@ test case to run by using the <code>-m</code> parameter along with the <code>-i<
 </code></pre></div>
 <div class="admonition danger">
 <p class="admonition-title">Error</p>
-<p><code>tcSingleClientAbstractServer</code> triggers an error in the AbstractBankServer state machine. Please use the <a href="../../advanced/debuggingerror/">guide</a> to explore how to debug an error generated by P Checker.</p>
+<p><code>tcSingleClientAbstractServer</code> triggers an error in the AbstractBankServer state machine. Please use the <a href="../../advanced/debuggingerror/">guide</a> to explore how to debug an error trace generated by P Checker.</p>
 </div>
 <h3 id="exercise-problem">Exercise Problem</h3>
 <ul>
