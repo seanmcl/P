@@ -361,18 +361,6 @@
 
 
   <li class="md-nav__item">
-    <a href="../../tutorial/paxos/" class="md-nav__link">
-      Paxos Made Simple
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
     <a href="../../tutorial/common/" class="md-nav__link">
       Timer, Failure, and Shared Memory
     </a>
@@ -886,7 +874,7 @@
 <p>Note that P does not support pass by references, everything in P is always pass by value. Hence the functions above must return a priority queue after adding the element into the queue (mutated queue).</p>
 </div>
 <h4 id="p-test">P Test</h4>
-<p>The <a href="https://github.com/p-org/P/blob/master/Tutorial/PriorityQueue/PTst/Client.p">Client.p</a> files presents a <a href="https://github.com/p-org/P/blob/master/Tutorial/PriorityQueue/PTst/Client.p#L5"><code>Client</code></a> state machine that uses the priority queue and performs operations on it by calling the foreign function. The <code>Client</code> machine also declares a <a href="https://github.com/p-org/P/blob/master/Tutorial/PriorityQueue/PTst/Client.p#L46-L47">local foreign function</a> to add an element into the queue.</p>
+<p>The <a href="https://github.com/p-org/P/blob/master/Tutorial/PriorityQueue/PTst/Client.p">Client.p</a> file presents a <a href="https://github.com/p-org/P/blob/master/Tutorial/PriorityQueue/PTst/Client.p#L5"><code>Client</code></a> state machine that uses the priority queue and performs operations on it by calling the foreign function. The <code>Client</code> machine also declares a <a href="https://github.com/p-org/P/blob/master/Tutorial/PriorityQueue/PTst/Client.p#L46-L47">local foreign function</a> to add an element into the queue.</p>
 <h4 id="p-foreign-code">P Foreign Code</h4>
 <p>The implementation of the <code>tPriorityQueue</code> is available in <a href="https://github.com/p-org/P/blob/master/Tutorial/PriorityQueue/PForeign/PriorityQueue.cs">PriorityQueue.cs</a></p>
 <div class="admonition note">

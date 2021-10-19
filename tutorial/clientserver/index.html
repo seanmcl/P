@@ -439,18 +439,6 @@
 
 
   <li class="md-nav__item">
-    <a href="../paxos/" class="md-nav__link">
-      Paxos Made Simple
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
     <a href="../common/" class="md-nav__link">
       Timer, Failure, and Shared Memory
     </a>
@@ -870,35 +858,59 @@
 </code></pre></div></p>
 <p>The recommended way to work through this example is to open the <a href="https://github.com/p-org/P/tree/master/Tutorial">P\Tutorial</a> folder in IntelliJ side-by-side a browser using which you can simulatenously read the description for each example and browser the P program. </p>
 </details>
-<p><strong>System:</strong> We consider a client-server application where clients interact with the bank to withdraw money from their accounts. </p>
+<p><strong>System:</strong> We consider a client-server application where clients interact with a bank to withdraw money from their accounts. </p>
 <p><img align="center" alt="Placeholder" src="../clientserver.png" /></p>
-<p>The bank consists of two components: a bank server that services withdraw requests from the client and a backend database which is used to store the account balance information for each client.
-Multiple clients can concurrently send withdraw request to the bank server. The bank server on receiving a withdraw request, reads the current bank balance for the client and if the withdraw request is allowed then performs the withdrawal, updates the account balance and responds back to the client with the new account balance.</p>
-<p><strong>Correctness Specification:</strong> One of the invariant that the bank tries to maintain is that each client account must have atleast 10 dollars as its balance. If a withdraw request can take the account balance below 10 then the withdraw request is rejected by the bank. We would like to check the correctness property that in the presence of concurrent client withdraw requests the bank always responds with the correct bank balance for a client and a withdraw request must always succeeds if there is enough balance (&gt; 10) in the account.</p>
+<p>The bank consists of two components: (1) a bank server that services withdraw requests from the client; and (2) a backend database which is used to store the account balance information for each client.
+Multiple clients can concurrently send withdraw request to the bank. The bank server on receiving a withdraw request, reads the current bank balance for the client and if the withdraw request is allowed then performs the withdrawal, updates the account balance, and responds back to the client with the new account balance.</p>
+<p><strong>Correctness Specification:</strong> The invariant that the bank must maintain is that each account must have atleast 10 dollars as its balance. If a withdraw request takes the account balance below 10 then the withdraw request must be rejected by the bank. The correctness property we would also like to check is that in the presence of concurrent client withdraw requests the bank always responds with the correct bank balance for a client and a withdraw request must always succeeds if there is enough balance (&gt; 10) in the account.</p>
 <h3 id="p-project">P Project</h3>
-<p>The <a href="https://github.com/p-org/P/tree/master/Tutorial/1_ClientServer">1_ClientServer</a> folder contains the source code for the <a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/ClientServer.pproj">ClientServer</a> project. Please feel free to read details about the typical <a href="../../advanced/structureOfPProgram/">P program structure</a> and <a href="../../advanced/PProject/">P project file</a>.</p>
+<p>The <a href="https://github.com/p-org/P/tree/master/Tutorial/1_ClientServer">1_ClientServer</a> folder contains the source code for the <a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/ClientServer.pproj">ClientServer</a> project. Please feel free to read details about the recommended <a href="../../advanced/structureOfPProgram/">P program structure</a> and <a href="../../advanced/PProject/">P project file</a>.</p>
 <h3 id="models">Models</h3>
 <p>The P models (<a href="https://github.com/p-org/P/tree/master/Tutorial/1_ClientServer/PSrc">PSrc</a>) for the ClientServer example consists of four files: </p>
 <ol>
 <li><a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSrc/Client.p">Client.p</a>: Implements the Client state machine.</li>
 </ol>
-<details class="tip"><summary>[Expand]: Lets walk through Client.p</summary><p>...</p>
+<details class="tip"><summary>[Expand]: Lets walk through Client.p</summary><ul>
+<li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSrc/Client.p#L19-L22">L19 - L22</a>)  &rarr; Event <code>eWithDrawReq</code> and <code>eWithDrawResp</code> are used to communicate between the <code>Client</code> and <code>Server</code> machine (manual: <a href="../../manual/events/">event declaration</a>).</li>
+<li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSrc/Client.p#L3-L17">L3 - L17</a>) &rarr; Declares the payload types for the <code>eWithDrawReq</code> and <code>eWithDrawResp</code> events (manual: <a href="../../manual/datatypes/#user-defined">user defined type</a>).</li>
+<li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSrc/Client.p#L25-L95">L25 - L95</a>)  &rarr; Declares the <code>Client</code> state machine (manual: <a href="../../manual/statemachines/">P state machine</a>).<ul>
+<li>The <code>Client</code> machine has a set of local variables used to store the local-state of the state machine (<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSrc/Client.p#L27-L31">L27 - L31</a>). <code>Init</code> state is the start state of the machine where the machine starts executions on being created. The entry function of the <code>Init</code> state initializes the local variables based on the parameters received on creation and jumps to the <code>WithdrawMoney</code> state.</li>
+<li>In the <code>WithdrawMoney</code> state, the state machine checks if there is enough money in the account. If the balance is greater than 10 then it issues a random withdraw request to the bank by sending the <code>eWithDrawReq</code> event (<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSrc/Client.p#L55">L55</a>) otherwise it jumps to the <code>NoMoneyToWithDraw</code> state. After sending a withdraw request, the machine waits for the <code>eWithDrawResp</code> event (<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSrc/Client.p#L59">L59</a>). On receiving the <code>eWithDrawResp</code> event, the machine executes the corresponding event handler that confirms if banks response is as expected and also if there is still money in the account then jump bank to the WithdrawMoney state. Note that each time we (re-)enter a state (through a transition or goto statement), its entry function is executed.</li>
+</ul>
+</li>
+</ul>
 </details>
 <ul>
 <li><a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSrc/Server.p">Server.p</a>: Implements the BankServer and the Backend Database state machines.</li>
 </ul>
-<details class="tip"><summary>[Expand]: Lets walk through Server.p</summary><p>...</p>
+<details class="tip"><summary>[Expand]: Lets walk through Server.p</summary><ul>
+<li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSrc/Server.p#L1-L7">L1 - L7</a>) &rarr; Declares the events used to communicate between the bank server and the backend database.</li>
+<li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSrc/Server.p#L9-L48">L9 - L48</a>) &rarr; Declares the <code>BankServer</code> machine. The BankServer machine uses a database machine as a service to store the bank balance for all its clients.
+On receiving an eWithDrawReq (withdraw requests) from a client, it reads the current balance for the account,
+if there is enough money in the account then it updates the new balance in the database after withdrawal
+and sends a response back to the client.</li>
+<li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSrc/Server.p#L50-L74">L50 - L74</a>) &rarr; Declares the <code>Database</code> machine. The Database machine acts as a helper service for the Bank server and stores the bank balance for
+each account. There are two API's or functions to interact with the Database: ReadBankBalance and UpdateBankBalance. These functions are implemented as global functions in P (<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSrc/Server.p#L76-L92">L76 - L92</a>).</li>
+</ul>
 </details>
 <ul>
-<li><a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSrc/AbstractBankServer.p">AbstractBankServer.p</a>: Implements the AbstractBankServer state machine that provides an simplified abstraction for the BankServer machine.</li>
+<li><a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSrc/AbstractBankServer.p">AbstractBankServer.p</a>: Implements the AbstractBankServer state machine that provides an simplified abstraction for the BankServer machine. We will demonstrate how one replace the bank service consisting of two interacting components by its abstraction when testing the client application.</li>
 </ul>
-<p>We will demonstrate how one replace the bank service consisting of two interacting components by its abstraction when testing the client application.</p>
-<details class="tip"><summary>[Expand]: Lets walk through AbstractBankServer.p</summary><p>...</p>
+<details class="tip"><summary>[Expand]: Lets walk through AbstractBankServer.p</summary><ul>
+<li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSrc/AbstractBankServer.p#L12-L37">L12 - L37</a>) &rarr; Declares an abstraction of BankServer machine. The <code>AbstractBankServer</code> provides an implementation of the Bank where it abstracts away
+the interaction between the BankServer and Database. We use the <code>AbstractBankServer</code> machine to demonstrate how one can replace a complex component in P with its abstraction that hides a lot of its internal complexity. For the client, it still exposes the same interface or behavior. Hence, when checking the correctness of the client it doesnt matter whether we use BankServer or the AbstractBankServer.</li>
+</ul>
 </details>
+<div class="admonition info">
+<p class="admonition-title">Key Takeaway</p>
+<p>To mitigate the state space explosion problem, when modeling and checking complex systems consisting of several components, we would like to check the correctness of each component in isolation. When doing this kind of a compositional reasoning, we would like to replace the environment of the component with its abstraction. The abstraction basically exposes the same interface as the environment by removes its internal complexity, simplifying the overall problem of checking the correctness of the component under test. There is a large body of literature on doing compositional reasoning of distributed systems. You can start with <a href="https://ankushdesai.github.io/assets/papers/modp.pdf">the Modular P paper</a>. How to automatically replace a machine with its abstraction is described below.</p>
+</div>
 <ul>
 <li><a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSrc/ClientServerModules.p">ClientServerModules.p</a>: Declares the P modules corresponding to each component in the system.</li>
 </ul>
-<details class="tip"><summary>[Expand]: Lets walk through ClientServerModules.p</summary><p>...</p>
+<details class="tip"><summary>[Expand]: Lets walk through ClientServerModules.p</summary><ul>
+<li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSrc/ClientServerModules.p#L1-L5">L1 - L5</a>) &rarr; Declares the <code>Client</code> and <code>BankServer</code> module</li>
+</ul>
 </details>
 <h3 id="specifications">Specifications</h3>
 <p>The P Specifications (<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSpec">PSpec</a>) for the ClientServer example are implemented in the <a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSpec/BankBalanceCorrect.p">BankBalanceCorrect.p</a> file. We define two specifications:</p>
@@ -911,11 +923,9 @@ Multiple clients can concurrently send withdraw request to the bank server. The 
 </li>
 </ul>
 <div class="admonition info">
-<p class="admonition-title">Note</p>
 <p>BankBalanceIsCorrect also checks that if there is enough money in the account then the withdraw request must not error. Hence, the two properties above together ensure that every withdraw request if allowed will eventually succeed and the bank cannot block correct withdrawal requests.</p>
 </div>
-<details class="tip"><summary>[Expand]: Lets walk through BankBalanceCorrect.p</summary><p>...</p>
-</details>
+<details class="tip"><summary>[Expand]: Lets walk through BankBalanceCorrect.p</summary></details>
 <h3 id="test-scenarios">Test Scenarios</h3>
 <p>The test scenarios folder in P consists of two parts: (1) TestDrivers: These are collection of state machines that implement the test harnesses or environment state machines for different test scenarios and (2) TestScripts: These are collection of test cases that are automatically discharged by the P checker.</p>
 <p>The test scenarios folder for ClientServer (<a href="https://github.com/p-org/P/tree/master/Tutorial/1_ClientServer/PTst">PTst</a>) consists of two files <a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PTst/TestDriver.p">TestDriver.p</a> and <a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PTst/Testscript.p">TestScript.p</a>.</p>
@@ -924,15 +934,82 @@ Multiple clients can concurrently send withdraw request to the bank server. The 
 <details class="tip"><summary>[Expand]: Lets walk through TestScript.p</summary><p>...</p>
 </details>
 <h3 id="compiling-clientserver">Compiling ClientServer</h3>
+<p>Run the following command to compile the ClientServer project:</p>
+<div class="highlight"><pre><span></span><code>pc -proj:ClientServer.pproj
+</code></pre></div>
+<details class="note"><summary>Expected Output</summary><div class="highlight"><pre><span></span><code>----------------------------------------
+==== Loading project file: ClientServer.pproj
+....... includes p file: P/Tutorial/1_ClientServer/PSrc/Server.p
+....... includes p file: P/Tutorial/1_ClientServer/PSrc/Client.p
+....... includes p file: P/Tutorial/1_ClientServer/PSrc/AbstractBankServer.p
+....... includes p file: P/Tutorial/1_ClientServer/PSrc/ClientServerModules.p
+....... includes p file: P/Tutorial/1_ClientServer/PSpec/BankBalanceCorrect.p
+....... includes p file: P/Tutorial/1_ClientServer/PTst/TestDriver.p
+....... includes p file: P/Tutorial/1_ClientServer/PTst/Testscript.p
+----------------------------------------
+----------------------------------------
+Parsing ..
+Type checking ...
+Code generation ....
+Generated ClientServer.cs
+----------------------------------------
+Compiling ClientServer.csproj ..
+
+Microsoft (R) Build Engine version 16.10.2+857e5a733 for .NET
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Determining projects to restore...
+All projects are up-to-date for restore.
+ClientServer -&gt; P/Tutorial/1_ClientServer/POutput/netcoreapp3.1/ClientServer.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+</code></pre></div>
+</details>
 <h3 id="testing-clientserver">Testing ClientServer</h3>
+<p>You can get the list of test cases defined in the ClientServer program by passing the generated <code>dll</code>
+to the P Checker:</p>
+<div class="highlight"><pre><span></span><code>pmc &lt;Path&gt;/ClientServer.dll
+</code></pre></div>
+<details class="note"><summary>Expected Output</summary><div class="highlight"><pre><span></span><code>pmc &lt;Path&gt;/ClientServer.dll
+
+Provide /method or -m flag to qualify the <span class="nb">test</span> method name you wish to use. 
+Possible options are::
+<span class="hll">PImplementation.tcSingleClient.Execute
+</span><span class="hll">PImplementation.tcMultipleClients.Execute
+</span><span class="hll">PImplementation.tcSingleClientAbstractServer.Execute
+</span></code></pre></div>
+</details>
+<p>There are three test cases defined in the ClientServer project and you can specify which
+test case to run by using the <code>-m</code> parameter along with the <code>-i</code> parameter for the number of schedules to explore.</p>
+<p>Check the <code>tcSingleClient</code> test case for 1000 schedules:</p>
+<div class="highlight"><pre><span></span><code>pmc &lt;Path&gt;/ClientServer.dll \
+    -m PImplementation.tcSingleClient.Execute \
+    -i 1000
+</code></pre></div>
+<p>Check the <code>tcMultipleClients</code> test case for 1000 schedules:</p>
+<div class="highlight"><pre><span></span><code>pmc &lt;Path&gt;/ClientServer.dll \
+    -m PImplementation.tcMultipleClients.Execute \
+    -i 1000
+</code></pre></div>
+<p>Check the <code>tcSingleClientAbstractServer</code> test case for 1000 schedules:</p>
+<div class="highlight"><pre><span></span><code>pmc &lt;Path&gt;/ClientServer.dll \
+    -m PImplementation.tcSingleClientAbstractServer.Execute \
+    -i 1000
+</code></pre></div>
+<div class="admonition danger">
+<p class="admonition-title">Error</p>
+<p><code>tcSingleClientAbstractServer</code> triggers an error in the AbstractBankServer state machine. Please use the <a href="../../advanced/debuggingerror/">guide</a> to explore how to debug an error generated by P Checker.</p>
+</div>
 <h3 id="exercise-problem">Exercise Problem</h3>
 <ul>
-<li>[Problem 1] Fix the bug in AbstractBankServer state machine and run the P Checker again on the test cases to ensure that there are no more bugs in the models.</li>
-<li>[Problem 2] Extend the ClientServer example with support for depositing money into the bank. This would require implementing events <code>eDepositReq</code> and <code>eDepositResp</code> which are used to interact between the client and server machine. The Client machine should be updated to deposit (one time) some random money when the account balance is low and the BankServer machine implementation would have to be updated to support depositing money into the account. After implementing the deposit feature, run the test-cases again to check if the system still satisfies the desired specifications. </li>
+<li>[Problem 1] Fix the bug in AbstractBankServer state machine and run the P Checker again on the test case to ensure that there are no more bugs in the models.</li>
+<li>[Problem 2] Extend the ClientServer example with support for depositing money into the bank. This would require implementing events <code>eDepositReq</code> and <code>eDepositResp</code> which are used to interact between the client and server machine. The Client machine should be updated to deposit money into the account when the balance is low and the BankServer machine implementation would have to be updated to support depositing money into the bank account. After implementing the deposit feature, run the test-cases again to check if the system still satisfies the desired specifications.</li>
 </ul>
 <div class="admonition success">
 <p class="admonition-title">What did we learn through this example?</p>
-<p>We will learn about P state machines, writing simple safety and liveness specifications as P monitors, writing multiple model checking scenarios to check the correctness of a P program, and finally, replacing complex components in P with their abstractions using P's module system.</p>
+<p>We explored writing P state machines, safety and liveness specifications as P monitors, writing multiple model checking scenarios to check the correctness of a P program, and finally, replacing complex components in P with their abstractions using P's module system.</p>
 </div>
                 
               

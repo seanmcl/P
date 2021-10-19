@@ -404,18 +404,6 @@
 
 
   <li class="md-nav__item">
-    <a href="../../tutorial/paxos/" class="md-nav__link">
-      Paxos Made Simple
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
     <a href="../../tutorial/common/" class="md-nav__link">
       Timer, Failure, and Shared Memory
     </a>
@@ -961,8 +949,8 @@ Possible options are::
 There are three test cases defined in the ClientServer P project and you can specify which
 test case to run by using the <code>-m</code> or <code>/method</code> parameter along with the <code>-i</code> parameter to
 specify how many different schedules to explore when running this test case (by default the checker explores a single schedule).
-For complex systems, running for 100,000 schedules typically finds most of the easy to find bugs before
-running the checker on a distributed cluster to explore billions of schedules and rule out deep bugs in the system.</p>
+<em>For complex systems, running for 100,000 schedules typically finds most of the easy to find bugs before
+running the checker on a distributed cluster to explore billions of schedules and rule out deep bugs in the system.</em></p>
 <p>So to run the <code>tcSingleClient</code> test case for 100 schedules, we can use the following command:</p>
 <div class="highlight"><pre><span></span><code>pmc &lt;Path&gt;/ClientServer.dll \
     -m PImplementation.tcSingleClient.Execute \

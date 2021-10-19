@@ -358,13 +358,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#example-5-single-decree-paxos" class="md-nav__link">
-    [Example 5] Single Decree Paxos
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#common-timer-failure-injector-and-shared-memory" class="md-nav__link">
     [Common] Timer, Failure Injector, and Shared Memory
   </a>
@@ -422,18 +415,6 @@
   <li class="md-nav__item">
     <a href="../tutorial/failuredetector/" class="md-nav__link">
       Failure Detector
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../tutorial/paxos/" class="md-nav__link">
-      Paxos Made Simple
     </a>
   </li>
 
@@ -823,13 +804,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#example-5-single-decree-paxos" class="md-nav__link">
-    [Example 5] Single Decree Paxos
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#common-timer-failure-injector-and-shared-memory" class="md-nav__link">
     [Common] Timer, Failure Injector, and Shared Memory
   </a>
@@ -904,14 +878,19 @@ By this point in the tutorial, we have gotten familiar with the P language and m
 <p>In this example, we demonstrate how to use data nondeterminism to model message loss, unreliable sends, and node failures. We also discuss how to model other types of network nondeterminism. Finally, we give an example of a liveness specification that the failure detector must satisfy.</p>
 </div>
 <hr />
-<p>How can we finish our tutorials on modeling distributed systems without giving tribute to the Paxos protocol (and our inspiration <img alt="🙏" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f64f.svg" title=":pray:" /> <a href="http://www.lamport.org/">Leslie Lamport</a> <img alt="🙏" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f64f.svg" title=":pray:" /> ). Lets end the tutorial with a simplified <strong><a href="https://mwhittaker.github.io/blog/single_decree_paxos/">single decree paxos</a></strong>.</p>
-<h3 id="example-5-single-decree-paxos"><strong><a href="../tutorial/paxos/">[Example 5] Single Decree Paxos</a></strong></h3>
-<p>We present a simplified model of the <a href="https://mwhittaker.github.io/blog/single_decree_paxos/">single decree paxos</a>. We say simplified because general paxos is resilient against arbitrary network (lossy, duplicate, re-order, and delay), in our case we only model message loss and delay, and check correctness of paxos in the presence of such a network. This is a fun exercise, we encourage you to play around and create variants of paxos!</p>
-<div class="admonition summary">
-<p class="admonition-title">What will we learn through this example?</p>
-<p>In this example, we present a simplified model of the single decree paxos. (Todo: add details about the properties checked)</p>
-</div>
-<hr />
+<!---
+How can we finish our tutorials on modeling distributed systems without giving tribute to the Paxos protocol (and our inspiration :pray: [Leslie Lamport](http://www.lamport.org/) :pray: ). Lets end the tutorial with a simplified **[single decree paxos](https://mwhittaker.github.io/blog/single_decree_paxos/)**.
+
+### **[[Example 5] Single Decree Paxos](tutorial/paxos.md)**
+
+We present a simplified model of the [single decree paxos](https://mwhittaker.github.io/blog/single_decree_paxos/). We say simplified because general paxos is resilient against arbitrary network (lossy, duplicate, re-order, and delay), in our case we only model message loss and delay, and check correctness of paxos in the presence of such a network. This is a fun exercise, we encourage you to play around and create variants of paxos!
+
+!!! summary "What will we learn through this example?"
+    In this example, we present a simplified model of the single decree paxos. (Todo: add details about the properties checked)
+
+-----
+--->
+
 <h3 id="common-timer-failure-injector-and-shared-memory"><strong><a href="../tutorial/common/">[Common] Timer, Failure Injector, and Shared Memory</a></strong></h3>
 <p>We have described how to model system's interaction with an OS Timer <a href="https://github.com/p-org/P/blob/master/Tutorial/Common/Timer/">Timer</a>, and how to model injecting node failures in the system <a href="https://github.com/p-org/P/tree/master/Tutorial/Common/FailureInjector">Failure Injector</a>. These models are used in the Two Phase Commit, Espresso Machine, and Failure Detector examples.</p>
 <p>P is a purely messaging passing based programming language and hence does not support primitives for modeling shared memory based concurrency. But one can always model shared memory concurrency using message passing. We have used this style of modeling when checking the correctness of single node file systems. Please check out <a href="https://github.com/p-org/P/tree/master/Tutorial/Common/SharedMemory">Shared Memory</a> example for how to model shared memory concurrency using P.</p>
