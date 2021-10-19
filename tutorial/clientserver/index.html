@@ -944,6 +944,7 @@ the interaction between the BankServer and Database. We use the <code>AbstractBa
 <ul>
 <li>To better understand the P test cases, please look at manual: <a href="../../manual/testcases/">P test cases</a>.</li>
 <li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PTst/Testscript.p#L4-L16">L4 - L16</a>) &rarr; Declares three test cases each checking a different scenario and system. The system under test is the <code>union</code> of the modules representing each component in the system (manual: <a href="../../manual/modulesystem/#union-module">P module system</a>).</li>
+<li>In the test case <code>tcSingleClientAbstractServer</code>, instead of composing with the Bank module, <a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PTst/Testscript.p#L16">we use the AbstractBank module</a>. Hence, in the composed system, whenever we create <code>BankServer</code> machine during the execution of the system it leads to the creation of the <code>AbstractBankServer</code> machine.</li>
 </ul>
 </details>
 <h3 id="compiling-clientserver">Compiling ClientServer</h3>
