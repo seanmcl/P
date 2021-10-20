@@ -65,6 +65,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#p-project" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -352,9 +357,85 @@
     <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
     
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Failure Detector
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
     <a href="./" class="md-nav__link md-nav__link--active">
       Failure Detector
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#p-project" class="md-nav__link">
+    P Project
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#models" class="md-nav__link">
+    Models
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#specifications" class="md-nav__link">
+    Specifications
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-scenarios" class="md-nav__link">
+    Test Scenarios
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compiling-failuredetector" class="md-nav__link">
+    Compiling FailureDetector
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-failuredetector" class="md-nav__link">
+    Testing FailureDetector
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#discussion-modeling-message-reordering" class="md-nav__link">
+    Discussion: Modeling Message Reordering
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-problem" class="md-nav__link">
+    Exercise Problem
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -701,6 +782,83 @@
               </div>
             
             
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#p-project" class="md-nav__link">
+    P Project
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#models" class="md-nav__link">
+    Models
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#specifications" class="md-nav__link">
+    Specifications
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-scenarios" class="md-nav__link">
+    Test Scenarios
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compiling-failuredetector" class="md-nav__link">
+    Compiling FailureDetector
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-failuredetector" class="md-nav__link">
+    Testing FailureDetector
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#discussion-modeling-message-reordering" class="md-nav__link">
+    Discussion: Modeling Message Reordering
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise-problem" class="md-nav__link">
+    Exercise Problem
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content">
             <article class="md-content__inner md-typeset">
@@ -716,75 +874,142 @@
 </code></pre></div></p>
 <p>The recommended way to work through this example is to open the <a href="https://github.com/p-org/P/tree/master/Tutorial">P\Tutorial</a> folder in IntelliJ side-by-side a browser using which you can simulatenously read the description for each example and browser the P program in IntelliJ. </p>
 </details>
-<p><strong>System:</strong> We consider a simple broadcast based failure detector that basically broadcasts ping messages to all nodes in the system and uses a timer to wait for a pong response from all nodes. If a certain node does not respond with a pong message after multiple attempts (either because of network failure or node failure), the failure detector marks the node as down and notifies the clients about the nodes that are potentially down. We use this example to show how to model network message loss in P and discuss how to model other types of network behaviours.</p>
+<p><strong>System:</strong> We consider a simple failure detector that basically broadcasts ping messages to all the nodes in the system and uses a timer to wait for pong responses from all nodes. If a node does not respond with a pong message after multiple attempts (either because of network failure or node failure), the failure detector marks the node as down and notifies the clients about the nodes that are potentially down. We use this example to show how to model network message loss in P and discuss how to model other types of network behaviours.</p>
 <p><img align="center" alt="Placeholder" src="../failuredetector.png" /></p>
-<p><strong>Correctness Specification:</strong> We would like to check using a liveness specification that if the failure injecter shutsdown a particular node then the failure detector always eventually detects that node has failed and notifies client.</p>
-<!---
+<p><strong>Correctness Specification:</strong> We would like to check using a liveness specification that if the failure injecter shutsdown a particular node then the failure detector always eventually detects that the node failure and notifies the client.</p>
+<h3 id="p-project">P Project</h3>
+<p>The <a href="https://github.com/p-org/P/tree/master/Tutorial/4_FailureDetector">4_FailureDetector</a> folder contains the source code for the <a href="https://github.com/p-org/P/blob/master/Tutorial/4_FailureDetector/FailureDetector.pproj">FailureDetector</a> project. Please feel free to read details about the recommended <a href="../../advanced/structureOfPProgram/">P program structure</a> and <a href="../../advanced/PProject/">P project file</a>.</p>
+<h3 id="models">Models</h3>
+<p>The P models (<a href="https://github.com/p-org/P/tree/master/Tutorial/4_FailureDetector/PSrc">PSrc</a>) for the FailureDetector example consists of three files:</p>
+<ol>
+<li><a href="https://github.com/p-org/P/blob/master/Tutorial/4_FailureDetector/PSrc/FailureDetector.p">FailureDetector.p</a>: Implements the FailureDetector state machine.</li>
+</ol>
+<details class="tip"><summary>[Expand]: Lets walk through FailureDetector.p</summary><ul>
+<li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/4_FailureDetector/PSrc/FailureDetector.p#L1-L4">L1 - L4</a>)  &rarr; Event <code>ePing</code> and <code>ePong</code> are used to communicate between the <code>FailureDetector</code> and <code>Node</code> machines (manual: <a href="../../manual/events/">event declaration</a>).</li>
+<li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/4_FailureDetector/PSrc/FailureDetector.p#L6">L6</a>) &rarr; Event <code>eNotifyNodesDown</code> is used by the FailureDetector to inform the clients about the nodes that are potentially down.</li>
+<li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/4_FailureDetector/PSrc/FailureDetector.p#L14-L129">L14 - L129</a>)  &rarr; Declares the <code>FailureDetector</code> state machine (manual: <a href="../../manual/statemachines/">P state machine</a>).<ul>
+<li>The key things to note in the <code>FailureDetector</code> model is the usage of timer, Reliable and UnReliable sends ...</li>
+</ul>
+</li>
+</ul>
+</details>
+<ul>
+<li><a href="https://github.com/p-org/P/blob/master/Tutorial/1_ FailureDetector/PSrc/Server.p">Server.p</a>: Implements the BankServer and the Backend Database state machines.</li>
+</ul>
+<details class="tip"><summary>[Expand]: Lets walk through Server.p</summary><ul>
+<li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ FailureDetector/PSrc/Server.p#L1-L7">L1 - L7</a>) &rarr; Declares the events used to communicate between the bank server and the backend database.</li>
+<li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ FailureDetector/PSrc/Server.p#L9-L48">L9 - L48</a>) &rarr; Declares the <code>BankServer</code> machine. The BankServer machine uses a database machine as a service to store the bank balance for all its clients.
+On receiving an eWithDrawReq (withdraw requests) from a client, it reads the current balance for the account,
+if there is enough money in the account then it updates the new balance in the database after withdrawal
+and sends a response back to the client.</li>
+<li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ FailureDetector/PSrc/Server.p#L50-L74">L50 - L74</a>) &rarr; Declares the <code>Database</code> machine. The Database machine acts as a helper service for the Bank server and stores the bank balance for
+each account. There are two API's or functions to interact with the Database: ReadBankBalance and UpdateBankBalance. These functions are implemented as global functions in P (<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ FailureDetector/PSrc/Server.p#L76-L92">L76 - L92</a>).</li>
+</ul>
+</details>
+<ul>
+<li><a href="https://github.com/p-org/P/blob/master/Tutorial/1_ FailureDetector/PSrc/AbstractBankServer.p">AbstractBankServer.p</a>: Implements the AbstractBankServer state machine that provides an simplified abstraction for the BankServer machine. We will demonstrate how one replace the bank service consisting of two interacting components by its abstraction when testing the client application.</li>
+</ul>
+<details class="tip"><summary>[Expand]: Lets walk through AbstractBankServer.p</summary><ul>
+<li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ FailureDetector/PSrc/AbstractBankServer.p#L12-L37">L12 - L37</a>) &rarr; Declares an abstraction of BankServer machine. The <code>AbstractBankServer</code> provides an implementation of the Bank where it abstracts away
+the interaction between the BankServer and Database. We use the <code>AbstractBankServer</code> machine to demonstrate how one can replace a complex component in P with its abstraction that hides a lot of its internal complexity. For the client, it still exposes the same interface or behavior. Hence, when checking the correctness of the client it doesnt matter whether we use BankServer or the AbstractBankServer.</li>
+</ul>
+</details>
+<div class="admonition info">
+<p class="admonition-title">Key Takeaway</p>
+<p>To mitigate the state space explosion problem, when modeling and checking complex systems consisting of several components, we would like to check the correctness of each component in isolation. When doing this kind of a compositional reasoning, we would like to replace the environment of the component with its abstraction. The abstraction basically exposes the same interface as the environment by removes its internal complexity, simplifying the overall problem of checking the correctness of the component under test. There is a large body of literature on doing compositional reasoning of distributed systems. You can start with <a href="https://ankushdesai.github.io/assets/papers/modp.pdf">the Modular P paper</a>. How to automatically replace a machine with its abstraction is described below.</p>
+</div>
+<ul>
+<li><a href="https://github.com/p-org/P/blob/master/Tutorial/1_ FailureDetector/PSrc/ FailureDetectorModules.p"> FailureDetectorModules.p</a>: Declares the P modules corresponding to each component in the system.</li>
+</ul>
+<details class="tip"><summary>[Expand]: Lets walk through  FailureDetectorModules.p</summary><ul>
+<li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ FailureDetector/PSrc/ FailureDetectorModules.p#L1-L5">L1 - L5</a>) &rarr; Declares the <code>Client</code> and <code>Bank</code> modules. A module in P is a collection of state machines that together implement that module or component. A system model in P is then a composition or union of modules. The <code>Client</code> module consist of a single machine <code>Client</code> and the <code>Bank</code> module is implemented by machines <code>BankServer</code> and <code>Database</code> together (manual: <a href="../../manual/modulesystem/">P module system</a>).  The <code>AbstractBank</code> module using the <code>binding</code> feature in P modules to bind the <code>BankServer</code> machine to <code>AbstractBankServer</code> machine. Basically, what this implies is that whenever <code>AbstractBank</code> module is used creation of the <code>BankServer</code> machine will result in creation of <code>AbstractBankServer</code>, replacing the implementation with its abstraction (manual: <a href="../../manual/modulesystem/#primitive-module">primitive modules</a>).</li>
+</ul>
+</details>
+<h3 id="specifications">Specifications</h3>
+<p>The P Specifications (<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ FailureDetector/PSpec">PSpec</a>) for the  FailureDetector example are implemented in the <a href="https://github.com/p-org/P/blob/master/Tutorial/1_ FailureDetector/PSpec/BankBalanceCorrect.p">BankBalanceCorrect.p</a> file. We define two specifications:</p>
+<ul>
+<li>
+<p><strong>BankBalanceIsAlwaysCorrect</strong> (safety property): BankBalanceIsCorrect spec checks the global invariant that the account-balance communicated to the client by the bank is always correct and the bank never removes more money from the account than what is withdrawn by the client! Also, if the bank denies a withdraw request then its only because the withdrawal will reduce the account balance to below 10.</p>
+</li>
+<li>
+<p><strong>GuaranteedWithDrawProgress</strong> (liveness property): GuaranteedWithDrawProgress checks the liveness (or progress) property that all withdraw requests submitted by the client are eventually responded.</p>
+</li>
+</ul>
+<div class="admonition info">
+<p>BankBalanceIsAlwaysCorrect also checks that if there is enough money in the account then the withdraw request must not error. Hence, the two properties above together ensure that every withdraw request if allowed will eventually succeed and the bank cannot block correct withdrawal requests.</p>
+</div>
+<details class="tip"><summary>[Expand]: Lets walk through BankBalanceCorrect.p</summary><ul>
+<li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ FailureDetector/PSpec/BankBalanceCorrect.p#L20">L20</a>) &rarr; Event <code>eSpec_BankBalanceIsAlwaysCorrect_Init</code> is used to inform the monitors about the initial state of the Bank. The event is announced by the TestDrivers when setting up the system (<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ FailureDetector/PTst/TestDriver.p#L51">here</a>).</li>
+<li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ FailureDetector/PSpec/BankBalanceCorrect.p#L36-L86">L36 - L86</a>) &rarr; Declares the <code>BankBalanceIsAlwaysCorrect</code> safety spec machine that observes the events <code>eWithDrawReq</code>,  <code>eWithDrawResp</code>, and <code>eSpec_BankBalanceIsAlwaysCorrect_Init</code> to assert the required global invariant.</li>
+<li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ FailureDetector/PSpec/BankBalanceCorrect.p#L92-L115">L92 - L115</a>) &rarr; Declares the <code>GuaranteedWithDrawProgress</code> liveness spec machine that observes the events <code>eWithDrawReq</code> and <code>eWithDrawResp</code> to assert the required liveness property that every request is eventually responded by the Bank.</li>
+<li>To understand the semantics of the P spec machines, please read manual: <a href="../../manual/monitors/">p monitors</a>.</li>
+</ul>
+</details>
+<h3 id="test-scenarios">Test Scenarios</h3>
+<p>The test scenarios folder in P has two parts: (1) TestDrivers: These are collection of state machines that implement the test harnesses or environment state machines for different test scenarios and (2) TestScripts: These are collection of test cases that are automatically discharged by the P checker.</p>
+<p>The test scenarios folder for  FailureDetector (<a href="https://github.com/p-org/P/tree/master/Tutorial/1_ FailureDetector/PTst">PTst</a>) consists of two files <a href="https://github.com/p-org/P/blob/master/Tutorial/1_ FailureDetector/PTst/TestDriver.p">TestDriver.p</a> and <a href="https://github.com/p-org/P/blob/master/Tutorial/1_ FailureDetector/PTst/Testscript.p">TestScript.p</a>.</p>
+<details class="tip"><summary>[Expand]: Lets walk through TestDriver.p</summary><ul>
+<li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ FailureDetector/PTst/TestDriver.p#L36-L60">L36 - L60</a>) &rarr; Function <code>Setup FailureDetectorSystem</code> takes as input the number of clients to be created and setups the  FailureDetector system by creating the <code>Client</code> and <code>BankServer</code> machines. The <a href="https://github.com/p-org/P/blob/master/Tutorial/1_ FailureDetector/PTst/TestDriver.p#L25-L34"><code>CreateRandomInitialAccounts</code></a> function uses the <a href="../../manual/expressions/#choose"><code>choose</code></a> primitive to randomly initialize the accounts map.</li>
+<li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ FailureDetector/PTst/TestDriver.p#L3-L22">L3 - L22</a>) &rarr; Machines <code>TestWithSingleClient</code> and <code>TestWithMultipleClients</code> are simple test driver machines that setup the system to be checked by the P checker for different scenarios. In this case, test the  FailureDetector system by first randomly initializing the accounts map and with one <code>Client</code> and with multiple <code>Client</code>s (between 2 to 4)).</li>
+</ul>
+</details>
+<details class="tip"><summary>[Expand]: Lets walk through TestScript.p</summary><p>P allows programmers to write different test cases each of which can be checked separately and each can use a different test driver that triggers different behaviors in the system under test using different system configurations and input generators.</p>
+<ul>
+<li>To better understand the P test cases, please look at manual: <a href="../../manual/testcases/">P test cases</a>.</li>
+<li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ FailureDetector/PTst/Testscript.p#L4-L16">L4 - L16</a>) &rarr; Declares three test cases each checking a different scenario and system. The system under test is the <code>union</code> of the modules representing each component in the system (manual: <a href="../../manual/modulesystem/#union-module">P module system</a>).</li>
+<li>In the test case <code>tcSingleClientAbstractServer</code>, instead of composing with the Bank module, <a href="https://github.com/p-org/P/blob/master/Tutorial/1_ FailureDetector/PTst/Testscript.p#L16">we use the AbstractBank module</a>. Hence, in the composed system, whenever we create <code>BankServer</code> machine during the execution of the system it leads to the creation of the <code>AbstractBankServer</code> machine.</li>
+</ul>
+</details>
+<h3 id="compiling-failuredetector">Compiling FailureDetector</h3>
+<p>Run the following command to compile the FailureDetector project:</p>
+<div class="highlight"><pre><span></span><code>pc -proj:FailureDetector.pproj
+</code></pre></div>
+<details class="note"><summary>Expected Output</summary><div class="highlight"><pre><span></span><code>----------------------------------------
+==== Loading project file: FailureDetector.pproj
+....... includes p file: P/Tutorial/4_FailureDetector/PSrc/FailureDetectorModules.p
+....... includes p file: P/Tutorial/4_FailureDetector/PSrc/FailureDetector.p
+....... includes p file: P/Tutorial/4_FailureDetector/PSrc/Node.p
+....... includes p file: P/Tutorial/4_FailureDetector/PSpec/ReliableFailureDetector.p
+....... includes p file: P/Tutorial/4_FailureDetector/PTst/TestDriver.p
+....... includes p file: P/Tutorial/4_FailureDetector/PTst/TestScript.p
+....... includes p file: P/Tutorial/4_FailureDetector/PTst/Client.p
+==== Loading project file: P/Tutorial/Common/Timer/Timer.pproj
+....... includes p file: P/Tutorial/Common/Timer/PSrc/Timer.p
+....... includes p file: P/Tutorial/Common/Timer/PSrc/TimerModules.p
+==== Loading project file: P/Tutorial/Common/FailureInjector/FailureInjector.pproj
+....... includes p file: P/Tutorial/Common/FailureInjector/PSrc/NetworkFunctions.p
+....... includes p file: P/Tutorial/Common/FailureInjector/PSrc/FailureInjector.p
+----------------------------------------
+----------------------------------------
+Parsing ..
+Type checking ...
+Code generation ....
+Generated FailureDetector.cs
+----------------------------------------
+Compiling FailureDetector.csproj ..
 
-### P Project
+Microsoft (R) Build Engine version 16.10.2+857e5a733 for .NET
+Copyright (C) Microsoft Corporation. All rights reserved.
 
-The [1_ClientServer](https://github.com/p-org/P/tree/master/Tutorial/1_ClientServer) folder contains the source code for the [ClientServer](https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/ClientServer.pproj) project. Please feel free to read details about the typical [P program structure](../advanced/structureOfPProgram.md) and [P project file](../advanced/PProject.md).
+Determining projects to restore...
+Restored P/Tutorial/4_FailureDetector/FailureDetector.csproj (in 880 ms).
+FailureDetector -&gt; P/Tutorial/4_FailureDetector/POutput/netcoreapp3.1/FailureDetector.dll
 
-### Models
-
-The P models ([PSrc](https://github.com/p-org/P/tree/master/Tutorial/1_ClientServer/PSrc)) for the ClientServer example consists of four files: 
-
-1. [Client.p](https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSrc/Client.p): Implements the Client state machine.
-
-??? tip "[Expand]: Lets walk through Client.p"
-    ...
-
-- [Server.p](https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSrc/Server.p): Implements the BankServer state machine.
-
-??? tip "[Expand]: Lets walk through Server.p"
-    ...
-
-- [AbstractBankServer.p](https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSrc/AbstractBankServer.p): Implements the AbstractBankServer state machine that provides an simplified abstraction for the BankServer machine.
-
-??? tip "[Expand]: Lets walk through AbstractBankServer.p"
-    ...
-
-- [ClientServerModules.p](https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSrc/ClientServerModules.p): Declares the P modules corresponding to each component in the system.
-
-??? tip "[Expand]: Lets walk through ClientServerModules.p"
-    ...
-
-### Specifications
-
-The P Specifications ([PSpec](https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSpec)) for the ClientServer example are implemented in the [BankBalanceCorrect.p](https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSpec/BankBalanceCorrect.p) file. We define two specifications:
-
-- BankBalanceIsAlwaysCorrect (safety property): BankBalanceIsCorrect checks the global invariant that the account-balance communicated to the client by the bank is always correct and the banks never removes more money from the account than that withdrawn by the client! Also, if the bank denies a withdraw request then its only because the withdrawal will reduce the account balance to below 10.
-
-- GuaranteedWithDrawProgress (liveness property): GuaranteedWithDrawProgress checks the liveness (or progress) property that all withdraw requests submitted by the client are eventually responded.
-
-!!! info "Note" 
-    BankBalanceIsCorrect also checks that if there is enough money in the account then the withdraw request must not error. Hence, the two properties above together ensure that every withdraw request if allowed will eventually succeed and the bank cannot block correct withdrawal requests.
-
-??? tip "[Expand]: Lets walk through BankBalanceCorrect.p"
-    ...
-
-### Test Scenarios
-
-The test scenarios folder in P consists of two parts: (1) TestDrivers: These are collection of state machines that implement the test harnesses or environment state machines for different test scenarios and (2) TestScripts: These are collection of test cases that are automatically discharged by the P checker.
-
-The test scenarios folder for ClientServer ([PTst](https://github.com/p-org/P/tree/master/Tutorial/1_ClientServer/PTst)) consists of two files [TestDriver.p](https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PTst/TestDriver.p) and [TestScript.p](https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PTst/Testscript.p).
-
-??? tip "[Expand]: Lets walk through TestDriver.p"
-    ...
-
-??? tip "[Expand]: Lets walk through TestScript.p"
-    ...
-
-### Compiling ClientServer
-
-### Testing ClientServer
-
-### Exercise Problem
-
-!!! summary "Summary"
-    In this example, we demonstrate how to use data nondeterminism to model message loss and unreliable sends. We also discuss how to model other types of network nondeterminism. Finally, we give another example of a liveness specification that the failure detector must satisfy.
-
---->
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+</code></pre></div>
+</details>
+<h3 id="testing-failuredetector">Testing FailureDetector</h3>
+<p>There is only a single test case in the FailureDetector program and we can directly run the test case for 10000 iterations:</p>
+<div class="highlight"><pre><span></span><code>pmc &lt;Path&gt;/FailureDetector.dll -i <span class="m">10000</span>
+</code></pre></div>
+<h3 id="discussion-modeling-message-reordering">Discussion: Modeling Message Reordering</h3>
+<h3 id="exercise-problem">Exercise Problem</h3>
+<div class="admonition success">
+<p class="admonition-title">What did we learn through this example?</p>
+<p>In this example, we saw how to use data nondeterminism to model message loss and unreliable sends. We also discussed how to model other types of network nondeterminism.</p>
+</div>
                 
               
               
