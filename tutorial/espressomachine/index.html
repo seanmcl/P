@@ -856,7 +856,8 @@
                 <details class="note"><summary>How to use this example</summary><p>We assume that you have cloned the P repository locally.
 <div class="highlight"><pre><span></span><code>git clone https://github.com/p-org/P.git
 </code></pre></div></p>
-<p>The recommended way to work through this example is to open the <a href="https://github.com/p-org/P/tree/master/Tutorial">P\Tutorial</a> folder in IntelliJ side-by-side a browser using which you can simulatenously read the description for each example and browser the P program in IntelliJ. </p>
+<p>The recommended way to work through this example is to open the <a href="https://github.com/p-org/P/tree/master/Tutorial">P\Tutorial</a> folder in IntelliJ side-by-side a browser using which you can simulatenously read the description for each example and browser the P program in IntelliJ.</p>
+<p>To know more about P language primitives used in the example, please look them up in the <a href="../../manualoutline/">language manual</a>.</p>
 </details>
 <p>We have reached the middle of our tutorials <img alt="🥱" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f971.svg" title=":yawning_face:" />, its time to take a break and have an espresso coffee! <img alt="☕" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/2615.svg" title=":coffee:" /></p>
 <p>P has been used in the past to implement device drivers and robotics systems (see <a href="../../casestudies/">case studies</a> and <a href="../../publications/#p-case-studies">publications</a>). One of the many challenges in implementing such systems is that they are reactive systems and hence, must handle arbitrary sequence of events (inputs) appropriately depending on its current mode of operation.</p>
@@ -895,6 +896,7 @@ back to the controller if the operation succeeded or errored.</li>
 it is reset and after which it returns to the <code>Warmup</code> state.</p>
 <details class="tip"><summary>[Expand]: Lets walk through Safety.p</summary><ul>
 <li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/3_EspressoMachine/PSpec/Safety.p#L1-L7">L1 - L7</a>) &rarr; Events used to inform the monitor about the state of the EspressoMachine system. The events are announced as the system moves from one state to another (manual: <a href="../../manual/statements/#announce">announce statement</a>).</li>
+<li>The <code>EspressoMachineModesOfOperation</code> spec machine observes these events and ensures that the system moves through the states defined by the monitor. Note that if the system allows (has execution as) a sequence of events that are not accepted by the monitor (i.e., the monitor throws an unhandled event exception) then the system does not satisfy the desired specification. Hence, this monitor can be thought of accepting only those behaviors of the system that follow the sequence of states modelled by the spec machine. For example, if the system moves from Ready to CoffeeMaking state directly without Grinding then the monitor will raise an ALARM!</li>
 <li>To understand the semantics of the P spec machines, please read manual: <a href="../../manual/monitors/">p monitors</a>.</li>
 </ul>
 </details>
@@ -966,7 +968,7 @@ test case to run by using the <code>-m</code> parameter along with the <code>-i<
 </ul>
 <div class="admonition info">
 <p class="admonition-title">Thinking! ... <img alt="🤔" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f914.svg" title=":thinking:" /><img alt="🤔" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f914.svg" title=":thinking:" /></p>
-<p>Can you think of other cases where you would like to check that your system evolves through a certain sequence of states? or allows only those executions that follow a pattern? Can these be specified as P monitors? If not, what are the challenges? Typical example for such cases is: for a file in a storage system the sequence of operations that much succeed must have a pattern of the form: open &rarr; read* &rarr; close, similarly, for lock services, lockAcquire &rarr; readSuccess &rarr; lockReleased. More interestingly, you can also check things like: AuthenticationSuccess(x) &rarr; ReadSuccess(x), never see a case AuthenticationFailure(x) &rarr; ReadSuccess(x) in your executions! What do you think post your comments in the discussions.</p>
+<p>Can you think of other cases where you would like to check that your system evolves through a certain sequence of states? or allows only those executions that follow a pattern? Can these be specified as P monitors? If not, what are the challenges? Typical example for such cases is: for a file in a storage system the sequence of operations that much succeed must have a pattern of the form: open &rarr; read* &rarr; close, similarly, for lock services, lockAcquire &rarr; readSuccess &rarr; lockReleased. More interestingly, you can also check things like: AuthenticationSuccess(x) &rarr; ReadSuccess(x), never see a case AuthenticationFailure(x) &rarr; ReadSuccess(x) in your executions! What do you think?? post your comments in the discussions.</p>
 </div>
 <div class="admonition success">
 <p class="admonition-title">What did we learn through this example?</p>

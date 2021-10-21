@@ -389,36 +389,23 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#-testdriverp" class="md-nav__link">
-    - TestDriver.p
-  </a>
-  
-    <nav class="md-nav" aria-label="- TestDriver.p">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#compiling-twophasecommit" class="md-nav__link">
     Compiling TwoPhaseCommit
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#testing-twophasecommit" class="md-nav__link">
     Testing TwoPhaseCommit
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#exercise-problem" class="md-nav__link">
     Exercise Problem
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -845,36 +832,23 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#-testdriverp" class="md-nav__link">
-    - TestDriver.p
-  </a>
-  
-    <nav class="md-nav" aria-label="- TestDriver.p">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#compiling-twophasecommit" class="md-nav__link">
     Compiling TwoPhaseCommit
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#testing-twophasecommit" class="md-nav__link">
     Testing TwoPhaseCommit
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#exercise-problem" class="md-nav__link">
     Exercise Problem
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -896,7 +870,8 @@
                 <details class="note"><summary>How to use this example</summary><p>We assume that you have cloned the P repository locally.
 <div class="highlight"><pre><span></span><code>git clone https://github.com/p-org/P.git
 </code></pre></div></p>
-<p>The recommended way to work through this example is to open the <a href="https://github.com/p-org/P/tree/master/Tutorial">P\Tutorial</a> folder in IntelliJ side-by-side a browser using which you can simulatenously read the description for each example and browser the P program in IntelliJ. </p>
+<p>The recommended way to work through this example is to open the <a href="https://github.com/p-org/P/tree/master/Tutorial">P\Tutorial</a> folder in IntelliJ side-by-side a browser using which you can simulatenously read the description for each example and browser the P program in IntelliJ.</p>
+<p>To know more about P language primitives used in the example, please look them up in the <a href="../../manualoutline/">language manual</a>.</p>
 </details>
 <p>Now that we understand the basic features of the P language, lets look at modeling and analysis of a distributed system <img alt="🤹‍♂️" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f939-200d-2642-fe0f.svg" title=":man_juggling:" />!</p>
 <p><strong>System:</strong> We use a simplified version of the <a href="https://s2.smu.edu/~mhd/8330f11/p133-gray.pdf">classic two phase commit protocol</a> to model a transaction commit service. The two phase commit protocol uses a coordinator to gain consensus for any transaction spanning across multiple participants. A transaction in our case is simply a <code>write</code> operation for a key-value data store where the data store is replicated across multiple participants. More concretely, a <code>write</code> transaction must be committed by the coordinator only if its accepted by all the participant replicas and must be aborted if any one of the participant replica rejects the <code>write</code> request.</p>
@@ -912,20 +887,33 @@ Please feel free to read details about the recommended <a href="../../advanced/s
 <ol>
 <li><a href="https://github.com/p-org/P/blob/master/Tutorial/2_TwoPhaseCommit/PSrc/Coordinator.p">Coordinator.p</a>: Implements the Coordinator state machine.</li>
 </ol>
-<details class="tip"><summary>[Expand]: Lets walk through Coordinator.p</summary><p>...</p>
+<details class="tip"><summary>[Expand]: Lets walk through Coordinator.p</summary><ul>
+<li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/2_TwoPhaseCommit/PSrc/Coordinator.p#L25-L33">L25 - L33</a>) &rarr; Declares the <code>write</code> and <code>read</code> transaction events used to communicate between the coordinator and the client machines (manual: <a href="../../manual/events/">event declaration</a>).</li>
+<li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/2_TwoPhaseCommit/PSrc/Coordinator.p#L35-L43">L35 - L43</a>) &rarr; Declares the <code>prepare</code>, <code>commit</code> and <code>abort</code> events used to communicate between the coordinator and the participants in the system.</li>
+<li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/2_TwoPhaseCommit/PSrc/Coordinator.p#L3-L16">L3 - L16</a>) &rarr; Declares the payload types associated with these events (manual: <a href="../../manual/datatypes/#user-defined">user defined type</a>).</li>
+<li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/2_TwoPhaseCommit/PSrc/Coordinator.p#L65-L177">L65 - L177</a>) &rarr; Declares the <code>Coordinator</code> state machine. The Coordinator machine receives write and read transactions from the clients. The coordinator machine
+services these transactions one by one in the order in which they were received. On receiving a write
+transaction the coordinator sends prepare request to all the participants and waits for prepare
+responses from all the participants. Based on the responses, the coordinator either commits or aborts
+the transaction. If the coordinator fails to receive agreement from participants in time, then it
+timesout and aborts the transaction. On receiving a read transaction, the coordinator randomly selects
+a participant and  forwards the read request to that participant.</li>
+</ul>
 </details>
 <ul>
 <li><a href="https://github.com/p-org/P/blob/master/Tutorial/2_TwoPhaseCommit/PSrc/Participant.p">Participant.p</a>: Implements the Participant state machine.</li>
 </ul>
-<details class="tip"><summary>[Expand]: Lets walk through Participant.p</summary><p>...</p>
+<details class="tip"><summary>[Expand]: Lets walk through Participant.p</summary><ul>
+<li>Unlike the <code>Coordinator</code> state machine that has multiple states, the <code>Participant</code> state machine is fairly simple. Each participant waits for requests from the <code>Coordinator</code> and sends the response back based on whether the request can be accepted or has to be rejected.</li>
+<li>On receiving a <code>eShutDown</code> event, the participant does a <code>raise halt</code> to destroy itself. To know more about the special <code>halt</code> event, please check the manual: <a href="../../manual/expressions/#primitive">halt event</a>.</li>
+<li>Each participant maintains a local key-value store which is updated based on the transactions committed by the coordinator. On receiving a prepare request from the coordinator, the participant chooses to either accept or reject the transaction based on the associated transaction id.</li>
+</ul>
 </details>
 <ul>
-<li><a href="https://github.com/p-org/P/blob/master/Tutorial/2_TwoPhaseCommit/PSrc/TwoPhaseCommitModules.p">TwoPhaseCommitModules.p</a>: Declares the P modules corresponding to each component in the two phase commit system.</li>
+<li><a href="https://github.com/p-org/P/blob/master/Tutorial/2_TwoPhaseCommit/PSrc/TwoPhaseCommitModules.p">TwoPhaseCommitModules.p</a>: Declares the P module corresponding to the two phase commit system.</li>
 </ul>
-<details class="tip"><summary>[Expand]: Lets walk through TwoPhaseCommitModules.p</summary><p>...</p>
-</details>
 <h3 id="timer-and-failure-injector">Timer and Failure Injector</h3>
-<p>Our two phase commit project dependends on two other projects:</p>
+<p>Our two phase commit project dependends on two other components:</p>
 <ul>
 <li>
 <p><strong>OS Timer:</strong> The coordinator machine uses a timer to wait for prepare responses from all participants. The <code>OS timer</code> is modeled in P using the <a href="https://github.com/p-org/P/blob/master/Tutorial/Common/Timer/PSrc/Timer.p"><code>Timer</code> machine</a> declared in the <a href="https://github.com/p-org/P/tree/master/Tutorial/Common/Timer"><code>Timer project</code></a>. The Timer model demonstrate how when reasoning about the correctness of a system, we need to also model its interaction to any nondeterministic environment or service (in this case, an OS timer).</p>
@@ -938,28 +926,27 @@ Please feel free to read details about the recommended <a href="../../advanced/s
 <p>The P Specifications (<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSpec">PSpec</a>) for the TwoPhaseCommit example are implemented in the <a href="https://github.com/p-org/P/blob/master/Tutorial/2_TwoPhaseCommit/PSpec/Atomicity.p">Atomicity.p</a> file. We define two specifications:</p>
 <ul>
 <li>
-<p>Atomicity (safety property): if a transaction is committed by the coordinator then it was agreed on by all participants.</p>
+<p><strong>Atomicity</strong> (safety property): if a transaction is committed by the coordinator then it was agreed on by all participants and if the transaction is aborted then atleast one participant must have rejected the transaction.</p>
 </li>
 <li>
-<p>Progress (liveness property): every received transaction from a client must be eventually responded back.</p>
+<p><strong>Progress</strong> (liveness property): every received transaction must be eventually responded back (in the absence of node failures).</p>
 </li>
 </ul>
 <div class="admonition info">
-<p class="admonition-title">Note</p>
-<p>BankBalanceIsCorrect also checks that if there is enough money in the account then the withdraw request must not error. Hence, the two properties above together ensure that every withdraw request if allowed will eventually succeed and the bank cannot block correct withdrawal requests.</p>
+<p class="admonition-title">Weaker Property</p>
+<p>Note that we are asserted a weaker property than what is required for Atomicity. Ideally, we would like to check that if a transaction is committed by the coordinator then it was committed-locally by all participants and if the transaction is aborted then atleast one participant must have rejected the transaction and all the participants aborted the transaction. But we leave implementing this stronger property as an exercise problem which you can revisit after finishing the other problems in the tutorials.</p>
 </div>
-<details class="tip"><summary>[Expand]: Lets walk through Atomicity.p</summary><p>...</p>
-</details>
 <h3 id="test-scenarios">Test Scenarios</h3>
-<p>The test scenarios folder consists of two parts: (1) TestDrivers: These are collection of state machines that implement the test harnesses or environment state machines for different test scenarios and (2) TestScripts: These are collection of test cases that are automatically discharged by the P checker.</p>
-<p>The test scenarios folder for TwoPhaseCommit (<a href="https://github.com/p-org/P/tree/master/Tutorial/1_ClientServer/PTst">PTst</a>) consists of three files:</p>
-<h2 id="-testdriverp">- <a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PTst/TestDriver.p">TestDriver.p</a></h2>
-<ul>
-<li><a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PTst/Testscript.p">TestScript.p</a>.</li>
+<p>The test scenarios folder in P has two parts: TestDrivers and TestScripts. TestDrivers are collections of state machines that implement the test harnesses (or environment state machines) for different test scenarios. TestScripts are collections of test cases that are automatically run by the P checker.</p>
+<p>The test scenarios folder for ClientServer (<a href="https://github.com/p-org/P/tree/master/Tutorial/1_ClientServer/PTst">PTst</a>) consists of two files <a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PTst/TestDriver.p">TestDriver.p</a> and <a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PTst/Testscript.p">TestScript.p</a>.</p>
+<details class="tip"><summary>[Expand]: Lets walk through TestDriver.p</summary><ul>
+<li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PTst/TestDriver.p#L36-L60">L36 - L60</a>) &rarr; Function <code>SetupClientServerSystem</code> takes as input the number of clients to be created and configures the ClientServer system by creating the <code>Client</code> and <code>BankServer</code> machines. The <a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PTst/TestDriver.p#L25-L34"><code>CreateRandomInitialAccounts</code></a> function uses the <a href="../../manual/expressions/#choose"><code>choose</code></a> primitive to randomly initialize the accounts map.</li>
+<li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PTst/TestDriver.p#L3-L22">L3 - L22</a>) &rarr; Machines <code>TestWithSingleClient</code> and <code>TestWithMultipleClients</code> are simple test driver machines that configure the system to be checked by the P checker for different scenarios. In this case, test the ClientServer system by first randomly initializing the accounts map and then testing it with either one <code>Client</code> or with multiple <code>Client</code>s (between 2 and 4)).</li>
 </ul>
-<details class="tip"><summary>[Expand]: Lets walk through TestDriver.p</summary><p>...</p>
 </details>
-<details class="tip"><summary>[Expand]: Lets walk through TestScript.p</summary><p>...</p>
+<details class="tip"><summary>[Expand]: Lets walk through TestScript.p</summary><p>P allows programmers to write different test cases. Each test case is checked separately and can use a different test driver. Using different test drivers triggers different behaviors in the system under test, as it implies different system configurations and input generators. To better understand the P test cases, please look at manual: <a href="../../manual/testcases/">P test cases</a>.
+- (<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PTst/Testscript.p#L4-L16">L4 - L16</a>) &rarr; Declares three test cases each checking a different scenario and system. The system under test is the <code>union</code> of the modules representing each component in the system (manual: <a href="../../manual/modulesystem/#union-module">P module system</a>).
+- In the <code>tcSingleClientAbstractServer</code> test case, instead of composing with the Bank module, we use the AbstractBank module. Hence, in the composed system, whenever the creation of a BankServer machine is invoked the binding will instead create an AbstractBankServer machine.</p>
 </details>
 <h3 id="compiling-twophasecommit">Compiling TwoPhaseCommit</h3>
 <p>Run the following command to compile the TwoPhaseCommit project:</p>
@@ -1017,26 +1004,43 @@ Possible options are::
 </details>
 <p>There are three test cases defined in the TwoPhaseCommit project and you can specify which
 test case to run by using the <code>-m</code> parameter along with the <code>-i</code> parameter for the number of schedules to explore.</p>
-<p>Check the <code>tcSingleClientNoFailure</code> test case for 1000 schedules:</p>
+<p>Check the <code>tcSingleClientNoFailure</code> test case for 10000 schedules:</p>
 <div class="highlight"><pre><span></span><code>pmc &lt;Path&gt;/TwoPhaseCommit.dll \
     -m PImplementation.tcSingleClientNoFailure.Execute \
-    -i 1000
+    -i 10000
 </code></pre></div>
-<p>Check the <code>tcMultipleClientsNoFailure</code> test case for 1000 schedules:</p>
-<div class="highlight"><pre><span></span><code>pmc &lt;Path&gt;/TwoPhaseCommit.dll \
-    -m PImplementation.tcMultipleClientsNoFailure.Execute \
-    -i 1000
-</code></pre></div>
-<p>Check the <code>tcMultipleClientsWithFailure</code> test case for 1000 schedules:</p>
+<p>Check the <code>tcMultipleClientsNoFailure</code> test case for 10000 schedules:</p>
+<div class="admonition danger">
+<p class="admonition-title">Error</p>
+<p><code>tcMultipleClientsNoFailure</code> triggers a very subtle concurrency bug in the assumption made by the client of the two phase commit protocol.</p>
+<p><code>&lt;ErrorLog&gt; Assertion Failed: Record read is not same as what was written by the client:: read - X, written - Y</code></p>
+<p>Please use the <a href="../../advanced/debuggingerror/">guide</a> to explore how to debug an error trace generated by P Checker.</p>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>If you dive deeper in the log, you would notice that the error happens when two clients write to the same key and there is a race between the two writes and reads. The fix for this problem is to update the assertion on the client side that if the value that is read is not the same as the value that was written then it has to be true that it was overridden by a transaction whose transaction id is greater than its transaction id. This is true because Participants accept transaction to the same key in the monotonically increasing transaction ids.</p>
+</div>
+<p>Check the <code>tcMultipleClientsWithFailure</code> test case for 10000 schedules:</p>
 <div class="highlight"><pre><span></span><code>pmc &lt;Path&gt;/TwoPhaseCommit.dll \
     -m PImplementation.tcMultipleClientsWithFailure.Execute \
-    -i 1000
+    -i 10000
 </code></pre></div>
 <div class="admonition danger">
 <p class="admonition-title">Error</p>
-<p><code>tcMultipleClientsWithFailure</code> triggers an error in the AbstractBankServer state machine. Please use the <a href="../../advanced/debuggingerror/">guide</a> to explore how to debug an error trace generated by P Checker.</p>
+<p><code>tcMultipleClientsWithFailure</code> demonstrates the known case that in the presence of node failure the two phase commit protocol does not guarantee progress. </p>
+<p><code>&lt;ErrorLog&gt; Deadlock detected. Client(7) is waiting to receive an event, but no other controlled tasks are enabled.</code></p>
+<p>Please use the <a href="../../advanced/debuggingerror/">guide</a> to explore how to debug an error trace generated by P Checker.</p>
+<p>If you comment out the part of the Client state machine code that performs the read transaction then you would see the the Progress liveness monitor starts complaining.</p>
 </div>
 <h3 id="exercise-problem">Exercise Problem</h3>
+<ul>
+<li>
+<p>[Problem 1] Based on the hint above, try and fix the concurrency bug in the <code>Client</code> state machine and run the test cases again!</p>
+</li>
+<li>
+<p>[Problem 2] A really interesting exploratory problem would be to try and combine the two phase commit protocol with the failure detector system to over come the progress problem faced by two phase commit protocol in the presence of node failures. Can you really do that? Lets have a discussion and build a variant of the protocol to tolerant failures?</p>
+</li>
+</ul>
 <div class="admonition summary">
 <p class="admonition-title">What did we learn through this example?</p>
 <p>We dived deeper into: (1) modeling non-determinism in distributed systems, in particular, time-outs (2) writing complex safety properties like atomicity of transactions in P and finally, (3) modeling node failures in P using a failure injector state machine. We will also show how P allows invoking foreign code from the P programs. More details in <a href="../../manual/foriegntypesfunctions/">P foreign interface</a>.</p>
