@@ -871,7 +871,7 @@ Multiple clients can concurrently send withdraw requests to the bank. On receivi
 <ul>
 <li><a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSrc/Client.p">Client.p</a>: Implements the Client state machine.</li>
 </ul>
-<details class="tip"><summary>[Expand]: Lets walk through Client.p</summary><ul>
+<details class="tip"><summary>[Expand]: Let's walk through Client.p</summary><ul>
 <li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSrc/Client.p#L19-L22">L19 - L22</a>)  &rarr; Events <code>eWithDrawReq</code> and <code>eWithDrawResp</code> are used to communicate between the <code>Client</code> and the <code>Server</code> machines (manual: <a href="../../manual/events/">event declaration</a>).</li>
 <li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSrc/Client.p#L3-L17">L3 - L17</a>) &rarr; Declares the payload types for the <code>eWithDrawReq</code> and <code>eWithDrawResp</code> events (manual: <a href="../../manual/datatypes/#user-defined">user defined type</a>).</li>
 <li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSrc/Client.p#L25-L95">L25 - L95</a>)  &rarr; Declares the <code>Client</code> state machine (manual: <a href="../../manual/statemachines/">P state machine</a>).<ul>
@@ -884,7 +884,7 @@ Multiple clients can concurrently send withdraw requests to the bank. On receivi
 <ul>
 <li><a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSrc/Server.p">Server.p</a>: Implements the BankServer and the backend Database state machines.</li>
 </ul>
-<details class="tip"><summary>[Expand]: Lets walk through Server.p</summary><ul>
+<details class="tip"><summary>[Expand]: Let's walk through Server.p</summary><ul>
 <li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSrc/Server.p#L1-L7">L1 - L7</a>) &rarr; Declares the events used to communicate between the bank server and the backend database.</li>
 <li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSrc/Server.p#L9-L48">L9 - L48</a>) &rarr; Declares the <code>BankServer</code> machine. The BankServer machine uses a database machine as a service to store the bank balance for all its clients.
 On receiving an eWithDrawReq (withdraw requests) from a client, it reads the current balance for the account,
@@ -897,7 +897,7 @@ each account. There are two API's or functions to interact with the Database: Re
 <ul>
 <li><a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSrc/AbstractBankServer.p">AbstractBankServer.p</a>: Implements the AbstractBankServer state machine that provides a simplified abstraction that unifies the BankServer and Database machines. We will demonstrate how one can replace the complex bank service (consisting of two interacting components, the BankServer and the Database) by its abstraction when testing the client application.</li>
 </ul>
-<details class="tip"><summary>[Expand]: Lets walk through AbstractBankServer.p</summary><ul>
+<details class="tip"><summary>[Expand]: Let's walk through AbstractBankServer.p</summary><ul>
 <li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSrc/AbstractBankServer.p#L12-L37">L12 - L37</a>) &rarr; Declares an abstraction of the BankServer machine. The <code>AbstractBankServer</code> provides an implementation of the Bank where
 the interaction between the BankServer and Database is abstracted away. We use the <code>AbstractBankServer</code> machine to demonstrate how one can replace a complex component in P with an abstraction that hides a lot of its internal complexity. For the client, it still exposes the same interface or behavior. Hence, when checking the correctness of the client it does not matter whether we pair it with the BankServer or the AbstractBankServer.</li>
 </ul>
@@ -909,7 +909,7 @@ the interaction between the BankServer and Database is abstracted away. We use t
 <ul>
 <li><a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSrc/ClientServerModules.p">ClientServerModules.p</a>: Declares the P modules corresponding to each component in the system.</li>
 </ul>
-<details class="tip"><summary>[Expand]: Lets walk through ClientServerModules.p</summary><ul>
+<details class="tip"><summary>[Expand]: Let's walk through ClientServerModules.p</summary><ul>
 <li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSrc/ClientServerModules.p#L1-L5">L1 - L5</a>) &rarr; Declares the <code>Client</code> and <code>Bank</code> modules. A module in P is a collection of state machines that together implement that module or component. A system model in P is then a composition or union of modules. The <code>Client</code> module consists of a single machine <code>Client</code> and the <code>Bank</code> module is implemented by machines <code>BankServer</code> and <code>Database</code> together (manual: <a href="../../manual/modulesystem/">P module system</a>).  </li>
 <li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSrc/ClientServerModules.p#L7-L8">L7 - L8</a>) &rarr; The <code>AbstractBank</code> module uses the <code>binding</code> feature in P modules to bind the <code>BankServer</code> machine to the <code>AbstractBankServer</code> machine. Basically, what this implies is that whenever <code>AbstractBank</code> module is used the creation of the <code>BankServer</code> machine will result in creation of <code>AbstractBankServer</code>, replacing the implementation with its abstraction (manual: <a href="../../manual/modulesystem/#primitive-module">primitive modules</a>).</li>
 </ul>
@@ -923,7 +923,7 @@ the interaction between the BankServer and Database is abstracted away. We use t
 <div class="admonition info">
 <p>Stating that BankBalanceIsAlwaysCorrect checks that "if the bank denies a withdraw request then the request would reduce the balance to below 10 (&lt; 10)" is equivalent to state that "if there is enough money in the account - at least 10 (&gt;= 10), then the request must not error". Hence, the two properties BankBalanceIsAlwaysCorrect and GuaranteedWithDrawProgress together ensure that every withdraw request if allowed will eventually succeed and the bank cannot block correct withdrawal requests.</p>
 </div>
-<details class="tip"><summary>[Expand]: Lets walk through BankBalanceCorrect.p</summary><ul>
+<details class="tip"><summary>[Expand]: Let's walk through BankBalanceCorrect.p</summary><ul>
 <li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSpec/BankBalanceCorrect.p#L20">L20</a>) &rarr; Event <code>eSpec_BankBalanceIsAlwaysCorrect_Init</code> is used to inform the monitors about the initial state of the Bank. The event is announced by the TestDrivers when setting up the system (<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PTst/TestDriver.p#L51">here</a>).</li>
 <li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSpec/BankBalanceCorrect.p#L36-L86">L36 - L86</a>) &rarr; Declares the <code>BankBalanceIsAlwaysCorrect</code> safety spec machine that observes the events <code>eWithDrawReq</code>,  <code>eWithDrawResp</code>, and <code>eSpec_BankBalanceIsAlwaysCorrect_Init</code> to assert the required global invariant.</li>
 <li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PSpec/BankBalanceCorrect.p#L92-L115">L92 - L115</a>) &rarr; Declares the <code>GuaranteedWithDrawProgress</code> liveness spec machine that observes the events <code>eWithDrawReq</code> and <code>eWithDrawResp</code> to assert the required liveness property that every request is eventually responded by the Bank.</li>
@@ -933,12 +933,12 @@ the interaction between the BankServer and Database is abstracted away. We use t
 <h3 id="test-scenarios">Test Scenarios</h3>
 <p>The test scenarios folder in P has two parts: TestDrivers and TestScripts. TestDrivers are collections of state machines that implement the test harnesses (or environment state machines) for different test scenarios. TestScripts are collections of test cases that are automatically run by the P checker.</p>
 <p>The test scenarios folder for ClientServer (<a href="https://github.com/p-org/P/tree/master/Tutorial/1_ClientServer/PTst">PTst</a>) consists of two files <a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PTst/TestDriver.p">TestDriver.p</a> and <a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PTst/Testscript.p">TestScript.p</a>.</p>
-<details class="tip"><summary>[Expand]: Lets walk through TestDriver.p</summary><ul>
+<details class="tip"><summary>[Expand]: Let's walk through TestDriver.p</summary><ul>
 <li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PTst/TestDriver.p#L36-L60">L36 - L60</a>) &rarr; Function <code>SetupClientServerSystem</code> takes as input the number of clients to be created and configures the ClientServer system by creating the <code>Client</code> and <code>BankServer</code> machines. The <a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PTst/TestDriver.p#L25-L34"><code>CreateRandomInitialAccounts</code></a> function uses the <a href="../../manual/expressions/#choose"><code>choose</code></a> primitive to randomly initialize the accounts map.</li>
 <li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PTst/TestDriver.p#L3-L22">L3 - L22</a>) &rarr; Machines <code>TestWithSingleClient</code> and <code>TestWithMultipleClients</code> are simple test driver machines that configure the system to be checked by the P checker for different scenarios. In this case, test the ClientServer system by first randomly initializing the accounts map and then testing it with either one <code>Client</code> or with multiple <code>Client</code>s (between 2 and 4)).</li>
 </ul>
 </details>
-<details class="tip"><summary>[Expand]: Lets walk through TestScript.p</summary><p>P allows programmers to write different test cases. Each test case is checked separately and can use a different test driver. Using different test drivers triggers different behaviors in the system under test, as it implies different system configurations and input generators. To better understand the P test cases, please look at manual: <a href="../../manual/testcases/">P test cases</a>.
+<details class="tip"><summary>[Expand]: Let's walk through TestScript.p</summary><p>P allows programmers to write different test cases. Each test case is checked separately and can use a different test driver. Using different test drivers triggers different behaviors in the system under test, as it implies different system configurations and input generators. To better understand the P test cases, please look at manual: <a href="../../manual/testcases/">P test cases</a>.
 - (<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PTst/Testscript.p#L4-L16">L4 - L16</a>) &rarr; Declares three test cases each checking a different scenario and system. The system under test is the <code>union</code> of the modules representing each component in the system (manual: <a href="../../manual/modulesystem/#union-module">P module system</a>).
 - In the <code>tcSingleClientAbstractServer</code> test case, instead of composing with the Bank module, we use the AbstractBank module. Hence, in the composed system, whenever the creation of a BankServer machine is invoked the binding will instead create an AbstractBankServer machine.</p>
 </details>

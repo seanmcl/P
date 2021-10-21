@@ -873,7 +873,7 @@
 <p>The recommended way to work through this example is to open the <a href="https://github.com/p-org/P/tree/master/Tutorial">P\Tutorial</a> folder in IntelliJ side-by-side a browser using which you can simulatenously read the description for each example and browser the P program in IntelliJ.</p>
 <p>To know more about P language primitives used in the example, please look them up in the <a href="../../manualoutline/">language manual</a>.</p>
 </details>
-<p>Now that we understand the basic features of the P language, lets look at modeling and analysis of a distributed system <img alt="🤹‍♂️" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f939-200d-2642-fe0f.svg" title=":man_juggling:" />!</p>
+<p>Now that we understand the basic features of the P language, let's look at modeling and analysis of a distributed system <img alt="🤹‍♂️" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f939-200d-2642-fe0f.svg" title=":man_juggling:" />!</p>
 <p><strong>System:</strong> We use a simplified version of the <a href="https://s2.smu.edu/~mhd/8330f11/p133-gray.pdf">classic two phase commit protocol</a> to model a transaction commit service. The two phase commit protocol uses a coordinator to gain consensus for any transaction spanning across multiple participants. A transaction in our case is simply a <code>write</code> operation for a key-value data store where the data store is replicated across multiple participants. More concretely, a <code>write</code> transaction must be committed by the coordinator only if its accepted by all the participant replicas and must be aborted if any one of the participant replica rejects the <code>write</code> request.</p>
 <p><img align="center" alt="Placeholder" src="../twophasecommit.png" /></p>
 <p>A two phase commit protocol consists of two phases <img alt="😆" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f606.svg" title=":laughing:" /> (figure above). On receiving a write transaction, the coordinator starts the first phase in which it sends a <code>prepare</code> request to all the participants and waits for a <code>prepare success</code> or <code>prepare failure</code> response. On receiving prepare responses from all the participants, the coordinator moves to the second phase where it sends a <code>commit</code> or <code>abort</code> message to the participants and also responds back to the client.</p>
@@ -887,7 +887,7 @@ Please feel free to read details about the recommended <a href="../../advanced/s
 <ol>
 <li><a href="https://github.com/p-org/P/blob/master/Tutorial/2_TwoPhaseCommit/PSrc/Coordinator.p">Coordinator.p</a>: Implements the Coordinator state machine.</li>
 </ol>
-<details class="tip"><summary>[Expand]: Lets walk through Coordinator.p</summary><ul>
+<details class="tip"><summary>[Expand]: Let's walk through Coordinator.p</summary><ul>
 <li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/2_TwoPhaseCommit/PSrc/Coordinator.p#L25-L33">L25 - L33</a>) &rarr; Declares the <code>write</code> and <code>read</code> transaction events used to communicate between the coordinator and the client machines (manual: <a href="../../manual/events/">event declaration</a>).</li>
 <li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/2_TwoPhaseCommit/PSrc/Coordinator.p#L35-L43">L35 - L43</a>) &rarr; Declares the <code>prepare</code>, <code>commit</code> and <code>abort</code> events used to communicate between the coordinator and the participants in the system.</li>
 <li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/2_TwoPhaseCommit/PSrc/Coordinator.p#L3-L16">L3 - L16</a>) &rarr; Declares the payload types associated with these events (manual: <a href="../../manual/datatypes/#user-defined">user defined type</a>).</li>
@@ -903,7 +903,7 @@ a participant and  forwards the read request to that participant.</li>
 <ul>
 <li><a href="https://github.com/p-org/P/blob/master/Tutorial/2_TwoPhaseCommit/PSrc/Participant.p">Participant.p</a>: Implements the Participant state machine.</li>
 </ul>
-<details class="tip"><summary>[Expand]: Lets walk through Participant.p</summary><ul>
+<details class="tip"><summary>[Expand]: Let's walk through Participant.p</summary><ul>
 <li>Unlike the <code>Coordinator</code> state machine that has multiple states, the <code>Participant</code> state machine is fairly simple. Each participant waits for requests from the <code>Coordinator</code> and sends the response back based on whether the request can be accepted or has to be rejected.</li>
 <li>On receiving a <code>eShutDown</code> event, the participant does a <code>raise halt</code> to destroy itself. To know more about the special <code>halt</code> event, please check the manual: <a href="../../manual/expressions/#primitive">halt event</a>.</li>
 <li>Each participant maintains a local key-value store which is updated based on the transactions committed by the coordinator. On receiving a prepare request from the coordinator, the participant chooses to either accept or reject the transaction based on the associated transaction id.</li>
@@ -939,12 +939,12 @@ a participant and  forwards the read request to that participant.</li>
 <h3 id="test-scenarios">Test Scenarios</h3>
 <p>The test scenarios folder in P has two parts: TestDrivers and TestScripts. TestDrivers are collections of state machines that implement the test harnesses (or environment state machines) for different test scenarios. TestScripts are collections of test cases that are automatically run by the P checker.</p>
 <p>The test scenarios folder for ClientServer (<a href="https://github.com/p-org/P/tree/master/Tutorial/1_ClientServer/PTst">PTst</a>) consists of two files <a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PTst/TestDriver.p">TestDriver.p</a> and <a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PTst/Testscript.p">TestScript.p</a>.</p>
-<details class="tip"><summary>[Expand]: Lets walk through TestDriver.p</summary><ul>
+<details class="tip"><summary>[Expand]: Let's walk through TestDriver.p</summary><ul>
 <li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PTst/TestDriver.p#L36-L60">L36 - L60</a>) &rarr; Function <code>SetupClientServerSystem</code> takes as input the number of clients to be created and configures the ClientServer system by creating the <code>Client</code> and <code>BankServer</code> machines. The <a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PTst/TestDriver.p#L25-L34"><code>CreateRandomInitialAccounts</code></a> function uses the <a href="../../manual/expressions/#choose"><code>choose</code></a> primitive to randomly initialize the accounts map.</li>
 <li>(<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PTst/TestDriver.p#L3-L22">L3 - L22</a>) &rarr; Machines <code>TestWithSingleClient</code> and <code>TestWithMultipleClients</code> are simple test driver machines that configure the system to be checked by the P checker for different scenarios. In this case, test the ClientServer system by first randomly initializing the accounts map and then testing it with either one <code>Client</code> or with multiple <code>Client</code>s (between 2 and 4)).</li>
 </ul>
 </details>
-<details class="tip"><summary>[Expand]: Lets walk through TestScript.p</summary><p>P allows programmers to write different test cases. Each test case is checked separately and can use a different test driver. Using different test drivers triggers different behaviors in the system under test, as it implies different system configurations and input generators. To better understand the P test cases, please look at manual: <a href="../../manual/testcases/">P test cases</a>.
+<details class="tip"><summary>[Expand]: Let's walk through TestScript.p</summary><p>P allows programmers to write different test cases. Each test case is checked separately and can use a different test driver. Using different test drivers triggers different behaviors in the system under test, as it implies different system configurations and input generators. To better understand the P test cases, please look at manual: <a href="../../manual/testcases/">P test cases</a>.
 - (<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/PTst/Testscript.p#L4-L16">L4 - L16</a>) &rarr; Declares three test cases each checking a different scenario and system. The system under test is the <code>union</code> of the modules representing each component in the system (manual: <a href="../../manual/modulesystem/#union-module">P module system</a>).
 - In the <code>tcSingleClientAbstractServer</code> test case, instead of composing with the Bank module, we use the AbstractBank module. Hence, in the composed system, whenever the creation of a BankServer machine is invoked the binding will instead create an AbstractBankServer machine.</p>
 </details>
@@ -1038,7 +1038,7 @@ test case to run by using the <code>-m</code> parameter along with the <code>-i<
 <p>[Problem 1] Based on the hint above, try and fix the concurrency bug in the <code>Client</code> state machine and run the test cases again!</p>
 </li>
 <li>
-<p>[Problem 2] A really interesting exploratory problem would be to try and combine the two phase commit protocol with the failure detector system to over come the progress problem faced by two phase commit protocol in the presence of node failures. Can you really do that? Lets have a discussion and build a variant of the protocol to tolerant failures?</p>
+<p>[Problem 2] A really interesting exploratory problem would be to try and combine the two phase commit protocol with the failure detector system to over come the progress problem faced by two phase commit protocol in the presence of node failures. Can you really do that? Let's have a discussion and build a variant of the protocol to tolerant failures?</p>
 </li>
 </ul>
 <div class="admonition summary">
