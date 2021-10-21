@@ -885,7 +885,7 @@ sequence of steps from the intial state to the error state.
 (2) a <strong>schedule file</strong> (e.g., <code>ClientServer_0_0.schedule</code>) that can be used to replay the error
 trace and single step through the P program with the generated error trace for debugging.</p>
 <h3 id="error-trace">Error Trace</h3>
-<p>The <code>*.txt</code> file represents an textual error trace representing the sequence of steps (i.e, messages sent, messages received, machines created) from the initial state to the final error state. In the end of the error trace is the final error message, for example, in the case of ClientServer example above, you must see the following in the end of the error trace.</p>
+<p>The <code>*.txt</code> file contains a textual error trace representing the sequence of steps (i.e, messages sent, messages received, machines created) from the initial state to the final error state. In the end of the error trace is the final error message, for example, in the case of ClientServer example above, you must see the following in the end of the error trace.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">&lt;ErrorLog&gt;</span> Assertion Failed: Bank must accept the with draw request for 1, 
   bank balance is 11!
 </code></pre></div>

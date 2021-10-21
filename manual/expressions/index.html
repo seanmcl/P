@@ -590,6 +590,33 @@
     Primitives
   </a>
   
+    <nav class="md-nav" aria-label="Primitives">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    $
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#halt" class="md-nav__link">
+    Halt
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#this" class="md-nav__link">
+    This
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -877,6 +904,33 @@
     Primitives
   </a>
   
+    <nav class="md-nav" aria-label="Primitives">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    $
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#halt" class="md-nav__link">
+    Halt
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#this" class="md-nav__link">
+    This
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1085,11 +1139,12 @@ P supports the common imperative programming language expressions (just like in 
 <h3 id="primitives">Primitives</h3>
 <p>P allows the common primitive expressions like literal-constants for integers, floats, strings, booleans, and the null value.
 There are three unique primitive expressions in P:</p>
-<ul>
-<li><code>$</code> represents a nondeterministic boolean choice. It is a short hand for <code>choose()</code> which randomly returns a boolean value and the P Checker explores the behavior of the system for both the possibilities i.e., both when <code>$</code> evaluates to <code>true</code> or <code>false</code>.</li>
-<li><code>halt</code> is a special event in P used for destroying an instance of a P machine. The semantics of an <code>halt</code> event is that whenever a P machine throws an <code>unhandled event</code> exception because of a <code>halt</code> event then the machine is automatically destroyed or halted and all events sent to that machine instance are there after are equivalent to being dropped to ether. There are two ways of using the <code>halt</code> event: (1) self-halt by doing <code>raise halt;</code> raising a <code>halt</code> event which is not handled in the state machine or (2) by sending the <code>halt</code> event to the machine that needs to be halted. (Add reference to the Tutorial example).</li>
-<li><code>this</code> represents the <code>self</code> machine reference of the current machine. It can be used to send self reference to other machines in the program so that they can send messages to this machine.</li>
-</ul>
+<h4 id="_1">$</h4>
+<p><code>$</code> represents a nondeterministic boolean choice. It is a short hand for <code>choose()</code> which randomly returns a boolean value and the P Checker explores the behavior of the system for both the possibilities i.e., both when <code>$</code> evaluates to <code>true</code> or <code>false</code>.</p>
+<h4 id="halt">Halt</h4>
+<p><code>halt</code> is a special event in P used for destroying an instance of a P machine. The semantics of an <code>halt</code> event is that whenever a P machine throws an <code>unhandled event</code> exception because of a <code>halt</code> event then the machine is automatically destroyed or halted and all events sent to that machine instance there after are equivalent to being dropped to ether. There are two ways of using the <code>halt</code> event: (1) <strong>self-halt</strong> by doing <code>raise halt;</code> raising a <code>halt</code> event which is not handled in the state machine will lead to that machine being halted or (2) by sending the <code>halt</code> event to a machine, and that machine on dequeueing <code>halt</code>, would halt itself. Please checkout the <a href="../../tutorial/failuredetector/">FailureDetector</a> example in tutorials to know more about halt event</p>
+<h4 id="this">This</h4>
+<p><code>this</code> represents the <code>self</code> machine reference of the current machine. It can be used to send self reference to other machines in the program so that they can send messages to this machine.</p>
 <h3 id="formatted-string">Formatted String</h3>
 <p>P allows creating formatted strings.</p>
 <p><strong>Syntax:</strong>: <code>format ( formatString (, rvalueList)? )</code></p>

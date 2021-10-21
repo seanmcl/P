@@ -709,7 +709,44 @@
                 
                   <h1>P State Machines</h1>
                 
-                
+                <p>The underlying model of computation for P state machines is similar to that of <a href="http://osl.cs.illinois.edu/members/agha.html">Gul Agha's</a> <a href="https://dspace.mit.edu/handle/1721.1/6952">Actor-model-of-computation</a> (<a href="https://en.wikipedia.org/wiki/Actor_model">wiki</a>). A P program is a collection of concurrently executing state machines that communicate with eachother by sending events (or messages) asynchronously. Each P state machine has an <strong>unbounded FIFO buffer</strong> associated with it. Sends are <strong>asynchronous</strong>, i.e., executing a send operation <code>send t,e,v;</code> adds event <code>e</code> with payload value <code>v</code> into the FIFO buffer of the target machine <code>t</code>. 
+Each state in the P state machine has an entry and an exit function associated with it, entry function get executed when the state machine enters that state and similarly, the exit function gets executed when the machine exits that sate on an out going transition. After executing the entry function, the machine tries to dequeue an event from the input buffer or blocks if the buffer is empty. Upon dequeuing an event from the input queue of the machine, the attached handler is executed which might transition the machine to a different state.</p>
+<p>For detailed formal semantics of P state machines, we refer the readers to the <a href="https://ankushdesai.github.io/assets/papers/p.pdf">original P paper</a> and the <a href="https://ankushdesai.github.io/assets/papers/modp.pdf">more recent paper</a> with updated semantics.</p>
+<details class="note" open="open"><summary>P State Machine Grammar</summary><div class="highlight"><pre><span></span><code># State Machine in P
+machineDecl : machine name machineBody
+
+# State Machine Body
+machineBody : LBRACE machineEntry* RBRACE;
+machineEntry 
+  | varDecl
+  | funDecl
+  | stateDecl
+  ;
+
+# Variable Decl
+varDecl : var iden : type; ;                                    
+
+# State Declaration in P
+stateDecl : start? (hot | cold)? state name { stateBodyItem* }
+
+# State Body
+stateBody:
+  | entry anonFunction                # StateEntryFunAnon
+  | entry funName ;                   # StateEntryFunNamed
+  | exit noParamAnonFunction          # StateExitFunAnon
+  | exit funName;                     # StateExitFunNamed
+
+  ## Transition or Event Handlers in each state
+  | defer eventList ;                               # StateDeferHandler
+  | ignore eventList ;                              # StateIgnoreHandler
+  | on eventList do funName ;                       # OnEventDoAnonHandler
+  | on eventList do anonFunction                    # OnEventDoNamedHandler
+  | on eventList goto stateName ;                   # OnEventGotoState
+  | on eventList goto stateName with anonFunction   # OnEventGotoStateWithAnonHandler
+  | on eventList goto stateName with funName ;      # OnEventGotoStateWithNamedHandler
+  ;
+</code></pre></div>
+</details>
                 
               
               

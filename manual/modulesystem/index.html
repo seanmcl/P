@@ -815,7 +815,7 @@
 implement and test the system compositionally. More details about the underlying theory
 for the P module system (assume-guarantee style compositional reasoning) is described in
 the <a href="https://ankushdesai.github.io/assets/papers/modp.pdf">paper</a></p>
-<p>In its simplest form, a module in P is a collection of state machines. The P module system allows constructing larger modules by composing or unioning modules together. Hence, a distributed system under test which is a composition of multiple components together can be constructed by composing (or unioning) modules corresponding to those components. The <a href="../testcases/">P test cases</a> takes as input a module that represents the <strong>closed</strong><sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> system to be validated which is the union or composition of all the component modules.</p>
+<p>In its simplest form, a module in P is a collection of state machines. The P module system allows constructing larger modules by composing or unioning modules together. Hence, a distributed system under test which is a composition of multiple components can be constructed by composing (or unioning) modules corresponding to those components. The <a href="../testcases/">P test cases</a> takes as input a module that represents the <strong>closed</strong><sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> system to be validated which in turn is the union or composition of all the component modules.</p>
 <details class="note"><summary>P Modules Grammar</summary><div class="highlight"><pre><span></span><code>modExpr :
 | ( modExpr )                               # AnnonymousModuleExpr
 | { bindExpr (, bindExpr)* }                # PrimitiveModuleExpr
@@ -833,7 +833,6 @@ bindExpr : (iden | iden -&gt; iden) ;          # MachineBindExpr
 namedModuleDecl : module iden = modExpr ;   # Named module declaration
 </code></pre></div>
 </details>
-<p>(Add a link to the client server and two phase commit example to describe this further).</p>
 <h3 id="named-module">Named Module</h3>
 <p>A named module declaration simply assigns a name to a module expression.</p>
 <p><strong>Syntax</strong>: <code>module mName = modExpr;</code></p>
@@ -873,7 +872,10 @@ module serverAbs = {AbstractServer -&gt; Server, Timer};
 <p><code>module systemAbs = (union client, serverAbs);</code></p>
 <p><code>systemAbs</code> is a module which is a union of the module <code>client</code> and the <code>serverAbs</code> where the <code>Client</code> machine interacts with the <code>AbstractServer</code> machine instead of the <code>Server</code> machine in the <code>system</code> module.</p>
 <h3 id="assert-monitors-module">Assert Monitors Module</h3>
-<p>P allows attaching monitors (or specifications) to modules. When attaching monitors to a module, the events observed by the monitors must be sent by some machine in the module. The way to think about assert monitors module is that: <em>testing this module asserts that each execution of the module satisfies the global properties specified by the monitors.</em></p>
+<p>P allows attaching monitors (or specifications) to modules. When attaching monitors to a module, the events observed by the monitors must be sent by <code>some</code> machine in the module. </p>
+<div class="admonition info">
+<p>The way to think about assert monitors module is that: `attaching these monitors to the module asserts (during P checker exploration) that each execution of the module satisfies the global properties specified by the monitors._</p>
+</div>
 <p><strong>Syntax:</strong> <code>assert idenList in modExpr</code></p>
 <p><code>idenList</code> is a comma separated list of monitor (spec machine) names that are being asserted on the executions of the module <code>modExpr</code>.</p>
 <p><code>assert AtomicitySpec, EventualResponse in TwoPhaseCommit</code></p>

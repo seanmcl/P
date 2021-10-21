@@ -829,12 +829,12 @@
 <li><strong>Named functions</strong> can either be declared inside a state machine or globally as a top-level declaration. The named functions declared within a state machine are local to that machine and hence can access the local-variables of the machine. Global named functions are shared across state machines. Note that the purpose of having named functions is to enable code reuse. Named functions can be also be used as entry/exit functions and also as event handlers.</li>
 </ul>
 <p>Please look at <a href="../statemachines/">P state machine</a> for more details about the declaration of these functions.</p>
-<details class="note"><summary>P Functions Grammar</summary><div class="highlight"><pre><span></span><code>  anonEventHandler : (funParam?) functionBody                     # AnonymousFunDecl
+<details class="note"><summary>P Functions Grammar</summary><div class="highlight"><pre><span></span><code>  anonFunction : (funParam?) functionBody                         # AnonymousFunDecl
 
-  namedfunDecl : 
-      | fun name (funParamList?) (: returnType)? ;                # ForeignFunDecl
-      | fun name (funParamList?) (: returnType)? functionBody     # FunDecl
-      ;
+  funDecl : 
+    | fun name (funParamList?) (: returnType)? ;                  # ForeignFunDecl
+    | fun name (funParamList?) (: returnType)? functionBody       # FunDecl
+    ;
 
   functionBody : { varDecl* statement* }                          # FunctionBody
 

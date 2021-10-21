@@ -65,6 +65,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#safety-specification" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -536,9 +541,43 @@
     <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
     
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        P Monitors
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
     <a href="./" class="md-nav__link md-nav__link--active">
       P Monitors
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#safety-specification" class="md-nav__link">
+    Safety specification
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#liveness-specification" class="md-nav__link">
+    Liveness specification
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -701,6 +740,41 @@
               </div>
             
             
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#safety-specification" class="md-nav__link">
+    Safety specification
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#liveness-specification" class="md-nav__link">
+    Liveness specification
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content">
             <article class="md-content__inner md-typeset">
@@ -728,8 +802,8 @@ assert the desired correctness specifications based on these observations.</p>
 </details>
 <p><strong>Syntax:</strong> <code>spec iden observes eventsList statemachineBody ;</code></p>
 <p><code>iden</code> is the name of the spec machine, <code>eventsList</code> is the comma separated list of events observed by the spec machine and the <code>statemachineBody</code> is the implementation of the specification and its grammar is similar to the <a href="../statemachines/">P state machine</a>.</p>
-<div class="tabbed-set" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Safety specification</label><div class="tabbed-content">
-<p><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+<h4 id="safety-specification">Safety specification</h4>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
  4
@@ -753,7 +827,7 @@ assert the desired correctness specifications based on these observations.</p>
 <span class="cm">monotonically increasing by 1</span>
 <span class="cm">*******************************************************************/</span>
 <span class="n">spec</span> <span class="n">ReqIdsAreMonotonicallyIncreasing</span> <span class="n">observes</span> <span class="n">eRequest</span> <span class="p">{</span>
-  <span class="c1">// keep track of the Id in the previous request</span>
+    <span class="c1">// keep track of the Id in the previous request</span>
     <span class="k">var</span> <span class="py">previousId</span> <span class="p">:</span> <span class="n">int</span><span class="p">;</span>
     <span class="n">start</span> <span class="n">state</span> <span class="n">Init</span> <span class="p">{</span>
         <span class="n">on</span> <span class="n">eRequest</span> <span class="k">do</span> <span class="p">(</span><span class="n">req</span><span class="p">:</span> <span class="n">tRequest</span><span class="p">)</span> <span class="p">{</span>
@@ -766,10 +840,9 @@ assert the desired correctness specifications based on these observations.</p>
 <span class="p">}</span>
 </code></pre></div>
 </td></tr></table>
-The above specification checks a very simple global invariant that all <code>eRequest</code> events that are being sent by clients in the system have a globally monotonically increasing <code>rId</code>.</p>
-</div>
-<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Liveness specification</label><div class="tabbed-content">
-<p><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+<p>The above specification checks a very simple global invariant that all <code>eRequest</code> events that are being sent by clients in the system have a globally monotonically increasing <code>rId</code>.</p>
+<h4 id="liveness-specification">Liveness specification</h4>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
  4
@@ -808,10 +881,10 @@ The above specification checks a very simple global invariant that all <code>eRe
             <span class="n">pendingReqs</span> <span class="p">+=</span> <span class="p">(</span><span class="n">req</span><span class="p">.</span><span class="n">rId</span><span class="p">);</span>
         <span class="p">}</span>
     <span class="p">}</span>
-    <span class="n">hot</span> <span class="n">state</span> <span class="n">PendingReqs</span> <span class="p">{</span>
-        <span class="n">on</span> <span class="n">eResponse</span> <span class="k">do</span> <span class="p">(</span><span class="n">resp</span><span class="p">:</span> <span class="n">tResponse</span><span class="p">)</span> <span class="p">{</span>
+<span class="hll">    <span class="n">hot</span> <span class="n">state</span> <span class="n">PendingReqs</span> <span class="p">{</span>
+</span>        <span class="n">on</span> <span class="n">eResponse</span> <span class="k">do</span> <span class="p">(</span><span class="n">resp</span><span class="p">:</span> <span class="n">tResponse</span><span class="p">)</span> <span class="p">{</span>
             <span class="n">assert</span> <span class="n">resp</span><span class="p">.</span><span class="n">rId</span> <span class="k">in</span> <span class="n">pendingReqs</span><span class="p">,</span> 
-              <span class="n">format</span> <span class="p">(</span><span class="s">&quot;unexpected rId: {0} received, expected one of {1}&quot;</span><span class="p">,</span> <span class="n">resp</span><span class="p">.</span><span class="n">rId</span><span class="p">,</span> <span class="n">pendingReqs</span><span class="p">);</span>
+                <span class="n">format</span> <span class="p">(</span><span class="s">&quot;unexpected rId: {0} received, expected one of {1}&quot;</span><span class="p">,</span> <span class="n">resp</span><span class="p">.</span><span class="n">rId</span><span class="p">,</span> <span class="n">pendingReqs</span><span class="p">);</span>
             <span class="k">if</span><span class="p">(</span><span class="n">resp</span><span class="p">.</span><span class="n">status</span> <span class="p">==</span> <span class="n">SUCCESS</span><span class="p">)</span>
             <span class="p">{</span>
                 <span class="n">pendingReqs</span> <span class="p">-=</span> <span class="p">(</span><span class="n">resp</span><span class="p">.</span><span class="n">rId</span><span class="p">);</span>
@@ -826,10 +899,8 @@ The above specification checks a very simple global invariant that all <code>eRe
 <span class="p">}</span>
 </code></pre></div>
 </td></tr></table>
-The above specification checks the global liveness property that every event <code>eRequest</code> is eventually followed by a corresponding successful <code>eResponse</code> event. The key idea is that the system satisfies a liveness specification if at the end of the execution the monitor is not in a <strong>hot</strong> state (line 13). The programmers can use <code>hot</code> annotation on states to mark them as intermediate or error states. Hence, properties like <code>eventually something holds</code> or <code>every event X is eventually followed by Y</code> or <code>eventually the system enters a convergence state</code>, all such properties can be specified by marking the intermediate state as <code>hot</code> states and the checker ensures that all the executions of the system eventually end in a non-hot state. </p>
-<p>Details about the importance of liveness specifications and how we check if the system satisfies these properties is described <a href="../../advanced/importanceliveness/">here</a>. </p>
-</div>
-</div>
+<p>The above specification checks the global liveness property that every event <code>eRequest</code> is eventually followed by a corresponding successful <code>eResponse</code> event. The key idea is that the system satisfies a liveness specification if at the end of the execution the monitor is not in a <strong>hot</strong> state (line 13). The programmers can use <code>hot</code> annotation on states to mark them as intermediate or error states. Hence, properties like <code>eventually something holds</code> or <code>every event X is eventually followed by Y</code> or <code>eventually the system enters a convergence state</code>, all such properties can be specified by marking the intermediate state as <code>hot</code> states and the checker checks that all the executions of the system eventually end in a non-hot state. If there exists an execution that fails to come out of a hot state eventually then it is flagged as a potential liveness violation.</p>
+<p>Details about the importance of liveness specifications is described <a href="../../advanced/importanceliveness/">here</a>. For several examples of liveness properties, please check the specifications in the turorial examples.</p>
                 
               
               
