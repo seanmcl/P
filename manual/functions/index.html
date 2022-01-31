@@ -851,12 +851,14 @@
 <h3 id="named-functions">Named Functions</h3>
 <p>Named functions in P can be declared within P state machines as local functions that can access the local variables of the state machine. Named functions that are declared as top-level declarations are global functions that can be used across state machines.</p>
 <p>Check out the grammar of <a href="../statemachines/">P state machines</a> for local functions declarations and <a href="../../manualoutline/">top-level declarations</a> grammar for the global function declarations.</p>
+<p>Example of a local functions: <a href="https://github.com/p-org/P/blob/master/Tutorial/4_FailureDetector/PSrc/FailureDetector.p#L118">here</a> and an example of a global function that is shared across all machines: <a href="https://github.com/p-org/P/blob/master/Tutorial/Common/FailureInjector/PSrc/NetworkFunctions.p">here</a></p>
 <p><strong>Syntax</strong>: <code>fun name (funParamList?) (: returnType)? functionBody</code></p>
 <p><code>name</code> is the name of the named function, <code>funParamList</code> is the optional function parameters, and <code>returnType</code> is the optional return type of the function.</p>
 <h4 id="foreign-functions">Foreign Functions</h4>
 <p>P named function declarations without any function body are referred to as foreign functions. Foreign functions are functions that are declared in P and can be used in the P program just like any other function but the implementation of these functions is provided in the foreign language.</p>
 <p><strong>Syntax</strong>: <code>fun name (funParamList?) (: returnType)? ;</code></p>
 <p><code>name</code> is the name of the named function, <code>funParamList</code> is the optional function parameters, and <code>returnType</code> is the optional return type of the function.</p>
+<p>To know more about the foreign interface and functions, please look at the <a href="https://p-org.github.io/P/manual/foriegntypesfunctions/">PriorityQueue example</a>.</p>
 <h3 id="function-body">Function Body</h3>
 <p>Function body in P is similar to other programming languages with a restriction that P function-local variables uses C style local variable declarations.
 Declaration of local variables in a function must come before any other statement in the function body. So, the body of a function in P is a sequence of variable declarations followed by a sequence of <a href="../statements/">statements</a>.</p>
