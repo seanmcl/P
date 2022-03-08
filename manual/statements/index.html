@@ -619,6 +619,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#foreach" class="md-nav__link">
+    Foreach
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#if-then-else" class="md-nav__link">
     If Then Else
   </a>
@@ -874,6 +881,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#foreach" class="md-nav__link">
+    Foreach
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#if-then-else" class="md-nav__link">
     If Then Else
   </a>
@@ -984,6 +998,7 @@ P supports common imperative programming language statement constructs like whil
 <details class="note"><summary>P Statements Grammar</summary><div class="highlight"><pre><span></span><code>statement : { statement* }                          # CompoundStmt
 | assert expr (, expr)? ;                           # AssertStmt
 | print expr ;                                      # PrintStmt
+| foreach (iden in expr) statement                  # ForeachStmt
 | while ( expr )  statement                         # WhileStmt
 | if ( expr ) statement (else statement)?           # IfThenElseStmt
 | break ;                                           # BreakStmt
@@ -1082,18 +1097,63 @@ You can also provide a formatted string error message to add details to the erro
 </code></pre></div>
 </div>
 </div>
+<h3 id="foreach">Foreach</h3>
+<p><code>foreach</code> statement can be used to iterate over a collection (<code>sequence</code> or <code>set</code>) in P.</p>
+<p><strong>Syntax</strong>: <code>foreach (iden in expr) statement</code></p>
+<p><code>iden</code> is the name of the variable that store the element from the collection during iterations. <code>expr</code> represents the collection over which we want to iterate and must be of type <code>seq</code> or <code>set</code>. Type of <code>iden</code> must be same as the elements type in the collection.</p>
+<p>Note that variable <code>iden</code> must already be declared, and in each iteration, an element is assigned to this variable at the start of the iteration (no ordering guarantees). Also, one can mutate the collection represented by <code>expr</code> when iterating over it as the foreach statement enumerates over a clone of the collection (more details in the example below).</p>
+<div class="tabbed-set" data-tabs="4:3"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><label for="__tabbed_4_1">Foreach (set)</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="k">var</span> <span class="py">iter</span><span class="p">,</span> <span class="n">sum</span><span class="p">:</span> <span class="n">int</span><span class="p">;</span>
+<span class="k">var</span> <span class="py">ints</span><span class="p">:</span> <span class="k">set</span><span class="p">[</span><span class="n">int</span><span class="p">];</span>
+
+
+<span class="c1">// iterate over a set of integers</span>
+<span class="n">foreach</span><span class="p">(</span><span class="n">iter</span> <span class="k">in</span> <span class="n">ints</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">sum</span> <span class="p">=</span> <span class="n">sum</span> <span class="p">+</span> <span class="n">iter</span><span class="p">;</span>
+<span class="p">}</span> 
+</code></pre></div>
+</div>
+<input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><label for="__tabbed_4_2">Foreach (mutating collection)</label><div class="tabbed-content">
+<p><div class="highlight"><pre><span></span><code><span class="k">var</span> <span class="py">iter</span><span class="p">,</span> <span class="n">sum</span><span class="p">:</span> <span class="n">int</span><span class="p">;</span>
+<span class="k">var</span> <span class="py">ints</span><span class="p">:</span> <span class="k">set</span><span class="p">[</span><span class="n">int</span><span class="p">];</span>
+
+<span class="c1">// iterate over a set of integers</span>
+<span class="n">foreach</span><span class="p">(</span><span class="n">iter</span> <span class="k">in</span> <span class="n">ints</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">ints</span> <span class="p">-=</span> <span class="p">(</span><span class="n">iter</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">assert</span> <span class="n">sizeof</span><span class="p">(</span><span class="n">ints</span><span class="p">)</span> <span class="p">==</span> <span class="m">0</span><span class="p">;</span>
+</code></pre></div>
+One can mutate the collection represented by <code>expr</code> when iterating over it as the foreach statement enumerates over a clone of the collection (more details in the example below).</p>
+</div>
+<input id="__tabbed_4_3" name="__tabbed_4" type="radio" /><label for="__tabbed_4_3">Foreach (Iterating over map)</label><div class="tabbed-content">
+<p><div class="highlight"><pre><span></span><code><span class="k">var</span> <span class="py">key</span><span class="p">:</span> <span class="n">int</span><span class="p">;</span>
+<span class="k">var</span> <span class="py">intsM</span><span class="p">:</span> <span class="n">map</span><span class="p">[</span><span class="n">int</span><span class="p">,</span> <span class="n">int</span><span class="p">];</span>
+
+<span class="c1">// iterate over a set of integers</span>
+<span class="n">foreach</span><span class="p">(</span><span class="n">key</span> <span class="k">in</span> <span class="n">keys</span><span class="p">(</span><span class="n">intsM</span><span class="p">))</span>
+<span class="p">{</span>
+    <span class="n">intsM</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="p">=</span> <span class="n">intsM</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="p">+</span> <span class="n">delta</span><span class="p">;</span> 
+<span class="p">}</span>
+</code></pre></div>
+One can iterate over the map using <a href="../expressions/#keys-and-values"><code>keys</code> and <code>values</code> functions</a>.</p>
+</div>
+</div>
+<p>You can find more examples for the foreach statement in the <a href="https://github.com/p-org/P/blob/master/Tst/RegressionTests/Feature2Stmts/Correct/foreach/foreach1.p">file</a></p>
 <h3 id="if-then-else">If Then Else</h3>
 <p>IfThenElse statement in P is just like conditional if statements in other popular programming languages like C, C# or Java.</p>
 <p><strong>Syntax</strong>: <code>if ( expr ) statement (else statement)?</code></p>
 <p><code>expr</code> is the conditional <code>boolean</code> expression and <code>statement</code> could be any P statement. The <code>else</code> block is optional.</p>
-<div class="tabbed-set" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><label for="__tabbed_4_1">If Statement</label><div class="tabbed-content">
+<div class="tabbed-set" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><label for="__tabbed_5_1">If Statement</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="k">if</span><span class="p">(</span><span class="n">x</span> <span class="p">&gt;</span> <span class="m">10</span><span class="p">)</span> <span class="p">{</span> 
     <span class="p">...</span>
     <span class="n">x</span> <span class="p">=</span> <span class="n">x</span> <span class="p">+</span> <span class="m">20</span><span class="p">;</span> 
 <span class="p">}</span>  
 </code></pre></div>
 </div>
-<input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><label for="__tabbed_4_2">If Else Statement</label><div class="tabbed-content">
+<input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><label for="__tabbed_5_2">If Else Statement</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="k">if</span><span class="p">(</span><span class="n">x</span> <span class="p">&gt;</span> <span class="m">10</span><span class="p">)</span> 
 <span class="p">{</span> 
     <span class="n">x</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> 
@@ -1108,7 +1168,7 @@ You can also provide a formatted string error message to add details to the erro
 <h3 id="break-and-continue">Break and Continue</h3>
 <p><code>break</code> and <code>continue</code> statements in P are just like in other popular programming languages like C, C# or Java 
 to break out of the while loop or to continue to the next iteration of the loop respectively.</p>
-<div class="tabbed-set" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><label for="__tabbed_5_1">Break</label><div class="tabbed-content">
+<div class="tabbed-set" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><label for="__tabbed_6_1">Break</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="k">while</span><span class="p">(</span><span class="k">true</span><span class="p">)</span> <span class="p">{</span>
     <span class="p">...</span>
     <span class="k">if</span><span class="p">(</span><span class="n">x</span> <span class="p">==</span> <span class="m">10</span><span class="p">)</span>
@@ -1118,7 +1178,7 @@ to break out of the while loop or to continue to the next iteration of the loop 
 <span class="p">}</span>  
 </code></pre></div>
 </div>
-<input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><label for="__tabbed_5_2">Continue</label><div class="tabbed-content">
+<input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><label for="__tabbed_6_2">Continue</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="k">while</span><span class="p">(</span><span class="k">true</span><span class="p">)</span> <span class="p">{</span>
     <span class="p">...</span>
     <span class="k">if</span><span class="p">(</span><span class="n">x</span> <span class="p">==</span> <span class="m">10</span><span class="p">)</span> <span class="c1">// skip the loop when x is 10</span>
@@ -1130,7 +1190,7 @@ to break out of the while loop or to continue to the next iteration of the loop 
 </div>
 <h3 id="return">Return</h3>
 <p><code>return</code> statement in P can be used to return (or return a value) from any function.</p>
-<div class="tabbed-set" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><label for="__tabbed_6_1">Return</label><div class="tabbed-content">
+<div class="tabbed-set" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><label for="__tabbed_7_1">Return</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="k">fun</span> <span class="nf">IncrementX</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">if</span><span class="p">(</span><span class="n">x</span> <span class="p">&gt;</span> <span class="n">MAX_INT</span><span class="p">)</span>
         <span class="k">return</span><span class="p">;</span>
@@ -1138,7 +1198,7 @@ to break out of the while loop or to continue to the next iteration of the loop 
 <span class="p">}</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><label for="__tabbed_6_2">Return Value</label><div class="tabbed-content">
+<input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><label for="__tabbed_7_2">Return Value</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="k">fun</span> <span class="nf">Max</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">int</span><span class="p">)</span> <span class="p">:</span> <span class="n">int</span><span class="p">{</span>
 <span class="k">if</span><span class="p">(</span><span class="n">x</span> <span class="p">&gt;</span> <span class="n">y</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">x</span><span class="p">;</span>
@@ -1157,7 +1217,7 @@ to break out of the while loop or to continue to the next iteration of the loop 
 <p>Note that because of value semantics assignment in P copies the value of the <code>rvalue</code> into <code>lvalue</code>.
 <code>lvalue</code> could be any variable, a tuple field access, or an element in a collection as described in the Grammar above.
 <code>rvalue</code> could be any expression that evaluates to the same type as <code>lvalue</code>.</p>
-<div class="tabbed-set" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><label for="__tabbed_7_1">Assignment is copying!</label><div class="tabbed-content">
+<div class="tabbed-set" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><label for="__tabbed_8_1">Assignment is copying!</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="k">var</span> <span class="py">a</span><span class="p">:</span> <span class="n">seq</span><span class="p">[</span><span class="n">string</span><span class="p">];</span>
 <span class="k">var</span> <span class="py">b</span><span class="p">:</span> <span class="n">seq</span><span class="p">[</span><span class="n">string</span><span class="p">];</span>
 <span class="n">b</span> <span class="p">+=</span> <span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="s">&quot;b&quot;</span><span class="p">);</span>
@@ -1167,7 +1227,7 @@ to break out of the while loop or to continue to the next iteration of the loop 
 <span class="n">print</span> <span class="n">b</span><span class="p">;</span> <span class="c1">// will print [&quot;b&quot;]</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><label for="__tabbed_7_2">Assignments ..</label><div class="tabbed-content">
+<input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><label for="__tabbed_8_2">Assignments ..</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="n">a</span> <span class="p">=</span> <span class="m">10</span><span class="p">;</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">=</span> <span class="m">20</span><span class="p">;</span> <span class="n">tup1</span><span class="p">.</span><span class="n">a</span> <span class="p">=</span> <span class="s">&quot;x&quot;</span><span class="p">;</span>
 <span class="n">tup2</span><span class="p">.</span><span class="m">0</span> <span class="p">=</span> <span class="m">10</span><span class="p">;</span> <span class="n">t</span> <span class="p">=</span> <span class="n">foo</span><span class="p">();</span>
 </code></pre></div>
@@ -1177,7 +1237,7 @@ to break out of the while loop or to continue to the next iteration of the loop 
 <p>Insert statement is used to insert or add an element into a collection.</p>
 <p><strong>Syntax</strong>: <code>lvalue += ( expr, rvalue ) ;</code> or <code>lvalue += ( rvalue ) ;</code></p>
 <p><code>lvalue</code> is a value of any collection type in P. </p>
-<div class="tabbed-set" data-tabs="8:3"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><label for="__tabbed_8_1">Insert into a Sequence</label><div class="tabbed-content">
+<div class="tabbed-set" data-tabs="9:3"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><label for="__tabbed_9_1">Insert into a Sequence</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="k">var</span> <span class="py">sq</span> <span class="p">:</span> <span class="n">seq</span><span class="p">[</span><span class="n">T</span><span class="p">];</span>
 <span class="k">var</span> <span class="py">x</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span> <span class="n">i</span> <span class="p">:</span> <span class="n">int</span><span class="p">;</span>
 
@@ -1190,7 +1250,7 @@ to break out of the while loop or to continue to the next iteration of the loop 
 <code>i = 0</code> insserts x at the start of <code>sq</code> and <code>i = sizeof(sq)</code> appends x at the end of <code>sq</code></p>
 </div>
 </div>
-<input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><label for="__tabbed_8_2">Insert into a map or update map</label><div class="tabbed-content">
+<input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><label for="__tabbed_9_2">Insert into a map or update map</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="k">var</span> <span class="py">mp</span> <span class="p">:</span> <span class="n">map</span><span class="p">[</span><span class="n">K</span><span class="p">,</span><span class="n">V</span><span class="p">];</span>
 <span class="k">var</span> <span class="py">x</span><span class="p">:</span> <span class="n">K</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">V</span><span class="p">;</span>
 
@@ -1200,7 +1260,7 @@ to break out of the while loop or to continue to the next iteration of the loop 
 <span class="n">mp</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="p">=</span> <span class="n">y</span><span class="p">;</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_8_3" name="__tabbed_8" type="radio" /><label for="__tabbed_8_3">Insert or add into a set</label><div class="tabbed-content">
+<input id="__tabbed_9_3" name="__tabbed_9" type="radio" /><label for="__tabbed_9_3">Insert or add into a set</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="k">var</span> <span class="py">st</span> <span class="p">:</span> <span class="k">set</span><span class="p">[</span><span class="n">T</span><span class="p">];</span>
 <span class="k">var</span> <span class="py">x</span><span class="p">:</span> <span class="n">T</span><span class="p">;</span>
 
@@ -1212,7 +1272,7 @@ to break out of the while loop or to continue to the next iteration of the loop 
 <h3 id="remove">Remove</h3>
 <p>Remove statement is used to remove an element from a collection.</p>
 <p><strong>Syntax</strong>: <code>lvalue -= rvalue ;</code></p>
-<div class="tabbed-set" data-tabs="9:3"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><label for="__tabbed_9_1">Remove from a Sequence</label><div class="tabbed-content">
+<div class="tabbed-set" data-tabs="10:3"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><label for="__tabbed_10_1">Remove from a Sequence</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="k">var</span> <span class="py">sq</span> <span class="p">:</span> <span class="n">seq</span><span class="p">[</span><span class="n">T</span><span class="p">];</span>
 <span class="k">var</span> <span class="py">i</span> <span class="p">:</span> <span class="n">int</span><span class="p">;</span>
 
@@ -1224,7 +1284,7 @@ to break out of the while loop or to continue to the next iteration of the loop 
 <p>The value of index <code>i</code> above should be between <code>0 &lt;= i &lt;= sizeof(sq) - 1</code>.</p>
 </div>
 </div>
-<input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><label for="__tabbed_9_2">Remove from a map</label><div class="tabbed-content">
+<input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><label for="__tabbed_10_2">Remove from a map</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="k">var</span> <span class="py">mp</span> <span class="p">:</span> <span class="n">map</span><span class="p">[</span><span class="n">K</span><span class="p">,</span><span class="n">V</span><span class="p">];</span>
 <span class="k">var</span> <span class="py">x</span><span class="p">:</span> <span class="n">K</span><span class="p">;</span>
 
@@ -1232,7 +1292,7 @@ to break out of the while loop or to continue to the next iteration of the loop 
 <span class="n">mp</span> <span class="p">-=</span> <span class="p">(</span><span class="n">x</span><span class="p">);</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_9_3" name="__tabbed_9" type="radio" /><label for="__tabbed_9_3">Remove from a set</label><div class="tabbed-content">
+<input id="__tabbed_10_3" name="__tabbed_10" type="radio" /><label for="__tabbed_10_3">Remove from a set</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="k">var</span> <span class="py">st</span> <span class="p">:</span> <span class="k">set</span><span class="p">[</span><span class="n">T</span><span class="p">];</span>
 <span class="k">var</span> <span class="py">x</span><span class="p">:</span> <span class="n">T</span><span class="p">;</span>
 
@@ -1244,7 +1304,7 @@ to break out of the while loop or to continue to the next iteration of the loop 
 <h3 id="new">New</h3>
 <p>New statement is used to create an instance of a machine in P.</p>
 <p><strong>Syntax</strong>: <code>new iden (rvalue?) ;</code></p>
-<div class="tabbed-set" data-tabs="10:1"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><label for="__tabbed_10_1">Create a machine</label><div class="tabbed-content">
+<div class="tabbed-set" data-tabs="11:1"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><label for="__tabbed_11_1">Create a machine</label><div class="tabbed-content">
 <p><div class="highlight"><pre><span></span><code><span class="k">new</span> <span class="n">Client</span><span class="p">((</span><span class="n">id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">server</span> <span class="o">=</span> <span class="k">this</span><span class="p">));</span>
 </code></pre></div>
 Creates a dynamic instance of a Client machine and passes the constructor parameter <code>(id = 1, server = this)</code> 
@@ -1257,7 +1317,7 @@ which is delivered as a payload to the entry function of the start state of the 
 <p>Note that the parameters passed to the functions and the return values are pass-by-value!</p>
 </div>
 <p><strong>Syntax</strong>: <code>iden ( rvalue? ) ;</code></p>
-<div class="tabbed-set" data-tabs="11:1"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><label for="__tabbed_11_1">Function call</label><div class="tabbed-content">
+<div class="tabbed-set" data-tabs="12:1"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><label for="__tabbed_12_1">Function call</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="n">Foo</span><span class="p">();</span> <span class="n">Bar</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s">&quot;haha&quot;</span><span class="p">);</span>
 </code></pre></div>
 </div>
@@ -1268,7 +1328,7 @@ control of the state machine jumps to end of the entry function (popping the fun
 and the state machine immediately handles the raised event. One can think of raise of an event as throwing
 an exception which terminates the execution of the function stack and must be immediately handled by the event-handlers defined in that state.</p>
 <p><strong>Syntax</strong>: <code>raise expr (, rvalue)?</code></p>
-<div class="tabbed-set" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><label for="__tabbed_12_1">Raise Event</label><div class="tabbed-content">
+<div class="tabbed-set" data-tabs="13:2"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><label for="__tabbed_13_1">Raise Event</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="n">state</span> <span class="n">HandleRequest</span> <span class="p">{</span>
     <span class="n">entry</span> <span class="p">(</span><span class="n">req</span><span class="p">:</span> <span class="n">tRequest</span><span class="p">)</span>
     <span class="p">{</span>
@@ -1284,7 +1344,7 @@ an exception which terminates the execution of the function stack and must be im
 <span class="p">}</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><label for="__tabbed_12_2">Non deterministically triggering event handlers internally</label><div class="tabbed-content">
+<input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><label for="__tabbed_13_2">Non deterministically triggering event handlers internally</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code>    <span class="n">state</span> <span class="n">DoAddOrRemove</span> <span class="p">{</span>
         <span class="n">entry</span>
         <span class="p">{</span>
@@ -1311,11 +1371,11 @@ an exception which terminates the execution of the function stack and must be im
 Send takes as argument a triple <code>send t, e, v</code>, where <code>t</code> is a reference to the target state machine, <code>e</code> is the event sent and <code>v</code> is the associated payload.</p>
 <p><strong>Syntax</strong>: <code>send expr, expr (, rvalue)? ;</code></p>
 <p>Sends in P are asynchronous and non-blocking. Statement <code>send t, e, v</code> enqueues the event <code>e</code> with payload <code>v</code> into the target machine <code>t</code>'s message buffer.</p>
-<div class="tabbed-set" data-tabs="13:2"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><label for="__tabbed_13_1">Send event with payload</label><div class="tabbed-content">
+<div class="tabbed-set" data-tabs="14:2"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><label for="__tabbed_14_1">Send event with payload</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="n">send</span> <span class="n">server</span><span class="p">,</span> <span class="n">eRequest</span><span class="p">,</span> <span class="p">(</span><span class="n">source</span> <span class="p">=</span> <span class="k">this</span><span class="p">,</span> <span class="n">reqId</span> <span class="p">=</span> <span class="m">0</span><span class="p">);</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><label for="__tabbed_13_2">Send event</label><div class="tabbed-content">
+<input id="__tabbed_14_2" name="__tabbed_14" type="radio" /><label for="__tabbed_14_2">Send event</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="n">send</span> <span class="n">server</span><span class="p">,</span> <span class="n">ePing</span><span class="p">;</span>
 </code></pre></div>
 </div>
@@ -1330,7 +1390,7 @@ then it is synchronously delivered to the monitor.
 Announce can be used to publish an event to all the monitors that are observing that event.
 The <a href="../../tutorial/twophasecommit/">Two phase commit</a> example provides an use case for announce.</p>
 <p><strong>Syntax</strong>: <code>annouce expr (, rvalue)? ;</code></p>
-<div class="tabbed-set" data-tabs="14:1"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><label for="__tabbed_14_1">Announce event</label><div class="tabbed-content">
+<div class="tabbed-set" data-tabs="15:1"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><label for="__tabbed_15_1">Announce event</label><div class="tabbed-content">
 <p><div class="highlight"><pre><span></span><code><span class="n">spec</span> <span class="n">CheckConvergedState</span> <span class="n">observes</span> <span class="n">eStateUpdate</span><span class="p">,</span> <span class="n">eSystemConverged</span> 
 <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
 </code></pre></div>
@@ -1351,7 +1411,7 @@ Announce is used for passing information to the monitors during system execution
 (terminating the execution of the current function) and enters the target state.
 The optional payload accompanying the goto statement becomes the input parameter to the entry function of the target state.</p>
 <p><strong>Syntax</strong>: <code>goto iden (, rvalue)? ;</code></p>
-<div class="tabbed-set" data-tabs="15:2"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><label for="__tabbed_15_1">Goto</label><div class="tabbed-content">
+<div class="tabbed-set" data-tabs="16:2"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><label for="__tabbed_16_1">Goto</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="n">state</span> <span class="n">ServicePendingRequests</span> <span class="p">{</span>
     <span class="n">entry</span> <span class="p">{</span>
         <span class="k">if</span><span class="p">(</span><span class="n">sizeof</span><span class="p">(</span><span class="n">pendingRequests</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
@@ -1365,7 +1425,7 @@ The optional payload accompanying the goto statement becomes the input parameter
 <span class="n">state</span> <span class="n">Done</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_15_2" name="__tabbed_15" type="radio" /><label for="__tabbed_15_2">Goto with payload</label><div class="tabbed-content">
+<input id="__tabbed_16_2" name="__tabbed_16" type="radio" /><label for="__tabbed_16_2">Goto with payload</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="n">state</span> <span class="n">ServiceRequests</span> <span class="p">{</span>
     <span class="n">entry</span> <span class="p">(</span><span class="n">req</span><span class="p">:</span> <span class="n">tRequest</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// process request with some complicated logic</span>
@@ -1391,7 +1451,7 @@ recvCase : case eventList : anonFunction
 <p>Each <code>receive</code> statement can block or wait on a set of events, all other events are automatically deferred by the state machine. 
 On receiving an event that the <code>receive</code> is blocking on (case blocks), the state machine unblocks, executes the corresponding case-handler 
 and resumes executing the next statement after receive.</p>
-<div class="tabbed-set" data-tabs="16:2"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><label for="__tabbed_16_1">Receive: await single event</label><div class="tabbed-content">
+<div class="tabbed-set" data-tabs="17:2"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><label for="__tabbed_17_1">Receive: await single event</label><div class="tabbed-content">
 <p><div class="highlight"><pre><span></span><code><span class="n">fun</span> <span class="nf">AcquireLock</span><span class="p">(</span><span class="n">lock</span><span class="p">:</span> <span class="n">machine</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">send</span> <span class="n">lock</span><span class="p">,</span> <span class="n">eAcquireLock</span><span class="p">;</span>
@@ -1405,7 +1465,7 @@ Note that when executing the AcquireLock function the state machine blocks at th
 it automatically defers all the events except the <code>eLockGranted</code> event. On receiving the <code>eLockGranted</code>, 
 the case-handler is executed and then the print statement.</p>
 </div>
-<input id="__tabbed_16_2" name="__tabbed_16" type="radio" /><label for="__tabbed_16_2">Receive: await multiple events</label><div class="tabbed-content">
+<input id="__tabbed_17_2" name="__tabbed_17" type="radio" /><label for="__tabbed_17_2">Receive: await multiple events</label><div class="tabbed-content">
 <p><div class="highlight"><pre><span></span><code><span class="n">fun</span> <span class="nf">WaitForTime</span><span class="p">(</span><span class="n">timer</span><span class="p">:</span> <span class="n">Timer</span><span class="p">,</span> <span class="n">time</span><span class="p">:</span> <span class="kt">int</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="kd">var</span> <span class="n">success</span><span class="p">:</span> <span class="n">bool</span><span class="p">;</span>
