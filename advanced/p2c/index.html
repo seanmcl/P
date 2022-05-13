@@ -1,0 +1,996 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="P: Modular and Safe Programming of Distributed Systems">
+      
+      
+        <link rel="canonical" href="http://p-org.github.io/P/advanced/p2c/">
+      
+      
+        <meta name="author" content="Ankush Desai">
+      
+      <link rel="shortcut icon" href="../../icon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.2">
+    
+    
+      
+        <title>P2c - P</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.19190aaf.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.24b84193.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#000000">
+        
+      
+    
+    
+    
+      
+        
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="deep-orange">
+      
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#generating-c-program" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="http://p-org.github.io/P/" title="P" class="md-header-nav__button md-logo" aria-label="P">
+      
+  <img src="../../icon.png" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            P
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              P2c
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/p-org/P" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    P on Github
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="http://p-org.github.io/P/" title="P" class="md-nav__button md-logo" aria-label="P">
+      
+  <img src="../../icon.png" alt="logo">
+
+    </a>
+    P
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/p-org/P" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    P on Github
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../whatisP/" class="md-nav__link">
+      What is P?
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Getting Started
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Getting Started" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon"></span>
+        Getting Started
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../getstarted/install/" class="md-nav__link">
+      Installing P
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../getstarted/syntaxhighlight/" class="md-nav__link">
+      Syntax Highlighting for P
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../getstarted/usingP/" class="md-nav__link">
+      Using P Compiler and Checker
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Tutorials
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Tutorials" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon"></span>
+        Tutorials
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutsoutline/" class="md-nav__link">
+      Outline
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorial/clientserver/" class="md-nav__link">
+      Client Server
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorial/twophasecommit/" class="md-nav__link">
+      Two Phase Commit
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorial/espressomachine/" class="md-nav__link">
+      Espresso Machine
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorial/failuredetector/" class="md-nav__link">
+      Failure Detector
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorial/common/" class="md-nav__link">
+      Timer, Failure, and Shared Memory
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Advanced User Guide
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Advanced User Guide" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon"></span>
+        Advanced User Guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../psemantics/" class="md-nav__link">
+      P Semantics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../importanceliveness/" class="md-nav__link">
+      Importance of Liveness Specifications
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../structureOfPProgram/" class="md-nav__link">
+      Structure of a P Program
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../PProject/" class="md-nav__link">
+      P Project File
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../debuggingerror/" class="md-nav__link">
+      Debugging Error Traces (counter examples)
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      Language Manual
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Language Manual" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        <span class="md-nav__icon md-icon"></span>
+        Language Manual
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../manualoutline/" class="md-nav__link">
+      P Program (Outline)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../manual/datatypes/" class="md-nav__link">
+      P DataTypes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../manual/events/" class="md-nav__link">
+      P Events
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../manual/statemachines/" class="md-nav__link">
+      P State Machines
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../manual/monitors/" class="md-nav__link">
+      P Monitors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../manual/functions/" class="md-nav__link">
+      P Functions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../manual/expressions/" class="md-nav__link">
+      P Expressions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../manual/statements/" class="md-nav__link">
+      P Statements
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../manual/modulesystem/" class="md-nav__link">
+      P Module System
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../manual/testcases/" class="md-nav__link">
+      P Test cases
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../manual/foriegntypesfunctions/" class="md-nav__link">
+      P Foreign Interface
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../casestudies/" class="md-nav__link">
+      Case Studies
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../videos/" class="md-nav__link">
+      Videos
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../publications/" class="md-nav__link">
+      Publications
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
+    
+    <label class="md-nav__link" for="nav-10">
+      Contributing to P
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Contributing to P" data-md-level="1">
+      <label class="md-nav__title" for="nav-10">
+        <span class="md-nav__icon md-icon"></span>
+        Contributing to P
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../getstarted/build/" class="md-nav__link">
+      Building from Source
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#generating-c-program" class="md-nav__link">
+    Generating C Program
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compiling-generated-c-program" class="md-nav__link">
+    Compiling Generated C Program
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>P2c</h1>
+                
+                <h2 id="generating-c-program">Generating C Program</h2>
+<p>P programs can be compiled to their C equivalents. Compilation to C can be performed by specifying the target language to the P compiler as follow.</p>
+<div class="highlight"><pre><span></span><code>pc -generate:C myProgram.p
+</code></pre></div>
+<p>Executing this command generates two files in the current directory: <code>myProgram.h</code> and <code>myProgram.c</code>, which are the C equivalent of the P program.</p>
+<h2 id="compiling-generated-c-program">Compiling Generated C Program</h2>
+<p><code>myProgram.h</code> and <code>myProgram.c</code> only contain C representations of the constructs defined in the P program; therefore, a driver C program defining the main function and instantiating one of the machines is needed to start the execution. Below, an example driver program is presented.</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span> <span class="cpf">&quot;myProgram.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Prt.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
+<span class="n">PRT_PROCESS</span><span class="o">*</span> <span class="n">MAIN_P_PROCESS</span><span class="p">;</span>
+<span class="k">static</span> <span class="n">PRT_BOOLEAN</span> <span class="n">cooperative</span> <span class="o">=</span> <span class="n">PRT_TRUE</span><span class="p">;</span>
+<span class="k">static</span> <span class="kt">int</span> <span class="n">threads</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="kt">long</span> <span class="n">threadsRunning</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">pthread_mutex_t</span> <span class="n">threadsRunning_mutex</span><span class="p">;</span>
+
+<span class="k">static</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">parg</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">ErrorHandler</span><span class="p">(</span><span class="n">PRT_STATUS</span> <span class="n">status</span><span class="p">,</span> <span class="n">PRT_MACHINEINST</span><span class="o">*</span> <span class="n">ptr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">==</span> <span class="n">PRT_STATUS_ASSERT</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">fprintf_s</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span> <span class="s">&quot;exiting with PRT_STATUS_ASSERT (assertion failure)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">==</span> <span class="n">PRT_STATUS_EVENT_OVERFLOW</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">fprintf_s</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span> <span class="s">&quot;exiting with PRT_STATUS_EVENT_OVERFLOW</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">==</span> <span class="n">PRT_STATUS_EVENT_UNHANDLED</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">fprintf_s</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span> <span class="s">&quot;exiting with PRT_STATUS_EVENT_UNHANDLED</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">==</span> <span class="n">PRT_STATUS_QUEUE_OVERFLOW</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">fprintf_s</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span> <span class="s">&quot;exiting with PRT_STATUS_QUEUE_OVERFLOW </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">==</span> <span class="n">PRT_STATUS_ILLEGAL_SEND</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">fprintf_s</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span> <span class="s">&quot;exiting with PRT_STATUS_ILLEGAL_SEND </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">fprintf_s</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span> <span class="s">&quot;unexpected PRT_STATUS in ErrorHandler: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">status</span><span class="p">);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">Log</span><span class="p">(</span><span class="n">PRT_STEP</span> <span class="n">step</span><span class="p">,</span> <span class="n">PRT_MACHINESTATE</span> <span class="o">*</span><span class="n">senderState</span><span class="p">,</span> <span class="n">PRT_MACHINEINST</span> <span class="o">*</span><span class="n">receiver</span><span class="p">,</span> <span class="n">PRT_VALUE</span><span class="o">*</span> <span class="n">event</span><span class="p">,</span> <span class="n">PRT_VALUE</span><span class="o">*</span> <span class="n">payload</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">PrtPrintStep</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">senderState</span><span class="p">,</span> <span class="n">receiver</span><span class="p">,</span> <span class="n">event</span><span class="p">,</span> <span class="n">payload</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">decrement_threadsRunning</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">pthread_mutex_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">threadsRunning_mutex</span><span class="p">);</span>
+    <span class="n">threadsRunning</span> <span class="o">=</span> <span class="n">threadsRunning</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">pthread_mutex_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">threadsRunning_mutex</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">long</span> <span class="nf">get_threadsRunning</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kt">long</span> <span class="n">c</span><span class="p">;</span>
+    <span class="n">pthread_mutex_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">threadsRunning_mutex</span><span class="p">);</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">threadsRunning</span><span class="p">;</span>
+    <span class="n">pthread_mutex_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">threadsRunning_mutex</span><span class="p">);</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">c</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">PRT_CALL_CONV</span> <span class="n">MyAssert</span><span class="p">(</span><span class="n">PRT_INT32</span> <span class="n">condition</span><span class="p">,</span> <span class="n">PRT_CSTRING</span> <span class="n">message</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">condition</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">message</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">fprintf_s</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;ASSERT&quot;</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">fprintf_s</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;ASSERT: %s&quot;</span><span class="p">,</span> <span class="n">message</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="kt">void</span> <span class="n">RunToIdle</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">process</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// In the tester we run the state machines until there is no more work to do then we exit</span>
+    <span class="c1">// instead of blocking indefinitely.  This is then equivalent of the non-cooperative case</span>
+    <span class="c1">// where we PrtRunStateMachine once (inside PrtMkMachine).  So we do NOT call PrtWaitForWork.</span>
+    <span class="c1">// PrtWaitForWork((PRT_PROCESS*)process);</span>
+    <span class="n">PRT_PROCESS_PRIV</span><span class="o">*</span> <span class="n">privateProcess</span> <span class="o">=</span> <span class="p">(</span><span class="n">PRT_PROCESS_PRIV</span><span class="o">*</span><span class="p">)</span><span class="n">process</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">privateProcess</span><span class="o">-&gt;</span><span class="n">terminating</span> <span class="o">==</span> <span class="n">PRT_FALSE</span><span class="p">)</span> <span class="p">{</span>
+        <span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">decrement_threadsRunning</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+    <span class="n">PRT_DBG_START_MEM_BALANCED_REGION</span>
+    <span class="p">{</span>
+        <span class="n">PRT_GUID</span> <span class="n">processGuid</span><span class="p">;</span>
+        <span class="n">PRT_VALUE</span> <span class="o">*</span><span class="n">payload</span><span class="p">;</span>
+
+        <span class="n">processGuid</span><span class="p">.</span><span class="n">data1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="n">processGuid</span><span class="p">.</span><span class="n">data2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">processGuid</span><span class="p">.</span><span class="n">data3</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">processGuid</span><span class="p">.</span><span class="n">data4</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">MAIN_P_PROCESS</span> <span class="o">=</span> <span class="n">PrtStartProcess</span><span class="p">(</span><span class="n">processGuid</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">P_GEND_IMPL_DefaultImpl</span><span class="p">,</span> <span class="n">ErrorHandler</span><span class="p">,</span> <span class="n">Log</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">cooperative</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">PrtSetSchedulingPolicy</span><span class="p">(</span><span class="n">MAIN_P_PROCESS</span><span class="p">,</span> <span class="n">PRT_SCHEDULINGPOLICY_COOPERATIVE</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">parg</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">payload</span> <span class="o">=</span> <span class="n">PrtMkNullValue</span><span class="p">();</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">atoi</span><span class="p">(</span><span class="n">parg</span><span class="p">);</span>
+            <span class="n">payload</span> <span class="o">=</span> <span class="n">PrtMkIntValue</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="n">PrtUpdateAssertFn</span><span class="p">(</span><span class="n">MyAssert</span><span class="p">);</span>
+        <span class="n">PRT_UINT32</span> <span class="n">machineId</span><span class="p">;</span>
+        <span class="n">PRT_BOOLEAN</span> <span class="n">foundMainMachine</span> <span class="o">=</span> <span class="n">PrtLookupMachineByName</span><span class="p">(</span><span class="s">&quot;myMachine&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">machineId</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">foundMainMachine</span> <span class="o">==</span> <span class="n">PRT_FALSE</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="s">&quot;FAILED TO FIND DroneMachine&quot;</span><span class="p">);</span>
+            <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="n">PrtMkMachine</span><span class="p">(</span><span class="n">MAIN_P_PROCESS</span><span class="p">,</span> <span class="n">machineId</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">payload</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">cooperative</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">typedef</span> <span class="kt">void</span> <span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="n">start_routine</span><span class="p">)</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">);</span>
+            <span class="n">pthread_t</span> <span class="n">tid</span><span class="p">[</span><span class="n">threads</span><span class="p">];</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">threads</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">threadsRunning</span><span class="o">++</span><span class="p">;</span>
+                <span class="n">pthread_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tid</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="nb">NULL</span><span class="p">,</span> <span class="p">(</span><span class="n">start_routine</span><span class="p">)</span><span class="n">RunToIdle</span><span class="p">,</span> <span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span><span class="n">MAIN_P_PROCESS</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="k">while</span><span class="p">(</span><span class="n">get_threadsRunning</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">);</span>
+
+        <span class="p">}</span>
+        <span class="n">PrtFreeValue</span><span class="p">(</span><span class="n">payload</span><span class="p">);</span>
+        <span class="n">PrtStopProcess</span><span class="p">(</span><span class="n">MAIN_P_PROCESS</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">PRT_DBG_END_MEM_BALANCED_REGION</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>One needs to notice couple of details of the given C program.</p>
+<ul>
+<li>The program includes <code>myProgram.h</code> as it is calling constructs defined in the C equivalent of the program.</li>
+<li>Global variables defined at the begining of the program are parameters that are used for different configuration of the program.</li>
+<li><code>ErrorHandler</code> is a function defined to provide an interface for the runtime errors.</li>
+<li><code>Log</code> is a function defined to print the steps taken by the runtime backend.</li>
+<li><code>decrement_threadsRunning</code> and <code>get_threadsRunning</code> are helper functions used for multi-threaded execution.</li>
+<li><code>MyAssert</code> is  function defined to provide an interface for the runtime assertions.</li>
+<li><code>RunToIdle</code> is a function defined to run a given process until termination.</li>
+<li><code>main</code> starts the execution by using all the functions and parameters defined previously. First, it starts the main P process by calling <code>PrtStartProcess</code>, which returns a <code>PRT_PROCESS</code> pointer. Next, if the scheduling policy is set to cooperative by the corresponding global variable, then the main function sets the scheduling policy to cooperative. Then, by using the method <code>PrtLookupMachineByName</code>, we look for a machine defined in the program by its name and get its id. With the id we create the machine by calling <code>PrtMkMachine</code>. Notice that if cooperative scheduling is disabled, i.e., task neutral policy is selected, then the execution starts immediately after creating the machine. If cooperative scheduling is enabled, one can either call <code>PrtRunProcess</code> with <code>MAIN_P_PROCESS</code>, i.e., <code>PrtRunProcess(MAIN_P_PROCESS)</code>, which will run the program with cooperative scheduling using only one thread, or run the while loop given in the program. The while loop given in the program distributes the work among the specified number of worker threads. In this case, the program will not exit until all worker threads are done.</li>
+</ul>
+<p>Now that we have a driver C program, we need to compile the generated C program to an executable. To compile and execute the generated C program with respect to P semantics, we need to link P runtime backend with the C representation of the program and the driver C program during compilation. We recommend using CMake for this purpose, an example <code>CMakeLists.txt</code> is given below.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">cmake_minimum_required</span> <span class="p">(</span><span class="s">VERSION</span> <span class="s">3.1</span><span class="p">)</span>
+
+<span class="nb">project</span> <span class="p">(</span><span class="s">myProgram</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span><span class="s">projectName</span> <span class="s">myProgram</span><span class="p">)</span>
+
+<span class="nb">find_package</span> <span class="p">(</span><span class="s">Threads</span><span class="p">)</span>
+
+<span class="nb">include_directories</span><span class="p">(</span>
+    <span class="s">/path/to/P/Bld/Drops/Prt/include</span>
+<span class="p">)</span>
+
+<span class="nb">add_definitions</span><span class="p">(</span> <span class="s">-DPRT_PLAT_LINUXUSER</span> <span class="p">)</span>
+
+<span class="nb">add_executable</span><span class="p">(</span><span class="s">myProgram</span>
+    <span class="s">myProgram.h</span>
+    <span class="s">myProgram.c</span>
+    <span class="s">main.c</span>
+    <span class="s">/path/to/P/Bld/Drops/Prt/include/ext_compat.h</span>
+    <span class="s">/path/to/P/Bld/Drops/Prt/include/libhandler.h</span>
+    <span class="s">/path/to/P/Bld/Drops/Prt/include/libhandler-internal.h</span>
+    <span class="s">/path/to/P/Bld/Drops/Prt/include/Prt.h</span>
+    <span class="s">/path/to/P/Bld/Drops/Prt/include/PrtConfig.h</span>
+    <span class="s">/path/to/P/Bld/Drops/Prt/include/PrtExecution.h</span>
+    <span class="s">/path/to/P/Bld/Drops/Prt/include/PrtLinuxUserConfig.h</span>
+    <span class="s">/path/to/P/Bld/Drops/Prt/include/PrtProgram.h</span>
+    <span class="s">/path/to/P/Bld/Drops/Prt/include/PrtTypes.h</span>
+    <span class="s">/path/to/P/Bld/Drops/Prt/include/PrtValues.h</span>
+    <span class="s">/path/to/P/Bld/Drops/Prt/include/sal.h</span>
+<span class="p">)</span>
+
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">myProgram</span>
+    <span class="s">/path/to/P/Bld/Drops/Prt/lib/libPrt_static.a</span>
+    <span class="s">/path/to/P/Ext/libhandler/out/gcc-amd64-apple-darwin20.6.0/debug/libhandler.a</span> <span class="c"># If you are not using MacOS, you need to change gcc-amd64-apple-darwin20.6.0 accordingly!</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>This file links all necessary P runtime backend libraries with the project. To compile, run the following.</p>
+<div class="highlight"><pre><span></span><code>cmake CMakeLists.txt
+make
+</code></pre></div>
+<p>After running these commands, the executable <code>myProgram</code> will be in the current directory, which can be executed simply as follows.</p>
+<div class="highlight"><pre><span></span><code>./myProgram
+</code></pre></div>
+<p>One can extend this project structure, and build more complicated applications.</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2021 P Developers
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+      <a href="https://twitter.com/_planguage" target="_blank" rel="noopener" title="P on Twitter" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+      </a>
+    
+      
+      
+      <a href="mailto:ankushdesai@gmail.com" target="_blank" rel="noopener" title="Contact P Team" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M476 3.2L12.5 270.6c-18.1 10.4-15.8 35.6 2.2 43.2L121 358.4l287.3-253.2c5.5-4.9 13.3 2.6 8.6 8.3L176 407v80.5c0 23.6 28.5 32.9 42.5 15.8L282 426l124.6 52.2c14.2 6 30.4-2.9 33-18.2l72-432C515 7.8 493.3-6.8 476 3.2z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.7e0ee788.min.js"></script>
+      <script src="../../assets/javascripts/bundle.c1ccee15.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: ['navigation.instant', 'navigation.indexes', 'navigation.expand', 'navigation.top', 'toc.integrate', 'search.suggest', 'search.highlight'],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.4ac00218.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>
