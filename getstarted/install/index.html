@@ -282,22 +282,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-3-install-p-compiler" class="md-nav__link">
-    [Step 3] Install P Compiler
+  <a href="#step-3-install-p-tool" class="md-nav__link">
+    [Step 3] Install P tool
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-4-install-p-checker" class="md-nav__link">
-    [Step 4] Install P Checker
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#step-5-recommended-ide-optional" class="md-nav__link">
-    [Step 5] Recommended IDE (Optional)
+  <a href="#step-4-recommended-ide-optional" class="md-nav__link">
+    [Step 4] Recommended IDE (Optional)
   </a>
   
 </li>
@@ -797,22 +790,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-3-install-p-compiler" class="md-nav__link">
-    [Step 3] Install P Compiler
+  <a href="#step-3-install-p-tool" class="md-nav__link">
+    [Step 3] Install P tool
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-4-install-p-checker" class="md-nav__link">
-    [Step 4] Install P Checker
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#step-5-recommended-ide-optional" class="md-nav__link">
-    [Step 5] Recommended IDE (Optional)
+  <a href="#step-4-recommended-ide-optional" class="md-nav__link">
+    [Step 4] Recommended IDE (Optional)
   </a>
   
 </li>
@@ -839,52 +825,54 @@
                 
                   <h1>Installing P</h1>
                 
-                <p>P is built to be cross platform and can be used on MacOS, Linux, and Windows. We provide a step-by-step guide for installing P along with its required dependencies.</p>
-<div class="admonition info">
+                <div class="admonition info">
+<p class="admonition-title">If you want to use older P version 1.x.x, please use the installation steps <a href="../../old/getstarted/install/">here</a></p>
+</div>
+<p>P is built to be cross-platform and can be used on MacOS, Linux, and Windows. We provide a step-by-step guide for installing P along with the required dependencies.</p>
+<div class="admonition success">
 <p>After each step, please use the troubleshooting check to ensure that each installation step succeeded.</p>
 </div>
 <h3 id="step-1-install-net-core-sdk">[Step 1] Install .Net Core SDK</h3>
-<p>The P compiler and checker are implemented in C# and hence the tool chain requires <code>dotnet</code>. 
-P currently uses the specific version of <a href="https://dotnet.microsoft.com/download/dotnet/3.1">.Net SDK 3.1</a>.
-To install .Net Core 3.1 SDK use:</p>
+<p>The P compiler is implemented in C# and hence the tool chain requires <code>dotnet</code>.
+P currently uses the specific version of <a href="https://dotnet.microsoft.com/en-us/download/dotnet/6.0">.Net SDK 6.0</a>.</p>
 <div class="tabbed-set" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">MacOS</label><div class="tabbed-content">
-<p>Installing .Net SDK on MacOS using Homebrew (<a href="https://formulae.brew.sh/cask/dotnet">details</a>)
+<p>Installing .Net SDK on MacOS using Homebrew (<a href="https://formulae.brew.sh/cask/dotnet">details</a>)</p>
 <div class="highlight"><pre><span></span><code>brew tap isen-ng/dotnet-sdk-versions
-brew install --cask dotnet-sdk3-1-400
+brew install --cask dotnet-sdk6-0-400
 </code></pre></div>
-Dont have Homebrew? <img alt="🙃" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f643.svg" title=":upside_down_face:" /> Install directly using the <a href="https://dotnet.microsoft.com/download/dotnet/thank-you/sdk-3.1.412-macos-x64-installer">installer</a>. </p>
+<p>Dont have Homebrew? <img alt="🙃" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f643.svg" title=":upside_down_face:" /> Install manually using the installer for <a href="https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-6.0.405-macos-x64-installer">x64</a> or <a href="https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-6.0.405-macos-arm64-installer">Arm64</a>.</p>
 </div>
 <input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Ubuntu</label><div class="tabbed-content">
 <p>Installing .Net SDK on Ubuntu (<a href="https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu">details</a>)</p>
-<div class="highlight"><pre><span></span><code>wget https://packages.microsoft.com/config/ubuntu/21.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+<div class="highlight"><pre><span></span><code>wget https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
 sudo dpkg -i packages-microsoft-prod.deb
 rm packages-microsoft-prod.deb
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>sudo apt-get update; \
-sudo apt-get install -y apt-transport-https &amp;&amp; \
-sudo apt-get update &amp;&amp; \
-sudo apt-get install -y dotnet-sdk-3.1
+<div class="highlight"><pre><span></span><code>sudo apt update <span class="o">&amp;&amp;</span> sudo apt install -y dotnet-sdk-6.0
 </code></pre></div>
 </div>
 <input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><label for="__tabbed_1_3">Amazon Linux</label><div class="tabbed-content">
 <p>Installing .Net SDK on Amazon Linux (<a href="https://docs.servicestack.net/deploy-netcore-to-amazon-linux-2-ami">details</a>)</p>
 <div class="highlight"><pre><span></span><code>sudo rpm -Uvh https://packages.microsoft.com/config/centos/7/packages-microsoft-prod.rpm
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>sudo yum install dotnet-sdk-3.1
+<div class="highlight"><pre><span></span><code>sudo yum install -y dotnet-sdk-6.0
 </code></pre></div>
 </div>
 <input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><label for="__tabbed_1_4">Windows</label><div class="tabbed-content">
-<p>Installing .Net SDK on Windows using the installer (<a href="https://dotnet.microsoft.com/download/dotnet/thank-you/sdk-3.1.412-windows-x64-installer">details</a>)</p>
+<p>Installing .Net SDK on Windows using the installer for <a href="https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-6.0.405-windows-x64-installer">x64</a> or <a href="https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-6.0.405-windows-arm64-installer">Arm64</a></p>
 </div>
 </div>
-<details class="hint"><summary>Troubleshoot: Confirm that dotnet is correctly installed on your machine.</summary><p><code>dotnet --list-sdks</code></p>
-<p>You must see an SDK with <code>3.1.*</code> dotnet version installed.
+<details class="hint"><summary>Troubleshoot: Confirm that dotnet is correctly installed on your machine.</summary><div class="highlight"><pre><span></span><code>dotnet --list-sdks
+</code></pre></div>
+<p>You must see an SDK with <code>6.0.*</code> dotnet version installed.
 If you get <code>dotnet</code> command not found error, mostly likely, you need to add the path to dotnet in your <code>PATH</code>.</p>
+<p>Useful resources:</p>
+<ul>
+<li>For Ubuntu: <a href="https://stackoverflow.com/questions/73753672/a-fatal-error-occurred-the-folder-usr-share-dotnet-host-fxr-does-not-exist">fxr does not exist</a> </li>
+</ul>
 </details>
 <h3 id="step-2-install-java-runtime">[Step 2] Install Java Runtime</h3>
-<p>P compiler uses <a href="https://www.antlr.org/">ANTLR</a> parser and hence requires <code>java</code>.
-If you already have Java installed <img alt="😇" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f607.svg" title=":innocent:" />, ignore this step.
-To install Java use:</p>
+<p>The P compiler also requires Java (<code>java</code> version 11 or higher).</p>
 <div class="tabbed-set" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">MacOS</label><div class="tabbed-content">
 <p>Installing Java on MacOS using Homebrew (<a href="https://mkyong.com/java/how-to-install-java-on-mac-osx/">details</a>)
 <div class="highlight"><pre><span></span><code>brew install java
@@ -893,62 +881,38 @@ Dont have Homebrew? Directly use <a href="https://www.java.com/en/download/help/
 </div>
 <input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">Ubuntu</label><div class="tabbed-content">
 <p>Installing Java on Ubuntu (<a href="https://ubuntu.com/tutorials/install-jre#2-installing-openjdk-jre">details</a>)</p>
-<div class="highlight"><pre><span></span><code>sudo apt install default-jre
+<div class="highlight"><pre><span></span><code>sudo apt install -y default-jre
 </code></pre></div>
 </div>
 <input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><label for="__tabbed_2_3">Amazon Linux</label><div class="tabbed-content">
-<p>Installing Java 8 on Amazon Linux (you can use any version of java &gt; 8)</p>
-<div class="highlight"><pre><span></span><code>sudo yum install java-1.8.0-openjdk
+<p>Installing Java 11 on Amazon Linux (you can use any version of java &gt;= 11)</p>
+<div class="highlight"><pre><span></span><code>sudo yum install -y java-11-amazon-corretto-devel
 </code></pre></div>
 </div>
 <input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><label for="__tabbed_2_4">Windows</label><div class="tabbed-content">
 <p>Installing Java on Windows (<a href="https://www.java.com/en/download/help/windows_manual_download.html">details</a>)</p>
 </div>
 </div>
-<details class="hint"><summary>Troubleshoot: Confirm that java is correctly installed on your machine.</summary><p><code>java -version</code></p>
+<details class="hint"><summary>Troubleshoot: Confirm that java is correctly installed on your machine.</summary><div class="highlight"><pre><span></span><code>java -version
+</code></pre></div>
 <p>If you get <code>java</code> command not found error, mostly likely, you need to add the path to <code>java</code> in your <code>PATH</code>.</p>
 </details>
-<h3 id="step-3-install-p-compiler">[Step 3] Install P Compiler</h3>
-<p>Install the P compiler as a <code>dotnet tool</code> using the following command:</p>
+<h3 id="step-3-install-p-tool">[Step 3] Install P tool</h3>
+<p>Finally, let's install the P tool as a <code>dotnet tool</code> using the following command:</p>
 <div class="highlight"><pre><span></span><code>dotnet tool install --global P
 </code></pre></div>
-<details class="hint"><summary>Troubleshoot: Confirm that <code>pc</code> is correctly installed on your machine</summary><p>After installation, run <code>which pc</code> and it should show:
-<div class="highlight"><pre><span></span><code>which pc
-/Users/&lt;user&gt;/.dotnet/tools/pc
+<details class="hint"><summary>Troubleshoot: Confirm that <code>p</code> is correctly installed on your machine</summary><p>After installation, run <code>which p</code> and it should show:
+<div class="highlight"><pre><span></span><code>which p
+/Users/&lt;user&gt;/.dotnet/tools/p
 </code></pre></div>
 If not, add <code>$HOME/.dotnet/tools</code> to <code>$PATH</code> in your <code>.bash_profile</code> (or equivalent) and try again after restarting the shell.
-If you are getting the error that the <code>pc</code> command is not found, it is most likely that <code>$HOME/.dotnet/tools</code> is not in your <code>PATH</code>.</p>
+If you are getting the error that the <code>p</code> command is not found, it is most likely that <code>$HOME/.dotnet/tools</code> is not in your <code>PATH</code>.</p>
 </details>
 <details class="help"><summary>Updating P Compiler</summary><p>You can update the version of <code>P</code> compiler by running the following command:</p>
-<p><code>dotnet tool update --global P</code></p>
+<div class="highlight"><pre><span></span><code>dotnet tool update --global P
+</code></pre></div>
 </details>
-<h3 id="step-4-install-p-checker">[Step 4] Install P Checker</h3>
-<p>The current P checker depends on <a href="https://microsoft.github.io/coyote/">Coyote</a> (previously <a href="https://github.com/p-org/PSharp">P#</a>)</p>
-<p>Install the <code>Coyote</code> version <code>1.0.5</code> using the following command:</p>
-<div class="highlight"><pre><span></span><code>dotnet tool install --global Microsoft.Coyote.CLI --version 1.0.5
-</code></pre></div>
-<details class="hint"><summary>Troubleshoot: Confirm that <code>coyote</code> is correctly installed on your machine</summary><p>After installation, run <code>which coyote</code> and it should show:
-<div class="highlight"><pre><span></span><code>which coyote
-coyote is /Users/&lt;user&gt;/.dotnet/tools/coyote
-</code></pre></div>
-If not, add <code>$HOME/.dotnet/tools</code> to <code>$PATH</code> in your <code>.bash_profile</code> (or equivalent) and try again after restarting the shell.
-If you are getting an error that <code>coyote</code> command not found, its most likely that <code>$HOME/.dotnet/tools</code> is not in your <code>PATH</code>.</p>
-</details>
-<p>We highly recommend that you create the following alias as we use it in the rest of tutorials and getting started guide:</p>
-<div class="tabbed-set" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">On MacOS or Linux</label><div class="tabbed-content">
-<p>Add following alias to the bash profile (<code>~/.bash_profile</code> or the equivalent on your system) 
-so that you can invoke the P checker (<code>pmc</code>) directly.
-<div class="highlight"><pre><span></span><code><span class="nb">alias</span> <span class="nv">pmc</span><span class="o">=</span><span class="s1">&#39;coyote test&#39;</span>
-</code></pre></div></p>
-</div>
-<input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><label for="__tabbed_3_2">On Windows</label><div class="tabbed-content">
-<p>We recommend that you add the following to the <code>Microsoft.PowerShell_profile</code> 
-normally found in <code>D:\Users\&lt;username&gt;\Documents\WindowsPowerShell</code></p>
-<div class="highlight"><pre><span></span><code><span class="k">function</span> pmc <span class="o">{</span> coyote <span class="nb">test</span> <span class="nv">$args</span> <span class="o">}</span>
-</code></pre></div>
-</div>
-</div>
-<h3 id="step-5-recommended-ide-optional">[Step 5] Recommended IDE (Optional)</h3>
+<h3 id="step-4-recommended-ide-optional">[Step 4] Recommended IDE (Optional)</h3>
 <ul>
 <li>
 <p>For developing P programs, we recommend using <a href="https://www.jetbrains.com/idea/">IntelliJ
@@ -966,7 +930,7 @@ normally found in <code>D:\Users\&lt;username&gt;\Documents\WindowsPowerShell</c
 </li>
 </ul>
 <h2 id="using-p">Using P</h2>
-<p>Great <img alt="😄" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f604.svg" title=":smile:" />! You are all set to compile and test your first P program <img alt="🎓" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f393.svg" title=":mortar_board:" />!</p>
+<p>Great <img alt="😄" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f604.svg" title=":smile:" />! You are all set to compile and check your first P program <img alt="🎓" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f393.svg" title=":mortar_board:" />!</p>
                 
               
               
@@ -1022,7 +986,7 @@ normally found in <code>D:\Users\&lt;username&gt;\Documents\WindowsPowerShell</c
       <div class="md-footer-copyright">
         
           <div class="md-footer-copyright__highlight">
-            Copyright &copy; 2021 P Developers
+            Copyright &copy; 2023 P Developers
           </div>
         
         Made with

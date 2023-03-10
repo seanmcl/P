@@ -299,8 +299,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing-a-p-program" class="md-nav__link">
-    Testing a P program
+  <a href="#checking-a-p-program" class="md-nav__link">
+    Checking a P program
   </a>
   
 </li>
@@ -762,8 +762,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing-a-p-program" class="md-nav__link">
-    Testing a P program
+  <a href="#checking-a-p-program" class="md-nav__link">
+    Checking a P program
   </a>
   
 </li>
@@ -783,15 +783,18 @@
                 
                   <h1>Using P Compiler and Checker</h1>
                 
-                <div class="admonition check">
-<p>Before moving forward, we assume that you have successfully installed the
-<a href="../install/#step-3-install-p-compiler">P Compiler and Checker</a> and the <a href="../syntaxhighlight/">Syntax highlighting plugin</a> <img alt="🤘" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f918.svg" title=":metal:" /> .</p>
+                <div class="admonition info">
+<p class="admonition-title">If you are using an older P version 1.x.x, please find the usage guide <a href="../../old/getstarted/usingP/">here</a></p>
+</div>
+<div class="admonition check">
+<p>Before moving forward, we assume that you have successfully installed
+<a href="../install/">P</a> and the <a href="../syntaxhighlight/">Syntax highlighting plugin</a> <img alt="🤘" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f918.svg" title=":metal:" />.</p>
 </div>
 <p>We introduce the P language syntax and semantics in details in the
 <a href="../../tutsoutline/">Tutorials</a> and <a href="../../manualoutline/">Language Manual</a>. In this
-section, we provide an overview of the steps involved in compiling and testing a P program
+section, we provide an overview of the steps involved in compiling and checking a P program
 using the <a href="../../tutorial/clientserver/">client server</a> example in Tutorials.</p>
-<details class="info"><summary>Get the Client Server Example Locally</summary><p>We will use the <a href="https://github.com/p-org/P/tree/master/Tutorial/1_ClientServer">ClientServer</a> example from Tutorial folder in P repository to describe the process of compiling and testing a P program. Please clone the P repo and navigate to the
+<details class="info"><summary>Get the Client Server Example Locally</summary><p>We will use the <a href="https://github.com/p-org/P/tree/master/Tutorial/1_ClientServer">ClientServer</a> example from Tutorial folder in P repository to describe the process of compiling and checking a P program. Please clone the P repo and navigate to the
 ClientServer example in Tutorial.</p>
 <p>Clone P Repo locally:
 <div class="highlight"><pre><span></span><code>git clone https://github.com/p-org/P.git
@@ -803,72 +806,83 @@ Navigate to the ClientServer examples folder:
 <h3 id="compiling-a-p-program">Compiling a P program</h3>
 <p>There are two ways of compiling a P program:</p>
 <ol>
-<li>Using a <strong>P project file</strong> (<code>*.pproj</code>) to provides all the required inputs to the compiler or</li>
-<li>Passing all the P files (<code>*.p</code>) along with other options (e.g., <code>-generate</code>) <strong>as commandline arguments</strong> to the compiler.</li>
+<li>Using a <strong>P project file</strong> (<code>*.pproj</code>) to provide all the required inputs to the compiler or</li>
+<li>Passing all the P files (<code>*.p</code>) along with other options <strong>as commandline arguments</strong> to the compiler.</li>
 </ol>
 <div class="admonition tip">
-<p class="admonition-title">Recommentation</p>
+<p class="admonition-title">Recommendation</p>
 <p>We recommend using the P project files to compile a P program.</p>
 </div>
-<details class="help"><summary>P Compiler commandline options:</summary><p>The P compiler provides the following commandline options:</p>
-<div class="highlight"><pre><span></span><code>------------------------------------------ 
-Recommended usage: 
+<details class="help"><summary>P Compiler commandline options</summary><p>The P compiler provides the following commandline options:</p>
+<div class="highlight"><pre><span></span><code>-----------------------------------------------
+usage: p compile [--help] [--pproj string] [--pfiles string] [--projname string] [--outdir string] 
 
-&gt;&gt; pc -proj:&lt;.pproj file&gt;
+The P compiler compiles all the P files in the project together and generates the executable that
+can be checked for correctness by the P checker.
 
------------------------------------------- 
-Optional usage: 
+Compiling using `.pproj` file:
+------------------------------
+-pp, --pproj string         : P project file to compile (*.pproj). If this option is not passed,
+the compiler searches for a *.pproj in the current folder
 
-&gt;&gt; pc file1.p <span class="o">[</span>file2.p ...<span class="o">][</span>options<span class="o">]</span>
+Compiling P files directly through commandline:
+-----------------------------------------------
+-pf, --pfiles string        : List of P files to compile
+-pn, --projname string      : Project name for the compiled output
+-o, --outdir string         : Dump output to directory (absolute or relative path)
 
-options:
-    -t:<span class="o">[</span>target project name<span class="o">]</span>   -- project name <span class="o">(</span>as well as the generated file<span class="o">)</span> <span class="k">if</span> not supplied, use file1
-    -outputDir:<span class="o">[</span>path<span class="o">]</span>          -- where to write the generated files
-    -aspectOutputDir:<span class="o">[</span>path<span class="o">]</span>    -- where to write the generated aspectj files <span class="k">if</span> not supplied, use outputDir
-    -generate:<span class="o">[</span>C,CSharp,RVM<span class="o">]</span>   -- <span class="k">select</span> a target language to generate
-        C       : generate C code
-        CSharp  : generate C# code
-        RVM     : generate Monitor code
-    -h, -help, --help          -- display this <span class="nb">help</span> message
-------------------------------------------
+Optional Arguments:
+-------------------
+-h, --help                  Show this help menu
+-----------------------------------------------
 </code></pre></div>
 </details>
 <div class="tabbed-set" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Compile using the P Project</label><div class="tabbed-content">
 <p>Compiling the ClientServer project using the P Project file:</p>
-<div class="highlight"><pre><span></span><code>pc -proj:ClientServer.pproj
+<div class="highlight"><pre><span></span><code>p compile
 </code></pre></div>
-<details class="info"><summary>Expected Output</summary><div class="highlight"><pre><span></span><code>$ pc -proj:ClientServer.pproj
+<details class="info"><summary>Expected Output</summary><div class="highlight"><pre><span></span><code>$ p compile
+
+.. Searching for a P project file *.pproj locally in the current folder
+.. Found P project file: P/Tutorial/1_ClientServer/ClientServer.pproj
 ----------------------------------------
-==== Loading project file: ClientServer.pproj
+==== Loading project file: P/Tutorial/1_ClientServer/ClientServer.pproj
 ....... includes p file: P/Tutorial/1_ClientServer/PSrc/Server.p
 ....... includes p file: P/Tutorial/1_ClientServer/PSrc/Client.p
 ....... includes p file: P/Tutorial/1_ClientServer/PSrc/AbstractBankServer.p
 ....... includes p file: P/Tutorial/1_ClientServer/PSrc/ClientServerModules.p
 ....... includes p file: P/Tutorial/1_ClientServer/PSpec/BankBalanceCorrect.p
 ....... includes p file: P/Tutorial/1_ClientServer/PTst/TestDriver.p
-....... includes p file: /Tutorial/1_ClientServer/PTst/Testscript.p
+....... includes p file: P/Tutorial/1_ClientServer/PTst/Testscript.p
 ----------------------------------------
 ----------------------------------------
-Parsing ..
+Parsing ...
 Type checking ...
-Code generation ....
-Generated ClientServer.cs
+Code generation ...
+Generated ClientServer.cs.
 ----------------------------------------
-Compiling ClientServer.csproj ..
-
-Microsoft (R) Build Engine version 16.10.2+857e5a733 for .NET
-Copyright (C) Microsoft Corporation. All rights reserved.
-
+Compiling ClientServer...
+MSBuild version 17.3.1+2badb37d1 for .NET
 Determining projects to restore...
-All projects are up-to-date for restore.
-ClientServer -&gt; P/Tutorial/1_ClientServer/POutput/netcoreapp3.1/ClientServer.dll
+Restored P/Tutorial/1_ClientServer/PGenerated/ClientServer.csproj (in 160 ms).
+2 of 3 projects are up-to-date for restore.
+CheckerCore -&gt; P/Bld/Drops/Release/Binaries/net6.0/PCheckerCore.dll
+CSharpRuntime -&gt; P/Bld/Drops/Release/Binaries/net6.0/PCSharpRuntime.dll
+ClientServer -&gt; P/Tutorial/1_ClientServer/PGenerated/POutput/net6.0/ClientServer.dll
 
 Build succeeded.
-    0 Warning(s)
-    0 Error(s)
+0 Warning(s)
+0 Error(s)
+
+Time Elapsed 00:00:04.39
+
+
 ----------------------------------------
+[PTool]: Thanks for using P!
 </code></pre></div>
 </details>
+<p><code>p compile</code> command searches for the <code>*.pproj</code> file in the current directory.</p>
+<p>If you are running <code>p compile</code> from outside the P project directory, use the <code>-pp &lt;path to *.pproj&gt;</code> option instead.</p>
 <details class="info"><summary>P Project File Details</summary><p>The P compiler does not support advanced project management features like separate compilation and dependency analysis (<em>coming soon</em>).
 The current project file interface is a simple mechanism to provide all the required inputs to the compiler in an XML format (<a href="https://github.com/p-org/P/blob/master/Tutorial/1_ClientServer/ClientServer.pproj">ClientServer.pproj</a>).
 <div class="highlight"><pre><span></span><code><span class="c">&lt;!-- P Project file for the Client Server example --&gt;</span>
@@ -893,74 +907,80 @@ This feature provides a way to split the P models for a large system into sub pr
 </div>
 <input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Compile P files directly</label><div class="tabbed-content">
 <p>Compiling the ClientServer program by passing all the required inputs as commandline arguments:</p>
-<div class="highlight"><pre><span></span><code>pc PSpec/*.p PSrc/*.p PTst/*.p <span class="se">\</span>
--generate:csharp -outputDir:PGenerated -target:ClientServer
+<div class="highlight"><pre><span></span><code>p compile -pf PSpec/*.p PSrc/*.p PTst/*.p -pn ClientServer -o PGenerated
 </code></pre></div>
-<details class="info"><summary>Expected Output</summary><div class="highlight"><pre><span></span><code>----------------------------------------
-....... includes p file: P/Tutorial/1_ClientServer/PSpec/BankBalanceCorrect.p
-....... includes p file: P/Tutorial/1_ClientServer/PSrc/AbstractBankServer.p
-....... includes p file: P/Tutorial/1_ClientServer/PSrc/Client.p
-....... includes p file: P/Tutorial/1_ClientServer/PSrc/ClientServerModules.p
-....... includes p file: P/Tutorial/1_ClientServer/PSrc/Server.p
-....... includes p file: P/Tutorial/1_ClientServer/PTst/TestDriver.p
-....... includes p file: P/Tutorial/1_ClientServer/PTst/Testscript.p
+<details class="info"><summary>Expected Output</summary><div class="highlight"><pre><span></span><code>$ p compile -pf PSpec/*.p PSrc/*.p PTst/*.p -pn ClientServer -o PGenerated
+
 ----------------------------------------
-----------------------------------------
-Parsing ..
+Parsing ...
 Type checking ...
-Code generation ....
-Generated ClientServer.cs
+Code generation ...
+Generated ClientServer.cs.
 ----------------------------------------
-Compiling ClientServer.csproj ..
-
-Microsoft (R) Build Engine version 16.10.2+857e5a733 for .NET
-Copyright (C) Microsoft Corporation. All rights reserved.
-
+Compiling ClientServer...
+MSBuild version 17.3.1+2badb37d1 for .NET
 Determining projects to restore...
-Restored P/Tutorial/1_ClientServer/PGenerated/ClientServer.csproj (in 602 ms).
-ClientServer -&gt; P/Tutorial/1_ClientServer/PGenerated/POutput/netcoreapp3.1/ClientServer.dll
+Restored P/Tutorial/1_ClientServer/PGenerated/ClientServer.csproj (in 145 ms).
+2 of 3 projects are up-to-date for restore.
+CheckerCore -&gt; P/Bld/Drops/Release/Binaries/net6.0/PCheckerCore.dll
+CSharpRuntime -&gt; P/Bld/Drops/Release/Binaries/net6.0/PCSharpRuntime.dll
+ClientServer -&gt; P/Tutorial/1_ClientServer/PGenerated/POutput/net6.0/ClientServer.dll
 
 Build succeeded.
-    0 Warning(s)
-    0 Error(s)
+0 Warning(s)
+0 Error(s)
+
+Time Elapsed 00:00:04.74
+
+
+----------------------------------------
+[PTool]: Thanks for using P!
 </code></pre></div>
 </details>
 </div>
 </div>
-<h3 id="testing-a-p-program">Testing a P program</h3>
+<h3 id="checking-a-p-program">Checking a P program</h3>
 <p>Compiling the ClientServer program generates a <code>ClientServer.dll</code>, this <code>dll</code> is
 the C# representation of the P program. The P Checker takes as input this <code>dll</code> and
 systematically explores behaviors of the program for the specified test case.</p>
 <p>The path to the <code>dll</code> is present in the generated compilation output, check for line:
 <code>ClientServer -&gt; &lt;Path&gt;/ClientServer.dll</code></p>
-<p>You can get the list of test cases defined in the P program by passing the generated <code>dll</code>
-to the P Checker:</p>
-<div class="highlight"><pre><span></span><code>pmc &lt;Path&gt;/ClientServer.dll
+<p>You can get the list of test cases defined in the P program by running the P Checker:</p>
+<div class="highlight"><pre><span></span><code>p check
 </code></pre></div>
-<p>Expected Output:</p>
-<p><div class="highlight"><pre><span></span><code>pmc &lt;Path&gt;/ClientServer.dll
+<div class="admonition info">
+<p class="admonition-title">Expected Output</p>
+<div class="highlight"><pre><span></span><code>$ p check
 
-Provide /method or -m flag to qualify the <span class="nb">test</span> method name you wish to use. 
-Possible options are::
-<span class="hll">PImplementation.tcSingleClient.Execute
-</span><span class="hll">PImplementation.tcMultipleClients.Execute
-</span><span class="hll">PImplementation.tcSingleClientAbstractServer.Execute
-</span></code></pre></div>
-There are three test cases defined in the ClientServer P project and you can specify which
-test case to run by using the <code>-m</code> or <code>/method</code> parameter along with the <code>-i</code> parameter to
+.. Searching for a P compiled file locally in the current folder
+.. Found a P compiled file: P/Tutorial/1_ClientServer/PGenerated/POutput/net6.0/ClientServer.dll
+.. Checking P/Tutorial/1_ClientServer/PGenerated/POutput/net6.0/ClientServer.dll
+Error: We found &#39;3&#39; test cases. Please provide a more precise name of the test case you wish to check using (--testcase | -tc).
+Possible options are:
+<span class="hll">tcSingleClient
+</span><span class="hll">tcMultipleClients
+</span><span class="hll">tcSingleClientAbstractServer
+</span>
+[PTool]: Thanks for using P!
+</code></pre></div>
+</div>
+<p><code>p check</code> command searches for the <code>*.dll</code> file in the current directory.</p>
+<p>If you are running <code>p check</code> from outside the directory where <code>*.dll</code> is compiled to, run <code>p check &lt;path to *.dll&gt;</code> instead.</p>
+<p>There are three test cases defined in the ClientServer P project, and you can specify which
+test case to run by using the <code>-tc</code> or <code>--testcase</code> parameter along with the <code>-i</code> parameter to
 specify how many different schedules to explore when running this test case (by default the checker explores a single schedule).
 <em>For complex systems, running for 100,000 schedules typically finds most of the easy to find bugs before
 running the checker on a distributed cluster to explore billions of schedules and rule out deep bugs in the system.</em></p>
 <p>So to run the <code>tcSingleClient</code> test case for 100 schedules, we can use the following command:</p>
-<div class="highlight"><pre><span></span><code>pmc &lt;Path&gt;/ClientServer.dll \
-    -m PImplementation.tcSingleClient.Execute \
-    -i 100
+<div class="highlight"><pre><span></span><code>p check -tc tcSingleClient -i <span class="m">100</span>
 </code></pre></div>
-<details class="info"><summary>Expected Output</summary><div class="highlight"><pre><span></span><code>. Testing &lt;Path&gt;/ClientServer.dll
-... Method PImplementation.tcSingleClient.Execute
-Starting TestingProcessScheduler in process 72009
-... Created &#39;1&#39; testing task.
-... Task 0 is using &#39;random&#39; strategy (seed:3365663330).
+<details class="info"><summary>Expected Output</summary><div class="highlight"><pre><span></span><code>$ p check -tc tcSingleClient -i 100
+
+.. Searching for a P compiled file locally in the current folder
+.. Found a P compiled file: P/Tutorial/1_ClientServer/PGenerated/POutput/net6.0/ClientServer.dll
+.. Checking P/Tutorial/1_ClientServer/PGenerated/POutput/net6.0/ClientServer.dll
+.. Test case :: tcSingleClient
+... Checker is using &#39;random&#39; strategy (seed:1914817066).
 ..... Iteration #1
 ..... Iteration #2
 ..... Iteration #3
@@ -980,50 +1000,61 @@ Starting TestingProcessScheduler in process 72009
 ..... Iteration #80
 ..... Iteration #90
 ..... Iteration #100
-... Testing statistics:
+... Emitting coverage reports:
+..... Writing PCheckerOutput/BugFinding/ClientServer.dgml
+..... Writing PCheckerOutput/BugFinding/ClientServer.coverage.txt
+..... Writing PCheckerOutput/BugFinding/ClientServer.sci
+... Checking statistics:
 ..... Found 0 bugs.
 ... Scheduling statistics:
 ..... Explored 100 schedules: 100 fair and 0 unfair.
-..... Number of scheduling points in fair terminating schedules: 11 (min), 147 (avg), 680 (max).
-... Elapsed 0.8209742 sec.
+..... Number of scheduling points in fair terminating schedules: 22 (min), 157 (avg), 431 (max).
+... Elapsed 1.3911356 sec.
 . Done
+[PTool]: Thanks for using P!
 </code></pre></div>
 </details>
 <p>There is a known bug in the ClientServer example (explained in the Tutorials) which is caught by
 the <code>tcSingleClientAbstractServer</code> test case. Run command:
-<div class="highlight"><pre><span></span><code>pmc &lt;Path&gt;/ClientServer.dll \
-    -m PImplementation.tcSingleClientAbstractServer.Execute \
-    -i 100
+<div class="highlight"><pre><span></span><code>p check -tc tcSingleClientAbstractServer -i <span class="m">100</span>
 </code></pre></div></p>
-<details class="info"><summary>Expected Output</summary><div class="highlight"><pre><span></span><code>pmc &lt;Path&gt;/ClientServer.dll -m PImplementation.tcSingleClientAbstractServer.Execute -i 100
+<details class="info"><summary>Expected Output</summary><div class="highlight"><pre><span></span><code>$ p check &lt;Path&gt;/ClientServer.dll -tc tcSingleClientAbstractServer -i 100
 
-. Testing &lt;Path&gt;/ClientServer.dll
-... Method PImplementation.tcSingleClientAbstractServer.Execute
-Starting TestingProcessScheduler in process 72578
-... Created &#39;1&#39; testing task.
-... Task 0 is using &#39;random&#39; strategy (seed:574049731).
+.. Searching for a P compiled file locally in the current folder
+.. Found a P compiled file: P/Tutorial/1_ClientServer/PGenerated/POutput/net6.0/ClientServer.dll
+.. Checking P/Tutorial/1_ClientServer/PGenerated/POutput/net6.0/ClientServer.dll
+.. Test case :: tcSingleClientAbstractServer
+... Checker is using &#39;random&#39; strategy (seed:2783951180).
 ..... Iteration #1
-<span class="hll">... Task 0 found a bug.
-</span>... Emitting task 0 traces:
-<span class="hll">..... Writing /POutput/netcoreapp3.1/Output/ClientServer.dll/CoyoteOutput/ClientServer_0_0.txt
-</span><span class="hll">..... Writing /POutput/netcoreapp3.1/Output/ClientServer.dll/CoyoteOutput/ClientServer_0_0.schedule
-</span>... Elapsed 0.1971223 sec.
-... Testing statistics:
+<span class="hll">Checker found a bug.
+</span>... Emitting traces:
+<span class="hll">..... Writing PCheckerOutput/BugFinding/ClientServer_0_0.txt
+</span>..... Writing PCheckerOutput/BugFinding/ClientServer_0_0.dgml
+<span class="hll">..... Writing PCheckerOutput/BugFinding/ClientServer_0_0.schedule
+</span>... Elapsed 0.2447869 sec.
+... Emitting coverage reports:
+..... Writing PCheckerOutput/BugFinding/ClientServer.dgml
+..... Writing PCheckerOutput/BugFinding/ClientServer.coverage.txt
+..... Writing PCheckerOutput/BugFinding/ClientServer.sci
+... Checking statistics:
 <span class="hll">..... Found 1 bug.
 </span>... Scheduling statistics:
 ..... Explored 1 schedule: 1 fair and 0 unfair.
 ..... Found 100.00% buggy schedules.
-..... Number of scheduling points in fair terminating schedules: 132 (min), 132 (avg), 132 (max).
-... Elapsed 0.3081316 sec.
+..... Number of scheduling points in fair terminating schedules: 87 (min), 87 (avg), 87 (max).
+... Elapsed 0.4132906 sec.
 . Done
+[PTool]: Thanks for using P!
 </code></pre></div>
 </details>
-<p>The P checker on finding a bug generates two artifacts (highlighted in the expected output above):
-(1) a <strong>textual trace file</strong> (e.g., <code>ClientServer_0_0.txt</code>) that has the readable error trace representing the
-sequence of steps from the intial state to the error state;
-(2) a <strong>schedule file</strong> (e.g., <code>ClientServer_0_0.schedule</code>) that can be used to replay the error
+<p>The P checker on finding a bug generates two artifacts (highlighted in the expected output above):</p>
+<ol>
+<li>A <strong>textual trace file</strong> (e.g., <code>ClientServer_0_0.txt</code>) that has the readable error trace representing the
+sequence of steps from the initial state to the error state;</li>
+<li>A <strong>schedule file</strong> (e.g., <code>ClientServer_0_0.schedule</code>) that can be used to replay the error
 trace and single step through the P program with the generated error trace for debugging
-(more details about debugging P error traces: <a href="../../advanced/debuggingerror/">here</a>).</p>
+(more details about debugging P error traces: <a href="../../advanced/debuggingerror/">here</a>).</li>
+</ol>
                 
               
               
@@ -1079,7 +1110,7 @@ trace and single step through the P program with the generated error trace for d
       <div class="md-footer-copyright">
         
           <div class="md-footer-copyright__highlight">
-            Copyright &copy; 2021 P Developers
+            Copyright &copy; 2023 P Developers
           </div>
         
         Made with

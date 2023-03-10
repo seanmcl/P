@@ -413,8 +413,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing-failuredetector" class="md-nav__link">
-    Testing FailureDetector
+  <a href="#checking-failuredetector" class="md-nav__link">
+    Checking FailureDetector
   </a>
   
 </li>
@@ -832,8 +832,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing-failuredetector" class="md-nav__link">
-    Testing FailureDetector
+  <a href="#checking-failuredetector" class="md-nav__link">
+    Checking FailureDetector
   </a>
   
 </li>
@@ -925,17 +925,21 @@ by the failure injector will eventually be detected by the failure detector as f
 </details>
 <h3 id="compiling-failuredetector">Compiling FailureDetector</h3>
 <p>Run the following command to compile the FailureDetector project:</p>
-<div class="highlight"><pre><span></span><code>pc -proj:FailureDetector.pproj
+<div class="highlight"><pre><span></span><code>p compile
 </code></pre></div>
-<details class="note"><summary>Expected Output</summary><div class="highlight"><pre><span></span><code>----------------------------------------
-==== Loading project file: FailureDetector.pproj
+<details class="note"><summary>Expected Output</summary><div class="highlight"><pre><span></span><code>$ p compile
+
+.. Searching for a P project file *.pproj locally in the current folder
+.. Found P project file: P/Tutorial/4_FailureDetector/FailureDetector.pproj
+----------------------------------------
+==== Loading project file: P/Tutorial/4_FailureDetector/FailureDetector.pproj
 ....... includes p file: P/Tutorial/4_FailureDetector/PSrc/FailureDetectorModules.p
+....... includes p file: P/Tutorial/4_FailureDetector/PSrc/Client.p
 ....... includes p file: P/Tutorial/4_FailureDetector/PSrc/FailureDetector.p
 ....... includes p file: P/Tutorial/4_FailureDetector/PSrc/Node.p
 ....... includes p file: P/Tutorial/4_FailureDetector/PSpec/ReliableFailureDetector.p
 ....... includes p file: P/Tutorial/4_FailureDetector/PTst/TestDriver.p
 ....... includes p file: P/Tutorial/4_FailureDetector/PTst/TestScript.p
-....... includes p file: P/Tutorial/4_FailureDetector/PTst/Client.p
 ==== Loading project file: P/Tutorial/Common/Timer/Timer.pproj
 ....... includes p file: P/Tutorial/Common/Timer/PSrc/Timer.p
 ....... includes p file: P/Tutorial/Common/Timer/PSrc/TimerModules.p
@@ -944,28 +948,34 @@ by the failure injector will eventually be detected by the failure detector as f
 ....... includes p file: P/Tutorial/Common/FailureInjector/PSrc/FailureInjector.p
 ----------------------------------------
 ----------------------------------------
-Parsing ..
+Parsing ...
 Type checking ...
-Code generation ....
-Generated FailureDetector.cs
+Code generation ...
+Generated FailureDetector.cs.
 ----------------------------------------
-Compiling FailureDetector.csproj ..
-
-Microsoft (R) Build Engine version 16.10.2+857e5a733 for .NET
-Copyright (C) Microsoft Corporation. All rights reserved.
-
+Compiling FailureDetector...
+MSBuild version 17.3.1+2badb37d1 for .NET
 Determining projects to restore...
-Restored P/Tutorial/4_FailureDetector/FailureDetector.csproj (in 880 ms).
-FailureDetector -&gt; P/Tutorial/4_FailureDetector/POutput/netcoreapp3.1/FailureDetector.dll
+Restored P/Tutorial/4_FailureDetector/PGenerated/FailureDetector.csproj (in 141 ms).
+2 of 3 projects are up-to-date for restore.
+CheckerCore -&gt; P/Bld/Drops/Release/Binaries/net6.0/PCheckerCore.dll
+CSharpRuntime -&gt; P/Bld/Drops/Release/Binaries/net6.0/PCSharpRuntime.dll
+FailureDetector -&gt; P/Tutorial/4_FailureDetector/PGenerated/POutput/net6.0/FailureDetector.dll
 
 Build succeeded.
-    0 Warning(s)
-    0 Error(s)
+0 Warning(s)
+0 Error(s)
+
+Time Elapsed 00:00:03.20
+
+
+----------------------------------------
+[PTool]: Thanks for using P!
 </code></pre></div>
 </details>
-<h3 id="testing-failuredetector">Testing FailureDetector</h3>
-<p>There is only a single test case in the FailureDetector program and we can directly run the test case for 10000 iterations:</p>
-<div class="highlight"><pre><span></span><code>pmc &lt;Path&gt;/FailureDetector.dll -i <span class="m">10000</span>
+<h3 id="checking-failuredetector">Checking FailureDetector</h3>
+<p>There is only a single test case in the FailureDetector project and we can directly run the test case for 10000 iterations:</p>
+<div class="highlight"><pre><span></span><code>p check -i <span class="m">10000</span>
 </code></pre></div>
 <h3 id="discussion-modeling-message-reordering">Discussion: Modeling Message Reordering</h3>
 <p>(to be added soon)</p>
@@ -1029,7 +1039,7 @@ Build succeeded.
       <div class="md-footer-copyright">
         
           <div class="md-footer-copyright__highlight">
-            Copyright &copy; 2021 P Developers
+            Copyright &copy; 2023 P Developers
           </div>
         
         Made with

@@ -396,8 +396,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing-twophasecommit" class="md-nav__link">
-    Testing TwoPhaseCommit
+  <a href="#checking-twophasecommit" class="md-nav__link">
+    Checking TwoPhaseCommit
   </a>
   
 </li>
@@ -839,8 +839,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing-twophasecommit" class="md-nav__link">
-    Testing TwoPhaseCommit
+  <a href="#checking-twophasecommit" class="md-nav__link">
+    Checking TwoPhaseCommit
   </a>
   
 </li>
@@ -877,7 +877,7 @@
 <p><strong>System:</strong> We use a simplified version of the <a href="https://s2.smu.edu/~mhd/8330f11/p133-gray.pdf">classic two phase commit protocol</a> to model a transaction commit service. The two phase commit protocol uses a coordinator to gain consensus for any transaction spanning across multiple participants. A transaction in our case is simply a <code>write</code> operation for a key-value data store where the data store is replicated across multiple participants. More concretely, a <code>write</code> transaction must be committed by the coordinator only if it's accepted by all the participant replicas, and must be aborted if any one of the participant replicas rejects the <code>write</code> request.</p>
 <p><img align="center" alt="Placeholder" src="../twophasecommit.png" /></p>
 <p>A two phase commit protocol consists of two phases <img alt="😆" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f606.svg" title=":laughing:" /> (figure above). On receiving a write transaction, the coordinator starts the first phase in which it sends a <code>prepare</code> request to all the participants and waits for a <code>prepare success</code> or <code>prepare failure</code> response. On receiving prepare responses from all the participants, the coordinator moves to the second phase where it sends a <code>commit</code> or <code>abort</code> message to the participants and also responds back to the client.</p>
-<p><strong>Assumptions:</strong> Our transaction commit system is ridiculously simplified. To list a few: (1) our system does allow multiple concurrent clients to issue transactions in parallel, but the coordinator serializes these transactions and services them one-by-one; (2) our system is not fault tolerant to node failures, failure of either the coordinator or any of the participants will block the progress forever. Also, we rely on <a href="../../advanced/psemantics/">P's reliable send semantics</a> to model the behavior of the underlying network, hence, our system models assume reliable delivery of messages.</p>
+<p><strong>Assumptions:</strong> Our transaction commit system is ridiculously simplified. To list a few: (1) our system does allow multiple concurrent clients to issue transactions in parallel, but the coordinator serializes these transactions and services them one-by-one; (2) our system is not fault-tolerant to node failures, failure of either the coordinator or any of the participants will block the progress forever. Also, we rely on <a href="../../advanced/psemantics/">P's reliable send semantics</a> to model the behavior of the underlying network, hence, our system models assume reliable delivery of messages.</p>
 <p><strong>Correctness Specification:</strong> We would like our transaction commit service to provide atomicity guarantees for each transaction. That is, if the service responds to the client that a transaction was committed then that transaction must have been committed by each of its participants; and, if a transaction is aborted then at least one of the participants must have rejected it. We would also like to check that under the assumptions above (no node failures and reliable network), each transaction request is eventually responded by the transaction commit service.</p>
 <h3 id="p-project">P Project</h3>
 <p>The <a href="https://github.com/p-org/P/tree/master/Tutorial/2_TwoPhaseCommit">2_TwoPhaseCommit</a> folder contains the source code for the <a href="https://github.com/p-org/P/blob/master/Tutorial/2_TwoPhaseCommit/TwoPhaseCommit.pproj">TwoPhaseCommit</a> project.
@@ -955,65 +955,78 @@ a participant and forwards the read request to that participant.</li>
 </ul>
 </details>
 <h3 id="compiling-twophasecommit">Compiling TwoPhaseCommit</h3>
-<p>Run the following command to compile the TwoPhaseCommit project:</p>
-<div class="highlight"><pre><span></span><code>pc -proj:TwoPhaseCommit.pproj
+<p>Navigate to the <a href="https://github.com/p-org/P/tree/master/Tutorial/2_TwoPhaseCommit">2_TwoPhaseCommit</a> folder and run the following command to compile the TwoPhaseCommit project:</p>
+<div class="highlight"><pre><span></span><code>p compile
 </code></pre></div>
-<details class="note"><summary>Expected Output</summary><div class="highlight"><pre><span></span><code>----------------------------------------
-==== Loading project file: TwoPhaseCommit.pproj
-....... includes p file:  P/Tutorial/2_TwoPhaseCommit/PSrc/Coordinator.p
-....... includes p file:  P/Tutorial/2_TwoPhaseCommit/PSrc/Participant.p
-....... includes p file:  P/Tutorial/2_TwoPhaseCommit/PSrc/TwoPhaseCommitModules.p
-....... includes p file:  P/Tutorial/2_TwoPhaseCommit/PSpec/Atomicity.p
-....... includes p file:  P/Tutorial/2_TwoPhaseCommit/PTst/TestDriver.p
-....... includes p file:  P/Tutorial/2_TwoPhaseCommit/PTst/Client.p
-....... includes p file:  P/Tutorial/2_TwoPhaseCommit/PTst/TestScripts.p
-==== Loading project file:  P/Tutorial/Common/Timer/Timer.pproj
-....... includes p file:  P/Tutorial/Common/Timer/PSrc/Timer.p
-....... includes p file:  P/Tutorial/Common/Timer/PSrc/TimerModules.p
-==== Loading project file:  P/Tutorial/Common/FailureInjector/FailureInjector.pproj
-....... includes p file:  P/Tutorial/Common/FailureInjector/PSrc/NetworkFunctions.p
-....... includes p file:  P/Tutorial/Common/FailureInjector/PSrc/FailureInjector.p
+<details class="note"><summary>Expected Output</summary><div class="highlight"><pre><span></span><code>$ p compile
+
+.. Searching for a P project file *.pproj locally in the current folder
+.. Found P project file: P/Tutorial/2_TwoPhaseCommit/TwoPhaseCommit.pproj
+----------------------------------------
+==== Loading project file: P/Tutorial/2_TwoPhaseCommit/TwoPhaseCommit.pproj
+....... includes p file: P/Tutorial/2_TwoPhaseCommit/PSrc/Coordinator.p
+....... includes p file: P/Tutorial/2_TwoPhaseCommit/PSrc/Participant.p
+....... includes p file: P/Tutorial/2_TwoPhaseCommit/PSrc/TwoPhaseCommitModules.p
+....... includes p file: P/Tutorial/2_TwoPhaseCommit/PSpec/Atomicity.p
+....... includes p file: P/Tutorial/2_TwoPhaseCommit/PTst/TestDriver.p
+....... includes p file: P/Tutorial/2_TwoPhaseCommit/PTst/Client.p
+....... includes p file: P/Tutorial/2_TwoPhaseCommit/PTst/TestScripts.p
+....... includes foreign file: P/Tutorial/2_TwoPhaseCommit/PForeign/ForeignCode.cs
+==== Loading project file: P/Tutorial/Common/Timer/Timer.pproj
+....... includes p file: P/Tutorial/Common/Timer/PSrc/Timer.p
+....... includes p file: P/Tutorial/Common/Timer/PSrc/TimerModules.p
+==== Loading project file: P/Tutorial/Common/FailureInjector/FailureInjector.pproj
+....... includes p file: P/Tutorial/Common/FailureInjector/PSrc/NetworkFunctions.p
+....... includes p file: P/Tutorial/Common/FailureInjector/PSrc/FailureInjector.p
 ----------------------------------------
 ----------------------------------------
-Parsing ..
+Parsing ...
 Type checking ...
-Code generation ....
-Generated TwoPhaseCommit.cs
+Code generation ...
+Generated TwoPhaseCommit.cs.
 ----------------------------------------
-Compiling TwoPhaseCommit.csproj ..
-
-Microsoft (R) Build Engine version 16.10.2+857e5a733 for .NET
-Copyright (C) Microsoft Corporation. All rights reserved.
-
+Compiling TwoPhaseCommit...
+MSBuild version 17.3.1+2badb37d1 for .NET
 Determining projects to restore...
-All projects are up-to-date for restore.
-TwoPhaseCommit -&gt;  P/Tutorial/2_TwoPhaseCommit/POutput/netcoreapp3.1/TwoPhaseCommit.dll
+Restored P/Tutorial/2_TwoPhaseCommit/PGenerated/TwoPhaseCommit.csproj (in 132 ms).
+2 of 3 projects are up-to-date for restore.
+CheckerCore -&gt; P/Bld/Drops/Release/Binaries/net6.0/PCheckerCore.dll
+CSharpRuntime -&gt; P/Bld/Drops/Release/Binaries/net6.0/PCSharpRuntime.dll
+TwoPhaseCommit -&gt; P/Tutorial/2_TwoPhaseCommit/PGenerated/POutput/net6.0/TwoPhaseCommit.dll
 
 Build succeeded.
-    0 Warning(s)
-    0 Error(s)
+0 Warning(s)
+0 Error(s)
+
+Time Elapsed 00:00:06.33
+
+
+----------------------------------------
+[PTool]: Thanks for using P!
 </code></pre></div>
 </details>
-<h3 id="testing-twophasecommit">Testing TwoPhaseCommit</h3>
-<p>You can get the list of test cases defined in the TwoPhaseCommit program by passing the generated <code>dll</code>
-to the P Checker:</p>
-<div class="highlight"><pre><span></span><code>pmc &lt;Path&gt;/TwoPhaseCommit.dll
+<h3 id="checking-twophasecommit">Checking TwoPhaseCommit</h3>
+<p>You can get the list of test cases defined in the TwoPhaseCommit project by running the P Checker:</p>
+<div class="highlight"><pre><span></span><code>p check
 </code></pre></div>
-<details class="note"><summary>Expected Output</summary><div class="highlight"><pre><span></span><code>pmc &lt;Path&gt;/TwoPhaseCommit.dll
+<details class="note"><summary>Expected Output</summary><div class="highlight"><pre><span></span><code>$ p check
 
-Provide /method or -m flag to qualify the <span class="nb">test</span> method name you wish to use. 
-Possible options are::
-<span class="hll">PImplementation.tcSingleClientNoFailure.Execute
-</span><span class="hll">PImplementation.tcMultipleClientsNoFailure.Execute
-</span><span class="hll">PImplementation.tcMultipleClientsWithFailure.Execute
-</span></code></pre></div>
+.. Searching for a P compiled file locally in the current folder
+.. Found a P compiled file: P/Tutorial/2_TwoPhaseCommit/PGenerated/POutput/net6.0/TwoPhaseCommit.dll
+.. Checking P/Tutorial/2_TwoPhaseCommit/PGenerated/POutput/net6.0/TwoPhaseCommit.dll
+Error: We found &#39;3&#39; test cases. Please provide a more precise name of the test case you wish to check using (--testcase | -tc).
+Possible options are:
+<span class="hll">tcSingleClientNoFailure
+</span><span class="hll">tcMultipleClientsNoFailure
+</span><span class="hll">tcMultipleClientsWithFailure
+</span>
+[PTool]: Thanks for using P!
+</code></pre></div>
 </details>
 <p>There are three test cases defined in the TwoPhaseCommit project and you can specify which
-test case to run by using the <code>-m</code> parameter along with the <code>-i</code> parameter for the number of schedules to explore.</p>
+test case to run by using the <code>-tc</code> parameter along with the <code>-i</code> parameter for the number of schedules to explore.</p>
 <p>Check the <code>tcSingleClientNoFailure</code> test case for 10000 schedules:</p>
-<div class="highlight"><pre><span></span><code>pmc &lt;Path&gt;/TwoPhaseCommit.dll \
-    -m PImplementation.tcSingleClientNoFailure.Execute \
-    -i 10000
+<div class="highlight"><pre><span></span><code>p check -tc tcSingleClientNoFailure -i <span class="m">10000</span>
 </code></pre></div>
 <p>Check the <code>tcMultipleClientsNoFailure</code> test case for 10000 schedules:</p>
 <div class="admonition danger">
@@ -1027,9 +1040,7 @@ test case to run by using the <code>-m</code> parameter along with the <code>-i<
 <p>If you dive deeper in the log, you would notice that the error happens when two clients write to the same key. There is a race between the two clients issueing a write and read transaction on the same key with different values. The fix for this problem is to update the assertion on the client side to: if the value that is read when confirming the transaction is not the same as the value that was written then it must have been overridden by a transaction with id greater than its transaction id. <strong>This is true because Participants accept transaction to the same key in the monotonically increasing transaction ids</strong>.</p>
 </div>
 <p>Check the <code>tcMultipleClientsWithFailure</code> test case for 10000 schedules:</p>
-<div class="highlight"><pre><span></span><code>pmc &lt;Path&gt;/TwoPhaseCommit.dll \
-    -m PImplementation.tcMultipleClientsWithFailure.Execute \
-    -i 10000
+<div class="highlight"><pre><span></span><code>p check -tc tcMultipleClientsWithFailure -i <span class="m">10000</span>
 </code></pre></div>
 <div class="admonition danger">
 <p class="admonition-title">Error</p>
@@ -1106,7 +1117,7 @@ test case to run by using the <code>-m</code> parameter along with the <code>-i<
       <div class="md-footer-copyright">
         
           <div class="md-footer-copyright__highlight">
-            Copyright &copy; 2021 P Developers
+            Copyright &copy; 2023 P Developers
           </div>
         
         Made with

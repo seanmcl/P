@@ -401,8 +401,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing-espressomachine" class="md-nav__link">
-    Testing EspressoMachine
+  <a href="#checking-espressomachine" class="md-nav__link">
+    Checking EspressoMachine
   </a>
   
 </li>
@@ -825,8 +825,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#testing-espressomachine" class="md-nav__link">
-    Testing EspressoMachine
+  <a href="#checking-espressomachine" class="md-nav__link">
+    Checking EspressoMachine
   </a>
   
 </li>
@@ -905,10 +905,14 @@ it is reset and after which it returns to the <code>Warmup</code> state.</p>
 <p>The test scenarios folder for EspressoMachine (<a href="https://github.com/p-org/P/tree/master/Tutorial/1_EspressoMachine/PTst">PTst</a>) consists of three files: <a href="https://github.com/p-org/P/blob/master/Tutorial/3_EspressoMachine/PTst/TestDrivers.p">TestDriver.p</a> and <a href="https://github.com/p-org/P/blob/master/Tutorial/3_EspressoMachine/PTst/TestScripts.p">TestScript.p</a> are just like other previous examples. The <a href="https://github.com/p-org/P/blob/master/Tutorial/3_EspressoMachine/PTst/Users.p">User.p</a> declares two machines: (1) a <a href="https://github.com/p-org/P/blob/master/Tutorial/3_EspressoMachine/PTst/Users.p#L4-L51"><code>SaneUser</code> machine</a> that uses the EspressoMachine with care, pressing the buttons in the right order, and cleaning up the grounds after the coffee is made; and (2) a <a href="https://github.com/p-org/P/blob/master/Tutorial/3_EspressoMachine/PTst/Users.p#L66-L136"><code>CrazyUser</code> machine</a> who has never used an espresso machine before, gets too excited, and starts pushing random buttons on the control panel.  </p>
 <h3 id="compiling-espressomachine">Compiling EspressoMachine</h3>
 <p>Run the following command to compile the  project:</p>
-<div class="highlight"><pre><span></span><code>pc -proj:EspressoMachine.pproj
+<div class="highlight"><pre><span></span><code>p compile
 </code></pre></div>
-<details class="note"><summary>Expected Output</summary><div class="highlight"><pre><span></span><code>----------------------------------------
-==== Loading project file: EspressoMachine.pproj
+<details class="note"><summary>Expected Output</summary><div class="highlight"><pre><span></span><code>$ p compile
+
+.. Searching for a P project file *.pproj locally in the current folder
+.. Found P project file: P/Tutorial/3_EspressoMachine/EspressoMachine.pproj
+----------------------------------------
+==== Loading project file: P/Tutorial/3_EspressoMachine/EspressoMachine.pproj
 ....... includes p file: P/Tutorial/3_EspressoMachine/PSrc/CoffeeMaker.p
 ....... includes p file: P/Tutorial/3_EspressoMachine/PSrc/CoffeeMakerControlPanel.p
 ....... includes p file: P/Tutorial/3_EspressoMachine/PSrc/EspressoMachineModules.p
@@ -918,49 +922,55 @@ it is reset and after which it returns to the <code>Warmup</code> state.</p>
 ....... includes p file: P/Tutorial/3_EspressoMachine/PTst/TestScripts.p
 ----------------------------------------
 ----------------------------------------
-Parsing ..
+Parsing ...
 Type checking ...
-Code generation ....
-Generated EspressoMachine.cs
+Code generation ...
+Generated EspressoMachine.cs.
 ----------------------------------------
-Compiling EspressoMachine.csproj ..
-
-Microsoft (R) Build Engine version 16.10.2+857e5a733 for .NET
-Copyright (C) Microsoft Corporation. All rights reserved.
-
+Compiling EspressoMachine...
+MSBuild version 17.3.1+2badb37d1 for .NET
 Determining projects to restore...
-All projects are up-to-date for restore.
-EspressoMachine -&gt; P/Tutorial/3_EspressoMachine/POutput/netcoreapp3.1/EspressoMachine.dll
+Restored P/Tutorial/3_EspressoMachine/PGenerated/EspressoMachine.csproj (in 135 ms).
+2 of 3 projects are up-to-date for restore.
+CheckerCore -&gt; P/Bld/Drops/Release/Binaries/net6.0/PCheckerCore.dll
+CSharpRuntime -&gt; P/Bld/Drops/Release/Binaries/net6.0/PCSharpRuntime.dll
+EspressoMachine -&gt; P/Tutorial/3_EspressoMachine/PGenerated/POutput/net6.0/EspressoMachine.dll
 
 Build succeeded.
-    0 Warning(s)
-    0 Error(s)
+0 Warning(s)
+0 Error(s)
+
+Time Elapsed 00:00:03.81
+
+
+----------------------------------------
+[PTool]: Thanks for using P!
 </code></pre></div>
 </details>
-<h3 id="testing-espressomachine">Testing EspressoMachine</h3>
-<p>You can get the list of test cases defined in the EspressoMachine program by passing the generated <code>dll</code>
-to the P Checker:</p>
-<div class="highlight"><pre><span></span><code>pmc &lt;Path&gt;/EspressoMachine.dll
+<h3 id="checking-espressomachine">Checking EspressoMachine</h3>
+<p>You can get the list of test cases defined in the EspressoMachine project by running the P Checker:</p>
+<div class="highlight"><pre><span></span><code>p check
 </code></pre></div>
-<details class="note"><summary>Expected Output</summary><div class="highlight"><pre><span></span><code>pmc &lt;Path&gt;/EspressoMachine.dll
+<details class="note"><summary>Expected Output</summary><div class="highlight"><pre><span></span><code>$ p check
 
-Provide /method or -m flag to qualify the <span class="nb">test</span> method name you wish to use. 
-Possible options are::
-<span class="hll">PImplementation.tcSaneUserUsingCoffeeMachine.Execute
-</span><span class="hll">PImplementation.tcCrazyUserUsingCoffeeMachine.Execute
-</span></code></pre></div>
+.. Searching for a P compiled file locally in the current folder
+.. Found a P compiled file: P/Tutorial/3_EspressoMachine/PGenerated/POutput/net6.0/EspressoMachine.dll
+.. Checking P/Tutorial/3_EspressoMachine/PGenerated/POutput/net6.0/EspressoMachine.dll
+Error: We found &#39;2&#39; test cases. Please provide a more precise name of the test case you wish to check using (--testcase | -tc).
+Possible options are:
+<span class="hll">tcSaneUserUsingCoffeeMachine
+</span><span class="hll">tcCrazyUserUsingCoffeeMachine
+</span>
+[PTool]: Thanks for using P!
+</code></pre></div>
 </details>
 <p>There are two test cases defined in the EspressoMachine project and you can specify which
-test case to run by using the <code>-m</code> parameter along with the <code>-i</code> parameter for the number of schedules to explore.</p>
+test case to run by using the <code>-tc</code> parameter along with the <code>-i</code> parameter for the number of schedules to explore.</p>
 <p>Check the <code>tcSaneUserUsingCoffeeMachine</code> test case for 10000 schedules:</p>
-<div class="highlight"><pre><span></span><code>pmc &lt;Path&gt;/EspressoMachine.dll \
-    -m PImplementation.tcSaneUserUsingCoffeeMachine.Execute \
-    -i 10000
+<div class="highlight"><pre><span></span><code>p check -tc tcSaneUserUsingCoffeeMachine -i <span class="m">10000</span>
 </code></pre></div>
 <p>Check the <code>tcCrazyUserUsingCoffeeMachine</code> test case for 10000 schedules:</p>
-<div class="highlight"><pre><span></span><code>pmc &lt;Path&gt;/EspressoMachine.dll \
-    -m PImplementation.tcCrazyUserUsingCoffeeMachine.Execute \
-    -i 10000
+<div class="highlight"><pre><span></span><code>p check -tc tcCrazyUserUsingCoffeeMachine -i <span class="m">10000</span>
 </code></pre></div>
 <h3 id="exercise-problem">Exercise Problem</h3>
 <ul>
@@ -1029,7 +1039,7 @@ test case to run by using the <code>-m</code> parameter along with the <code>-i<
       <div class="md-footer-copyright">
         
           <div class="md-footer-copyright__highlight">
-            Copyright &copy; 2021 P Developers
+            Copyright &copy; 2023 P Developers
           </div>
         
         Made with

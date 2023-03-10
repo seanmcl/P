@@ -709,16 +709,15 @@
                 
                   <h1>P Project File</h1>
                 
-                <p>The P compiler does not support advanced project management features like separate compilation and dependency analysis (coming soon).
-The current project file interface is a simple mechanism to provide all the required inputs to the compiler in XML format.
-The P project file below is taken from the <a href="https://github.com/p-org/P/blob/master/Tutorial/2_TwoPhaseCommit/TwoPhaseCommit.pproj">TwoPhaseCommit</a> example in Tutorials.</p>
-<p><div class="highlight"><pre><span></span><code><span class="c">&lt;!-- P project file for the Two Phase Commit example --&gt;</span>
+                <p>The current project file interface is a simple mechanism to provide all the required inputs to the compiler in XML format.</p>
+<p>The P project file below is taken from the <a href="https://github.com/p-org/P/blob/master/Tutorial/2_TwoPhaseCommit/TwoPhaseCommit.pproj">TwoPhaseCommit</a> example in Tutorials.</p>
+<div class="highlight"><pre><span></span><code><span class="c">&lt;!-- P project file for the Two Phase Commit example --&gt;</span>
 <span class="nt">&lt;Project&gt;</span>
 <span class="nt">&lt;ProjectName&gt;</span>TwoPhaseCommit<span class="nt">&lt;/ProjectName&gt;</span>
 <span class="nt">&lt;InputFiles&gt;</span>
-    <span class="nt">&lt;PFile&gt;</span>./PSrc/<span class="nt">&lt;/PFile&gt;</span>
-    <span class="nt">&lt;PFile&gt;</span>./PSpec/<span class="nt">&lt;/PFile&gt;</span>
-    <span class="nt">&lt;PFile&gt;</span>./PTst/<span class="nt">&lt;/PFile&gt;</span>
+ <span class="nt">&lt;PFile&gt;</span>./PSrc/<span class="nt">&lt;/PFile&gt;</span>
+ <span class="nt">&lt;PFile&gt;</span>./PSpec/<span class="nt">&lt;/PFile&gt;</span>
+ <span class="nt">&lt;PFile&gt;</span>./PTst/<span class="nt">&lt;/PFile&gt;</span>
 <span class="nt">&lt;/InputFiles&gt;</span>
 <span class="nt">&lt;OutputDir&gt;</span>./PGenerated/<span class="nt">&lt;/OutputDir&gt;</span>
 <span class="c">&lt;!-- Add the dependencies for the Timer machine --&gt;</span>
@@ -727,14 +726,13 @@ The P project file below is taken from the <a href="https://github.com/p-org/P/b
 <span class="nt">&lt;IncludeProject&gt;</span>../Common/FailureInjector/FailureInjector.pproj<span class="nt">&lt;/IncludeProject&gt;</span>
 <span class="nt">&lt;/Project&gt;</span>
 </code></pre></div>
-The <code>&lt;InputFiles&gt;</code> block provides all the P files that must be compiled together for this project.
+<p>The <code>&lt;InputFiles&gt;</code> block provides all the P files that must be compiled together for this project.
 In <code>&lt;PFile&gt;</code>, you can either specify the path to the P file or to a folder and the P compiler includes all the files in the folder during compilation.
-The <code>&lt;Target&gt;</code> block specifies the target language for code generation (options are: CSharp, C, RVM and we are adding support for Java).
 The <code>&lt;ProjectName&gt;</code> block provides the name for the project which is used as the output file name.
 The <code>&lt;OutputDir&gt;</code> block provides the output directory for the generated code.
 Finally, <code>&lt;IncludeProject&gt;</code> block provides path to other P projects that must be included as dependencies during compilation.
 The P compiler simply recursively copies all the P files in the dependency projects and compiles them together.
-This feature provides a way to split the P models for a large system into sub projects that can share models.</p>
+This feature provides a way to split the P models for a large system into subprojects that can share models.</p>
                 
               
               
@@ -790,7 +788,7 @@ This feature provides a way to split the P models for a large system into sub pr
       <div class="md-footer-copyright">
         
           <div class="md-footer-copyright__highlight">
-            Copyright &copy; 2021 P Developers
+            Copyright &copy; 2023 P Developers
           </div>
         
         Made with
