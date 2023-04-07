@@ -864,17 +864,14 @@ Generated ClientServer.cs.
 Compiling ClientServer...
 MSBuild version 17.3.1+2badb37d1 for .NET
 Determining projects to restore...
-Restored P/Tutorial/1_ClientServer/PGenerated/ClientServer.csproj (in 160 ms).
-2 of 3 projects are up-to-date for restore.
-CheckerCore -&gt; P/Bld/Drops/Release/Binaries/net6.0/PCheckerCore.dll
-CSharpRuntime -&gt; P/Bld/Drops/Release/Binaries/net6.0/PCSharpRuntime.dll
-ClientServer -&gt; P/Tutorial/1_ClientServer/PGenerated/POutput/net6.0/ClientServer.dll
+Restored P/Tutorial/1_ClientServer/PGenerated/CSharp/ClientServer.csproj (in 365 ms).
+ClientServer -&gt; P/Tutorial/1_ClientServer/PGenerated/CSharp/net6.0/ClientServer.dll
 
 Build succeeded.
 0 Warning(s)
 0 Error(s)
 
-Time Elapsed 00:00:04.39
+Time Elapsed 00:00:02.34
 
 
 ----------------------------------------
@@ -920,17 +917,14 @@ Generated ClientServer.cs.
 Compiling ClientServer...
 MSBuild version 17.3.1+2badb37d1 for .NET
 Determining projects to restore...
-Restored P/Tutorial/1_ClientServer/PGenerated/ClientServer.csproj (in 145 ms).
-2 of 3 projects are up-to-date for restore.
-CheckerCore -&gt; P/Bld/Drops/Release/Binaries/net6.0/PCheckerCore.dll
-CSharpRuntime -&gt; P/Bld/Drops/Release/Binaries/net6.0/PCSharpRuntime.dll
-ClientServer -&gt; P/Tutorial/1_ClientServer/PGenerated/POutput/net6.0/ClientServer.dll
+All projects are up-to-date for restore.
+ClientServer -&gt; P/Tutorial/1_ClientServer/PGenerated/CSharp/net6.0/ClientServer.dll
 
 Build succeeded.
 0 Warning(s)
 0 Error(s)
 
-Time Elapsed 00:00:04.74
+Time Elapsed 00:00:01.87
 
 
 ----------------------------------------
@@ -953,8 +947,8 @@ systematically explores behaviors of the program for the specified test case.</p
 <div class="highlight"><pre><span></span><code>$ p check
 
 .. Searching for a P compiled file locally in the current folder
-.. Found a P compiled file: P/Tutorial/1_ClientServer/PGenerated/POutput/net6.0/ClientServer.dll
-.. Checking P/Tutorial/1_ClientServer/PGenerated/POutput/net6.0/ClientServer.dll
+.. Found a P compiled file: P/Tutorial/1_ClientServer/PGenerated/CSharp/net6.0/ClientServer.dll
+.. Checking P/Tutorial/1_ClientServer/PGenerated/CSharp/net6.0/ClientServer.dll
 Error: We found &#39;3&#39; test cases. Please provide a more precise name of the test case you wish to check using (--testcase | -tc).
 Possible options are:
 <span class="hll">tcSingleClient
@@ -977,10 +971,10 @@ running the checker on a distributed cluster to explore billions of schedules an
 <details class="info"><summary>Expected Output</summary><div class="highlight"><pre><span></span><code>$ p check -tc tcSingleClient -i 100
 
 .. Searching for a P compiled file locally in the current folder
-.. Found a P compiled file: P/Tutorial/1_ClientServer/PGenerated/POutput/net6.0/ClientServer.dll
-.. Checking P/Tutorial/1_ClientServer/PGenerated/POutput/net6.0/ClientServer.dll
+.. Found a P compiled file: P/Tutorial/1_ClientServer/PGenerated/CSharp/net6.0/ClientServer.dll
+.. Checking P/Tutorial/1_ClientServer/PGenerated/CSharp/net6.0/ClientServer.dll
 .. Test case :: tcSingleClient
-... Checker is using &#39;random&#39; strategy (seed:1914817066).
+... Checker is using &#39;random&#39; strategy (seed:2766677439).
 ..... Iteration #1
 ..... Iteration #2
 ..... Iteration #3
@@ -1008,8 +1002,8 @@ running the checker on a distributed cluster to explore billions of schedules an
 ..... Found 0 bugs.
 ... Scheduling statistics:
 ..... Explored 100 schedules: 100 fair and 0 unfair.
-..... Number of scheduling points in fair terminating schedules: 22 (min), 157 (avg), 431 (max).
-... Elapsed 1.3911356 sec.
+..... Number of scheduling points in fair terminating schedules: 11 (min), 167 (avg), 691 (max).
+... Elapsed 1.2432111 sec.
 . Done
 [PTool]: Thanks for using P!
 </code></pre></div>
@@ -1018,20 +1012,20 @@ running the checker on a distributed cluster to explore billions of schedules an
 the <code>tcSingleClientAbstractServer</code> test case. Run command:
 <div class="highlight"><pre><span></span><code>p check -tc tcSingleClientAbstractServer -i <span class="m">100</span>
 </code></pre></div></p>
-<details class="info"><summary>Expected Output</summary><div class="highlight"><pre><span></span><code>$ p check &lt;Path&gt;/ClientServer.dll -tc tcSingleClientAbstractServer -i 100
+<details class="info"><summary>Expected Output</summary><div class="highlight"><pre><span></span><code>$ p check -tc tcSingleClientAbstractServer -i 100
 
 .. Searching for a P compiled file locally in the current folder
-.. Found a P compiled file: P/Tutorial/1_ClientServer/PGenerated/POutput/net6.0/ClientServer.dll
-.. Checking P/Tutorial/1_ClientServer/PGenerated/POutput/net6.0/ClientServer.dll
+.. Found a P compiled file: P/Tutorial/1_ClientServer/PGenerated/CSharp/net6.0/ClientServer.dll
+.. Checking P/Tutorial/1_ClientServer/PGenerated/CSharp/net6.0/ClientServer.dll
 .. Test case :: tcSingleClientAbstractServer
-... Checker is using &#39;random&#39; strategy (seed:2783951180).
+... Checker is using &#39;random&#39; strategy (seed:1823819121).
 ..... Iteration #1
 <span class="hll">Checker found a bug.
 </span>... Emitting traces:
 <span class="hll">..... Writing PCheckerOutput/BugFinding/ClientServer_0_0.txt
 </span>..... Writing PCheckerOutput/BugFinding/ClientServer_0_0.dgml
 <span class="hll">..... Writing PCheckerOutput/BugFinding/ClientServer_0_0.schedule
-</span>... Elapsed 0.2447869 sec.
+</span>... Elapsed 0.2219742 sec.
 ... Emitting coverage reports:
 ..... Writing PCheckerOutput/BugFinding/ClientServer.dgml
 ..... Writing PCheckerOutput/BugFinding/ClientServer.coverage.txt
@@ -1041,8 +1035,8 @@ the <code>tcSingleClientAbstractServer</code> test case. Run command:
 </span>... Scheduling statistics:
 ..... Explored 1 schedule: 1 fair and 0 unfair.
 ..... Found 100.00% buggy schedules.
-..... Number of scheduling points in fair terminating schedules: 87 (min), 87 (avg), 87 (max).
-... Elapsed 0.4132906 sec.
+..... Number of scheduling points in fair terminating schedules: 117 (min), 117 (avg), 117 (max).
+... Elapsed 0.3952627 sec.
 . Done
 [PTool]: Thanks for using P!
 </code></pre></div>
