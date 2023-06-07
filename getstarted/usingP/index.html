@@ -953,7 +953,7 @@ Error: We found &#39;3&#39; test cases. Please provide a more precise name of th
 Possible options are:
 <span class="hll">tcSingleClient
 </span><span class="hll">tcMultipleClients
-</span><span class="hll">tcSingleClientAbstractServer
+</span><span class="hll">tcAbstractServer
 </span>
 [PTool]: Thanks for using P!
 </code></pre></div>
@@ -1009,15 +1009,15 @@ running the checker on a distributed cluster to explore billions of schedules an
 </code></pre></div>
 </details>
 <p>There is a known bug in the ClientServer example (explained in the Tutorials) which is caught by
-the <code>tcSingleClientAbstractServer</code> test case. Run command:
-<div class="highlight"><pre><span></span><code>p check -tc tcSingleClientAbstractServer -i <span class="m">100</span>
+the <code>tcAbstractServer</code> test case. Run command:
+<div class="highlight"><pre><span></span><code>p check -tc tcAbstractServer -i <span class="m">100</span>
 </code></pre></div></p>
-<details class="info"><summary>Expected Output</summary><div class="highlight"><pre><span></span><code>$ p check -tc tcSingleClientAbstractServer -i 100
+<details class="info"><summary>Expected Output</summary><div class="highlight"><pre><span></span><code>$ p check -tc tcAbstractServer -i 100
 
 .. Searching for a P compiled file locally in the current folder
 .. Found a P compiled file: P/Tutorial/1_ClientServer/PGenerated/CSharp/net6.0/ClientServer.dll
 .. Checking P/Tutorial/1_ClientServer/PGenerated/CSharp/net6.0/ClientServer.dll
-.. Test case :: tcSingleClientAbstractServer
+.. Test case :: tcAbstractServer
 ... Checker is using &#39;random&#39; strategy (seed:1823819121).
 ..... Iteration #1
 <span class="hll">Checker found a bug.
