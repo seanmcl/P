@@ -140,7 +140,7 @@
 
   
 
-<header class="md-header md-header--shadow" data-md-component="header">
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../.." title="P" class="md-header__button md-logo" aria-label="P" data-md-component="logo">
       
@@ -221,13 +221,164 @@
     
   </nav>
   
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../.." class="md-tabs__link">
+      Home
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../whatisP/" class="md-tabs__link">
+      What is P?
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="./" class="md-tabs__link md-tabs__link--active">
+        Getting Started
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../tutsoutline/" class="md-tabs__link">
+        Tutorials
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../advanced/psemantics/" class="md-tabs__link">
+        Advanced User Guide
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../manualoutline/" class="md-tabs__link">
+        Language Manual
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../casestudies/" class="md-tabs__link">
+      Case Studies
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../videos/" class="md-tabs__link">
+      Videos
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../publications/" class="md-tabs__link">
+      Publications
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../build/" class="md-tabs__link">
+        Contributing to P
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
 </header>
     
     <div class="md-container" data-md-component="container">
       
       
-        
-          
         
       
       <main class="md-main" data-md-component="main">
@@ -240,10 +391,12 @@
                   <div class="md-sidebar__inner">
                     
 
+  
+
 
   
 
-<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="../.." title="P" class="md-nav__button md-logo" aria-label="P" data-md-component="logo">
       
@@ -462,9 +615,7 @@
       
       
       
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
       
       
         
@@ -597,9 +748,7 @@
       
       
       
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
       
       
         
@@ -716,9 +865,7 @@
       
       
       
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
       
       
         
@@ -976,9 +1123,7 @@
       
       
       
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
       
       
         
@@ -1045,14 +1190,16 @@
 <h3 id="step-1-install-net-core-sdk">[Step 1] Install .Net Core SDK</h3>
 <p>The P compiler is implemented in C# and hence the tool chain requires <code>dotnet</code>.
 P currently uses the specific version of <a href="https://dotnet.microsoft.com/en-us/download/dotnet/6.0">.Net SDK 6.0</a>.</p>
-<div class="tabbed-set" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">MacOS</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">MacOS</label><label for="__tabbed_1_2">Ubuntu</label><label for="__tabbed_1_3">Amazon Linux</label><label for="__tabbed_1_4">Windows</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <p>Installing .Net SDK on MacOS using Homebrew (<a href="https://formulae.brew.sh/cask/dotnet">details</a>)</p>
 <div class="highlight"><pre><span></span><code>brew<span class="w"> </span>tap<span class="w"> </span>isen-ng/dotnet-sdk-versions
 brew<span class="w"> </span>install<span class="w"> </span>--cask<span class="w"> </span>dotnet-sdk6-0-400
 </code></pre></div>
 <p>Dont have Homebrew? <img alt="🙃" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1f643.svg" title=":upside_down_face:" /> Install manually using the installer for <a href="https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-6.0.405-macos-x64-installer">x64</a> or <a href="https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-6.0.405-macos-arm64-installer">Arm64</a>.</p>
 </div>
-<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Ubuntu</label><div class="tabbed-content">
+<div class="tabbed-block">
 <p>Installing .Net SDK on Ubuntu (<a href="https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu">details</a>)</p>
 <div class="highlight"><pre><span></span><code>wget<span class="w"> </span>https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb<span class="w"> </span>-O<span class="w"> </span>packages-microsoft-prod.deb
 sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span>packages-microsoft-prod.deb
@@ -1061,15 +1208,16 @@ rm<span class="w"> </span>packages-microsoft-prod.deb
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>dotnet-sdk-6.0
 </code></pre></div>
 </div>
-<input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><label for="__tabbed_1_3">Amazon Linux</label><div class="tabbed-content">
+<div class="tabbed-block">
 <p>Installing .Net SDK on Amazon Linux (<a href="https://docs.servicestack.net/deploy-netcore-to-amazon-linux-2-ami">details</a>)</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>rpm<span class="w"> </span>-Uvh<span class="w"> </span>https://packages.microsoft.com/config/centos/7/packages-microsoft-prod.rpm
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>yum<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>dotnet-sdk-6.0
 </code></pre></div>
 </div>
-<input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><label for="__tabbed_1_4">Windows</label><div class="tabbed-content">
+<div class="tabbed-block">
 <p>Installing .Net SDK on Windows using the installer for <a href="https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-6.0.405-windows-x64-installer">x64</a> or <a href="https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-6.0.405-windows-arm64-installer">Arm64</a></p>
+</div>
 </div>
 </div>
 <details class="hint">
@@ -1085,24 +1233,27 @@ If you get <code>dotnet</code> command not found error, mostly likely, you need 
 </details>
 <h3 id="step-2-install-java-runtime">[Step 2] Install Java Runtime</h3>
 <p>The P compiler also requires Java (<code>java</code> version 11 or higher).</p>
-<div class="tabbed-set" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">MacOS</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">MacOS</label><label for="__tabbed_2_2">Ubuntu</label><label for="__tabbed_2_3">Amazon Linux</label><label for="__tabbed_2_4">Windows</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <p>Installing Java on MacOS using Homebrew (<a href="https://mkyong.com/java/how-to-install-java-on-mac-osx/">details</a>)
 <div class="highlight"><pre><span></span><code>brew<span class="w"> </span>install<span class="w"> </span>java
 </code></pre></div>
 Dont have Homebrew? Directly use <a href="https://www.java.com/en/download/help/mac_install.html">installer</a>. </p>
 </div>
-<input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">Ubuntu</label><div class="tabbed-content">
+<div class="tabbed-block">
 <p>Installing Java on Ubuntu (<a href="https://ubuntu.com/tutorials/install-jre#2-installing-openjdk-jre">details</a>)</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>default-jre
 </code></pre></div>
 </div>
-<input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><label for="__tabbed_2_3">Amazon Linux</label><div class="tabbed-content">
+<div class="tabbed-block">
 <p>Installing Java 11 on Amazon Linux (you can use any version of java &gt;= 11)</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>yum<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>java-11-amazon-corretto
 </code></pre></div>
 </div>
-<input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><label for="__tabbed_2_4">Windows</label><div class="tabbed-content">
+<div class="tabbed-block">
 <p>Installing Java on Windows (<a href="https://www.java.com/en/download/help/windows_manual_download.html">details</a>)</p>
+</div>
 </div>
 </div>
 <details class="hint">
@@ -1161,6 +1312,8 @@ If you are getting the error that the <code>p</code> command is not found, it is
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
         </div>
         
           <button type="button" class="md-top md-icon" data-md-component="top" hidden>
@@ -1217,7 +1370,7 @@ If you are getting the error that the <code>p</code> command is not found, it is
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.indexes", "navigation.expand", "navigation.top", "toc.integrate", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "navigation.sections", "navigation.indexes", "navigation.top", "toc.integrate", "search.suggest", "search.highlight", "content.code.copy", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.220ee61c.min.js"></script>

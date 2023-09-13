@@ -140,7 +140,7 @@
 
   
 
-<header class="md-header md-header--shadow" data-md-component="header">
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../.." title="P" class="md-header__button md-logo" aria-label="P" data-md-component="logo">
       
@@ -221,13 +221,164 @@
     
   </nav>
   
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../.." class="md-tabs__link">
+      Home
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../whatisP/" class="md-tabs__link">
+      What is P?
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../getstarted/install/" class="md-tabs__link">
+        Getting Started
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../tutsoutline/" class="md-tabs__link">
+        Tutorials
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../advanced/psemantics/" class="md-tabs__link">
+        Advanced User Guide
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../manualoutline/" class="md-tabs__link md-tabs__link--active">
+        Language Manual
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../casestudies/" class="md-tabs__link">
+      Case Studies
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../videos/" class="md-tabs__link">
+      Videos
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../publications/" class="md-tabs__link">
+      Publications
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../getstarted/build/" class="md-tabs__link">
+        Contributing to P
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
 </header>
     
     <div class="md-container" data-md-component="container">
       
       
-        
-          
         
       
       <main class="md-main" data-md-component="main">
@@ -240,10 +391,12 @@
                   <div class="md-sidebar__inner">
                     
 
+  
+
 
   
 
-<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="../.." title="P" class="md-nav__button md-logo" aria-label="P" data-md-component="logo">
       
@@ -310,9 +463,7 @@
       
       
       
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
       
       
         
@@ -397,9 +548,7 @@
       
       
       
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
       
       
         
@@ -532,9 +681,7 @@
       
       
       
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
       
       
         
@@ -997,9 +1144,7 @@
       
       
       
-        
-      
-      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
       
       
         
@@ -1142,7 +1287,9 @@ P datatypes are described in the <a href="../expressions/">expressions</a> and <
 additional primitive data types that are specific to the P language are <code>event</code> and
 <code>machine</code>. <code>event</code> type represents the set of all P events. Similarly, <code>machine</code> type
 represents the set of all machine references.</p>
-<div class="tabbed-set" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Primitive Data types</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Primitive Data types</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="p">...</span>
 <span class="n">event</span><span class="w"> </span><span class="n">eRequest</span><span class="p">:</span><span class="w"> </span><span class="n">bool</span><span class="p">;</span>
 <span class="p">...</span>
@@ -1167,11 +1314,14 @@ represents the set of all machine references.</p>
 </code></pre></div>
 </div>
 </div>
+</div>
 <h3 id="enum">Enum</h3>
 <p>P supports enums, enum values in P are considered as global constants and must have unique
 name. Enums by default are given integer values starting from 0 (if no values are assigned
 to the elements). Enums in P can be coerced to <code>int</code>. Please refer to the grammar above for the syntax for declaring enums.</p>
-<div class="tabbed-set" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">Enum Declaration</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Enum Declaration</label><label for="__tabbed_2_2">Enum Declaration with Values</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code>enum tResponseStatus { ERROR, SUCCESS, TIMEOUT }
 
 // usage of enums
@@ -1183,7 +1333,7 @@ status = ERROR;
 assert (ERROR to int) == 0;
 </code></pre></div>
 </div>
-<input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">Enum Declaration with Values</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code>enum tResponseStatus { ERROR = 500, SUCCESS = 200,
 TIMEOUT = 400; }
 
@@ -1195,6 +1345,7 @@ status = ERROR;
 // you can coerce an enum to int
 assert (ERROR to int) == 500;
 </code></pre></div>
+</div>
 </div>
 </div>
 <h3 id="record">Record</h3>
@@ -1245,7 +1396,9 @@ Details about how to define/implement foreign types in P is described <a href=".
 <h3 id="user-defined">User Defined</h3>
 <p>P supports assigning names to type i.e., creating <code>typedef</code>. Note that these typedefs are simply assigning names to P types and does not effect the sub-typing relation.</p>
 <p><strong>Syntax:</strong>:  <code>type iden = type ;</code></p>
-<div class="tabbed-set" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">User Defined Type Declaration</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">User Defined Type Declaration</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <p><div class="highlight"><pre><span></span><code><span class="c1">// defining a type tLookUpRequest</span>
 <span class="n">type</span><span class="w"> </span><span class="n">tLookUpRequest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">client</span><span class="p">:</span><span class="w"> </span><span class="n">machine</span><span class="p">,</span><span class="w"> </span><span class="n">requestId</span><span class="p">:</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="p">:</span><span class="w"> </span><span class="n">string</span><span class="p">);</span>
 <span class="c1">// defining a type tLookUpRequestX</span>
@@ -1253,6 +1406,7 @@ Details about how to define/implement foreign types in P is described <a href=".
 </code></pre></div>
 The programmers can use type <code>tLookUpRequest</code> as a short hand for referring to the type <code>(client: machine, requestId: int, key: string)</code>
 Note that the types <code>tLookUpRequest</code> and <code>tLookUpRequestX</code> are same, the compiler does not distinguish between the two types.</p>
+</div>
 </div>
 </div>
 <h3 id="universal-supertypes">Universal Supertypes</h3>
@@ -1363,6 +1517,8 @@ assert sizeof(y.values) == 0;
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
         </div>
         
           <button type="button" class="md-top md-icon" data-md-component="top" hidden>
@@ -1419,7 +1575,7 @@ assert sizeof(y.values) == 0;
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.indexes", "navigation.expand", "navigation.top", "toc.integrate", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tabs", "navigation.tabs.sticky", "navigation.tracking", "navigation.sections", "navigation.indexes", "navigation.top", "toc.integrate", "search.suggest", "search.highlight", "content.code.copy", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.220ee61c.min.js"></script>
