@@ -96,11 +96,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>http://p-org.github.io/P/getstarted/syntaxhighlight/</loc>
-         <lastmod>2023-09-18</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>http://p-org.github.io/P/getstarted/usingP/</loc>
          <lastmod>2023-09-18</lastmod>
          <changefreq>daily</changefreq>
