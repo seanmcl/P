@@ -507,8 +507,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getstarted/syntaxhighlight/" class="md-nav__link">
-        Syntax Highlighting for P
+      <a href="../../getstarted/PeasyIDE/" class="md-nav__link">
+        IDE for P
       </a>
     </li>
   
@@ -1315,15 +1315,15 @@ Possible options are:
 </details>
 <p>There are two test cases defined in the EspressoMachine project and you can specify which
 test case to run by using the <code>-tc</code> parameter along with the <code>-s</code> parameter for the number of schedules to explore.</p>
-<p>Check the <code>tcSaneUserUsingCoffeeMachine</code> test case for 10000 schedules:</p>
+<p>Check the <code>tcSaneUserUsingCoffeeMachine</code> test case for 10,000 schedules:</p>
 <div class="highlight"><pre><span></span><code>p<span class="w"> </span>check<span class="w"> </span>-tc<span class="w"> </span>tcSaneUserUsingCoffeeMachine<span class="w"> </span>-s<span class="w"> </span><span class="m">10000</span>
 </code></pre></div>
-<p>Check the <code>tcCrazyUserUsingCoffeeMachine</code> test case for 10000 schedules:</p>
+<p>Check the <code>tcCrazyUserUsingCoffeeMachine</code> test case for 10,000 schedules:</p>
 <div class="highlight"><pre><span></span><code>p<span class="w"> </span>check<span class="w"> </span>-tc<span class="w"> </span>tcCrazyUserUsingCoffeeMachine<span class="w"> </span>-s<span class="w"> </span><span class="m">10000</span>
 </code></pre></div>
 <h3 id="exercise-problem">Exercise Problem</h3>
 <ul>
-<li>[Problem 1] Note that the current safety specification <code>CoffeeMakerModesOfOperation</code> does not capture the case where the CoffeeMaker can move to GroundsOpen and GroundsClosed state. Extend the spec to cover those modes of operations as well.</li>
+<li>[Problem 1] Note that the current safety specification <code>EspressoMachineModesOfOperation</code> does not capture the case where the CoffeeMaker can move to CoffeeMakerDoorOpened state. Extend the spec to cover those modes of operations as well.</li>
 </ul>
 <div class="admonition info">
 <p class="admonition-title">Thinking! ... <img alt="🤔" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1f914.svg" title=":thinking:" /><img alt="🤔" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1f914.svg" title=":thinking:" /></p>

@@ -507,8 +507,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getstarted/syntaxhighlight/" class="md-nav__link">
-        Syntax Highlighting for P
+      <a href="../../getstarted/PeasyIDE/" class="md-nav__link">
+        IDE for P
       </a>
     </li>
   
@@ -1371,10 +1371,10 @@ Possible options are:
 </details>
 <p>There are three test cases defined in the TwoPhaseCommit project and you can specify which
 test case to run by using the <code>-tc</code> parameter along with the <code>-s</code> parameter for the number of schedules to explore.</p>
-<p>Check the <code>tcSingleClientNoFailure</code> test case for 10000 schedules:</p>
+<p>Check the <code>tcSingleClientNoFailure</code> test case for 10,000 schedules:</p>
 <div class="highlight"><pre><span></span><code>p<span class="w"> </span>check<span class="w"> </span>-tc<span class="w"> </span>tcSingleClientNoFailure<span class="w"> </span>-s<span class="w"> </span><span class="m">10000</span>
 </code></pre></div>
-<p>Check the <code>tcMultipleClientsNoFailure</code> test case for 10000 schedules:</p>
+<p>Check the <code>tcMultipleClientsNoFailure</code> test case for 10,000 schedules:</p>
 <div class="highlight"><pre><span></span><code>p check -tc tcMultipleClientsNoFailure -s 10000
 </code></pre></div>
 <div class="admonition danger">
@@ -1385,9 +1385,9 @@ test case to run by using the <code>-tc</code> parameter along with the <code>-s
 </div>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>If you dive deeper in the log, you would notice that the error happens when two clients write to the same key. There is a race between the two clients issueing a write and read transaction on the same key with different values. The fix for this problem is to update the assertion on the client side to: if the value that is read when confirming the transaction is not the same as the value that was written then it must have been overridden by a transaction with id greater than its transaction id. <strong>This is true because Participants accept transaction to the same key in the monotonically increasing transaction ids</strong>.</p>
+<p>If you dive deeper in the log, you would notice that the error happens when two clients write to the same key. There is a race between the two clients issuing a write and read transaction on the same key with different values. The fix for this problem is to update the assertion on the client side to: if the value that is read when confirming the transaction is not the same as the value that was written then it must have been overridden by a transaction with id greater than its transaction id. <strong>This is true because Participants accept transaction to the same key in the monotonically increasing transaction ids</strong>.</p>
 </div>
-<p>Check the <code>tcMultipleClientsWithFailure</code> test case for 10000 schedules:</p>
+<p>Check the <code>tcMultipleClientsWithFailure</code> test case for 10,000 schedules:</p>
 <div class="highlight"><pre><span></span><code>p<span class="w"> </span>check<span class="w"> </span>-tc<span class="w"> </span>tcMultipleClientsWithFailure<span class="w"> </span>-s<span class="w"> </span><span class="m">10000</span>
 </code></pre></div>
 <div class="admonition danger">
